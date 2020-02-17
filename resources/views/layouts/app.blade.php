@@ -9,11 +9,10 @@
     <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
     <link rel="dns-prefetch" href="https://fonts.gstatic.com">
     <!--     Fonts and icons     -->
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
     <!-- CSS Files -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('css/now-ui-dashboard.css?v=1.0.1')}}" rel="stylesheet" />
+    <link href="{{asset('css/now-ui-dashboard.css')}}" rel="stylesheet" />
     <!-- custom styles -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 </head>
@@ -41,7 +40,7 @@
                         <div class="card">
                             <div class="card-header">
                                 <h5 class="title">@yield('card-title')</h5>
-                                <p class="category">@yield('card-subtitle')</p>
+                                <h6>@yield('card-subtitle')</h6>
                             </div>
                             <div class="card-body">
                                 @yield('content')

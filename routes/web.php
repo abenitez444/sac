@@ -13,12 +13,13 @@
 
 Route::get('/', function () {
     return view('home');
-});
+})->name('home');
 
 Route::get('/inventory/upload', 'inventoryController@show')->name('upload');
 Route::get('/inventory/list', 'inventoryController@list')->name('list');
 Route::get('/inventory/detail/{id}', 'inventoryController@detail')->name('detail');
 Route::get('/inventory/create', 'inventoryController@create')->name('create');
+Route::get('/inventory/edit/{id}', 'inventoryController@edit')->name('edit');
 
 Route::post('/inventory/save', 'inventoryController@save')->name('save');
 Route::post('/inventory/uploadFile', 'inventoryController@uploadFile');

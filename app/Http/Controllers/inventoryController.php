@@ -13,7 +13,7 @@ class inventoryController extends Controller
     public function create()
     {
     	$entities = Entity::all();
-    	return view('inventory.create', compact('entities'));
+    	return view('inventory.store', compact('entities'));
 
     }
 
@@ -23,16 +23,31 @@ class inventoryController extends Controller
     	return view('inventory.list', compact('inventories'));
     }
 
-    public function detail($id)
+    public function edit($id)
     {
     	$inventory = Inventory::find($id);
+        $entities = Entity::all();
+
+
     	if(isset($inventory))
     	{
-    		return view('inventory.detail', compact('inventory'));
+    		return view('inventory.store', compact('inventory', 'entities'));
     	}else
     	{
         	return redirect('/inventory/list')->with('success');
     	}
+    }
+
+    public function detail($id)
+    {
+        $inventory = Inventory::find($id);
+        if(isset($inventory))
+        {
+            return view('inventory.detail', compact('inventory'));
+        }else
+        {
+            return redirect('/inventory/list')->with('success');
+        }
     }
 
     public function show()
@@ -47,7 +62,7 @@ class inventoryController extends Controller
 
         \Cache::put('id',$entity, 1); //*nombre, parámetro, tiempo en minuos
 
-        Excel::import(new InventoryImport, request()->file('file'), 1);
+        Excel::import(new InventoryImport, request()->file('file'));
         return redirect('/inventory/list')->with('success', 'Registro exitoso!');
     }
 
