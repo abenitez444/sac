@@ -7,6 +7,7 @@ use App\Imports\InventoryImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Entity;
 use App\Models\Inventory;
+use App\DataTables\InventoryDataTable;
 
 class inventoryController extends Controller
 {
@@ -17,10 +18,11 @@ class inventoryController extends Controller
 
     }
 
-    public function list()
+    public function list(InventoryDataTable $dataTables)
     {
-    	$inventories = Inventory::all();
-    	return view('inventory.list', compact('inventories'));
+    	/*$inventories = Inventory::all();
+    	return view('inventory.list', compact('inventories'));*/
+        return $dataTables->render('inventory.list');
     }
 
     public function edit($id)

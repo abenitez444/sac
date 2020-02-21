@@ -13,6 +13,8 @@
     <!-- CSS Files -->
     <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
     <link href="{{asset('css/now-ui-dashboard.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{ asset('css/datatable/jquery.dataTables.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/datatable/buttons.dataTables.min.css') }}">
     <!-- custom styles -->
     <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
 </head>
@@ -66,5 +68,10 @@
 <script src="{{asset('/js/plugins/bootstrap-notify.js')}}"></script>
 <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
 <script src="{{asset('/js/now-ui-dashboard.js')}}?v=1.0.1"></script>
+<script src="{{ asset('js/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('js/datatable/dataTables.buttons.min.js') }}"></script>
 <script src="{{asset('/js/function.js')}}"></script>
+
+@yield('js')
+
 </html>
