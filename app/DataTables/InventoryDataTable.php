@@ -21,7 +21,16 @@ class InventoryDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'inventorydatatable.action');
+            ->addColumn('action', function($query){
+
+                $html = '<a href="'.route('detail',$query->id).'" class="icono" title="Visualizar"><b class="fa fa-eye"></b></a>';
+                /*$html .= ' <a href="'.route('bms.imprimir',$query->id).'" class="icono" title="Imprimir"><b class="fa fa-print"></b></a>';*/
+                $html .= ' <a href="'.route('edit',$query->id).'" class="icono" title="Editar"><b class="fa fa-edit"></b></a>';
+   /*             if (auth()->user()->rol == 1) {
+                    $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deleteBMS('.$query->id.')"><b class="fa fa-trash"></b></a>';
+                }*/
+                return $html;
+            });
     }
 
     /**
@@ -43,22 +52,18 @@ class InventoryDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('inventorydatatable-table')
+                    ->setTableId('inventory-table')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
                     )->parameters([
-                'paging' => true,
                 'searching' => true,
                 'info' => false,
-                'searchDelay' => 350,
                 'responsive' => true,
                 'language' => [
                     'url' => url('//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json')
@@ -74,11 +79,6 @@ class InventoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::computed('action')
-                  ->exportable(false)
-                  ->printable(false)
-                  ->width(60)
-                  ->addClass('text-center'),
             Column::make('dependencia'),
             Column::make('ubicacion'),
             Column::make('responsable'),
@@ -90,6 +90,10 @@ class InventoryDataTable extends DataTable
 /*            Column::make('cantidad'),*/
 /*            Column::make('especificacion'),*/
             Column::make('detalle'),
+            Column::computed('action')
+                  ->exportable(false)
+                  ->printable(false)
+                  ->addClass('text-center'),
 
         ];
     }

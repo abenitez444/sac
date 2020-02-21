@@ -6,69 +6,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ config('app.name', 'Laravel') }}</title>
-    <!--<script src="{{ asset('js/app.js') }}" defer></script>-->
-    <link rel="dns-prefetch" href="https://fonts.gstatic.com">
-    <!--     Fonts and icons     -->
-    <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet">
+
+
     <!-- CSS Files -->
-    <link href="{{asset('css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link href="{{asset('css/now-ui-dashboard.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{ asset('css/datatable/jquery.dataTables.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('css/datatable/buttons.dataTables.min.css') }}">
-    <!-- custom styles -->
-    <link href="{{ asset('css/styles.css') }}" rel="stylesheet" />
+    <link href="{{asset('vendor/fontawesome-free/css/all.min.css')}}" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
+    <link href="{{asset('css/sb-admin-2.min.css')}}" rel="stylesheet" />
+{{--     <link href="{{asset('css/datatable/jquery.dataTables.min.css')}}" rel="stylesheet" /> --}}
+    <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
+    <link href="{{asset('css/datatable/buttons.dataTables.min.css')}}" rel="stylesheet" />
+
 </head>
-<body class="full-height">
-    <div id="app" class="wrapper" class="full-height">
-        <div class="sidebar" data-color="orange">
-            <div class="logo">
-                <a href="#" class="simple-text logo-normal">
-                   Nombre
-                </a>
-            </div>
-            @include('layouts.sidebar')
+<body id="page-top">
+<!-- Page Wrapper -->
+  <div id="wrapper">
+    @include('layouts.sidebar')
+
+        <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+      <!-- Main Content -->
+      <div id="content">
+        @include('layouts.navbar')
+        <div class="container-fluid">
+          <h1 class="h3 mb-2 text-gray-800">@yield('card-title')</h1>
+          <p class="mb-4">@yield('card-subtitle')</p>
+          @yield('content')
+
         </div>
-        <div class="main-panel">
-            <!-- Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
-                @include('layouts.navbar')
-            </nav>
-            <!-- End Navbar -->
-            <div class="panel-header panel-header-sm">
-            </div>
-            <div class="content">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h5 class="title">@yield('card-title')</h5>
-                                <h6>@yield('card-subtitle')</h6>
-                            </div>
-                            <div class="card-body">
-                                @yield('content')
-                            </div>
-                        </div>
-                        @include('layouts.footer')
-                    </div>
-                </div>
-            </div>
-        </div>
+      </div>
+      @include('layouts.footer')
     </div>
+
+  </div>
+
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
+    <!-- Logout Modal-->
+  <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+        <div class="modal-footer">
+          <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+          <a class="btn btn-primary" href="login.html">Logout</a>
+        </div>
+      </div>
+    </div>
+  </div>
 </body>
 <!--   Core JS Files   -->
-<script src="{{asset('/js/core/jquery.min.js')}}"></script>
-<script src="{{asset('/js/core/popper.min.js')}}"></script>
-<script src="{{asset('/js/core/bootstrap.min.js')}}"></script>
-<script src="{{asset('/js/plugins/perfect-scrollbar.jquery.min.js')}}"></script>
-<!--  Google Maps Plugin    -->
-<!--<script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>-->
-<!-- Chart JS -->
-<script src="{{asset('/js/plugins/chartjs.min.js')}}"></script>
-<!--  Notifications Plugin    -->
-<script src="{{asset('/js/plugins/bootstrap-notify.js')}}"></script>
-<!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
-<script src="{{asset('/js/now-ui-dashboard.js')}}?v=1.0.1"></script>
-<script src="{{ asset('js/datatable/jquery.dataTables.min.js') }}"></script>
+<script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
+<script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+<script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
+<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+{{-- HART JS NO SE USA --}}
+{{-- <script src="{{asset('vendor/chart.js/Chart.min.js')}}"></script>
+
+<script src="{{asset('js/demo/chart-area-demo.js')}}"></script>
+<script src="{{asset('js/demo/chart-pie-demo.js')}}"></script> --}}
+
+<script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/datatable/dataTables.buttons.min.js') }}"></script>
 <script src="{{asset('/js/function.js')}}"></script>
 

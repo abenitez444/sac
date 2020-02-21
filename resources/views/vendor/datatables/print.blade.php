@@ -14,8 +14,8 @@
     </head>
     <body>
         <table class="table table-bordered table-condensed table-striped">
-            @foreach($data as $row)
-                @if ($row == reset($data)) 
+            @foreach($data as $key => $row)
+                @if ($key == 0) 
                     <tr>
                         @foreach($row as $key => $value)
                             <th>{!! $key !!}</th>

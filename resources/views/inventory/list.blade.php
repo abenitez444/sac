@@ -1,18 +1,17 @@
 @extends('layouts.app')
-@section('card-title', 'Inventario')
-@section('card-subtitle', 'Listar')
+@section('card-title', 'Consulta del inventario')
+@section('card-subtitle', '')
 @section('content')
-<div class="container-fluid">
-    <form method="POST" id="formBDM">
-        
-    <input type="hidden" id="token" value="{{ csrf_token() }}">
-    <div class="card">
-        <div class="card-body">
-           <div id="table" class=" table-responsive text-center">
-              {!! $dataTable->table(['class' => 'table table-bordered table-hover text-center w-100'], true) !!}  
-           </div>
-        </div>
+
+<div class="card shadow mb-4">
+  <div class="card-header py-3">
+    <h6 class="m-0 font-weight-bold text-primary">Tabla de Inventario</h6>
+  </div>
+  <div class="card-body">
+    <div class="table-responsive">
+      {!! $dataTable->table(['class' => 'table table-bordered table-hover text-center w-100'], true) !!} 
     </div>
+  </div>
 </div>
 
 
