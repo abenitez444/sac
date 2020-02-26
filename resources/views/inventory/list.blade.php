@@ -1,11 +1,12 @@
+
 @extends('layouts.app')
 @section('card-title', 'Consulta del inventario')
 @section('card-subtitle', '')
 @section('content')
 
 <div class="card shadow mb-4">
-  <div class="card-header py-3">
-    <h6 class="m-0 font-weight-bold text-primary">Tabla de Inventario</h6>
+  <div class="card-header bg-primary">
+    <h5 class="font-weight-bold text-white">Tabla de Inventario</h5>
   </div>
   <div class="card-body">
     <div class="table-responsive">

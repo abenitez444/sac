@@ -25,7 +25,7 @@
             <div class="col-sm-3 my-1">
               <label class="my-1 mr-2">Seleccionar el archivo del inventario</label>
               <div class="custom-file">
-                <input type="file" id="file" name="file" class="custom-file-input" lang="es">
+                <input type="file" id="file" name="file" class="custom-file-input" lang="es" accept=".csv">
                 <label class="custom-file-label" for="file"><i class="fas fa-cloud-upload-alt text-dark"></i> Archivo .CSV del Inventario</label>
               </div>
             </div>
@@ -33,11 +33,27 @@
         </div>
         <div class="card-footer pt-4 pb-4">
     	   	<div class="text-center">
-            <button type="submit" class="btn btn-info"><b><i class="fas fa-check-circle fa-lg"></i> Enviar</b></button>
+            <button type="submit" id="uploadButton" disabled class="btn btn-info"><b><i class="fas fa-check-circle fa-lg"></i> Enviar</b></button>
             <a type="button" href="{{ route('home') }}" class="btn btn-danger text-white"><b><i class="fas fa-check-circle fa-lg"></i> Cancelar</b></a>
           </div>
         </div>
 		  </div>
     </div>	
 	</form>
+@endsection
+@section('js')
+<script type="text/javascript">
+$('INPUT[type="file"]').change(function () {
+  var ext = this.value.match(/\.(.+)$/)[1];
+  switch (ext) {
+    case 'csv':
+      $('#uploadButton').attr('disabled', false);
+    break;
+    default:
+      $('#uploadButton').attr('disabled', true);
+      toastr.error('El formato del archivo no es el indicado (Tiene que ser .csv)',"<h5>Error de archivo</h5>");
+      this.value = '';
+  }
+});
+</script>
 @endsection

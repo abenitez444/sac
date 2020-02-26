@@ -90,10 +90,10 @@
     };
 
     DataTable.ext.buttons.excel = {
-        className: 'buttons-excel',
+        className: 'buttons-excel ',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel');
+            return '<i class="fa fa-file-excel"></i> ' + dt.i18n('buttons.excel', 'Excel');
         },
 
         action: function (e, dt, button, config) {
@@ -106,7 +106,7 @@
         className: 'buttons-excel',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel');
+            return '<i class="fa fa-file-excel"></i> ' + dt.i18n('buttons.excel', 'Excel');
         },
 
         action: function (e, dt, button, config) {
@@ -121,7 +121,7 @@
         className: 'buttons-excel',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.excel', 'Excel (only visible columns)');
+            return '<i class="fa fa-file-excel"></i> ' + dt.i18n('buttons.excel', 'Excel (only visible columns)');
         },
 
         action: function (e, dt, button, config) {
@@ -138,17 +138,19 @@
         className: 'buttons-export',
 
         text: function (dt) {
-            return '<i class="fa fa-download"></i> ' + dt.i18n('buttons.export', 'Export') + '&nbsp;<span class="caret"/>';
+            return '<i class="fa fa-download "></i> ' + dt.i18n('buttons.export', 'Exportar') + '&nbsp;<span class="caret"/>';
         },
 
-        buttons: ['csv', 'excel', 'pdf']
+/*        buttons: ['csv', 'excel', 'pdf']*/
+        buttons: ['csv', 'excel']
     };
 
     DataTable.ext.buttons.csv = {
         className: 'buttons-csv',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV');
+            return '<i class="fa fa-file-csv"></i> ' + dt.i18n('buttons.csv', 'CSV');
+
         },
 
         action: function (e, dt, button, config) {
@@ -161,7 +163,7 @@
         className: 'buttons-csv',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV (only visible columns)');
+            return '<i class="fa fa-file-csv"></i> ' + dt.i18n('buttons.csv', 'CSV (only visible columns)');
         },
 
         action: function (e, dt, button, config) {
@@ -176,7 +178,7 @@
         className: 'buttons-csv',
 
         text: function (dt) {
-            return '<i class="fa fa-file-excel-o"></i> ' + dt.i18n('buttons.csv', 'CSV');
+            return '<i class="fa fa-file-csv"></i> ' + dt.i18n('buttons.csv', 'CSV');
         },
 
         action: function (e, dt, button, config) {
@@ -191,7 +193,7 @@
         className: 'buttons-pdf',
 
         text: function (dt) {
-            return '<i class="fa fa-file-pdf-o"></i> ' + dt.i18n('buttons.pdf', 'PDF');
+            return '<i class="fa fa-file-pdf"></i> ' + dt.i18n('buttons.pdf', 'PDF');
         },
 
         action: function (e, dt, button, config) {
@@ -204,7 +206,7 @@
         className: 'buttons-pdf',
 
         text: function (dt) {
-            return '<i class="fa fa-file-pdf-o"></i> ' + dt.i18n('buttons.pdf', 'PDF');
+            return '<i class="fa fa-file-pdf"></i> ' + dt.i18n('buttons.pdf', 'PDF');
         },
 
         action: function (e, dt, button, config) {
@@ -219,7 +221,7 @@
         className: 'buttons-print',
 
         text: function (dt) {
-            return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Print');
+            return  '<i class="fa fa-print"></i> ' + dt.i18n('buttons.print', 'Imprimir');
         },
 
         action: function (e, dt, button, config) {
@@ -232,7 +234,7 @@
         className: 'buttons-reset',
 
         text: function (dt) {
-            return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Reset');
+            return '<i class="fa fa-undo"></i> ' + dt.i18n('buttons.reset', 'Resetear');
         },
 
         action: function (e, dt, button, config) {

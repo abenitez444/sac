@@ -8,6 +8,8 @@ use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
 use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
+use Illuminate\Database\Eloquent\Model;
+
 
 class InventoryDataTable extends DataTable
 {
@@ -20,7 +22,7 @@ class InventoryDataTable extends DataTable
     public function dataTable($query)
     {
         return datatables()
-            ->eloquent($query)
+            ->of($query)
             ->addColumn('action', function($query){
 
                 $html = '<a href="'.route('detail',$query->id).'" class="icono" title="Visualizar"><b class="fa fa-eye"></b></a>';
@@ -39,9 +41,11 @@ class InventoryDataTable extends DataTable
      * @param \App\InventoryDataTable $model
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function query(Inventory $model)
+    public function query()
     {
-        return $model->newQuery();
+        $query = Inventory::join('entity', 'inventory.entity_id', '=', 'entity.id')
+            ->select('inventory.id as id', 'inventory.dependencia as dependencia', 'inventory.ubicacion as ubicacion', 'inventory.responsable as responsable', 'inventory.codigo_interno as codigo_interno', 'inventory.descripcion as descripcion', 'inventory.serial as serial', 'inventory.modelo as modelo', 'inventory.marca as marca', 'inventory.cantidad as cantidad', 'inventory.especificacion as especificacion', 'inventory.detalle as detalle', 'entity.name as entity' );
+        return $query;
     }
 
     /**
@@ -84,12 +88,13 @@ class InventoryDataTable extends DataTable
             Column::make('responsable'),
             Column::make('codigo_interno'),
             Column::make('descripcion'),
-/*            Column::make('serial'),*/
+            Column::make('serial')->visible(false)->searchable(false),
             Column::make('modelo'),
             Column::make('marca'),
-/*            Column::make('cantidad'),*/
-/*            Column::make('especificacion'),*/
+            Column::make('cantidad')->visible(false)->searchable(false),
+            Column::make('especificacion')->visible(false)->searchable(false),
             Column::make('detalle'),
+            Column::make('entity')->title('Ente')->name('entity.name'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)

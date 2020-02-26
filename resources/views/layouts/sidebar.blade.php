@@ -6,7 +6,7 @@
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-atlas"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SIGEPRO</div>
+    <div class="sidebar-brand-text mx-3">SIGESPRO</div>
   </a>
 
   <!-- Divider -->
