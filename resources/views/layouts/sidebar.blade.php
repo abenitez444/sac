@@ -36,7 +36,7 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Gestion de inventario:</h6>
-        <a class="collapse-item" href="{{ route('list') }}">Lista</a>
+        <a class="collapse-item" href="{{ route('index') }}">Lista</a>
         <a class="collapse-item" href="{{ route('create') }}">Registrar</a>
         <a class="collapse-item" href="{{ route('upload') }}">Cargar Inventario</a>
       </div>

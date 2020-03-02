@@ -15,8 +15,8 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::get('/inventory/index', 'inventoryController@index')->name('index');
 Route::get('/inventory/upload', 'inventoryController@show')->name('upload');
-Route::get('/inventory/list', 'inventoryController@list')->name('list');
 Route::get('/inventory/detail/{id}', 'inventoryController@detail')->name('detail');
 Route::get('/inventory/create', 'inventoryController@create')->name('create');
 Route::get('/inventory/edit/{id}', 'inventoryController@edit')->name('edit');
@@ -24,6 +24,10 @@ Route::get('/inventory/edit/{id}', 'inventoryController@edit')->name('edit');
 Route::post('/inventory/save', 'inventoryController@save')->name('save');
 Route::post('/inventory/uploadFile', 'inventoryController@uploadFile')->name('uploadFile');
 
-Route::get('/proyect', function () {
-    return view('proyect.show');
-})->name('proyect');
+/*CRUD PROYECT*/
+Route::get('/proyect/index', 'proyectController@index')->name('proyect.index');
+Route::get('/proyect/show', 'proyectController@show')->name('proyect.show');
+Route::get('/proyect/upload', 'proyectController@show')->name('proyect.upload');
+Route::get('/proyect/detail/{id}', 'proyectController@detail')->name('proyect.detail');
+Route::get('/proyect/create', 'proyectController@create')->name('proyect.create');
+Route::get('/proyect/edit/{id}', 'proyectController@edit')->name('proyect.edit');

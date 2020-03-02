@@ -11,6 +11,14 @@ use App\DataTables\InventoryDataTable;
 
 class inventoryController extends Controller
 {
+    
+    public function index(InventoryDataTable $dataTables)
+    {
+    	/*$inventories = Inventory::all();
+    	return view('inventory.list', compact('inventories'));*/
+        return $dataTables->render('inventory.list');
+    }
+
     public function create()
     {
     	$entities = Entity::all();
@@ -18,12 +26,6 @@ class inventoryController extends Controller
 
     }
 
-    public function list(InventoryDataTable $dataTables)
-    {
-    	/*$inventories = Inventory::all();
-    	return view('inventory.list', compact('inventories'));*/
-        return $dataTables->render('inventory.list');
-    }
 
     public function edit($id)
     {

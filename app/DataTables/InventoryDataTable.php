@@ -10,9 +10,15 @@ use Yajra\DataTables\Html\Editor\Fields;
 use Yajra\DataTables\Services\DataTable;
 use Illuminate\Database\Eloquent\Model;
 
+use Illuminate\Http\JsonResponse;
+
+
+
 
 class InventoryDataTable extends DataTable
 {
+
+    protected $exportClass = DataTableExport::class;
     /**
      * Build DataTable class.
      *
@@ -83,7 +89,7 @@ class InventoryDataTable extends DataTable
     protected function getColumns()
     {
         return [
-            Column::make('dependencia'),
+            Column::make('dependencia')->width(60),
             Column::make('ubicacion'),
             Column::make('responsable'),
             Column::make('codigo_interno'),
@@ -112,4 +118,12 @@ class InventoryDataTable extends DataTable
     {
         return 'Inventory_' . date('YmdHis');
     }
+
+    public function excel()
+    {
+        $ext = '.' . strtolower($this->excelWriter);
+
+        return $this->buildExcelFile()->download($this->getFilename() . $ext, \Maatwebsite\Excel\Excel::XLSX);
+    }
+
 }
