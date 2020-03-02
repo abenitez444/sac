@@ -23,3 +23,7 @@ Route::get('/inventory/edit/{id}', 'inventoryController@edit')->name('edit');
 
 Route::post('/inventory/save', 'inventoryController@save')->name('save');
 Route::post('/inventory/uploadFile', 'inventoryController@uploadFile')->name('uploadFile');
+
+Route::get('/proyect', function () {
+    return view('proyect.show');
+})->name('proyect');

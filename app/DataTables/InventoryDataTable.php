@@ -66,13 +66,13 @@ class InventoryDataTable extends DataTable
                         Button::make('print'),
                         Button::make('reset'),
                     )->parameters([
-                'searching' => true,
-                'info' => false,
-                'responsive' => true,
-                'language' => [
-                    'url' => url('//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json')
-                ],
-            ]);
+                        'searching' => true,
+                        'info' => false,
+                        'responsive' => true,
+                        'language' => [
+                            'url' => url('//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json')
+                        ],
+                    ]);
     }
 
     /**
