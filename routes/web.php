@@ -11,7 +11,7 @@
 |
 */
 
-Route::get('/', function () {
+Route::get('/home', function () {
     return view('home');
 })->name('home');
 
@@ -31,3 +31,7 @@ Route::get('/proyect/upload', 'proyectController@show')->name('proyect.upload');
 Route::get('/proyect/detail/{id}', 'proyectController@detail')->name('proyect.detail');
 Route::get('/proyect/create', 'proyectController@create')->name('proyect.create');
 Route::get('/proyect/edit/{id}', 'proyectController@edit')->name('proyect.edit');
+
+Auth::routes();
+
+/*Route::get('/home', 'HomeController@index')->name('home');*/

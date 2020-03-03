@@ -27,6 +27,8 @@ class CreateInventory extends Migration
             $table->string('especificacion')->nullable();
             $table->string('detalle')->nullable();
             $table->integer('entity_id')->unsigned();
+
+            $table->softDeletes();
             $table->timestamps();
            
             $table->foreign('entity_id')->references('id')->on('entity');   

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateEntityTable extends Migration
+class CreateStatusTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class CreateEntityTable extends Migration
      */
     public function up()
     {
-        Schema::create('entity', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-
-            $table->softDeletes();
+        Schema::create('status', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('description');
             $table->timestamps();
         });
     }
@@ -29,6 +27,6 @@ class CreateEntityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('entity');
+        Schema::dropIfExists('status');
     }
 }

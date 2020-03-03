@@ -2,7 +2,7 @@
 
 namespace App\DataTables;
 
-use App\Proyect;
+use App\Models\Proyect;
 use Yajra\DataTables\Html\Button;
 use Yajra\DataTables\Html\Column;
 use Yajra\DataTables\Html\Editor\Editor;
@@ -11,6 +11,9 @@ use Yajra\DataTables\Services\DataTable;
 
 class ProyectDataTable extends DataTable
 {
+
+    protected $exportClass = DataTableExport::class;
+
     /**
      * Build DataTable class.
      *
@@ -21,7 +24,7 @@ class ProyectDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'proyect.action');
+            ->addColumn('action', 'proyectction');
     }
 
     /**
@@ -43,17 +46,15 @@ class ProyectDataTable extends DataTable
     public function html()
     {
         return $this->builder()
-                    ->setTableId('proyect-table')
+                    ->setTableId('proyectTable')
                     ->columns($this->getColumns())
                     ->minifiedAjax()
                     ->dom('Bfrtip')
                     ->orderBy(1)
                     ->buttons(
-                        Button::make('create'),
                         Button::make('export'),
                         Button::make('print'),
                         Button::make('reset'),
-                        Button::make('reload')
                     );
     }
 
@@ -71,9 +72,9 @@ class ProyectDataTable extends DataTable
                   ->width(60)
                   ->addClass('text-center'),
             Column::make('id'),
-            Column::make('add your columns'),
-            Column::make('created_at'),
-            Column::make('updated_at'),
+            Column::make('name'),
+            Column::make('date_start'),
+            Column::make('date_end'),
         ];
     }
 

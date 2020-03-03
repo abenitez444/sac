@@ -2,7 +2,7 @@
 <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
-  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+  <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-atlas"></i>
     </div>
@@ -42,6 +42,20 @@
       </div>
     </div>
   </li>
+    <!-- Divider -->
+  <hr class="sidebar-divider">
+
+  <!-- Heading -->
+  <div class="sidebar-heading">
+    Proyectos
+  </div>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('proyect.index') }}">
+      <i class="fas fa-fw fa-chart-area"></i>
+      <span>Gestion de Proyectos</span></a>
+  </li>
+  <!-- Nav Item - Pages Collapse Menu -->
+
 
   <!-- Divider -->
   <hr class="sidebar-divider">
