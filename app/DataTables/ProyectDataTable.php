@@ -24,7 +24,16 @@ class ProyectDataTable extends DataTable
     {
         return datatables()
             ->eloquent($query)
-            ->addColumn('action', 'proyectction');
+            ->addColumn('action', function($query){
+
+                $html = '<a href="'.route('proyect.show',$query->id).'" class="icono" title="Visualizar"><b class="fa fa-eye"></b></a>';
+                /*$html .= ' <a href="'.route('bms.imprimir',$query->id).'" class="icono" title="Imprimir"><b class="fa fa-print"></b></a>';*/
+                $html .= ' <a href="" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createProyect" data-whatever="'.$query->id.'" ><b class="fa fa-edit"></b></a>';
+   /*             if (auth()->user()->rol == 1) {
+                    $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deleteBMS('.$query->id.')"><b class="fa fa-trash"></b></a>';
+                }*/
+                return $html;
+            });
     }
 
     /**
@@ -66,15 +75,15 @@ class ProyectDataTable extends DataTable
     protected function getColumns()
     {
         return [
+            Column::make('id'),
+            Column::make('name'),
+            Column::make('date_start'),
+            Column::make('date_end'),
             Column::computed('action')
                   ->exportable(false)
                   ->printable(false)
                   ->width(60)
                   ->addClass('text-center'),
-            Column::make('id'),
-            Column::make('name'),
-            Column::make('date_start'),
-            Column::make('date_end'),
         ];
     }
 

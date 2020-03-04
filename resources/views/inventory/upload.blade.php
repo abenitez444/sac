@@ -33,7 +33,7 @@
         </div>
         <div class="card-footer pt-4 pb-4">
     	   	<div class="text-center">
-            <button type="submit" id="uploadButton" disabled class="btn btn-info"><b><i class="fas fa-check-circle fa-lg"></i> Enviar</b></button>
+            <button type="submit" id="uploadButton" disabled class="btn btn-success"><b><i class="fas fa-check-circle fa-lg"></i> Guardar</b></button>
             <a type="button" href="{{ route('home') }}" class="btn btn-danger text-white"><b><i class="fas fa-check-circle fa-lg"></i> Cancelar</b></a>
           </div>
         </div>

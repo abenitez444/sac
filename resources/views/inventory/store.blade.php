@@ -113,8 +113,8 @@
     </div>
     <div class="card-footer">
       <div class="form-group text-center">
-        <button type="sumbit" class="btn btn-info">Guardar</button>
-        <a href="{{route('list')}}" class="btn btn-danger">Cancelar</a>
+        <button type="sumbit" class="btn btn-success">Guardar</button>
+        <a href="{{route('index')}}" class="btn btn-danger">Cancelar</a>
       </div>
     </div>
   </div>
