@@ -32,9 +32,14 @@
   {!! $dataTable->scripts() !!}
 <script type="text/javascript">
   $(document).ready(function(){
+    var modal = $(this)
+
+    var table = $('#proyectTable').DataTable();
 
     $('#btn-new').click(function(e){
+      modal.find('.modal-title').text('Registrar proyecto')
       $('#id').val('');
+      $("#proyect-form")[0].reset();
     });
 
     $('#send-proyect').click(function(e){
@@ -46,13 +51,12 @@
         data: data,
       })
       .done(function() {
+        table.ajax.reload();
+        $('#modal-createProyect').modal('hide')
         console.log("success");
       })
       .fail(function() {
         console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
       });
       
     })
@@ -60,29 +64,28 @@
     $('#modal-createProyect').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
-      var modal = $(this)
-      
-      $.ajax({
-        url: '{{ url('/proyect/edit') }}/'+id,
-        type: 'GET',
-        dataType: 'json',
-      })
-      .done(function(data) {
-        modal.find('.modal-title').text('Editar proyecto:' + data.name)
-        modal.find('.modal-body #name').val(data.id)
-        modal.find('.modal-body #name').val(data.name)
-        modal.find('.modal-body #status_id').val(data.status_id)
-        modal.find('.modal-body #type_id').val(data.type_id)
-        modal.find('.modal-body #date_start').val(data.date_start)
-      })
-      .fail(function() {
-        console.log("error");
-      })
-      .always(function() {
-        console.log("complete");
-      });
-      
+      if(id){
 
+        $.ajax({
+          url: '{{ url('/proyect/edit') }}/'+id,
+          type: 'GET',
+          dataType: 'json',
+        })
+        .done(function(data) {
+          modal.find('.modal-title').text('Editar proyecto:' + data.name)
+          modal.find('.modal-body #id').val(data.id)
+          modal.find('.modal-body #name').val(data.name)
+          modal.find('.modal-body #status_id').val(data.status_id)
+          modal.find('.modal-body #type_id').val(data.type_id)
+          modal.find('.modal-body #date_start').val(data.date_start)
+
+          table.ajax.reload();
+          $('#modal-createProyect').modal('hide')
+        })
+        .fail(function() {
+          console.log("error");
+        });
+      }
     })
   })
 </script>

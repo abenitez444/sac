@@ -33,7 +33,7 @@ class proyectController extends Controller
         $proyect->fill($request->all());
         $proyect->save();
         
-        return redirect('/home');
+        return $proyect;
     }
 
     public function edit(Proyect $proyect)
