@@ -20,9 +20,9 @@ class proyectController extends Controller
     	return view('inventory.list', compact('inventories'));*/
         return $dataTables->render('proyect.index', compact('status', 'types'));
     }
-    public function show(){
+    public function show(Proyect $proyect){
 
-    	return view('proyect.show');
+    	return view('proyect.show', compact('proyect'));
     	
     }
 

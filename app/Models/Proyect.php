@@ -20,4 +20,13 @@ class Proyect extends Model
  		
  	];
 
+ 	public function type()
+    {
+        return $this->belongsTo('App\Models\TypeProyect', 'type_id');
+    }
+    public function statu()
+    {
+        return $this->belongsTo('App\Models\Statu', 'statu_id');
+    }
+
 }

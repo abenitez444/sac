@@ -20,7 +20,7 @@
   <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
 
 </head>
-<body id="page-top">
+<body id="page-top ">
 <!-- Page Wrapper -->
   <div id="wrapper">
     @auth
@@ -33,6 +33,7 @@
       <div id="content">
 
         @include('layouts.navbar')
+        @yield('sub-narbar')
         <div class="container-fluid">
           <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-2 text-gray-800">@yield('card-title')</h1>
@@ -57,7 +58,7 @@
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
-<script src="{{asset('js/sb-admin-2.min.js')}}"></script>
+<script src="{{asset('js/sb-admin-2.js')}}"></script>
 
 
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>

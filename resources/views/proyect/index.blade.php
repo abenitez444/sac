@@ -78,9 +78,6 @@
           modal.find('.modal-body #status_id').val(data.status_id)
           modal.find('.modal-body #type_id').val(data.type_id)
           modal.find('.modal-body #date_start').val(data.date_start)
-
-          table.ajax.reload();
-          $('#modal-createProyect').modal('hide')
         })
         .fail(function() {
           console.log("error");

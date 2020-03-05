@@ -26,10 +26,7 @@ Route::post('/inventory/uploadFile', 'inventoryController@uploadFile')->name('up
 
 /*CRUD PROYECT*/
 Route::get('/proyect/index', 'proyectController@index')->name('proyect.index');
-Route::get('/proyect/show', 'proyectController@show')->name('proyect.show');
-Route::get('/proyect/upload', 'proyectController@show')->name('proyect.upload');
-Route::get('/proyect/detail/{id}', 'proyectController@detail')->name('proyect.detail');
-Route::get('/proyect/create', 'proyectController@create')->name('proyect.create');
+Route::get('/proyect/show/{proyect}', 'proyectController@show')->name('proyect.show');
 Route::get('/proyect/edit/{proyect}', 'proyectController@edit')->name('proyect.edit');
 
 Route::post('/proyect/store', 'proyectController@store')->name('proyect.store');
