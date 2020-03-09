@@ -8,6 +8,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Entity;
 use App\Models\Inventory;
 use App\DataTables\InventoryDataTable;
+use Illuminate\Support\Facades\Validator;
 
 class inventoryController extends Controller
 {
@@ -70,16 +71,37 @@ class inventoryController extends Controller
         return redirect('/inventory/list')->with('success', 'Registro exitoso!');
     }
 
+      private function ValidateForm($obj)
+    {
+        $this->validatorInventory($obj->formBdm)->validate();
+    }
 
     public function save(Request $request) 
     {
 	 	$id = $request->input('id');
         $inventory = Inventory::firstOrNew(['id' => $id]);
         $inventory->fill($request->all());
+        $this->ValidateForm($obj);
         $inventory->save();
  
       return \Response::json(['message' => 'Usuario ya registrado'], 200);
         
   
+    }
+
+     public function validatorInventory($data)
+    {
+        return Validator::make((array) $data, 
+            [
+                'entity_id' =>  ['required'],
+                
+            ],
+
+            [ 
+                'entity_id.required' => 'Debe ingresar el nombre del responsable de cultura y deporte.',
+            
+            ]
+        );
+
     }
 }
