@@ -18,9 +18,10 @@
   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
+  @yield('css')
 
 </head>
-<body id="page-top ">
+<body id="page-top">
 <!-- Page Wrapper -->
   <div id="wrapper">
     @auth
@@ -39,7 +40,9 @@
             <h1 class="h3 mb-2 text-gray-800">@yield('card-title')</h1>
             @yield('card-button')
           </div>
-          @yield('content')
+          <div id="app">
+            @yield('content')
+          </div>
         </div>
       </div>
       @include('layouts.footer')
@@ -53,12 +56,12 @@
   </a>
 </body>
 <!--   Core JS Files   -->
-<script src="{{ asset('js/app.js') }}" defer></script>
 
 <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
 <script src="{{asset('vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.js')}}"></script>
+<script src="{{ asset('js/app.js') }}"></script>
 
 
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>

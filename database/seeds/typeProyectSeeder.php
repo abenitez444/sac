@@ -12,8 +12,8 @@ class typeProyectSeeder extends Seeder
     public function run()
     {
         $types = array(
-            array('Publico'),
-            array('Privado')
+            array('Externo'),
+            array('Interno')
         );  
 
         foreach($types as $type){

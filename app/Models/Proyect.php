@@ -2,8 +2,8 @@
 
 namespace App\Models;
 
+use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Proyect extends Model

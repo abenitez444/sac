@@ -26,6 +26,8 @@ Route::post('/inventory/uploadFile', 'inventoryController@uploadFile')->name('up
 
 /*CRUD PROYECT*/
 Route::get('/proyect/index', 'proyectController@index')->name('proyect.index');
+
+
 Route::get('/proyect/show/{proyect}', 'proyectController@show')->name('proyect.show');
 Route::get('/proyect/edit/{proyect}', 'proyectController@edit')->name('proyect.edit');
 
@@ -35,3 +37,8 @@ Route::post('/proyect/store', 'proyectController@store')->name('proyect.store');
 Auth::routes();
 
 /*Route::get('/home', '*/
+
+Route::group(['prefix' => 'kanban'], function () {
+    Route::get('/list/{id}', 'kanbanController@list')->name('kanban.list');
+    Route::post('/list/create', 'kanbanController@createList')->name('kanban.createList');
+});
