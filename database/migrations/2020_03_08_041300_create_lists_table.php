@@ -17,6 +17,7 @@ class CreateListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->bigInteger('proyect_id')->unsigned();
+            $table->intenger('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
 

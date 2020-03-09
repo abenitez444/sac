@@ -17,7 +17,7 @@
       </div>
     </nav>
     <div class="flex">
-        <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll">
+        <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
           <div
             v-for="(list) in lists"
             :key="list.id"
@@ -90,7 +90,20 @@ export default {
       }).catch(function (error) {
          console.log("Tasks could not be retrieved "+error);
       });
-    }
+    },
+    listsOrden: function(e){
+
+      let self = this;
+        axios.post('../../kanban/list/order',{
+          lists: self.lists,
+        })
+        .then(function (response) {
+          console.log('move complete')
+        })
+        .catch(function (error) {
+           console.log("Tasks could not be retrieved "+error);
+        }); 
+    },
   }
 };
 </script>

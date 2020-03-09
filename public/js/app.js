@@ -2067,6 +2067,16 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log("Tasks could not be retrieved " + error);
       });
+    },
+    listsOrden: function listsOrden(e) {
+      var self = this;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/order', {
+        lists: self.lists
+      }).then(function (response) {
+        console.log('move complete');
+      })["catch"](function (error) {
+        console.log("Tasks could not be retrieved " + error);
+      });
     }
   }
 });
@@ -24377,7 +24387,8 @@ var render = function() {
               source: _vm.lists.id,
               animation: 200,
               group: "list"
-            }
+            },
+            on: { end: _vm.listsOrden }
           },
           _vm._l(_vm.lists, function(list) {
             return _c(

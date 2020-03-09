@@ -16,7 +16,7 @@ class kanbanController extends Controller
 
     public function list($id)
     {
-        $lists = Lists::where('proyect_id', $id)->get();
+        $lists = Lists::where('proyect_id', $id)->orderBy('orden', 'asc')->get();
         $board_results = array();
 
          foreach ($lists as $list){
@@ -73,6 +73,19 @@ class kanbanController extends Controller
         $task->save();
 
         return response()->json($task);
+    }
+
+    public function moveList(Request $request) 
+    {
+
+        foreach ($request->lists as $key => $list) {
+
+            $data = Lists::find($list['id']);
+            $data->orden = $key;
+            $data->save();
+        }
+
+        return response()->json($data);
     }
 
     public function edit(Proyect $proyect)
