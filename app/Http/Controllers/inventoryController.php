@@ -76,9 +76,10 @@ class inventoryController extends Controller
 	 	$id = $request->input('id');
         $inventory = Inventory::firstOrNew(['id' => $id]);
         $inventory->fill($request->all());
-
         $inventory->save();
+ 
+      return \Response::json(['message' => 'Usuario ya registrado'], 200);
         
-        return redirect('/inventory/list')->with('success', 'Registro exitoso');
+  
     }
 }

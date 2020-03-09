@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
+  @yield('css')
 
 </head>
 <body id="page-top">

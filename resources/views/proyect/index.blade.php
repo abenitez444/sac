@@ -28,7 +28,7 @@
 @endsection
 
 @section('js')
-    <script src="/vendor/datatables/buttons.server-side.js"></script>
+<script src="/vendor/datatables/buttons.server-side.js"></script>
   {!! $dataTable->scripts() !!}
 <script type="text/javascript">
   $(document).ready(function(){
@@ -53,10 +53,20 @@
       .done(function() {
         table.ajax.reload();
         $('#modal-createProyect').modal('hide')
-        console.log("success");
+        Swal.fire({
+          type: 'success',
+          title: "¡Registro exitoso!",
+          showConfirmButton: false,
+          timer: 2000
+        })
       })
       .fail(function() {
-        console.log("error");
+        Swal.fire({
+          type: 'error',
+          title: "No se realizo el registro!",
+          showConfirmButton: false,
+          timer: 2000
+        })
       });
       
     })

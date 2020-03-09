@@ -1,0 +1,103 @@
+.bajar-container{
+    margin-top: 150px;
+    width: 60%;
+    }
+    
+    .btn-danger{
+      background:#8F3743;
+    }
+    
+    .error{
+    color:#8F3743;
+    }
+    
+    .fa-envelope{
+        margin-top: 5px;
+    }
+    
+    .fa-key{
+        margin-top: 5px;
+    }
+    
+    input[type="text"] {
+      width: 100%;
+      border: 2px solid #aaa;
+      border-radius: 4px;
+      margin: 0px 0;
+      outline: none;
+      padding: 15px;
+      box-sizing: border-box;
+      transition: 0.3s;
+    }
+
+    select {
+        width: 100%;
+        border: 2px solid #aaa;
+        border-radius: 4px;
+        margin: 0px 0;
+        outline: none;
+        padding: 8px;
+        box-sizing: border-box;
+        transition: 0.3s;
+      }
+    
+    
+    input[type="text"]:focus {
+      border-color: #4E73DF;
+      box-shadow: 0 0 8px 0 #4E73DF;
+    }
+
+    select:focus {
+        border-color: #4E73DF;
+        box-shadow: 0 0 8px 0 #4E73DF;
+    }
+      
+    .inputWithIcon input[type="text"] {
+      padding-left: 40px;
+    }
+    .inputWithIcon textarea {
+        padding-left: 40px;
+     }
+    
+    .inputWithIcon select {
+       padding-left: 40px;
+    }
+    
+    .inputWithIcon {
+      position: relative;
+    }
+    
+    .inputWithIcon i {
+      position: absolute;
+      left: 0;
+      top: 0px;
+      padding: 9px 8px;
+      color: #aaa;
+      transition: 0.3s;
+    }
+    
+    .inputWithIcon input[type="text"]:focus + i {
+      color: #4E73DF;
+    }
+    
+    .inputWithIcon textarea:focus + i {
+        color: #4E73DF;
+    }
+    
+    .inputWithIcon select:focus + i {
+      color: #4E73DF;
+    }
+
+   
+    .inputWithIcon.inputIconBg i {
+      background-color: #aaa;
+      color: #fff;
+      padding: 9px 4px;
+      border-radius: 4px 0 0 4px;
+    }
+    
+    .inputWithIcon.inputIconBg input[type="text"]:focus + i {
+      color: #fff;
+      background-color: dodgerBlue;
+    }
+    
