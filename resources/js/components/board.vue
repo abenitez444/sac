@@ -80,7 +80,10 @@ export default {
         }); 
     },
     checkMove: function(e) {
+      var valor = {"id":5,"name":"mierda","date":"2020-03-08T02:57:31.000000Z"};
       console.log(e.relatedContext.component.$attrs.source);
+      console.log(e.relatedContext);
+      e.relatedContext.list.push(valor);
     }
   }
 };

@@ -28,7 +28,7 @@ class kanbanController extends Controller
                         'date' => $item->created_at,
                     ];
                 }
-                $board_results[] = [
+                $board_results[$list->id] = [
                     'id' => $list->id,
                     'name' => $list->name,
                     'tasks' => $itemArr
