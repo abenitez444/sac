@@ -26,6 +26,8 @@ class kanbanController extends Controller
                         'id' => $item->id,
                         'name' => $item->name,
                         'date' => $item->created_at,
+                        'description' => $item->description,
+
                     ];
                 }
                 $board_results[] = [
