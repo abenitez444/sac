@@ -24364,76 +24364,89 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _c("div", { staticClass: "flex" }, [
-      _c(
-        "div",
-        { staticClass: "min-h-screen flex overflow-x-scroll" },
-        _vm._l(_vm.lists, function(list) {
-          return _c(
-            "div",
-            {
-              key: list.id,
-              staticClass: "bg-gray-100 rounded-lg column-width rounded"
-            },
-            [
-              _c(
-                "div",
-                {
-                  staticClass: "card bg-light mb-3 mr-1",
-                  staticStyle: { "max-width": "28rem" }
-                },
-                [
-                  _c("div", { staticClass: "card-header bg-success" }, [
-                    _c(
-                      "span",
-                      {
-                        staticClass:
-                          "card-title text-white font-semibold font-sans tracking-wide",
-                        staticStyle: {
-                          "font-size": "20px",
-                          "text-shadow": "0px 0px 3px #000000"
-                        }
-                      },
-                      [_vm._v(_vm._s(list.name))]
-                    )
-                  ]),
-                  _vm._v(" "),
-                  _c(
-                    "div",
-                    { staticClass: "card-body" },
-                    [
+    _c(
+      "div",
+      { staticClass: "flex" },
+      [
+        _c(
+          "draggable",
+          {
+            staticClass: "min-h-screen flex overflow-x-scroll",
+            attrs: {
+              list: _vm.lists,
+              source: _vm.lists.id,
+              animation: 200,
+              group: "list"
+            }
+          },
+          _vm._l(_vm.lists, function(list) {
+            return _c(
+              "div",
+              {
+                key: list.id,
+                staticClass: "bg-gray-100 rounded-lg column-width rounded"
+              },
+              [
+                _c(
+                  "div",
+                  {
+                    staticClass: "card bg-light mb-3 mr-1",
+                    staticStyle: { "max-width": "28rem" }
+                  },
+                  [
+                    _c("div", { staticClass: "card-header bg-success" }, [
                       _c(
-                        "draggable",
+                        "span",
                         {
-                          attrs: {
-                            list: list.tasks,
-                            source: list.id,
-                            animation: 200,
-                            "ghost-class": "ghost-card",
-                            group: "tasks",
-                            move: _vm.checkMove
+                          staticClass:
+                            "card-title text-white font-semibold font-sans tracking-wide",
+                          staticStyle: {
+                            "font-size": "20px",
+                            "text-shadow": "0px 0px 3px #000000"
                           }
                         },
-                        _vm._l(list.tasks, function(task) {
-                          return _c("task-card", {
-                            key: task.id,
-                            staticClass: "mt-3 cursor-move",
-                            attrs: { task: task }
-                          })
-                        }),
-                        1
+                        [_vm._v(_vm._s(list.name))]
                       )
-                    ],
-                    1
-                  )
-                ]
-              )
-            ]
-          )
-        }),
-        0
-      )
-    ])
+                    ]),
+                    _vm._v(" "),
+                    _c(
+                      "div",
+                      { staticClass: "card-body" },
+                      [
+                        _c(
+                          "draggable",
+                          {
+                            attrs: {
+                              list: list.tasks,
+                              source: list.id,
+                              animation: 200,
+                              "ghost-class": "ghost-card",
+                              group: "tasks",
+                              move: _vm.checkMove
+                            }
+                          },
+                          _vm._l(list.tasks, function(task) {
+                            return _c("task-card", {
+                              key: task.id,
+                              staticClass: "mt-3 cursor-move",
+                              attrs: { task: task }
+                            })
+                          }),
+                          1
+                        )
+                      ],
+                      1
+                    )
+                  ]
+                )
+              ]
+            )
+          }),
+          0
+        )
+      ],
+      1
+    )
   ])
 }
 var staticRenderFns = [
