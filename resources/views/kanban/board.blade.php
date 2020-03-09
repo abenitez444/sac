@@ -4,4 +4,6 @@
 @section('content')
 
 <board></board>
+
+<example-component></example-component>
 @endsection

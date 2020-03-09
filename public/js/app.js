@@ -1978,6 +1978,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuedraggable__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vuedraggable__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _task_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./task.vue */ "./resources/js/components/task.vue");
 /* harmony import */ var _createList_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./createList.vue */ "./resources/js/components/createList.vue");
+/* harmony import */ var _createTask_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./createTask.vue */ "./resources/js/components/createTask.vue");
 //
 //
 //
@@ -2026,6 +2027,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+
 
 
 
@@ -2056,14 +2059,14 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     checkMove: function checkMove(e) {
-      var valor = {
-        "id": 5,
-        "name": "mierda",
-        "date": "2020-03-08T02:57:31.000000Z"
-      };
-      console.log(e.relatedContext.component.$attrs.source);
-      console.log(e.relatedContext);
-      e.relatedContext.list.push(valor);
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/moveTask/', {
+        id: e.draggedContext.element.id,
+        list_id: e.relatedContext.component.$attrs.source
+      }).then(function (response) {
+        console.log('move complete');
+      })["catch"](function (error) {
+        console.log("Tasks could not be retrieved " + error);
+      });
     }
   }
 });
@@ -2126,8 +2129,85 @@ __webpack_require__.r(__webpack_exports__);
         name: this.name,
         proyect_id: this.proyect
       }).then(function (response) {
+        $('.listname').val('');
         $('#CreateList').modal('hide');
         self.$emit('newList', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTask.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTask.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["lists"],
+  data: function data() {
+    return {
+      nameTask: '',
+      description: ''
+    };
+  },
+  methods: {
+    createTask: function createTask(e) {
+      var self = this;
+      e.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/task/create', {
+        name: this.nameTask,
+        description: this.description,
+        list_id: this.lists[0].id,
+        order: 1
+      }).then(function (response) {
+        $('.taskname').val('');
+        $('.taskdescription').val('');
+        $('#CreateTask').modal('hide');
+        self.$emit('newTask', response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2199,7 +2279,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\r\n  min-width: 400px;\r\n  width: 400px;\n}\r\n/* Unfortunately @apply cannot be setup in codesandbox, \r\nbut you'd use \"@apply border opacity-50 border-blue-500 bg-gray-200\" here */\n.ghost-card[data-v-09b136aa] {\r\n  opacity: 0.5;\r\n  background: #F7FAFC;\r\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\r\n  margin-top: -30px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 400px;\n  width: 400px;\n}\n/* Unfortunately @apply cannot be setup in codesandbox, \nbut you'd use \"@apply border opacity-50 border-blue-500 bg-gray-200\" here */\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
 
 // exports
 
@@ -24266,7 +24346,18 @@ var render = function() {
                   return _vm.lists.push($event)
                 }
               }
-            })
+            }),
+            _vm._v(" "),
+            _vm.lists[0]
+              ? _c("createTask", {
+                  attrs: { lists: _vm.lists },
+                  on: {
+                    newTask: function($event) {
+                      return _vm.lists[0].tasks.push($event)
+                    }
+                  }
+                })
+              : _vm._e()
           ],
           1
         )
@@ -24281,7 +24372,7 @@ var render = function() {
           return _c(
             "div",
             {
-              key: list.name,
+              key: list.id,
               staticClass: "bg-gray-100 rounded-lg column-width rounded"
             },
             [
@@ -24443,7 +24534,7 @@ var render = function() {
                         expression: "name"
                       }
                     ],
-                    staticClass: "form-control",
+                    staticClass: "form-control listname",
                     attrs: { type: "text" },
                     domProps: { value: _vm.name },
                     on: {
@@ -24518,6 +24609,184 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8&":
+/*!*************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8& ***!
+  \*************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "TaskCreate" } }, [
+    _c(
+      "button",
+      {
+        staticClass: "ml-2 btn btn-primary",
+        attrs: {
+          type: "button",
+          "data-toggle": "modal",
+          "data-target": "#CreateTask",
+          "data-whatever": "@getbootstrap"
+        }
+      },
+      [_vm._v("Agrega Tarea")]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "CreateTask",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "CreateTaskLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-body" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "recipient-name" }
+                    },
+                    [_vm._v("Nombre de la Tarea:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.nameTask,
+                        expression: "nameTask"
+                      }
+                    ],
+                    staticClass: "form-control taskname",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.nameTask },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.nameTask = $event.target.value
+                      }
+                    }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "form-group" }, [
+                  _c(
+                    "label",
+                    {
+                      staticClass: "col-form-label",
+                      attrs: { for: "recipient-name" }
+                    },
+                    [_vm._v("Descripcion:")]
+                  ),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.description,
+                        expression: "description"
+                      }
+                    ],
+                    staticClass: "form-control taskdescription",
+                    attrs: { type: "text" },
+                    domProps: { value: _vm.description },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.description = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.createTask }
+                  },
+                  [_vm._v("Guardar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "CreateTaskLabel" } },
+        [_vm._v("Agregar nueva lista")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/task.vue?vue&type=template&id=f15a0460&":
 /*!*******************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/task.vue?vue&type=template&id=f15a0460& ***!
@@ -24558,9 +24827,9 @@ var render = function() {
             _vm._v(_vm._s(_vm.task.date))
           ]),
           _vm._v(" "),
-          _vm.task.name
+          _vm.task.description
             ? _c("badge", { attrs: { color: _vm.badgeColor } }, [
-                _vm._v(_vm._s(_vm.task.name))
+                _vm._v(_vm._s(_vm.task.description))
               ])
             : _vm._e()
         ],
@@ -40037,6 +40306,7 @@ Vue.component('badge', __webpack_require__(/*! ./components/badge.vue */ "./reso
 Vue.component('task', __webpack_require__(/*! ./components/task.vue */ "./resources/js/components/task.vue")["default"]);
 Vue.component('board', __webpack_require__(/*! ./components/board.vue */ "./resources/js/components/board.vue")["default"]);
 Vue.component('createList', __webpack_require__(/*! ./components/createList.vue */ "./resources/js/components/createList.vue")["default"]);
+Vue.component('createTask', __webpack_require__(/*! ./components/createTask.vue */ "./resources/js/components/createTask.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -40388,6 +40658,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/createTask.vue":
+/*!************************************************!*\
+  !*** ./resources/js/components/createTask.vue ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./createTask.vue?vue&type=template&id=3433d6a8& */ "./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8&");
+/* harmony import */ var _createTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./createTask.vue?vue&type=script&lang=js& */ "./resources/js/components/createTask.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _createTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/createTask.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/createTask.vue?vue&type=script&lang=js&":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/createTask.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./createTask.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTask.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_createTask_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8&":
+/*!*******************************************************************************!*\
+  !*** ./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8& ***!
+  \*******************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./createTask.vue?vue&type=template&id=3433d6a8& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/createTask.vue?vue&type=template&id=3433d6a8&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_createTask_vue_vue_type_template_id_3433d6a8___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/task.vue":
 /*!******************************************!*\
   !*** ./resources/js/components/task.vue ***!
@@ -40475,8 +40814,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\patricia\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\patricia\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/srarteaga/local/patricia/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/srarteaga/local/patricia/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

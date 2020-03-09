@@ -41,4 +41,7 @@ Auth::routes();
 Route::group(['prefix' => 'kanban'], function () {
     Route::get('/list/{id}', 'kanbanController@list')->name('kanban.list');
     Route::post('/list/create', 'kanbanController@createList')->name('kanban.createList');
+    
+    Route::post('/task/create', 'kanbanController@createTask')->name('kanban.createTask');
+    Route::post('/moveTask', 'kanbanController@moveTask')->name('kanban.moveTask');
 });

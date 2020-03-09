@@ -5,7 +5,7 @@
     </div>
     <div class="flex mt-4 justify-between items-center">
       <span class="text-sm text-gray-600">{{task.date}}</span>
-      <badge v-if="task.name" :color="badgeColor">{{task.name}}</badge>
+      <badge v-if="task.description" :color="badgeColor">{{task.description}}</badge>
     </div>
   </div>
 </template>

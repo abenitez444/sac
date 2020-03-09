@@ -13,13 +13,14 @@
           TIPO: {{ this.type }}
         </span>
         <createList :proyect="proyect" @newList="lists.push($event)"></createList>
+        <createTask v-if="lists[0]" :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
       </div>
     </nav>
     <div class="flex">
       <div class="min-h-screen flex overflow-x-scroll">
         <div
           v-for="list in lists"
-          :key="list.name"
+          :key="list.id"
           class="bg-gray-100 rounded-lg column-width rounded"
         >
         <div class="card bg-light mb-3 mr-1" style="max-width: 28rem;">
@@ -51,6 +52,7 @@ import axios from 'axios';
 import draggable from "vuedraggable";
 import TaskCard from "./task.vue";
 import createList from "./createList.vue";
+import createTask from "./createTask.vue";
 export default {
   name: "board",
   props: ['proyect', 'name', 'type'],
@@ -80,10 +82,14 @@ export default {
         }); 
     },
     checkMove: function(e) {
-      var valor = {"id":5,"name":"mierda","date":"2020-03-08T02:57:31.000000Z"};
-      console.log(e.relatedContext.component.$attrs.source);
-      console.log(e.relatedContext);
-      e.relatedContext.list.push(valor);
+      axios.post('../../kanban/moveTask/', {
+          id : e.draggedContext.element.id,
+          list_id: e.relatedContext.component.$attrs.source,
+      }).then(function (response){
+        console.log('move complete')
+      }).catch(function (error) {
+         console.log("Tasks could not be retrieved "+error);
+      });
     }
   }
 };

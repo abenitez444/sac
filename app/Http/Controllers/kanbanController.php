@@ -28,7 +28,7 @@ class kanbanController extends Controller
                         'date' => $item->created_at,
                     ];
                 }
-                $board_results[$list->id] = [
+                $board_results[] = [
                     'id' => $list->id,
                     'name' => $list->name,
                     'tasks' => $itemArr
@@ -50,6 +50,27 @@ class kanbanController extends Controller
             'tasks' => $itemArr
         ];
         return response()->json($board_results);
+    }
+    public function createTask(Request $request) 
+    {
+        $task = Task::create(request()->all());
+        $board_results = array();
+        $board_results = [
+            'id' => $task->id,
+            'name' => $task->name,
+            'description' => $task->description,
+            'date' => $task->created_at,
+        ];
+        return response()->json($board_results);
+    }
+
+    public function moveTask(Request $request) 
+    {
+        $task = Task::find($request->id);
+        $task->list_id = $request->list_id;
+        $task->save();
+
+        return response()->json($task);
     }
 
     public function edit(Proyect $proyect)

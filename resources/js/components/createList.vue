@@ -14,7 +14,7 @@
           <div class="modal-body">
             <div class="form-group">
               <label for="recipient-name" class="col-form-label">Nombre de la Lista:</label>
-              <input type="text" class="form-control" v-model="name">
+              <input type="text" class="form-control listname" v-model="name">
             </div>
           </div>
           <div class="modal-footer">
@@ -45,7 +45,7 @@ export default {
           proyect_id: this.proyect,
       })
       .then(function (response) {
-        
+        $('.listname').val('');
         $('#CreateList').modal('hide');
         self.$emit('newList', response.data)
       })

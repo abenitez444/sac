@@ -29,6 +29,7 @@ Vue.component('badge', require('./components/badge.vue').default);
 Vue.component('task', require('./components/task.vue').default);
 Vue.component('board', require('./components/board.vue').default);
 Vue.component('createList', require('./components/createList.vue').default);
+Vue.component('createTask', require('./components/createTask.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
