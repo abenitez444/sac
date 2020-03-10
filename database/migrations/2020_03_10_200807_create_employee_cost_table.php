@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTypeProyectsTable extends Migration
+class CreateEmployeeCostTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateTypeProyectsTable extends Migration
      */
     public function up()
     {
-        Schema::create('type_proyects', function (Blueprint $table) {
+        Schema::create('employee_cost', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('description');
-
-            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -29,6 +26,6 @@ class CreateTypeProyectsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('type_proyects');
+        Schema::dropIfExists('employee_cost');
     }
 }
