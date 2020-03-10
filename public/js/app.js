@@ -2040,7 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "board",
-  props: ['proyect', 'name', 'type'],
+  props: ['proyect', 'name'],
   components: {
     TaskCard: _task_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -24424,7 +24424,7 @@ var render = function() {
               _c("ul", { staticClass: "navbar-nav mr-auto" }),
               _vm._v(" "),
               _c("span", { staticClass: "text-white font-weight-bold" }, [
-                _vm._v("\n        TIPO: " + _vm._s(this.type) + "\n      ")
+                _vm._v("\n        Tipo:\n      ")
               ]),
               _vm._v(" "),
               _c("createList", {

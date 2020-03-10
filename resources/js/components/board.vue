@@ -10,7 +10,7 @@
 
         </ul>
         <span class="text-white font-weight-bold">
-          TIPO: {{ this.type }}
+          Tipo:
         </span>
         <createList :proyect="proyect" @newList="lists.push($event)"></createList>
         <createTask v-if="lists[0]" :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
@@ -59,7 +59,7 @@ import editList from "./editList.vue";
 import createTask from "./createTask.vue";
 export default {
   name: "board",
-  props: ['proyect', 'name', 'type'],
+  props: ['proyect', 'name'],
   components: {
     TaskCard,
     draggable,

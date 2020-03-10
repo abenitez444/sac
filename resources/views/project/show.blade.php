@@ -5,7 +5,7 @@
 @endsection
 @section('content')
 
-<board project="{{ $project->id }}" name="{{ $project->name }}" type="{{ $project->type->description }}"></board>
+<board project="{{ $project->id }}" name="{{ $project->name }}"></board>
 
 
 @endsection

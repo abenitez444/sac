@@ -1,32 +1,27 @@
 <?php
-
+ 
 namespace App\Models;
-
+ 
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
+use Illuminate\Database\Eloquent\Model;
+ 
 class Project extends Model
 {
-	use SoftDeletes; 
-
- 	protected $fillable = [
- 		'name',
- 		'user_id',
- 		'type_id',
- 		'status_id',
- 		'date_start',
- 		'date_end',
- 		
- 	];
-
- 	public function type()
+    use SoftDeletes;
+ 
+    protected $fillable = [
+        'name',
+        'date_start',
+        'date_end',
+        'entity_id',
+        'status_id',
+        'cost'
+    ];
+ 
+ 
+    public function StatusProject()
     {
-        return $this->belongsTo('App\Models\TypeProject', 'type_id');
+        return $this->belongsTo('App\Models\StatusProject', 'status_id');
     }
-    public function statu()
-    {
-        return $this->belongsTo('App\Models\Statu', 'statu_id');
-    }
-
 }
