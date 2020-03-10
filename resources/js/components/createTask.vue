@@ -1,6 +1,6 @@
 <template>
   <div id="TaskCreate">
-    <button type="button" class="ml-2 btn btn-primary" data-toggle="modal" data-target="#CreateTask" data-whatever="@getbootstrap">Agrega Tarea</button>
+    <button type="button" class="ml-2 btn btn-primary" data-toggle="modal" data-target="#CreateTask">Agrega Tarea</button>
 
     <div class="modal fade" id="CreateTask" tabindex="-1" role="dialog" aria-labelledby="CreateTaskLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">

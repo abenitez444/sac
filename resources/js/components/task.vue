@@ -1,7 +1,8 @@
 <template>
-  <div class="bg-white shadow rounded px-3 pt-2 pb-3 border border-white">
+  <div class="bg-white shadow rounded px-3 pt-2 pb-3 border border-white cursor-move">
     <div class="flex justify-between">
       <p class="text-gray-700 font-semibold font-sans tracking-wide text-sm">{{task.name}}</p>
+      <a class="text-primary cursor-pointer"><i class="fas fa-edit fa-md"></i></a>
     </div>
     <div class="flex mt-4 justify-between items-center">
       <span class="text-sm text-gray-600">Creado: {{task.date}}</span>

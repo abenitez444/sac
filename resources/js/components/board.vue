@@ -24,17 +24,20 @@
             class="bg-gray-100 rounded-lg column-width rounded"
           >
           <div class="card bg-light mb-3 mr-1" style="max-width: 28rem;">
-              <div class="card-header bg-success">
-                <span class="card-title text-white font-semibold font-sans tracking-wide" style="font-size:20px; text-shadow: 0px 0px 3px #000000;">{{list.name}}</span>
+              <div class="card-header bg-success cursor-move">
+                <editList :list="lists[index]" :name="list.name"></editList>
+
               </div>
               <div class="card-body">
 
                 <draggable :list="list.tasks" :source="list.id" :rowlist="index" :animation="200" ghost-class="ghost-card" group="tasks" @end="checkMove">
                   <task-card
-                    v-for="(task) in list.tasks"
+                    v-for="(task, row) in list.tasks"
                     :key="task.id"
                     :task="task"
-                    class="mt-3 cursor-move"
+                    :rowlisk="index"
+                    :rowtask="row"
+                    class="mt-3"
                   ></task-card>
                 </draggable>
               </div>
@@ -50,6 +53,7 @@ import axios from 'axios';
 import draggable from "vuedraggable";
 import TaskCard from "./task.vue";
 import createList from "./createList.vue";
+import editList from "./editList.vue";
 import createTask from "./createTask.vue";
 export default {
   name: "board",
