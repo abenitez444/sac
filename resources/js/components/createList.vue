@@ -43,6 +43,7 @@ export default {
       axios.post('../../kanban/list/create', {
           name : this.name,
           proyect_id: this.proyect,
+          order: 100,
       })
       .then(function (response) {
         $('.listname').val('');

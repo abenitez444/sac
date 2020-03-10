@@ -19,7 +19,7 @@
     <div class="flex">
         <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
           <div
-            v-for="(list) in lists"
+            v-for="(list, index) in lists"
             :key="list.id"
             class="bg-gray-100 rounded-lg column-width rounded"
           >
@@ -28,16 +28,14 @@
                 <span class="card-title text-white font-semibold font-sans tracking-wide" style="font-size:20px; text-shadow: 0px 0px 3px #000000;">{{list.name}}</span>
               </div>
               <div class="card-body">
-                <!-- Draggable component comes from vuedraggable. It provides drag & drop functionality -->
-                <draggable :list="list.tasks" :source="list.id" :animation="200" ghost-class="ghost-card" group="tasks" :move="checkMove">
-                  <!-- Each element from here will be draggable and animated. Note :key is very important here to be unique both for draggable and animations to be smooth & consistent. -->
+
+                <draggable :list="list.tasks" :source="list.id" :rowlist="index" :animation="200" ghost-class="ghost-card" group="tasks" @end="checkMove">
                   <task-card
                     v-for="(task) in list.tasks"
                     :key="task.id"
                     :task="task"
                     class="mt-3 cursor-move"
                   ></task-card>
-                  <!-- </transition-group> -->
                 </draggable>
               </div>
             </div>
@@ -82,9 +80,10 @@ export default {
         }); 
     },
     checkMove: function(e) {
-      axios.post('../../kanban/moveTask/', {
-          id : e.draggedContext.element.id,
-          list_id: e.relatedContext.component.$attrs.source,
+      axios.post('../../kanban/moveTask', {
+          id : e.item._underlying_vm_.id,
+          list_id: e.to.__vue__.$attrs.source,
+          tasks: this.lists[e.to.__vue__.$attrs.rowlist].tasks,
       }).then(function (response){
         console.log('move complete')
       }).catch(function (error) {
@@ -110,8 +109,8 @@ export default {
 
 <style scoped>
 .column-width {
-  min-width: 400px;
-  width: 400px;
+  min-width: 380px;
+  width: 380px;
 }
 /* Unfortunately @apply cannot be setup in codesandbox, 
 but you'd use "@apply border opacity-50 border-blue-500 bg-gray-200" here */

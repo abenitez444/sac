@@ -2026,8 +2026,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 
@@ -2059,9 +2057,10 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     checkMove: function checkMove(e) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/moveTask/', {
-        id: e.draggedContext.element.id,
-        list_id: e.relatedContext.component.$attrs.source
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/moveTask', {
+        id: e.item._underlying_vm_.id,
+        list_id: e.to.__vue__.$attrs.source,
+        tasks: this.lists[e.to.__vue__.$attrs.rowlist].tasks
       }).then(function (response) {
         console.log('move complete');
       })["catch"](function (error) {
@@ -2137,7 +2136,8 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/create', {
         name: this.name,
-        proyect_id: this.proyect
+        proyect_id: this.proyect,
+        order: 100
       }).then(function (response) {
         $('.listname').val('');
         $('#CreateList').modal('hide');
@@ -2212,7 +2212,7 @@ __webpack_require__.r(__webpack_exports__);
         name: this.nameTask,
         description: this.description,
         list_id: this.lists[0].id,
-        order: 1
+        order: 100
       }).then(function (response) {
         $('.taskname').val('');
         $('.taskdescription').val('');
@@ -2289,7 +2289,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 400px;\n  width: 400px;\n}\n/* Unfortunately @apply cannot be setup in codesandbox, \nbut you'd use \"@apply border opacity-50 border-blue-500 bg-gray-200\" here */\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\r\n  min-width: 380px;\r\n  width: 380px;\n}\r\n/* Unfortunately @apply cannot be setup in codesandbox, \r\nbut you'd use \"@apply border opacity-50 border-blue-500 bg-gray-200\" here */\n.ghost-card[data-v-09b136aa] {\r\n  opacity: 0.5;\r\n  background: #F7FAFC;\r\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\r\n  margin-top: -30px !important;\n}\r\n", ""]);
 
 // exports
 
@@ -24390,7 +24390,7 @@ var render = function() {
             },
             on: { end: _vm.listsOrden }
           },
-          _vm._l(_vm.lists, function(list) {
+          _vm._l(_vm.lists, function(list, index) {
             return _c(
               "div",
               {
@@ -24430,11 +24430,12 @@ var render = function() {
                             attrs: {
                               list: list.tasks,
                               source: list.id,
+                              rowlist: index,
                               animation: 200,
                               "ghost-class": "ghost-card",
-                              group: "tasks",
-                              move: _vm.checkMove
-                            }
+                              group: "tasks"
+                            },
+                            on: { end: _vm.checkMove }
                           },
                           _vm._l(list.tasks, function(task) {
                             return _c("task-card", {
@@ -40838,8 +40839,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/srarteaga/local/patricia/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/srarteaga/local/patricia/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\patricia\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\patricia\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

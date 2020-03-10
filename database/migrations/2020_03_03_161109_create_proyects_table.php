@@ -18,7 +18,7 @@ class CreateProyectsTable extends Migration
             $table->string('name');
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->bigInteger('type_id')->unsigned();
-            $table->bigInteger('status_id')->unsigned();
+            $table->bigInteger('status_id')->unsigned()->nullable();
             $table->date('date_start')->nullable();
             $table->date('date_end')->nullable();
 

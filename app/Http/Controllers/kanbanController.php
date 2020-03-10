@@ -16,17 +16,18 @@ class kanbanController extends Controller
 
     public function list($id)
     {
-        $lists = Lists::where('proyect_id', $id)->orderBy('orden', 'asc')->get();
+        $lists = Lists::where('proyect_id', $id)->orderBy('order', 'asc')->get();
         $board_results = array();
 
          foreach ($lists as $list){
                 $itemArr = array();
-                foreach ($list->task as $item){
+                foreach ($list->task->sortBy('order') as $item){
                     $itemArr[] = [
                         'id' => $item->id,
                         'name' => $item->name,
                         'date' => $item->created_at,
                         'description' => $item->description,
+                        'order' => $item->order,
 
                     ];
                 }
@@ -49,6 +50,7 @@ class kanbanController extends Controller
         $board_results = [
             'id' => $list->id,
             'name' => $list->name,
+            'order' => $list->order,
             'tasks' => $itemArr
         ];
         return response()->json($board_results);
@@ -72,6 +74,13 @@ class kanbanController extends Controller
         $task->list_id = $request->list_id;
         $task->save();
 
+        foreach ($request->tasks as $key => $list) {
+
+            $data = Task::find($list['id']);
+            $data->order = $key;
+            $data->save();
+        }
+
         return response()->json($task);
     }
 
@@ -81,7 +90,7 @@ class kanbanController extends Controller
         foreach ($request->lists as $key => $list) {
 
             $data = Lists::find($list['id']);
-            $data->orden = $key;
+            $data->order = $key;
             $data->save();
         }
 

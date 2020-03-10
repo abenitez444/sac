@@ -17,7 +17,7 @@ class CreateTasksTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('description')->nullable();
-            $table->string('order');
+            $table->integer('order')->nullable();
             $table->bigInteger('list_id')->unsigned();
             $table->date('date_end')->nullable();
             $table->softDeletes();

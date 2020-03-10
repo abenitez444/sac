@@ -16,8 +16,9 @@ class CreateListsTable extends Migration
         Schema::create('lists', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
+            $table->string('color')->nullable();
             $table->bigInteger('proyect_id')->unsigned();
-            $table->intenger('order')->nullable();
+            $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
