@@ -47,7 +47,6 @@
       </div>
       @include('layouts.footer')
     </div>
-
   </div>
 
   <!-- Scroll to Top Button-->
@@ -62,8 +61,6 @@
 <script src="{{asset('vendor/jquery-easing/jquery.easing.min.js')}}"></script>
 <script src="{{asset('js/sb-admin-2.js')}}"></script>
 <script src="{{ asset('js/app.js') }}"></script>
-
-
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/datatable/dataTables.buttons.min.js') }}"></script>

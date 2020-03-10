@@ -41,3 +41,4 @@ Vue.component('editList', require('./components/editList.vue').default);
 const app = new Vue({
     el: '#app',
 });
+

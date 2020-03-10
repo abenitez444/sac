@@ -1,0 +1,94 @@
+.inputWithIcon input[type="text"] {
+  padding-left: 42px;
+}
+.inputWithIcon textarea {
+  padding-left: 40px;
+}
+
+.inputWithIcon select {
+  padding-left: 40px;
+}
+
+.inputWithIcon {
+  position: relative;
+}
+
+.inputWithIcon i {
+  position: absolute;
+  left: 0;
+  top: 0px;
+  padding: 12px 8px;
+  padding-left: 10px;
+  color: #aaa;
+  transition: 0.3s;
+}
+
+.inputWithIcon input[type="text"]:focus + i + p{
+  color: red !important;
+  font-weight: bold;
+}
+
+.inputWithIcon input[type="text"]:focus + i {
+  color: #4E73DF !important;
+}
+
+.inputWithIcon select:focus + i + p{
+  color: red !important;
+  font-weight: bold;
+}
+
+.inputWithIcon textarea:focus + i + p{
+  color: red !important;
+  font-weight: bold;
+}
+
+.inputWithIcon textarea:focus + i {
+  color: #4E73DF;
+}
+
+.inputWithIcon select:focus + i + p{
+  color: red !important;
+  font-weight: bold;
+}
+
+.inputWithIcon select:focus + i {
+  color: #4E73DF;
+}
+
+input[type="text"] {
+  width: 100%;
+  border: 2px solid #aaa;
+  border-radius: 60px;
+  outline: none;
+  box-sizing: border-box;
+  transition: 0.3s;
+  background-color: #F9F4F4;
+}
+
+.fondo-gris {
+    width: 100%;
+    border: 2px solid #aaa;
+    background-color: #F9F4F4;
+    border-radius: 60px;
+}
+
+.textarea-gris {
+   background-color: #F9F4F4;
+   border: 2px solid #aaa;    
+}  
+
+.element-focus:focus {
+   border-color: #4E73DF;
+   box-shadow: 0 0 8px 0 #4E73DF;
+}
+
+input[type="text"]:focus {
+  border-color: #4E73DF;
+  box-shadow: 0 0 8px 0 #4E73DF;
+}
+
+.campo-obligatorio{
+  color: #aaa;
+  font-size: 12px;
+}
+
