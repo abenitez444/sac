@@ -174,6 +174,7 @@
         type: 'POST',
         dataType: 'json',
         data: data,
+      //success
       }).done(function() {
         Swal.fire({
           type: 'success',
@@ -181,15 +182,29 @@
           showConfirmButton: false,
           timer: 2000
         }) 
+      //Errors
         $("#inventory-form")[0].reset();
-      }).fail(function() {
+      }).fail(function(msj) {
         Swal.fire({
+
           type: 'error',
           title: "No se realizo el registro!",
           showConfirmButton: false,
           timer: 2000
         })
+
+      var errors = $.parseJSON(msj.responseText);
+
+        $.each(errors.errors, function(key, value) 
+        {
+            $("#" + key + "_group").addClass("has-error");
+            $("." + key + "_span").addClass("help-block text-danger").html(value);
+            toastr.error(value,"<h5>"+"<b style='color:#FFF400;'>* </b>" + "Campo obligatorio"+"</h5>");
+        });
+
       });
+    
     })
 </script>
+
 @endsection

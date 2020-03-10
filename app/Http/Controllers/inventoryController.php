@@ -71,37 +71,48 @@ class inventoryController extends Controller
         return redirect('/inventory/list')->with('success', 'Registro exitoso!');
     }
 
-      private function ValidateForm($obj)
-    {
-        $this->validatorInventory($obj->formBdm)->validate();
-    }
-
     public function save(Request $request) 
     {
+
+        $request->validate(
+            [
+                'entity_id' =>  ['required'],
+                'dependencia' =>  ['required'],
+                'ubicacion' =>  ['required'],
+                'responsable' =>  ['required'],
+                'codigo_interno' =>  ['required'],
+                'descripcion' =>  ['required'],
+                'serial' =>  ['required'],
+                'marca' =>  ['required'],
+                'modelo' =>  ['required'],
+                'cantidad' =>  ['required'],
+                'especificacion' =>  ['required'],
+                'detalle' =>  ['required'],
+            ],
+
+            [ 
+                'entity_id.required' => 'Debe seleccionar un ente.',
+                'dependencia.required' => 'Introduzca la dependencia administrativa.',
+                'ubicacion.required' => 'Introduzca la ubicación física del bien.',
+                'responsable.required' => 'Introduzca el responsable del bien.',
+                'codigo_interno.required' => 'Introduzca el código interno del bien.',
+                'descripcion.required' => 'Introduzca una breve descripción del bien.',
+                'serial.required' => 'Introduzca el serial del bien.',
+                'marca.required' => 'Introduzca la marca del bien.',
+                'modelo.required' => 'Introduzca el modelo del bien.',
+                'cantidad.required' => 'Introduzca la cantidad del bien.',
+                'especificacion.required' => 'Introduzca la especificación del bien.',
+                'detalle.required' => 'Introduzca detalles del bien.',
+            ]
+        );
+
 	 	$id = $request->input('id');
         $inventory = Inventory::firstOrNew(['id' => $id]);
         $inventory->fill($request->all());
-        $this->ValidateForm($obj);
         $inventory->save();
  
       return \Response::json(['message' => 'Usuario ya registrado'], 200);
         
-  
     }
 
-     public function validatorInventory($data)
-    {
-        return Validator::make((array) $data, 
-            [
-                'entity_id' =>  ['required'],
-                
-            ],
-
-            [ 
-                'entity_id.required' => 'Debe ingresar el nombre del responsable de cultura y deporte.',
-            
-            ]
-        );
-
-    }
 }
