@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 
-class TypeProyect extends Model
+class TypeProject extends Model
 {
 
  	protected $fillable = [

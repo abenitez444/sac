@@ -50,7 +50,7 @@
     Proyectos
   </div>
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('proyect.index') }}">
+    <a class="nav-link" href="{{ route('project.index') }}">
       <i class="fas fa-fw fa-chart-area"></i>
       <span>Gestion de Proyectos</span></a>
   </li>

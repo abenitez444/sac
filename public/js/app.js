@@ -2030,6 +2030,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2046,7 +2048,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   data: function data() {
     return {
-      lists: []
+      lists: [],
+      editList: '',
+      indexList: ''
     };
   },
   mounted: function mounted() {
@@ -2081,6 +2085,10 @@ __webpack_require__.r(__webpack_exports__);
       })["catch"](function (error) {
         console.log("Tasks could not be retrieved " + error);
       });
+    },
+    editLists: function editLists(index) {
+      this.editList = this.lists[index];
+      this.indexList = index;
     }
   }
 });
@@ -2270,32 +2278,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["list", "name"],
-  data: function data() {
-    return {
-      nameList: this.name
-    };
-  },
+  props: ["listas"],
   methods: {
-    editList: function editList() {
-      console.log('hola');
-    },
-    create: function create(e) {
+    updateList: function updateList(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/create', {
-        name: this.name,
-        proyect_id: this.proyect,
-        order: 100
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/edit', {
+        id: this.listas.id,
+        name: this.listas.name
       }).then(function (response) {
-        $('.listname').val('');
+        $('.editListname').val('');
         $('#EditList').modal('hide');
-        self.$emit('newList', response.data);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2344,7 +2339,6 @@ __webpack_require__.r(__webpack_exports__);
     badgeColor: function badgeColor() {
       var mappings = {
         Diseño: "purple",
-        "Feature Request": "teal",
         Backend: "blue",
         Frondend: "orange",
         QA: "green",
@@ -2370,7 +2364,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n/* Unfortunately @apply cannot be setup in codesandbox, \nbut you'd use \"@apply border opacity-50 border-blue-500 bg-gray-200\" here */\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
 
 // exports
 
@@ -24403,144 +24397,176 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "kanban-board" }, [
-    _c(
-      "nav",
-      {
-        staticClass:
-          "navbar navbar-expand-lg navbar-dark bg-secondary shadow-lg rounded mb-2"
-      },
-      [
-        _c("span", { staticClass: "navbar-brand" }, [
-          _vm._v(_vm._s(this.name))
-        ]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c(
-          "div",
-          {
-            staticClass: "collapse navbar-collapse",
-            attrs: { id: "navbarText" }
-          },
-          [
-            _c("ul", { staticClass: "navbar-nav mr-auto" }),
-            _vm._v(" "),
-            _c("span", { staticClass: "text-white font-weight-bold" }, [
-              _vm._v("\n        TIPO: " + _vm._s(this.type) + "\n      ")
-            ]),
-            _vm._v(" "),
-            _c("createList", {
-              attrs: { proyect: _vm.proyect },
-              on: {
-                newList: function($event) {
-                  return _vm.lists.push($event)
-                }
-              }
-            }),
-            _vm._v(" "),
-            _vm.lists[0]
-              ? _c("createTask", {
-                  attrs: { lists: _vm.lists },
-                  on: {
-                    newTask: function($event) {
-                      return _vm.lists[0].tasks.push($event)
-                    }
-                  }
-                })
-              : _vm._e()
-          ],
-          1
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "flex" },
-      [
-        _c(
-          "draggable",
-          {
-            staticClass: "min-h-screen flex overflow-x-scroll",
-            attrs: {
-              list: _vm.lists,
-              source: _vm.lists.id,
-              animation: 200,
-              group: "list"
+  return _c(
+    "div",
+    { staticClass: "kanban-board" },
+    [
+      _c(
+        "nav",
+        {
+          staticClass:
+            "navbar navbar-expand-lg navbar-dark bg-secondary shadow-lg rounded mb-2"
+        },
+        [
+          _c("span", { staticClass: "navbar-brand" }, [
+            _vm._v(_vm._s(this.name))
+          ]),
+          _vm._v(" "),
+          _vm._m(0),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "collapse navbar-collapse",
+              attrs: { id: "navbarText" }
             },
-            on: { end: _vm.listsOrden }
-          },
-          _vm._l(_vm.lists, function(list, index) {
-            return _c(
-              "div",
-              {
-                key: list.id,
-                staticClass: "bg-gray-100 rounded-lg column-width rounded"
+            [
+              _c("ul", { staticClass: "navbar-nav mr-auto" }),
+              _vm._v(" "),
+              _c("span", { staticClass: "text-white font-weight-bold" }, [
+                _vm._v("\n        TIPO: " + _vm._s(this.type) + "\n      ")
+              ]),
+              _vm._v(" "),
+              _c("createList", {
+                attrs: { proyect: _vm.proyect },
+                on: {
+                  newList: function($event) {
+                    return _vm.lists.push($event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _vm.lists[0]
+                ? _c("createTask", {
+                    attrs: { lists: _vm.lists },
+                    on: {
+                      newTask: function($event) {
+                        return _vm.lists[0].tasks.push($event)
+                      }
+                    }
+                  })
+                : _vm._e()
+            ],
+            1
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "flex" },
+        [
+          _c(
+            "draggable",
+            {
+              staticClass: "min-h-screen flex overflow-x-scroll",
+              attrs: {
+                list: _vm.lists,
+                source: _vm.lists.id,
+                animation: 200,
+                group: "list"
               },
-              [
-                _c(
-                  "div",
-                  {
-                    staticClass: "card bg-light mb-3 mr-1",
-                    staticStyle: { "max-width": "28rem" }
-                  },
-                  [
-                    _c(
-                      "div",
-                      { staticClass: "card-header bg-success cursor-move" },
-                      [
-                        _c("editList", {
-                          attrs: { list: _vm.lists[index], name: list.name }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      { staticClass: "card-body" },
-                      [
-                        _c(
-                          "draggable",
-                          {
-                            attrs: {
-                              list: list.tasks,
-                              source: list.id,
-                              rowlist: index,
-                              animation: 200,
-                              "ghost-class": "ghost-card",
-                              group: "tasks"
-                            },
-                            on: { end: _vm.checkMove }
-                          },
-                          _vm._l(list.tasks, function(task, row) {
-                            return _c("task-card", {
-                              key: task.id,
-                              staticClass: "mt-3",
+              on: { end: _vm.listsOrden }
+            },
+            _vm._l(_vm.lists, function(list, index) {
+              return _c(
+                "div",
+                {
+                  key: list.id,
+                  staticClass: "bg-gray-100 rounded-lg column-width rounded"
+                },
+                [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "card bg-light mb-3 mr-1",
+                      staticStyle: { "max-width": "28rem" }
+                    },
+                    [
+                      _c(
+                        "div",
+                        { staticClass: "card-header bg-success cursor-move" },
+                        [
+                          _c(
+                            "a",
+                            {
+                              staticClass: "cursor-pointer",
                               attrs: {
-                                task: task,
-                                rowlisk: index,
-                                rowtask: row
+                                "data-toggle": "modal",
+                                "data-target": "#EditList"
+                              },
+                              on: {
+                                click: function($event) {
+                                  return _vm.editLists(index)
+                                }
                               }
-                            })
-                          }),
-                          1
-                        )
-                      ],
-                      1
-                    )
-                  ]
-                )
-              ]
-            )
-          }),
-          0
-        )
-      ],
-      1
-    )
-  ])
+                            },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass:
+                                    "card-title text-white font-semibold font-sans tracking-wide",
+                                  staticStyle: {
+                                    "font-size": "20px",
+                                    "text-shadow": "0px 0px 3px #000000"
+                                  }
+                                },
+                                [_vm._v(_vm._s(list.name))]
+                              )
+                            ]
+                          )
+                        ]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "div",
+                        { staticClass: "card-body" },
+                        [
+                          _c(
+                            "draggable",
+                            {
+                              attrs: {
+                                list: list.tasks,
+                                source: list.id,
+                                rowlist: index,
+                                animation: 200,
+                                "ghost-class": "ghost-card",
+                                group: "tasks"
+                              },
+                              on: { end: _vm.checkMove }
+                            },
+                            _vm._l(list.tasks, function(task, row) {
+                              return _c("task-card", {
+                                key: task.id,
+                                staticClass: "mt-3",
+                                attrs: {
+                                  task: task,
+                                  rowlisk: index,
+                                  rowtask: row
+                                }
+                              })
+                            }),
+                            1
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]
+              )
+            }),
+            0
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c("editList", { attrs: { listas: _vm.editList } })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -24909,29 +24935,6 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "ListEdit" } }, [
     _c(
-      "a",
-      {
-        staticClass: "cursor-pointer",
-        attrs: { "data-toggle": "modal", "data-target": "#EditList" },
-        on: { click: _vm.editList }
-      },
-      [
-        _c(
-          "span",
-          {
-            staticClass:
-              "card-title text-white font-semibold font-sans tracking-wide",
-            staticStyle: {
-              "font-size": "20px",
-              "text-shadow": "0px 0px 3px #000000"
-            }
-          },
-          [_vm._v(_vm._s(_vm.name))]
-        )
-      ]
-    ),
-    _vm._v(" "),
-    _c(
       "div",
       {
         staticClass: "modal fade",
@@ -24949,7 +24952,18 @@ var render = function() {
           { staticClass: "modal-dialog", attrs: { role: "document" } },
           [
             _c("div", { staticClass: "modal-content" }, [
-              _vm._m(0),
+              _c("div", { staticClass: "modal-header" }, [
+                _c(
+                  "h5",
+                  {
+                    staticClass: "modal-title",
+                    attrs: { id: "EditListLabel" }
+                  },
+                  [_vm._v("Editar la lista: " + _vm._s(_vm.listas.name))]
+                ),
+                _vm._v(" "),
+                _vm._m(0)
+              ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
                 _c("div", { staticClass: "form-group" }, [
@@ -24967,26 +24981,45 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.nameList,
-                        expression: "nameList"
+                        value: _vm.listas.name,
+                        expression: "listas.name"
                       }
                     ],
-                    staticClass: "form-control listname",
+                    staticClass: "form-control editListname",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.nameList },
+                    domProps: { value: _vm.listas.name },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.nameList = $event.target.value
+                        _vm.$set(_vm.listas, "name", $event.target.value)
                       }
                     }
                   })
                 ])
               ]),
               _vm._v(" "),
-              _vm._m(1)
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    attrs: { type: "button" },
+                    on: { click: _vm.updateList }
+                  },
+                  [_vm._v("Guardar")]
+                )
+              ])
             ])
           ]
         )
@@ -24999,45 +25032,18 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-header" }, [
-      _c("h5", { staticClass: "modal-title", attrs: { id: "EditListLabel" } }, [
-        _vm._v("Agregar nueva lista")
-      ]),
-      _vm._v(" "),
-      _c(
-        "button",
-        {
-          staticClass: "close",
-          attrs: {
-            type: "button",
-            "data-dismiss": "modal",
-            "aria-label": "Close"
-          }
-        },
-        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "modal-footer" }, [
-      _c(
-        "button",
-        {
-          staticClass: "btn btn-secondary",
-          attrs: { type: "button", "data-dismiss": "modal" }
-        },
-        [_vm._v("Cerrar")]
-      ),
-      _vm._v(" "),
-      _c(
-        "button",
-        { staticClass: "btn btn-primary", attrs: { type: "button" } },
-        [_vm._v("Guardar")]
-      )
-    ])
+    return _c(
+      "button",
+      {
+        staticClass: "close",
+        attrs: {
+          type: "button",
+          "data-dismiss": "modal",
+          "aria-label": "Close"
+        }
+      },
+      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+    )
   }
 ]
 render._withStripped = true

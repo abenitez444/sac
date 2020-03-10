@@ -24,7 +24,7 @@
 </div>
 
 
-@include('proyect.store')
+@include('project.store')
 @endsection
 
 @section('js')
@@ -34,25 +34,25 @@
   $(document).ready(function(){
     var modal = $(this)
 
-    var table = $('#proyectTable').DataTable();
+    var table = $('#projectTable').DataTable();
 
     $('#btn-new').click(function(e){
       modal.find('.modal-title').text('Registrar proyecto')
       $('#id').val('');
-      $("#proyect-form")[0].reset();
+      $("#project-form")[0].reset();
     });
 
-    $('#send-proyect').click(function(e){
-      var data = $("#proyect-form").serialize();
+    $('#send-project').click(function(e){
+      var data = $("#project-form").serialize();
       $.ajax({
-        url: '{{ route('proyect.store') }}',
+        url: '{{ route('project.store') }}',
         type: 'POST',
         dataType: 'json',
         data: data,
       })
       .done(function() {
         table.ajax.reload();
-        $('#modal-createProyect').modal('hide')
+        $('#modal-createProject').modal('hide')
         Swal.fire({
           type: 'success',
           title: "¡Registro exitoso!",
@@ -71,13 +71,13 @@
       
     })
 
-    $('#modal-createProyect').on('show.bs.modal', function (event) {
+    $('#modal-createProject').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
       if(id){
 
         $.ajax({
-          url: '{{ url('/proyect/edit') }}/'+id,
+          url: '{{ url('/project/edit') }}/'+id,
           type: 'GET',
           dataType: 'json',
         })

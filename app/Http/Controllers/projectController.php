@@ -3,34 +3,34 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataTables\ProyectDataTable;
-use App\Models\Proyect;
-use App\Models\TypeProyect;
+use App\DataTables\ProjectDataTable;
+use App\Models\Project;
+use App\Models\TypeProject;
 use App\Models\Statu;
 use App\Models\Lists;
 use App\Models\Task;
 
 
-class proyectController extends Controller
+class projectController extends Controller
 {
 
-    public function index(ProyectDataTable $dataTables)
+    public function index(ProjectDataTable $dataTables)
     {
         $status = Statu::all();
-        $types = TypeProyect::all();
+        $types = TypeProject::all();
     	/*$inventories = Inventory::all();
     	return view('inventory.list', compact('inventories'));*/
-        return $dataTables->render('proyect.index', compact('status', 'types'));
+        return $dataTables->render('project.index', compact('status', 'types'));
     }
-    public function show(Proyect $proyect)
+    public function show(Project $project)
     {
 
-    	return view('proyect.show', compact('proyect'));
+    	return view('project.show', compact('project'));
     	
     }
     public function list($id)
     {
-        $lists = Lists::where('proyect_id', $id)->get();
+        $lists = Lists::where('project_id', $id)->get();
         $board_results = array();
 
          foreach ($lists as $lists){
@@ -56,15 +56,15 @@ class proyectController extends Controller
     public function store(Request $request) 
     {
         $id = $request->input('id');
-        $proyect = Proyect::firstOrNew(['id' => $id]);
-        $proyect->fill($request->all());
-        $proyect->save();
+        $project = Project::firstOrNew(['id' => $id]);
+        $project->fill($request->all());
+        $project->save();
         
-        return $proyect;
+        return $project;
     }
 
-    public function edit(Proyect $proyect)
+    public function edit(Project $project)
     {
-        return $proyect;
+        return $project;
     }
 }

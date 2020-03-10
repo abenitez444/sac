@@ -26,7 +26,6 @@ export default {
     badgeColor() {
       const mappings = {
         Diseño: "purple",
-        "Feature Request": "teal",
         Backend: "blue",
         Frondend: "orange",
         QA: "green",

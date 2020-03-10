@@ -6,7 +6,7 @@ use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Proyect extends Model
+class Project extends Model
 {
 	use SoftDeletes; 
 
@@ -22,7 +22,7 @@ class Proyect extends Model
 
  	public function type()
     {
-        return $this->belongsTo('App\Models\TypeProyect', 'type_id');
+        return $this->belongsTo('App\Models\TypeProject', 'type_id');
     }
     public function statu()
     {

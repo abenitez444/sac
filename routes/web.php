@@ -29,13 +29,13 @@ Route::group(['prefix' => 'inventory'], function () {
 });
 
 /*CRUD PROYECT*/
-Route::group(['prefix' => 'proyect'], function () {
+Route::group(['prefix' => 'project'], function () {
 
-	Route::get('/index', 'proyectController@index')->name('proyect.index');
-	Route::get('/show/{proyect}', 'proyectController@show')->name('proyect.show');
-	Route::get('/edit/{proyect}', 'proyectController@edit')->name('proyect.edit');
+	Route::get('/index', 'projectController@index')->name('project.index');
+	Route::get('/show/{project}', 'projectController@show')->name('project.show');
+	Route::get('/edit/{project}', 'projectController@edit')->name('project.edit');
 
-	Route::post('/store', 'proyectController@store')->name('proyect.store');
+	Route::post('/store', 'projectController@store')->name('project.store');
 
 });
 
@@ -46,6 +46,7 @@ Route::group(['prefix' => 'kanban'], function () {
 
     Route::post('/list/create', 'kanbanController@createList')->name('kanban.createList');
     Route::post('/list/order', 'kanbanController@moveList')->name('kanban.moveList');
+    Route::post('/list/edit', 'kanbanController@editList')->name('kanban.moveList');
     Route::post('/task/create', 'kanbanController@createTask')->name('kanban.createTask');
     Route::post('/moveTask', 'kanbanController@moveTask')->name('kanban.moveTask');
 });

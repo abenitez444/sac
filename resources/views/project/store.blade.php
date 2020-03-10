@@ -1,6 +1,6 @@
-<div class="modal fade" id="modal-createProyect" tabindex="-1" role="dialog" aria-labelledby="modal-createProyect"
+<div class="modal fade" id="modal-createProject" tabindex="-1" role="dialog" aria-labelledby="modal-createProject"
   aria-hidden="true">
-  <div class="modal-dialog" role="proyect">
+  <div class="modal-dialog" role="project">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="ModalLabel">Registrar proyecto</h5>
@@ -9,7 +9,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <form id="proyect-form" method="POST">
+        <form id="project-form" method="POST">
           @csrf
           <input type="hidden" class="form-control" id="id" name="id">
           <div class="form-group">

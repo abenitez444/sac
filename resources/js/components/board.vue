@@ -17,34 +17,36 @@
       </div>
     </nav>
     <div class="flex">
-        <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
-          <div
-            v-for="(list, index) in lists"
-            :key="list.id"
-            class="bg-gray-100 rounded-lg column-width rounded"
-          >
+      <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
+        <div
+          v-for="(list, index) in lists"
+          :key="list.id"
+          class="bg-gray-100 rounded-lg column-width rounded"
+        >
           <div class="card bg-light mb-3 mr-1" style="max-width: 28rem;">
-              <div class="card-header bg-success cursor-move">
-                <editList :list="lists[index]" :name="list.name"></editList>
+            <div class="card-header bg-success cursor-move">
+            <a class="cursor-pointer" @click="editLists(index)" data-toggle="modal" data-target="#EditList">
+              <span class="card-title text-white font-semibold font-sans tracking-wide" style="font-size:20px; text-shadow: 0px 0px 3px #000000;">{{list.name}}</span>
+            </a>
 
-              </div>
-              <div class="card-body">
-
-                <draggable :list="list.tasks" :source="list.id" :rowlist="index" :animation="200" ghost-class="ghost-card" group="tasks" @end="checkMove">
-                  <task-card
-                    v-for="(task, row) in list.tasks"
-                    :key="task.id"
-                    :task="task"
-                    :rowlisk="index"
-                    :rowtask="row"
-                    class="mt-3"
-                  ></task-card>
-                </draggable>
-              </div>
+            </div>
+            <div class="card-body">
+              <draggable :list="list.tasks" :source="list.id" :rowlist="index" :animation="200" ghost-class="ghost-card" group="tasks" @end="checkMove">
+                <task-card
+                  v-for="(task, row) in list.tasks"
+                  :key="task.id"
+                  :task="task"
+                  :rowlisk="index"
+                  :rowtask="row"
+                  class="mt-3"
+                ></task-card>
+              </draggable>
             </div>
           </div>
-        </draggable>
+        </div>
+      </draggable>
     </div>
+    <editList :listas="editList"></editList>
   </div>
 </template>
 
@@ -66,7 +68,8 @@ export default {
   data() {
     return {
       lists: [],
-       
+      editList: '',
+      indexList: '',
     };
   },
   mounted(){
@@ -107,6 +110,10 @@ export default {
            console.log("Tasks could not be retrieved "+error);
         }); 
     },
+    editLists: function(index){
+      this.editList = this.lists[index];
+      this.indexList = index;
+    }
   }
 };
 </script>
@@ -116,8 +123,6 @@ export default {
   min-width: 380px;
   width: 380px;
 }
-/* Unfortunately @apply cannot be setup in codesandbox, 
-but you'd use "@apply border opacity-50 border-blue-500 bg-gray-200" here */
 .ghost-card {
   opacity: 0.5;
   background: #F7FAFC;

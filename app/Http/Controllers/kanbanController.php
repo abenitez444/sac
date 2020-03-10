@@ -98,8 +98,13 @@ class kanbanController extends Controller
         return response()->json($data);
     }
 
-    public function edit(Proyect $proyect)
+    public function editList(Request $request)
     {
-        return $proyect;
+
+        $list = Lists::find($request->id);
+        $list->name = $request->name;
+        $list->save();
+
+        return response()->json($list);
     }
 }
