@@ -39,7 +39,7 @@ class inventoryController extends Controller
     		return view('inventory.store', compact('inventory', 'entities'));
     	}else
     	{
-        	return redirect('/inventory/list')->with('success');
+        	return redirect('/inventory/index')->with('success');
     	}
     }
 
@@ -51,7 +51,7 @@ class inventoryController extends Controller
             return view('inventory.detail', compact('inventory'));
         }else
         {
-            return redirect('/inventory/list')->with('success');
+            return redirect('/inventory/index')->with('success');
         }
     }
 
@@ -68,7 +68,8 @@ class inventoryController extends Controller
         \Cache::put('id',$entity, 1); //*nombre, parámetro, tiempo en minuos
 
         Excel::import(new InventoryImport, request()->file('file'));
-        return redirect('/inventory/list')->with('success', 'Registro exitoso!');
+        
+        return redirect('/inventory/index')->with('success', 'Registro exitoso!');
     }
 
     public function save(Request $request) 
