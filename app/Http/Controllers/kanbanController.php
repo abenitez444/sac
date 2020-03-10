@@ -25,7 +25,7 @@ class kanbanController extends Controller
                     $itemArr[] = [
                         'id' => $item->id,
                         'name' => $item->name,
-                        'date' => $item->created_at,
+                        'date' => $item->created_at->format('d-m-Y'),
                         'description' => $item->description,
                         'order' => $item->order,
 
@@ -63,7 +63,8 @@ class kanbanController extends Controller
             'id' => $task->id,
             'name' => $task->name,
             'description' => $task->description,
-            'date' => $task->created_at,
+            'date' => $task->created_at->format('d-m-Y'),
+            'order' => $task->order,
         ];
         return response()->json($board_results);
     }

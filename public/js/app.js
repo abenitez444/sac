@@ -2264,13 +2264,15 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     badgeColor: function badgeColor() {
       var mappings = {
-        Design: "purple",
+        Diseño: "purple",
         "Feature Request": "teal",
         Backend: "blue",
+        Frondend: "orange",
         QA: "green",
-        "default": "teal"
+        "default": "teal",
+        Urgente: "red"
       };
-      return mappings[this.task.name] || mappings["default"];
+      return mappings[this.task.description] || mappings["default"];
     }
   }
 });
@@ -24440,7 +24442,7 @@ var render = function() {
                           _vm._l(list.tasks, function(task) {
                             return _c("task-card", {
                               key: task.id,
-                              staticClass: "mt-3 cursor-move",
+                              staticClass: "mt-3",
                               attrs: { task: task }
                             })
                           }),
@@ -24830,7 +24832,7 @@ var render = function() {
   return _c(
     "div",
     {
-      staticClass: "bg-white shadow rounded px-3 pt-3 pb-5 border border-white"
+      staticClass: "bg-white shadow rounded px-3 pt-2 pb-3 border border-white"
     },
     [
       _c("div", { staticClass: "flex justify-between" }, [
@@ -24849,7 +24851,7 @@ var render = function() {
         { staticClass: "flex mt-4 justify-between items-center" },
         [
           _c("span", { staticClass: "text-sm text-gray-600" }, [
-            _vm._v(_vm._s(_vm.task.date))
+            _vm._v("Creado: " + _vm._s(_vm.task.date))
           ]),
           _vm._v(" "),
           _vm.task.description
