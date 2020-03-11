@@ -20,7 +20,7 @@ class CreateEmployeeTable extends Migration
             $table->string('tlf')->nullable();
             $table->string('cv')->nullable();
             $table->string('mail')->nullable();
-
+            $table->string('avatar')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
