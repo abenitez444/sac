@@ -92,3 +92,14 @@ input[type="text"]:focus {
   font-size: 12px;
 }
 
+.push{
+  margin-top: -15px;
+}
+
+.avatar {
+  width: 100px;
+  height: 10vh;
+  border-radius: 50%;
+  margin-top: -40px;
+
+}
