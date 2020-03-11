@@ -22,7 +22,7 @@ class StatusSeeder extends Seeder
         );  
 
         foreach($status as $statu){
-            DB::table('status')->insert([
+            DB::table('status_project')->insert([
         		'description' => $statu[0]
             ]);    
         }

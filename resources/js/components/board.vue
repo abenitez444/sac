@@ -12,7 +12,7 @@
         <span class="text-white font-weight-bold">
           Tipo:
         </span>
-        <createList :proyect="proyect" @newList="lists.push($event)"></createList>
+        <createList :project="project" @newList="lists.push($event)"></createList>
         <createTask v-if="lists[0]" :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
       </div>
     </nav>
@@ -46,7 +46,7 @@
         </div>
       </draggable>
     </div>
-    <editList :listas="editList"></editList>
+    <editList :list="listEdit"></editList>
   </div>
 </template>
 
@@ -59,7 +59,7 @@ import editList from "./editList.vue";
 import createTask from "./createTask.vue";
 export default {
   name: "board",
-  props: ['proyect', 'name'],
+  props: ['project', 'name'],
   components: {
     TaskCard,
     draggable,
@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       lists: [],
-      editList: '',
+      listEdit: '',
       indexList: '',
     };
   },
@@ -78,7 +78,7 @@ export default {
   methods:{
     getLists(){
       let self = this;
-        axios.get('../../kanban/list/'+this.proyect)
+        axios.get('../../kanban/list/'+this.project)
         .then(function (response) {
           self.lists = response.data;
         })
@@ -111,7 +111,7 @@ export default {
         }); 
     },
     editLists: function(index){
-      this.editList = this.lists[index];
+      this.listEdit = this.lists[index];
       this.indexList = index;
     }
   }

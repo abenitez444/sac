@@ -20,14 +20,12 @@ class CreateProjectTable extends Migration
             $table->date('date_end')->nullable();
             $table->integer('entity_id')->unsigned();
             $table->bigInteger('status_id')->unsigned()->nullable();
-            $table->booblean('cost')->->default(false);
+            $table->boolean('cost')->default(false);
 
             $table->softDeletes();
             $table->timestamps();
 
-            // $table->bigInteger('user_id')->unsigned()->nullable();
-            // $table->foreign('user_id')->references('id')->on('users');   
-            $table->foreign('status_id')->references('id')->on('status');   
+            $table->foreign('status_id')->references('id')->on('status_project');   
             $table->foreign('entity_id')->references('id')->on('entity');   
         });
     }

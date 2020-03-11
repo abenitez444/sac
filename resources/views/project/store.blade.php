@@ -17,11 +17,11 @@
             <input type="text" class="form-control" id="name" name="name">
           </div>
           <div class="form-group">
-            <label for="recipient-type_id" class="col-form-label">Tipo de proyecto:</label>
-            <select class="custom-select mr-sm-2" id="type_id" name="type_id">
+            <label for="recipient-entity_id" class="col-form-label">Ente:</label>
+            <select class="custom-select mr-sm-2" id="entity_id" name="entity_id">
               <option selected>Seleccione...</option>
-              @foreach($types as $type)
-                <option value="{{ $type->id }}">{{ $type->description }}</option>
+              @foreach($entities as $entity)
+                <option value="{{ $entity->id }}">{{ $entity->name }}</option>
               @endforeach
             </select>
           </div>
@@ -42,7 +42,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-        <button type="button" id="send-proyect" class="btn btn-primary" >Guardar</button>
+        <button type="button" id="send-project" class="btn btn-primary" >Guardar</button>
       </div>
     </div>
   </div>

@@ -2040,7 +2040,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "board",
-  props: ['proyect', 'name'],
+  props: ['project', 'name'],
   components: {
     TaskCard: _task_vue__WEBPACK_IMPORTED_MODULE_2__["default"],
     draggable: vuedraggable__WEBPACK_IMPORTED_MODULE_1___default.a,
@@ -2049,7 +2049,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       lists: [],
-      editList: '',
+      listEdit: '',
       indexList: ''
     };
   },
@@ -2059,7 +2059,7 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getLists: function getLists() {
       var self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../../kanban/list/' + this.proyect).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../../kanban/list/' + this.project).then(function (response) {
         self.lists = response.data;
       })["catch"](function (error) {
         console.log("Tasks could not be retrieved " + error);
@@ -2087,7 +2087,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     editLists: function editLists(index) {
-      this.editList = this.lists[index];
+      this.listEdit = this.lists[index];
       this.indexList = index;
     }
   }
@@ -2137,7 +2137,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["proyect"],
+  props: ["project"],
   data: function data() {
     return {
       name: ''
@@ -2149,7 +2149,7 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/create', {
         name: this.name,
-        proyect_id: this.proyect,
+        project_id: this.project,
         order: 100
       }).then(function (response) {
         $('.listname').val('');
@@ -2280,17 +2280,31 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["listas"],
+  props: ["list"],
   methods: {
     updateList: function updateList(e) {
+      if (this.list.name) {
+        var self = this;
+        e.preventDefault();
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/edit', {
+          id: self.list.id,
+          name: self.list.name
+        }).then(function (response) {
+          $('#EditList').modal('hide');
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      } else {
+        toastr.error('El nombre de la lista no puede estar vacio', 'Error!');
+      }
+    },
+    cancelEdit: function cancelEdit(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/edit', {
-        id: this.listas.id,
-        name: this.listas.name
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/show', {
+        id: self.list.id
       }).then(function (response) {
-        $('.editListname').val('');
-        $('#EditList').modal('hide');
+        self.list.name = response.data.name;
       })["catch"](function (error) {
         console.log(error);
       });
@@ -2364,7 +2378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\r\n  min-width: 380px;\r\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\r\n  opacity: 0.5;\r\n  background: #F7FAFC;\r\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\r\n  margin-top: -30px !important;\n}\r\n", ""]);
 
 // exports
 
@@ -24428,7 +24442,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("createList", {
-                attrs: { proyect: _vm.proyect },
+                attrs: { project: _vm.project },
                 on: {
                   newList: function($event) {
                     return _vm.lists.push($event)
@@ -24563,7 +24577,7 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("editList", { attrs: { listas: _vm.editList } })
+      _c("editList", { attrs: { list: _vm.listEdit } })
     ],
     1
   )
@@ -24942,6 +24956,7 @@ var render = function() {
           id: "EditList",
           tabindex: "-1",
           role: "dialog",
+          "data-backdrop": "static",
           "aria-labelledby": "EditListLabel",
           "aria-hidden": "true"
         }
@@ -24959,7 +24974,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "EditListLabel" }
                   },
-                  [_vm._v("Editar la lista: " + _vm._s(_vm.listas.name))]
+                  [_vm._v("Editar la lista: " + _vm._s(_vm.list.name))]
                 ),
                 _vm._v(" "),
                 _vm._m(0)
@@ -24981,19 +24996,19 @@ var render = function() {
                       {
                         name: "model",
                         rawName: "v-model",
-                        value: _vm.listas.name,
-                        expression: "listas.name"
+                        value: _vm.list.name,
+                        expression: "list.name"
                       }
                     ],
                     staticClass: "form-control editListname",
                     attrs: { type: "text" },
-                    domProps: { value: _vm.listas.name },
+                    domProps: { value: _vm.list.name },
                     on: {
                       input: function($event) {
                         if ($event.target.composing) {
                           return
                         }
-                        _vm.$set(_vm.listas, "name", $event.target.value)
+                        _vm.$set(_vm.list, "name", $event.target.value)
                       }
                     }
                   })
@@ -25005,7 +25020,8 @@ var render = function() {
                   "button",
                   {
                     staticClass: "btn btn-secondary",
-                    attrs: { type: "button", "data-dismiss": "modal" }
+                    attrs: { type: "button", "data-dismiss": "modal" },
+                    on: { click: _vm.cancelEdit }
                   },
                   [_vm._v("Cerrar")]
                 ),
@@ -41161,8 +41177,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/srarteaga/local/patricia/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/srarteaga/local/patricia/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\laragon\www\patricia\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\laragon\www\patricia\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

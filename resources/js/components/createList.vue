@@ -30,7 +30,7 @@
 <script>
 import axios from 'axios';
 export default {
-  props: ["proyect"],
+  props: ["project"],
   data(){
     return {
       name: '',
@@ -42,7 +42,7 @@ export default {
       e.preventDefault();
       axios.post('../../kanban/list/create', {
           name : this.name,
-          proyect_id: this.proyect,
+          project_id: this.project,
           order: 100,
       })
       .then(function (response) {

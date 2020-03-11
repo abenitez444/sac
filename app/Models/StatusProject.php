@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class StatusProject extends Model
 {
-    protected $table = 'project';
+    protected $table = 'status_project';
 
  	protected $fillable = [
  		'description',

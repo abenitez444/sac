@@ -17,12 +17,12 @@ class CreateListsTable extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('color')->nullable();
-            $table->bigInteger('proyect_id')->unsigned();
+            $table->bigInteger('project_id')->unsigned();
             $table->integer('order')->nullable();
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('proyect_id')->references('id')->on('proyects');   
+            $table->foreign('project_id')->references('id')->on('project');   
         });
     }
 

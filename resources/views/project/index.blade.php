@@ -3,7 +3,7 @@
 @section('card-title', 'Gestion de Proyectos')
 @section('card-button')
 <div class="d-none d-sm-inline-block ">
-  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-new" data-toggle="modal" data-target="#modal-createProyect">
+  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-new" data-toggle="modal" data-target="#modal-createProject">
     <span class="icon text-white-50">
       <i class="fas fa-plus font-weight-bold"></i>
     </span>

@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\DataTables\ProyectDataTable;
-use App\Models\Proyect;
-use App\Models\TypeProyect;
-use App\Models\Statu;
+use App\Models\Project;
+use App\Models\StatusProject;
 use App\Models\Lists;
 use App\Models\Task;
 
@@ -16,7 +14,7 @@ class kanbanController extends Controller
 
     public function list($id)
     {
-        $lists = Lists::where('proyect_id', $id)->orderBy('order', 'asc')->get();
+        $lists = Lists::where('project_id', $id)->orderBy('order', 'asc')->get();
         $board_results = array();
 
          foreach ($lists as $list){
@@ -104,6 +102,12 @@ class kanbanController extends Controller
         $list = Lists::find($request->id);
         $list->name = $request->name;
         $list->save();
+
+        return response()->json($list);
+    }
+    public function showList(Request $request)
+    {
+        $list = Lists::find($request->id);
 
         return response()->json($list);
     }

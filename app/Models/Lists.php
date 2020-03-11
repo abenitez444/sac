@@ -14,7 +14,8 @@ class Lists extends Model
 
  	protected $fillable = [
  		'name',
- 		'proyect_id'
+ 		'project_id',
+ 		'color'
  	];
 
  	public function task()
