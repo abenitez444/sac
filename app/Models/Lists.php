@@ -15,6 +15,7 @@ class Lists extends Model
  	protected $fillable = [
  		'name',
  		'project_id',
+ 		'order',
  		'color'
  	];
 

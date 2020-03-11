@@ -35,6 +35,27 @@ class projectController extends Controller
         $project = Project::firstOrNew(['id' => $id]);
         $project->fill($request->all());
         $project->save();
+
+
+        for ($i=1; $i <= 3; $i++) {
+
+            $list = New Lists;
+            $list->project_id = $project->id;
+            switch ($i) {
+                case 1:
+                    $list->name = "Por hacer";
+                    break;
+                case 2:
+                    $list->name = "En desarrollo";
+                    break;
+                case 3:
+                    $list->name = "Terminado";
+                    break;
+            }
+            $list->order = $i;
+            $list->save();
+           
+        }
         
         return $project;
     }

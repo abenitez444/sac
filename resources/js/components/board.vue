@@ -24,7 +24,7 @@
           class="bg-gray-100 rounded-lg column-width rounded"
         >
           <div class="card bg-light mb-3 mr-1" style="max-width: 28rem;">
-            <div class="card-header bg-success cursor-move">
+            <div class="card-header bg-blue-500 cursor-move">
             <a class="cursor-pointer" @click="editLists(index)" data-toggle="modal" data-target="#EditList">
               <span class="card-title text-white font-semibold font-sans tracking-wide" style="font-size:20px; text-shadow: 0px 0px 3px #000000;">{{list.name}}</span>
             </a>

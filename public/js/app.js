@@ -2150,7 +2150,7 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/create', {
         name: this.name,
         project_id: this.project,
-        order: 100
+        order: 99
       }).then(function (response) {
         $('.listname').val('');
         $('#CreateList').modal('hide');
@@ -2378,7 +2378,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\r\n  min-width: 380px;\r\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\r\n  opacity: 0.5;\r\n  background: #F7FAFC;\r\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\r\n  margin-top: -30px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
 
 // exports
 
@@ -24499,7 +24499,7 @@ var render = function() {
                     [
                       _c(
                         "div",
-                        { staticClass: "card-header bg-success cursor-move" },
+                        { staticClass: "card-header bg-blue-500 cursor-move" },
                         [
                           _c(
                             "a",
@@ -24629,7 +24629,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "ml-2 btn btn-info",
+        staticClass: "ml-2 btn bg-blue-500 text-white font-weight-bold",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -24774,7 +24774,7 @@ var render = function() {
     _c(
       "button",
       {
-        staticClass: "ml-2 btn btn-primary",
+        staticClass: "ml-2 btn bg-indigo-600 text-white font-weight-bold",
         attrs: {
           type: "button",
           "data-toggle": "modal",
@@ -24977,7 +24977,23 @@ var render = function() {
                   [_vm._v("Editar la lista: " + _vm._s(_vm.list.name))]
                 ),
                 _vm._v(" "),
-                _vm._m(0)
+                _c(
+                  "button",
+                  {
+                    staticClass: "close",
+                    attrs: {
+                      type: "button",
+                      "data-dismiss": "modal",
+                      "aria-label": "Close"
+                    },
+                    on: { click: _vm.cancelEdit }
+                  },
+                  [
+                    _c("span", { attrs: { "aria-hidden": "true" } }, [
+                      _vm._v("×")
+                    ])
+                  ]
+                )
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "modal-body" }, [
@@ -25043,25 +25059,7 @@ var render = function() {
     )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c(
-      "button",
-      {
-        staticClass: "close",
-        attrs: {
-          type: "button",
-          "data-dismiss": "modal",
-          "aria-label": "Close"
-        }
-      },
-      [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
-    )
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -41177,8 +41175,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\patricia\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\patricia\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/srarteaga/local/patricia/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/srarteaga/local/patricia/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

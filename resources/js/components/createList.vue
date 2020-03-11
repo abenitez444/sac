@@ -1,6 +1,6 @@
 <template>
   <div id="ListCreate">
-    <button type="button" class="ml-2 btn btn-info" data-toggle="modal" data-target="#CreateList" data-whatever="@getbootstrap">Agrega Lista</button>
+    <button type="button" class="ml-2 btn bg-blue-500 text-white font-weight-bold" data-toggle="modal" data-target="#CreateList" data-whatever="@getbootstrap">Agrega Lista</button>
 
     <div class="modal fade" id="CreateList" tabindex="-1" role="dialog" aria-labelledby="CreateListLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
@@ -43,7 +43,7 @@ export default {
       axios.post('../../kanban/list/create', {
           name : this.name,
           project_id: this.project,
-          order: 100,
+          order: 99,
       })
       .then(function (response) {
         $('.listname').val('');
