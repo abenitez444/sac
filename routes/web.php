@@ -59,9 +59,8 @@ Route::group(['prefix' => 'employee'], function () {
 	Route::get('/create', 'employeeController@create')->name('employee.create');
 	Route::get('/detail/{id}', 'employeeController@detail')->name('employee.detail');
 	Route::get('/edit/{id}', 'employeeController@edit')->name('employee.edit');
-
 	Route::post('/save', 'employeeController@save')->name('employee.save');
-
+	Route::put('/delete','employeeController@destroy')->name('employee.delete');
 });
 
 Auth::routes();

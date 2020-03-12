@@ -1,7 +1,3 @@
-@section('css')
-<link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
-@endsection
-
 <div class="modal fade" id="modal-createEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-createEmployee"
   aria-hidden="true">
   <div class="modal-dialog modal-md" role="employee">
@@ -23,31 +19,48 @@
               <img src="{{asset('img/avatar.png')}}" alt="Avatar" class="avatar" title="Cargar imagen del empleado.">
           </div>
           <input type="hidden" class="form-control" id="id" name="id">
-          <div class="form-group">
-            <div class="inputWithIcon">
-              <input type="text" class="form-control" id="name" name="name" placeholder="Nombre y apellido">
-              <i class="fas fa-address-card fa-lg" title="Introduzca el nombre y apellido del empleado."></i>
+          <div class="row justify-content-center form-group">
+            <div class="col-sm-8 col-md-8 col-lg-10">
+              <div class="inputWithIcon">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre y apellido">
+                <i class="fas fa-address-card fa-lg" title="Introduzca el nombre y apellido del empleado."></i>
+              </div>
             </div>
           </div>
-          <div class="form-group mt-4">
-            <div class="inputWithIcon">
-              <input type="text" class="form-control" id="ci" name="ci" placeholder="Cédula de identidad">
-              <i class="fas fa-id-card fa-lg" title="Introduzca la cédula de identidad del empleado."></i>
+          <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-3 col-lg-3 form-group">
+              <div class="inputWithIcon">
+                  <select id="nac" name="nac" type="text" class="form-control custom-select @error('nac') is-invalid @enderror fondo-gris element-focus" value="{{ old('nac') }}">
+                      <option value="0" disabled selected></option>
+                      <option value="1">V</option>
+                      <option value="2">E</option>
+                  </select>
+                  <i class="fas fa-hand-pointer fa-lg" title="Introduzca la cédula de identidad del empleado."></i>
+                </div>
+              </div>
+              <div class="col-sm-8 col-md-5 col-lg-7 form-group">
+                <div class="inputWithIcon">
+                  <input type="text" class="form-control" id="ci" name="ci" placeholder="Cédula identidad">
+                  <i class="fas fa-id-card fa-lg" title="Introduzca la cédula de identidad del empleado."></i>
+                </div>
             </div>
           </div>
-          <div class="form-group mt-4">
-            <div class="inputWithIcon">
-              <input type="text" class="form-control" id="tlf" name="tlf" placeholder="Teléfono">
-              <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del empleado."></i>
+          <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8 col-lg-10 form-group">
+              <div class="inputWithIcon">
+                <input type="text" class="form-control" id="tlf" name="tlf" placeholder="Teléfono">
+                <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del empleado."></i>
+              </div>
             </div>
           </div>
-          <div class="form-group mt-4">
-            <div class="inputWithIcon">
-              <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electrónico">
-              <i class="fas fa-envelope fa-lg" title="Introduzca el correo electrónico del empleado."></i>
+          <div class="row justify-content-center">
+            <div class="col-sm-8 col-md-8 col-lg-10 form-group">
+              <div class="inputWithIcon">
+                <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electrónico">
+                <i class="fas fa-envelope fa-lg" title="Introduzca el correo electrónico del empleado."></i>
+              </div>
             </div>
           </div>
-
           <div class="form-group text-center">
               <label class="ml-2 mt-2"><b>Adjuntar CV</b></label>
             <div class="inputWithIcon">

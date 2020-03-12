@@ -16,7 +16,7 @@
   <div class="card-footer">
     <div class="text-center">
   {{-- <button type="button" class="btn btn-danger">Descargar este Documento</button> --}}
-  <a href="{{route('list')}}" class="btn btn-primary">Volver</a>
+  <a href="{{route('employee.index')}}" class="btn btn-primary">Volver</a>
 </div>
   </div>
 </div>
