@@ -45,7 +45,7 @@ export default {
     createTask(e) {
       let self = this;
       e.preventDefault();
-      axios.post('../../kanban/task/create', {
+      axios.post('../../task/create', {
           name : this.nameTask,
           description : this.description,
           list_id: this.lists[0].id,

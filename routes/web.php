@@ -15,6 +15,11 @@ Route::get('/home', function () {
     return view('home');
 })->name('home');
 
+Route::get('/', function () {
+    return redirect()->route('home');
+});
+
+
 Route::group(['prefix' => 'inventory'], function () {
 
 	Route::get('/index', 'inventoryController@index')->name('index');
@@ -41,16 +46,23 @@ Route::group(['prefix' => 'project'], function () {
 
 /*Route::get('/home', '*/
 
-Route::group(['prefix' => 'kanban'], function () {
-    Route::get('/list/{id}', 'kanbanController@list')->name('kanban.list');
 
-    Route::post('/list/create', 'kanbanController@createList')->name('kanban.createList');
-    Route::post('/list/order', 'kanbanController@moveList')->name('kanban.moveList');
-    Route::post('/list/edit', 'kanbanController@editList')->name('kanban.moveList');
-    Route::post('/list/show', 'kanbanController@showList')->name('kanban.showList');
-    Route::post('/list/deleted', 'kanbanController@deletedList')->name('kanban.deletedList');
-    Route::post('/task/create', 'kanbanController@createTask')->name('kanban.createTask');
-    Route::post('/moveTask', 'kanbanController@moveTask')->name('kanban.moveTask');
+Route::group(['prefix' => 'list'], function () {
+
+    Route::get('/index/{id}', 'listController@index')->name('list.index');
+    Route::post('/create', 'listController@create')->name('list.create');
+    Route::post('/move', 'listController@move')->name('list.move');
+    Route::post('/edit', 'listController@edit')->name('list.edit');
+    Route::post('/show', 'listController@show')->name('list.show');
+	Route::post('/deleted', 'listController@deleted')->name('list.deleted');
+});
+
+
+Route::group(['prefix' => 'task'], function () {
+
+    Route::post('/create', 'taskController@create')->name('task.create');
+    Route::post('/move', 'taskController@move')->name('task.move');
+    
 });
 
 Route::group(['prefix' => 'employee'], function () {

@@ -2059,14 +2059,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getLists: function getLists() {
       var self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../../kanban/list/' + this.project).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.get('../../list/index/' + this.project).then(function (response) {
         self.lists = response.data;
       })["catch"](function (error) {
         console.log("Tasks could not be retrieved " + error);
       });
     },
     checkMove: function checkMove(e) {
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/moveTask', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../task/move', {
         id: e.item._underlying_vm_.id,
         list_id: e.to.__vue__.$attrs.source,
         tasks: this.lists[e.to.__vue__.$attrs.rowlist].tasks
@@ -2078,7 +2078,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     listsOrden: function listsOrden(e) {
       var self = this;
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/order', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/move', {
         lists: self.lists
       }).then(function (response) {
         console.log('move complete');
@@ -2147,7 +2147,7 @@ __webpack_require__.r(__webpack_exports__);
     create: function create(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/create', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/create', {
         name: this.name,
         project_id: this.project,
         order: 99
@@ -2221,7 +2221,7 @@ __webpack_require__.r(__webpack_exports__);
     createTask: function createTask(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/task/create', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../task/create', {
         name: this.nameTask,
         description: this.description,
         list_id: this.lists[0].id,
@@ -2287,7 +2287,7 @@ __webpack_require__.r(__webpack_exports__);
       if (this.list.name) {
         var self = this;
         e.preventDefault();
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/edit', {
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/edit', {
           id: self.list.id,
           name: self.list.name
         }).then(function (response) {
@@ -2302,7 +2302,7 @@ __webpack_require__.r(__webpack_exports__);
     cancelEdit: function cancelEdit(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/show', {
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/show', {
         id: self.list.id
       }).then(function (response) {
         self.list.name = response.data.name;
@@ -2325,7 +2325,7 @@ __webpack_require__.r(__webpack_exports__);
         confirmButtonText: 'Yes, delete it!'
       }).then(function (result) {
         if (result.value) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../kanban/list/deleted', {
+          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/deleted', {
             id: self.list.id
           }).then(function (response) {
             /*lista: ["icono-5-4", "icono-7-6", "icono-8-7", "icono-9-8", "icono-1-0", "icono-2-1"]
@@ -2410,7 +2410,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\r\n  min-width: 380px;\r\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\r\n  opacity: 0.5;\r\n  background: #F7FAFC;\r\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\r\n  margin-top: -30px !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
 
 // exports
 
@@ -44286,8 +44286,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\laragon\www\patricia\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\laragon\www\patricia\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/srarteaga/local/patricia/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/srarteaga/local/patricia/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

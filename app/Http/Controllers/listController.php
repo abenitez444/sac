@@ -3,16 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Project;
-use App\Models\StatusProject;
 use App\Models\Lists;
-use App\Models\Task;
 
-
-class kanbanController extends Controller
+class listController extends Controller
 {
-
-    public function list($id)
+    public function index($id)
     {
         $lists = Lists::where('project_id', $id)->orderBy('order', 'asc')->get();
         $board_results = array();
@@ -40,7 +35,7 @@ class kanbanController extends Controller
         
     }
 
-    public function createList(Request $request) 
+    public function create(Request $request) 
     {
         $list = Lists::create(request()->all());
         $board_results = array();
@@ -53,37 +48,8 @@ class kanbanController extends Controller
         ];
         return response()->json($board_results);
     }
-    public function createTask(Request $request) 
-    {
-        $task = Task::create(request()->all());
-        $board_results = array();
-        $board_results = [
-            'id' => $task->id,
-            'name' => $task->name,
-            'description' => $task->description,
-            'date' => $task->created_at->format('d-m-Y'),
-            'order' => $task->order,
-        ];
-        return response()->json($board_results);
-    }
 
-    public function moveTask(Request $request) 
-    {
-        $task = Task::find($request->id);
-        $task->list_id = $request->list_id;
-        $task->save();
-
-        foreach ($request->tasks as $key => $list) {
-
-            $data = Task::find($list['id']);
-            $data->order = $key;
-            $data->save();
-        }
-
-        return response()->json($task);
-    }
-
-    public function moveList(Request $request) 
+    public function move(Request $request) 
     {
 
         foreach ($request->lists as $key => $list) {
@@ -96,7 +62,7 @@ class kanbanController extends Controller
         return response()->json($data);
     }
 
-    public function editList(Request $request)
+    public function edit(Request $request)
     {
 
         $list = Lists::find($request->id);
@@ -105,15 +71,16 @@ class kanbanController extends Controller
 
         return response()->json($list);
     }
-    public function showList(Request $request)
+    public function show(Request $request)
     {
         $list = Lists::find($request->id);
 
         return response()->json($list);
     }
 
-    public function deletedList(Request $request)
+    public function deleted(Request $request)
     {
+    	
         $list = Lists::destroy($request->id);
 
         return response()->json($list);

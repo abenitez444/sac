@@ -40,7 +40,7 @@ export default {
     create(e) {
       let self = this;
       e.preventDefault();
-      axios.post('../../kanban/list/create', {
+      axios.post('../../list/create', {
           name : this.name,
           project_id: this.project,
           order: 99,

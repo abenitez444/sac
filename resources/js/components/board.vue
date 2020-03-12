@@ -78,7 +78,7 @@ export default {
   methods:{
     getLists(){
       let self = this;
-        axios.get('../../kanban/list/'+this.project)
+        axios.get('../../list/index/'+this.project)
         .then(function (response) {
           self.lists = response.data;
         })
@@ -87,7 +87,7 @@ export default {
         }); 
     },
     checkMove: function(e) {
-      axios.post('../../kanban/moveTask', {
+      axios.post('../../task/move', {
           id : e.item._underlying_vm_.id,
           list_id: e.to.__vue__.$attrs.source,
           tasks: this.lists[e.to.__vue__.$attrs.rowlist].tasks,
@@ -100,7 +100,7 @@ export default {
     listsOrden: function(e){
 
       let self = this;
-        axios.post('../../kanban/list/order',{
+        axios.post('../../list/move',{
           lists: self.lists,
         })
         .then(function (response) {

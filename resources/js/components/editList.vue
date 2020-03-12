@@ -35,7 +35,7 @@ export default {
       if (this.list.name) {
         let self = this;
         e.preventDefault();
-        axios.post('../../kanban/list/edit', {
+        axios.post('../../list/edit', {
             id : self.list.id,
             name : self.list.name,
         })
@@ -53,7 +53,7 @@ export default {
     cancelEdit(e){
       let self = this;
       e.preventDefault();
-      axios.post('../../kanban/list/show', {
+      axios.post('../../list/show', {
           id : self.list.id,
       })
       .then(function (response) {
@@ -76,7 +76,7 @@ export default {
         confirmButtonText: 'Yes, delete it!'
       }).then((result) => {
         if (result.value) {
-          axios.post('../../kanban/list/deleted', {
+          axios.post('../../list/deleted', {
               id : self.list.id,
           })
           .then(function (response) {
