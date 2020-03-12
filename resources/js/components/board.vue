@@ -46,7 +46,7 @@
         </div>
       </draggable>
     </div>
-    <editList :list="listEdit"></editList>
+    <editList :list="listEdit" :indexList="indexList" @putList="lists.splice($event, 1)"></editList>
   </div>
 </template>
 

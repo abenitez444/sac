@@ -15,7 +15,7 @@
 {{--     <link href="{{asset('css/datatable/jquery.dataTables.min.css')}}" rel="stylesheet" /> --}}
   <link href="{{asset('vendor/datatables/dataTables.bootstrap4.min.css')}}" rel="stylesheet" />
   <link href="{{asset('css/datatable/buttons.dataTables.min.css')}}" rel="stylesheet" />
-  <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}">
+{{--   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"> --}}
   <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
   @yield('css')
@@ -64,7 +64,7 @@
 <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
 <script src="{{ asset('js/datatable/dataTables.buttons.min.js') }}"></script>
-<script src="{{ asset('js/sweetalert2.min.js') }}"></script>
+{{-- <script src="{{ asset('js/sweetalert2.min.js') }}"></script> --}}
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/loading.js') }}"></script>
 <script src="{{asset('/js/function.js')}}"></script>

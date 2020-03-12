@@ -111,4 +111,11 @@ class kanbanController extends Controller
 
         return response()->json($list);
     }
+
+    public function deletedList(Request $request)
+    {
+        $list = Lists::destroy($request->id);
+
+        return response()->json($list);
+    }
 }

@@ -47,7 +47,8 @@ Route::group(['prefix' => 'kanban'], function () {
     Route::post('/list/create', 'kanbanController@createList')->name('kanban.createList');
     Route::post('/list/order', 'kanbanController@moveList')->name('kanban.moveList');
     Route::post('/list/edit', 'kanbanController@editList')->name('kanban.moveList');
-    Route::post('/list/show', 'kanbanController@showList')->name('kanban.show');
+    Route::post('/list/show', 'kanbanController@showList')->name('kanban.showList');
+    Route::post('/list/deleted', 'kanbanController@deletedList')->name('kanban.deletedList');
     Route::post('/task/create', 'kanbanController@createTask')->name('kanban.createTask');
     Route::post('/moveTask', 'kanbanController@moveTask')->name('kanban.moveTask');
 });
