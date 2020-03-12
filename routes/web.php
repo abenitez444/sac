@@ -62,7 +62,10 @@ Route::group(['prefix' => 'task'], function () {
 
     Route::post('/create', 'taskController@create')->name('task.create');
     Route::post('/move', 'taskController@move')->name('task.move');
-    
+    Route::post('/edit', 'taskController@edit')->name('task.edit');
+    Route::post('/show', 'taskController@show')->name('task.show');
+	Route::post('/deleted', 'taskController@deleted')->name('task.deleted');
+
 });
 
 Route::group(['prefix' => 'employee'], function () {

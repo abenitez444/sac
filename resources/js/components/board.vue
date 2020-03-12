@@ -1,21 +1,35 @@
 <template>
   <div class="kanban-board">
-    <nav class="navbar navbar-expand-lg navbar-dark bg-secondary shadow-lg rounded mb-2">
-      <span class="navbar-brand">{{ this.name }}</span>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    <nav class="navbar navbar-expand navbar-light bg-gray-400 topbar mb-3 static-top shadow-lg rounded">
+      <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+        <i class="fa fa-bars"></i>
       </button>
-      <div class="collapse navbar-collapse" id="navbarText">
-        <ul class="navbar-nav mr-auto">
-
-        </ul>
-        <span class="text-white font-weight-bold">
-          Tipo:
-        </span>
-        <createList :project="project" @newList="lists.push($event)"></createList>
-        <createTask v-if="lists[0]" :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
-      </div>
+      <span class="navbar-brand font-weight-bold text-dark">{{ this.name }}</span>
+      <ul class="navbar-nav ml-auto">
+        <div class="topbar-divider d-none d-sm-block"></div>
+        <li class="nav-item dropdown no-arrow">
+          <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="mr-2 d-none d-lg-inline text-dark font-weight-bold">Opciones</span>
+            <img class="img-profile rounded-circle" src="../img/confi.png">
+          </a>
+          <!-- Dropdown - User Information -->
+          <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateList" >
+              <i class="fas fa-clipboard-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              Agregar Lista
+            </a>
+            <a v-if="lists[0]" class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateTask">
+              <i class="fas fa-tasks fa-sm fa-fw mr-2 text-gray-400"></i>
+              Agreagar Tarea
+            </a>
+            <div class="dropdown-divider"></div>
+          </div>
+        </li>
+      </ul>
     </nav>
+    <createTask :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
+    <createList :project="project" @newList="lists.push($event)"></createList>
+
     <div class="flex">
       <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
         <div
@@ -128,7 +142,11 @@ export default {
   background: #F7FAFC;
   border: 1px solid #4299e1;
 }
-.navbar-dark{
+.navbar-light{
   margin-top: -30px !important;
+}
+.img-profile{
+  width: 30px;
+  height: 30px;
 }
 </style>

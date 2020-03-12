@@ -1,8 +1,6 @@
 <template>
   <div id="ListCreate">
-    <button type="button" class="ml-2 btn bg-blue-500 text-white font-weight-bold" data-toggle="modal" data-target="#CreateList" data-whatever="@getbootstrap">Agrega Lista</button>
-
-    <div class="modal fade" id="CreateList" tabindex="-1" role="dialog" aria-labelledby="CreateListLabel" aria-hidden="true">
+    <div class="modal fade" id="CreateList" tabindex="-60" role="dialog" aria-labelledby="CreateListLabel" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">

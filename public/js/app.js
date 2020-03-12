@@ -2032,6 +2032,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2133,8 +2147,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ["project"],
@@ -2175,8 +2187,6 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
-//
-//
 //
 //
 //
@@ -2410,7 +2420,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-dark[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n", ""]);
+exports.push([module.i, "\n.column-width[data-v-09b136aa] {\n  min-width: 380px;\n  width: 380px;\n}\n.ghost-card[data-v-09b136aa] {\n  opacity: 0.5;\n  background: #F7FAFC;\n  border: 1px solid #4299e1;\n}\n.navbar-light[data-v-09b136aa]{\n  margin-top: -30px !important;\n}\n.img-profile[data-v-09b136aa]{\n  width: 30px;\n  height: 30px;\n}\n", ""]);
 
 // exports
 
@@ -27512,52 +27522,79 @@ var render = function() {
         "nav",
         {
           staticClass:
-            "navbar navbar-expand-lg navbar-dark bg-secondary shadow-lg rounded mb-2"
+            "navbar navbar-expand navbar-light bg-gray-400 topbar mb-3 static-top shadow-lg rounded"
         },
         [
-          _c("span", { staticClass: "navbar-brand" }, [
-            _vm._v(_vm._s(this.name))
-          ]),
-          _vm._v(" "),
           _vm._m(0),
           _vm._v(" "),
           _c(
-            "div",
-            {
-              staticClass: "collapse navbar-collapse",
-              attrs: { id: "navbarText" }
-            },
-            [
-              _c("ul", { staticClass: "navbar-nav mr-auto" }),
+            "span",
+            { staticClass: "navbar-brand font-weight-bold text-dark" },
+            [_vm._v(_vm._s(this.name))]
+          ),
+          _vm._v(" "),
+          _c("ul", { staticClass: "navbar-nav ml-auto" }, [
+            _c("div", { staticClass: "topbar-divider d-none d-sm-block" }),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item dropdown no-arrow" }, [
+              _vm._m(1),
               _vm._v(" "),
-              _c("span", { staticClass: "text-white font-weight-bold" }, [
-                _vm._v("\n        Tipo:\n      ")
-              ]),
-              _vm._v(" "),
-              _c("createList", {
-                attrs: { project: _vm.project },
-                on: {
-                  newList: function($event) {
-                    return _vm.lists.push($event)
-                  }
-                }
-              }),
-              _vm._v(" "),
-              _vm.lists[0]
-                ? _c("createTask", {
-                    attrs: { lists: _vm.lists },
-                    on: {
-                      newTask: function($event) {
-                        return _vm.lists[0].tasks.push($event)
-                      }
-                    }
-                  })
-                : _vm._e()
-            ],
-            1
-          )
+              _c(
+                "div",
+                {
+                  staticClass:
+                    "dropdown-menu dropdown-menu-right shadow animated--grow-in",
+                  attrs: { "aria-labelledby": "userDropdown" }
+                },
+                [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _vm.lists[0]
+                    ? _c(
+                        "a",
+                        {
+                          staticClass: "dropdown-item",
+                          attrs: {
+                            href: "#",
+                            "data-toggle": "modal",
+                            "data-target": "#CreateTask"
+                          }
+                        },
+                        [
+                          _c("i", {
+                            staticClass:
+                              "fas fa-tasks fa-sm fa-fw mr-2 text-gray-400"
+                          }),
+                          _vm._v("\n            Agreagar Tarea\n          ")
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "dropdown-divider" })
+                ]
+              )
+            ])
+          ])
         ]
       ),
+      _vm._v(" "),
+      _c("createTask", {
+        attrs: { lists: _vm.lists },
+        on: {
+          newTask: function($event) {
+            return _vm.lists[0].tasks.push($event)
+          }
+        }
+      }),
+      _vm._v(" "),
+      _c("createList", {
+        attrs: { project: _vm.project },
+        on: {
+          newList: function($event) {
+            return _vm.lists.push($event)
+          }
+        }
+      }),
       _vm._v(" "),
       _c(
         "div",
@@ -27690,17 +27727,63 @@ var staticRenderFns = [
     return _c(
       "button",
       {
-        staticClass: "navbar-toggler",
+        staticClass: "btn btn-link d-md-none rounded-circle mr-3",
+        attrs: { id: "sidebarToggleTop" }
+      },
+      [_c("i", { staticClass: "fa fa-bars" })]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "nav-link dropdown-toggle",
         attrs: {
-          type: "button",
-          "data-toggle": "collapse",
-          "data-target": "#navbarText",
-          "aria-controls": "navbarText",
-          "aria-expanded": "false",
-          "aria-label": "Toggle navigation"
+          href: "#",
+          id: "userDropdown",
+          role: "button",
+          "data-toggle": "dropdown",
+          "aria-haspopup": "true",
+          "aria-expanded": "false"
         }
       },
-      [_c("span", { staticClass: "navbar-toggler-icon" })]
+      [
+        _c(
+          "span",
+          { staticClass: "mr-2 d-none d-lg-inline text-dark font-weight-bold" },
+          [_vm._v("Opciones")]
+        ),
+        _vm._v(" "),
+        _c("img", {
+          staticClass: "img-profile rounded-circle",
+          attrs: { src: __webpack_require__(/*! ../img/confi.png */ "./resources/js/img/confi.png") }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "a",
+      {
+        staticClass: "dropdown-item",
+        attrs: {
+          href: "#",
+          "data-toggle": "modal",
+          "data-target": "#CreateList"
+        }
+      },
+      [
+        _c("i", {
+          staticClass: "fas fa-clipboard-list fa-sm fa-fw mr-2 text-gray-400"
+        }),
+        _vm._v("\n            Agregar Lista\n          ")
+      ]
     )
   }
 ]
@@ -27727,26 +27810,12 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "ListCreate" } }, [
     _c(
-      "button",
-      {
-        staticClass: "ml-2 btn bg-blue-500 text-white font-weight-bold",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": "#CreateList",
-          "data-whatever": "@getbootstrap"
-        }
-      },
-      [_vm._v("Agrega Lista")]
-    ),
-    _vm._v(" "),
-    _c(
       "div",
       {
         staticClass: "modal fade",
         attrs: {
           id: "CreateList",
-          tabindex: "-1",
+          tabindex: "-60",
           role: "dialog",
           "aria-labelledby": "CreateListLabel",
           "aria-hidden": "true"
@@ -27871,19 +27940,6 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { attrs: { id: "TaskCreate" } }, [
-    _c(
-      "button",
-      {
-        staticClass: "ml-2 btn bg-indigo-600 text-white font-weight-bold",
-        attrs: {
-          type: "button",
-          "data-toggle": "modal",
-          "data-target": "#CreateTask"
-        }
-      },
-      [_vm._v("Agrega Tarea")]
-    ),
-    _vm._v(" "),
     _c(
       "div",
       {
@@ -44265,6 +44321,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_task_vue_vue_type_template_id_f15a0460___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
+
+/***/ }),
+
+/***/ "./resources/js/img/confi.png":
+/*!************************************!*\
+  !*** ./resources/js/img/confi.png ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "/images/confi.png?3265eff8cd0cebcb74912045bb1cbc0d";
 
 /***/ }),
 
