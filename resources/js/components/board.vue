@@ -15,11 +15,11 @@
           <!-- Dropdown - User Information -->
           <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
             <a class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateList" >
-              <i class="fas fa-clipboard-list fa-sm fa-fw mr-2 text-gray-400"></i>
+              <i class="fas fa-clipboard-list fa-sm fa-fw mr-2 text-blue-400"></i>
               Agregar Lista
             </a>
             <a v-if="lists[0]" class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateTask">
-              <i class="fas fa-tasks fa-sm fa-fw mr-2 text-gray-400"></i>
+              <i class="fas fa-tasks fa-sm fa-fw mr-2 text-blue-400"></i>
               Agreagar Tarea
             </a>
             <div class="dropdown-divider"></div>
@@ -27,8 +27,6 @@
         </li>
       </ul>
     </nav>
-    <createTask :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
-    <createList :project="project" @newList="lists.push($event)"></createList>
 
     <div class="flex">
       <draggable :list="lists" :source="lists.id" :animation="200" group="list" class="min-h-screen flex overflow-x-scroll" @end="listsOrden">
@@ -53,6 +51,7 @@
                   :rowlisk="index"
                   :rowtask="row"
                   class="mt-3"
+                  @taskid="editTask.splice($event, 1)"
                 ></task-card>
               </draggable>
             </div>
@@ -60,7 +59,10 @@
         </div>
       </draggable>
     </div>
+    <createTask :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
+    <createList :project="project" @newList="lists.push($event)"></createList>
     <editList :list="listEdit" :indexList="indexList" @putList="lists.splice($event, 1)"></editList>
+    <editTask :task="editTask" :indexTa="indexList" @putList="lists.splice($event, 1)"></editTask>
   </div>
 </template>
 
@@ -71,19 +73,25 @@ import TaskCard from "./task.vue";
 import createList from "./createList.vue";
 import editList from "./editList.vue";
 import createTask from "./createTask.vue";
+import editTask from "./editTask.vue";
 export default {
   name: "board",
   props: ['project', 'name'],
   components: {
-    TaskCard,
     draggable,
-    createList
+    TaskCard,
+    createList,
+    editList,
+    createTask,
+    editTask,
+
   },
   data() {
     return {
       lists: [],
       listEdit: '',
       indexList: '',
+      indexTask:'',
     };
   },
   mounted(){

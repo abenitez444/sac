@@ -32,6 +32,7 @@ Vue.component('board', require('./components/board.vue').default);
 Vue.component('createList', require('./components/createList.vue').default);
 Vue.component('createTask', require('./components/createTask.vue').default);
 Vue.component('editList', require('./components/editList.vue').default);
+Vue.component('editTask', require('./components/editTask.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
