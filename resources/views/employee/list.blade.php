@@ -14,30 +14,7 @@
   </a>
 </div>
 @endsection
-<style>
-  .md-avatar {
-  vertical-align: middle;
-  width: 50px;
-  height: 50px;
-}
-.md-avatar.size-1 {
-  width: 40px;
-  height: 40px;
-}
-.md-avatar.size-2 {
-  width: 70px;
-  height: 70px;
-}
-.md-avatar.size-3 {
-  width: 90px;
-  height: 90px;
-}
-.md-avatar.size-4 {
-  width: 110px;
-  height: 110px;
-}
-  
-</style>
+
 @section('content')
 <div class="card shadow mb-4">
   <div class="card-header bg-primary">
@@ -62,7 +39,7 @@
           <tr class="text-center">
             <td><img src="{{asset('img/avatar.png')}}" alt="Avatar" style="width: 35px; border-radius: 50px;"></td> 
             <td>{{$emp->name}}</td>
-            <td>@if($emp->nac == 1) V @else E @endif -{{$emp->ci}}</td>
+            <td>{{$emp->Nac->opcion}}-{{$emp->ci}}</td>
             <td>{{$emp->tlf}}</td> 
             <td>{{$emp->mail}}</td>
             <!--<td>{{$emp->cv}}</td>-->
@@ -92,6 +69,7 @@
 @section('js')
 
 <script type="text/javascript">
+  //Register employee in modal 
   $(document).ready(function(){
     var modal = $(this)
 
@@ -150,6 +128,7 @@
       });
       
     })
+    //Edit employee in modal 
       $('#modal-createEmployee').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
@@ -178,7 +157,7 @@
     })
   })
 </script>
-
+<!--Delete empleado -->
 <script>
   function deleteEmployee (id){
 
@@ -238,7 +217,7 @@
   })
 }
 </script>
-
+<!--Details of empleado in modal -->
 <script>
   $('#modal-detailEmployee').on('show.bs.modal', function (event) {
       var modal = $(this)
@@ -252,11 +231,11 @@
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Editar empleado:' + data.name)
+          modal.find('.modal-title').text(' Ficha de empleado ')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #avatar').val(data.avatar)
-          modal.find('.modal-body #lista').val(data.name)
-          modal.find('.modal-body #nac').val(data.nac)
+          modal.find('.modal-body #name').text(data.name)
+          modal.find('.modal-body #nac').text(data.nac.opcion)
           modal.find('.modal-body #ci').val(data.ci)
           modal.find('.modal-body #tlf').val(data.tlf)
           modal.find('.modal-body #mail').val(data.mail)

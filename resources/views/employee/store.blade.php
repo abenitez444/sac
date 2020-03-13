@@ -34,8 +34,9 @@
               <div class="inputWithIcon">
                   <select id="nac" name="nac" type="text" class="form-control custom-select @error('nac') is-invalid @enderror fondo-gris element-focus" value="{{ old('nac') }}">
                       <option value="0" disabled selected></option>
-                      <option value="1">V</option>
-                      <option value="2">E</option>
+                    @foreach($employee as $emp)
+                      <option value="{{$emp->id}}">{{$emp->Nac->opcion}}</option>
+                    @endforeach
                   </select>
                   <i class="fas fa-hand-pointer fa-lg" title="Introduzca la cédula de identidad del empleado."></i>
                 </div>

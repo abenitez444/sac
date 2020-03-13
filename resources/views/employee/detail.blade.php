@@ -15,9 +15,35 @@
             <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
           </div>
           <div class="row">
-            <div class="col">
-              <label>Nombre</label>
-              <input type="text" id="lista" value="{{$employee[0]->name}}">
+           
+              <!--Grid column-->
+              <div class="col-lg-12 col-md-12 mb-lg-0 mb-4">
+                <!--Card-->
+                <div class="card testimonial-card">
+                  <!--Background color-->
+                  <div class="card-up info-color"></div>
+                  <!--Avatar-->
+                  <div class="avatar mx-auto white">
+                    <img src="https://mdbootstrap.com/img/Photos/Avatars/img%20(9).jpg" class="rounded-circle img-fluid">
+                  </div>
+                  <div class="card-body">
+                    <!--Name-->
+                    <h4 class="font-weight-bold mb-4"><span id="name"></span></h4>
+                    <span id="nac"></span>
+                    <hr>
+                    <!--Quotation-->
+                    <p class="dark-grey-text mt-4"><i class="fa fa-quote-left pr-2"></i>Lorem ipsum dolor sit amet eos
+                      adipisci, consectetur adipisicing elit.</p>
+                  </div>
+                </div>
+              </div>
+        
+          </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-12">
+              <span id="name" class="font-weight-bold" style=""></span>
             </div>
           </div>
         </div>

@@ -27,5 +27,9 @@ class Employee extends Model
 		'cv'
  	];
 
+	 public function Nac()
+	    {
+	        return $this->belongsTo('App\Models\Nationality', 'nac');
+	    }
 
 }
