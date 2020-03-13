@@ -64,4 +64,11 @@ class projectController extends Controller
     {
         return $project;
     }
+
+    public function kanban(Project $project)
+    {
+
+        return view('project.kanban', compact('project'));
+        
+    }
 }

@@ -2049,6 +2049,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2072,7 +2074,8 @@ __webpack_require__.r(__webpack_exports__);
       lists: [],
       listEdit: '',
       indexList: '',
-      indexTask: ''
+      indexTask: '',
+      taskList: []
     };
   },
   mounted: function mounted() {
@@ -2406,67 +2409,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ["task", "indexTa"],
+  props: ["task", "row"],
   methods: {
     updateTask: function updateTask(e) {
-      if (this.list.name) {
+      if (this.task.name) {
         var self = this;
         e.preventDefault();
-        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/edit', {
-          id: self.list.id,
-          name: self.list.name
+        axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../task/edit', {
+          id: self.task.id,
+          name: self.task.name,
+          description: self.task.description
         }).then(function (response) {
-          $('#EditList').modal('hide');
+          $('#taskModaledit').modal('hide');
         })["catch"](function (error) {
           console.log(error);
         });
       } else {
-        toastr.error('El nombre de la lista no puede estar vacio', 'Error!');
+        toastr.error('El nombre de la tarea no puede estar vacio', 'Error!');
       }
     },
     cancelTask: function cancelTask(e) {
       var self = this;
       e.preventDefault();
-      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/show', {
-        id: self.list.id
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../task/show', {
+        id: self.task.id
       }).then(function (response) {
-        self.list.name = response.data.name;
+        self.task.name = response.data.name;
+        self.task.description = response.data.description;
       })["catch"](function (error) {
         console.log(error);
-      });
-    },
-    deletedTask: function deletedTask(e) {
-      var _this = this;
-
-      var self = this;
-      e.preventDefault();
-      Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
-      }).then(function (result) {
-        if (result.value) {
-          axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../list/deleted', {
-            id: self.list.id
-          }).then(function (response) {
-            /*lista: ["icono-5-4", "icono-7-6", "icono-8-7", "icono-9-8", "icono-1-0", "icono-2-1"]
-            this.lista.splice(indice, 1);
-            _.pull(this.array, 'icono-9-8')*/
-            self.$emit('putList', self.indexList);
-            Swal.fire('Eliminada!', 'La lista ha sido eliminada con éxito.', 'success');
-          })["catch"](function (error) {
-            Swal.fire('Error!', 'No se pudo eliminar la lista.', 'error');
-          });
-        } else {
-          _this.cancelTask(e);
-        }
       });
     }
   }
@@ -2501,14 +2474,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     Badge: _badge_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  props: {
-    task: {
-      type: Object,
-      "default": function _default() {
-        return {};
-      }
-    }
-  },
+  props: ["task", "lists", 'rowtask'],
   computed: {
     badgeColor: function badgeColor() {
       var mappings = {
@@ -2525,6 +2491,50 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     value: function value() {
       this.$emit('taskid', this.task);
+    },
+    cancelDeleted: function cancelDeleted(e) {
+      var self = this;
+      e.preventDefault();
+      axios.post('../../task/show', {
+        id: self.task.id
+      }).then(function (response) {
+        self.task.name = response.data.name;
+        self.task.description = response.data.description;
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    deletedTask: function deletedTask(e) {
+      var _this = this;
+
+      var self = this;
+      e.preventDefault();
+      Swal.fire({
+        title: '¿Estas seguro?',
+        text: "No podrás recuperar la tarea si la eliminas!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, delete it!'
+      }).then(function (result) {
+        if (result.value) {
+          axios.post('../../task/deleted', {
+            id: self.task.id
+          }).then(function (response) {
+            self.lists.splice(self.rowtask, 1);
+            /*            Swal.fire(
+                          'Eliminada!',
+                          'La tarea ha sido eliminada con éxito.',
+                          'success'
+                        )*/
+          })["catch"](function (error) {
+            Swal.fire('Error!', 'No se pudo eliminar la tarea.', 'error');
+          });
+        } else {
+          _this.cancelDeleted(e);
+        }
+      });
     }
   }
 });
@@ -27792,11 +27802,15 @@ var render = function() {
                                 attrs: {
                                   task: task,
                                   rowlisk: index,
-                                  rowtask: row
+                                  rowtask: row,
+                                  lists: list.tasks
                                 },
                                 on: {
                                   taskid: function($event) {
-                                    return _vm.editTask.splice($event, 1)
+                                    _vm.taskList = $event
+                                  },
+                                  putList: function($event) {
+                                    return list.splice($event, 1)
                                   }
                                 }
                               })
@@ -27844,14 +27858,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("editTask", {
-        attrs: { task: _vm.editTask, indexTa: _vm.indexList },
-        on: {
-          putList: function($event) {
-            return _vm.lists.splice($event, 1)
-          }
-        }
-      })
+      _c("editTask", { attrs: { task: _vm.taskList } })
     ],
     1
   )
@@ -28384,17 +28391,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "ListEdit" } }, [
+  return _c("div", { attrs: { id: "Taskkcontainer" } }, [
     _c(
       "div",
       {
         staticClass: "modal fade",
         attrs: {
-          id: "EditList",
+          id: "taskModaledit",
           tabindex: "-1",
           role: "dialog",
           "data-backdrop": "static",
-          "aria-labelledby": "EditListLabel",
+          "aria-labelledby": "taskModaleditLabel",
           "aria-hidden": "true"
         }
       },
@@ -28409,7 +28416,7 @@ var render = function() {
                   "h5",
                   {
                     staticClass: "modal-title",
-                    attrs: { id: "EditListLabel" }
+                    attrs: { id: "taskModaleditLabel" }
                   },
                   [_vm._v("Editar Tarea: " + _vm._s(_vm.task.name))]
                 ),
@@ -28472,7 +28479,7 @@ var render = function() {
                     "label",
                     {
                       staticClass: "col-form-label",
-                      attrs: { for: "recipient-name" }
+                      attrs: { for: "recipient-description" }
                     },
                     [_vm._v("Descripcion:")]
                   ),
@@ -28510,16 +28517,6 @@ var render = function() {
                     on: { click: _vm.cancelTask }
                   },
                   [_vm._v("Cerrar")]
-                ),
-                _vm._v(" "),
-                _c(
-                  "button",
-                  {
-                    staticClass: "btn btn-danger",
-                    attrs: { type: "button", "data-dismiss": "modal" },
-                    on: { click: _vm.deletedTask }
-                  },
-                  [_vm._v("Eliminar")]
                 ),
                 _vm._v(" "),
                 _c(
@@ -28570,21 +28567,31 @@ var render = function() {
     [
       _c("div", { staticClass: "flex justify-between" }, [
         _c(
-          "p",
+          "a",
           {
-            staticClass:
-              "text-gray-700 font-semibold font-sans tracking-wide text-sm"
+            staticClass: "cursor-pointer",
+            attrs: { "data-toggle": "modal", "data-target": "#taskModaledit" },
+            on: { click: _vm.value }
           },
-          [_vm._v(_vm._s(_vm.task.name))]
+          [
+            _c(
+              "p",
+              {
+                staticClass:
+                  "text-gray-700 font-semibold font-sans tracking-wide text-sm"
+              },
+              [_vm._v(_vm._s(_vm.task.name))]
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
           "a",
           {
-            staticClass: "text-primary cursor-pointer",
-            on: { click: _vm.value }
+            staticClass: "text-danger cursor-pointer",
+            on: { click: _vm.deletedTask }
           },
-          [_c("i", { staticClass: "fas fa-edit fa-md" })]
+          [_c("i", { staticClass: "fas fa-trash-alt fa-md" })]
         )
       ]),
       _vm._v(" "),

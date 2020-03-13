@@ -50,8 +50,10 @@
                   :task="task"
                   :rowlisk="index"
                   :rowtask="row"
+                  :lists="list.tasks"
                   class="mt-3"
-                  @taskid="editTask.splice($event, 1)"
+                  @taskid="taskList = $event"
+                  @putList="list.splice($event, 1)"
                 ></task-card>
               </draggable>
             </div>
@@ -62,7 +64,7 @@
     <createTask :lists="lists" @newTask="lists[0].tasks.push($event)"></createTask>
     <createList :project="project" @newList="lists.push($event)"></createList>
     <editList :list="listEdit" :indexList="indexList" @putList="lists.splice($event, 1)"></editList>
-    <editTask :task="editTask" :indexTa="indexList" @putList="lists.splice($event, 1)"></editTask>
+    <editTask :task="taskList"></editTask>
   </div>
 </template>
 
@@ -92,6 +94,7 @@ export default {
       listEdit: '',
       indexList: '',
       indexTask:'',
+      taskList: [],
     };
   },
   mounted(){

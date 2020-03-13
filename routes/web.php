@@ -39,6 +39,7 @@ Route::group(['prefix' => 'project'], function () {
 	Route::get('/index', 'projectController@index')->name('project.index');
 	Route::get('/show/{project}', 'projectController@show')->name('project.show');
 	Route::get('/edit/{project}', 'projectController@edit')->name('project.edit');
+	Route::get('/kanban/{project}', 'projectController@kanban')->name('project.kanban');
 
 	Route::post('/store', 'projectController@store')->name('project.store');
 
