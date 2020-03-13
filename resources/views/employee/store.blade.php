@@ -5,14 +5,16 @@
       <div class="modal-header bg-primary"><i class="fas fa-users text-white fa-lg mr-2 mt-1"></i>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
+          <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>
       </div>
       <div class="modal-body">
         <form id="employee-form" method="POST">
           @csrf
           <div class="row">
-            <div class="sidebar-brand-text mx-3 push ml-3"><i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b></div>
+            <div class="sidebar-brand-text mx-3 push ml-3">
+              <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
+            </div>
           </div>
           <div class="form-group text-center">
               <input type="file" class="form-control custom-file-input"  id="cv" name="cv" lang="es" accept=".png"  title="Debe adjuntar su sintesis curricular en formato PDF.">

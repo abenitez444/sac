@@ -33,17 +33,10 @@ class employeeController extends Controller
     {   
 
         $employee = Employee::find($id);
-        if(isset($employee))
-        {
-           
-            return view('employee.detail', compact('employee'));
 
-        }else
-        {
+        return response()->json($employee);
 
-            return redirect('/employee/index')->with('success');
-
-        }
+       
     }
 
 

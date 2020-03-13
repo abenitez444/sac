@@ -14,7 +14,30 @@
   </a>
 </div>
 @endsection
-
+<style>
+  .md-avatar {
+  vertical-align: middle;
+  width: 50px;
+  height: 50px;
+}
+.md-avatar.size-1 {
+  width: 40px;
+  height: 40px;
+}
+.md-avatar.size-2 {
+  width: 70px;
+  height: 70px;
+}
+.md-avatar.size-3 {
+  width: 90px;
+  height: 90px;
+}
+.md-avatar.size-4 {
+  width: 110px;
+  height: 110px;
+}
+  
+</style>
 @section('content')
 <div class="card shadow mb-4">
   <div class="card-header bg-primary">
@@ -30,7 +53,7 @@
             <th><b>Cédula de identidad</b></th>
             <th><b>Teléfono</b></th>
             <th><b>Correo electrónico</b></th>
-            <th><b>Sintesis curricular</b></th>
+            <!--<th><b>Sintesis curricular</b></th>-->
             <th><b>Opciones</b></th>
           </tr>
         </thead>
@@ -42,9 +65,9 @@
             <td>@if($emp->nac == 1) V @else E @endif -{{$emp->ci}}</td>
             <td>{{$emp->tlf}}</td> 
             <td>{{$emp->mail}}</td>
-            <td>{{$emp->cv}}</td>
+            <!--<td>{{$emp->cv}}</td>-->
             <td>
-              <a href="detail/{{$emp->id}}" class="icono" title="Visualizar">
+              <a href="detail/{{$emp->id}}" class="icono" title="Visualizar" id="btn-detailEmployee" data-toggle="modal" data-target="#modal-detailEmployee" data-whatever="{{$emp->id}}">
                 <b class="radiusV fa fa-eye"></b>
               </a>
               <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createEmployee" data-whatever="{{$emp->id}}">
@@ -63,6 +86,7 @@
 </div>
 
 @include('employee.store')
+@include('employee.detail')
 @endsection
 
 @section('js')
@@ -81,6 +105,10 @@
       modal.find('.modal-title').text('Registrar empleado')
       $('#id').val('');
       $("#employee-form")[0].reset();
+    });
+
+    $('#btn-detailEmployee').click(function(e){
+      modal.find('.modal-title').text('Detalle de empleado')
     });
 
     $('#send-employee').click(function(e){
@@ -210,6 +238,37 @@
   })
 }
 </script>
+
+<script>
+  $('#modal-detailEmployee').on('show.bs.modal', function (event) {
+      var modal = $(this)
+      var button = $(event.relatedTarget) 
+      var id = button.data('whatever') 
+      if(id){
+
+        $.ajax({
+          url: '{{ url('/employee/detail') }}/'+id,
+          type: 'GET',
+          dataType: 'json',
+        })
+        .done(function(data) {
+          modal.find('.modal-title').text(' Editar empleado:' + data.name)
+          modal.find('.modal-body #id').val(data.id)
+          modal.find('.modal-body #avatar').val(data.avatar)
+          modal.find('.modal-body #lista').val(data.name)
+          modal.find('.modal-body #nac').val(data.nac)
+          modal.find('.modal-body #ci').val(data.ci)
+          modal.find('.modal-body #tlf').val(data.tlf)
+          modal.find('.modal-body #mail').val(data.mail)
+          modal.find('.modal-body #cv').val(data.cv)
+        })
+        .fail(function() {
+          console.log("error");
+        });
+      }
+    })
+</script>
+
 @endsection
 
 
