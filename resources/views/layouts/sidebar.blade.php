@@ -21,10 +21,18 @@
 
   <!-- Divider -->
   <hr class="sidebar-divider">
-
+   <!-- Heading -->
+  <div class="sidebar-heading">
+    Personal
+  </div>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('employee.index') }}">
+      <i class="fas fa-user-tag fa-lg"></i>
+      <span>Empleados</span></a>
+  </li>
   <!-- Heading -->
   <div class="sidebar-heading">
-    Gention
+    Gentión
   </div>
 
   <!-- Nav Item - Pages Collapse Menu -->
@@ -51,8 +59,8 @@
   </div>
   <li class="nav-item">
     <a class="nav-link" href="{{ route('project.index') }}">
-      <i class="fas fa-fw fa-chart-area"></i>
-      <span>Gestion de Proyectos</span></a>
+      <i class="fas fa-fw fa-chart-area fa-lg"></i>
+      <span>Gestión de Proyectos</span></a>
   </li>
   <!-- Nav Item - Pages Collapse Menu -->
 
@@ -68,7 +76,7 @@
   <!-- Nav Item - Charts -->
   <li class="nav-item">
     <a class="nav-link" href="charts.html">
-      <i class="fas fa-fw fa-chart-area"></i>
+      <i class="fas fa-fw fa-chart-area fa-lg"></i>
       <span>Carga</span></a>
   </li>
   <!-- Divider -->

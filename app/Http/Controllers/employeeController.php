@@ -22,38 +22,21 @@ class employeeController extends Controller
     }*/
 
 
-   /* public function edit($id)
+    public function edit($id)
     {
     	$employee = Employee::find($id);
 
-    	if(isset($employee))
-    	{
-
-    		return view('employee.store', compact('employee'));
-
-    	}else
-    	{
-
-        	return redirect('/employee/index')->with('success');
-
-    	}
-    }*/
+    	return response()->json($employee);
+    }
 
     public function detail($id)
     {   
 
-        $employee = Employee::find($id);
-        if(isset($employee))
-        {
-           
-            return view('employee.detail', compact('employee'));
+        $employee = Employee::with('Nac')->where('employee.id', $id)->first();
 
-        }else
-        {
+        return response()->json($employee);
 
-            return redirect('/employee/index')->with('success');
-
-        }
+       
     }
 
 
@@ -84,4 +67,17 @@ class employeeController extends Controller
         
         return \Response::json(['message' => 'Usuario ya registrado'], 200);
     }
+
+     public function destroy(Request $request)
+    {   
+            $employee = Employee::find($request->id);
+            
+            if ($employee != null) {
+                $delete = $employee->delete();
+                return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
+            }
+
+                
+    }
+ 
 }
