@@ -9,20 +9,22 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nombre de la Tarea:</label>
-              <input type="text" class="form-control taskname" v-model="nameTask">
+          <form @submit.prevent="createTask">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre de la Tarea:</label>
+                <input type="text" class="form-control taskname" v-model="nameTask">
+              </div>
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Descripcion:</label>
+                <input type="text" class="form-control taskdescription" v-model="description">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Descripcion:</label>
-              <input type="text" class="form-control taskdescription" v-model="description">
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button @click="createTask" type="button" class="btn btn-primary">Guardar</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>
@@ -61,5 +63,5 @@ export default {
     }
   }
   
-}
+};
 </script>

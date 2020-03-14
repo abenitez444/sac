@@ -9,20 +9,22 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nombre de la Tarea:</label>
-              <input type="text" class="form-control taskname" v-model="task.name">
+          <form @submit.prevent="updateTask">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre de la Tarea:</label>
+                <input type="text" class="form-control taskname" v-model="task.name">
+              </div>
+              <div class="form-group">
+                <label for="recipient-description" class="col-form-label">Descripcion:</label>
+                <input type="text" class="form-control taskdescription" v-model="task.description">
+              </div>
             </div>
-            <div class="form-group">
-              <label for="recipient-description" class="col-form-label">Descripcion:</label>
-              <input type="text" class="form-control taskdescription" v-model="task.description">
+            <div class="modal-footer">
+              <button @click="cancelTask" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button @click="cancelTask" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button  @click="updateTask" type="button" class="btn btn-primary">Guardar</button>
-          </div>
+          </form>
         </div>
       </div>
     </div>

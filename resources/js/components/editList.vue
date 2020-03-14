@@ -9,17 +9,19 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nombre de la Lista:</label>
-              <input type="text" class="form-control editListname" v-model="list.name">
+          <form @submit.prevent="updateList">
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre de la Lista:</label>
+                <input type="text" class="form-control editListname" v-model="list.name">
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button @click="cancelEdit" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button @click="deletedList" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
-            <button  @click="updateList" type="button" class="btn btn-primary">Guardar</button>
-          </div>
+            <div class="modal-footer">
+              <button @click="cancelEdit" type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button @click="deletedList" type="button" class="btn btn-danger" data-dismiss="modal">Eliminar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -67,13 +69,13 @@ export default {
       let self = this;
       e.preventDefault();
       Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
+        title: '¿Estas seguro?',
+        text: "No podrás recuperar la tarea si la eliminas!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+        confirmButtonText: 'Confirmar!'
       }).then((result) => {
         if (result.value) {
           axios.post('../../list/deleted', {

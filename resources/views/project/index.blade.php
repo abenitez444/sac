@@ -28,7 +28,7 @@
 @endsection
 
 @section('js')
-<script src="/vendor/datatables/buttons.server-side.js"></script>
+<script src="{{ asset('/vendor/datatables/buttons.server-side.js') }}"></script>
   {!! $dataTable->scripts() !!}
 <script type="text/javascript">
   $(document).ready(function(){

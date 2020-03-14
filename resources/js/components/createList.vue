@@ -9,16 +9,18 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
-            <div class="form-group">
-              <label for="recipient-name" class="col-form-label">Nombre de la Lista:</label>
-              <input type="text" class="form-control listname" v-model="name">
+          <form @submit.prevent="create">     
+            <div class="modal-body">
+              <div class="form-group">
+                <label for="recipient-name" class="col-form-label">Nombre de la Lista:</label>
+                <input type="text" class="form-control listname" v-model="name">
+              </div>
             </div>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-            <button @click="create" type="button" class="btn btn-primary">Guardar</button>
-          </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+          </form>
         </div>
       </div>
     </div>
@@ -54,5 +56,5 @@ export default {
     }
   }
   
-}
+};
 </script>
