@@ -15,11 +15,25 @@
   </div>
 </div>
 
-
 @endsection
 
 
 @section('js')
 	<script src="/vendor/datatables/buttons.server-side.js"></script>
 	{!! $dataTable->scripts() !!}
+ 
+  <script type="text/javascript">
+  $(document).ready(function(){
+    var modal = $(this)
+
+    var table = $('#inventoryTable').DataTable();
+
+    $('#btn-new').click(function(e){
+      modal.find('.modal-title').text('Registrar inventario')
+      $('#id').val('');
+      $("#inventory-form")[0].reset();
+    });
+    
+  </script>
+
 @endsection

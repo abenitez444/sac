@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
+use App\Models\Nationality;
 use Illuminate\Support\Facades\Validator;
 
 class employeeController extends Controller
@@ -11,8 +12,9 @@ class employeeController extends Controller
      public function index()
     {
     	$employee = Employee::all();
-    	return view('employee.list', compact('employee'));
-    }
+        $nationality = Nationality::all();
+    	return view('employee.list', compact('employee', 'nationality'));
+     }
 
  /*   public function create()
     {
@@ -59,10 +61,10 @@ class employeeController extends Controller
             ]
         );
 
+        
 	 	$id = $request->input('id');
         $employee = Employee::firstOrNew(['id' => $id]);
         $employee->fill($request->all());
-
         $employee->save();
         
         return \Response::json(['message' => 'Usuario ya registrado'], 200);
