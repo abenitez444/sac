@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\DataTables\InventoryDataTable;
+use App\Models\Inventory;
 use App\Imports\InventoryImport;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Models\Entity;
-use App\Models\Inventory;
-use App\DataTables\InventoryDataTable;
 use Illuminate\Support\Facades\Validator;
 
 class inventoryController extends Controller
@@ -15,9 +15,9 @@ class inventoryController extends Controller
     
     public function index(InventoryDataTable $dataTables)
     {
-    	/*$inventories = Inventory::all();
-    	return view('inventory.list', compact('inventories'));*/
-        return $dataTables->render('inventory.list');
+    	$inventories = Inventory::all();
+    	
+        return $dataTables->render('inventory.index', compact('inventories'));
     }
 
     public function create()

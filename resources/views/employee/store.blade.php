@@ -29,13 +29,14 @@
               </div>
             </div>
           </div>
+    
           <div class="row justify-content-center">
             <div class="col-sm-8 col-md-3 col-lg-3 form-group">
               <div class="inputWithIcon">
                   <select id="nac" name="nac" type="text" class="form-control custom-select @error('nac') is-invalid @enderror fondo-gris element-focus" value="{{ old('nac') }}">
                       <option value="0" disabled selected></option>
-                    @foreach($employee as $emp)
-                      <option value="{{$emp->id}}">{{$emp->Nac->opcion}}</option>
+                    @foreach($nationality as $nac)
+                      <option value="{{$nac->id}}">{{$nac->opcion}}</option>
                     @endforeach
                   </select>
                   <i class="fas fa-hand-pointer fa-lg" title="Introduzca la cédula de identidad del empleado."></i>

@@ -231,14 +231,14 @@
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Ficha de empleado ')
+          modal.find('.modal-title').text(' Perfil de empleado ')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #avatar').val(data.avatar)
           modal.find('.modal-body #name').text(data.name)
           modal.find('.modal-body #nac').text(data.nac.opcion)
-          modal.find('.modal-body #ci').val(data.ci)
-          modal.find('.modal-body #tlf').val(data.tlf)
-          modal.find('.modal-body #mail').val(data.mail)
+          modal.find('.modal-body #ci').text(data.ci)
+          modal.find('.modal-body #tlf').text(data.tlf)
+          modal.find('.modal-body #mail').text(data.mail)
           modal.find('.modal-body #cv').val(data.cv)
         })
         .fail(function() {
