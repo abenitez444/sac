@@ -13,7 +13,7 @@ class employeeController extends Controller
     {
     	$employee = Employee::all();
         $nationality = DocumentType::all();
-    	return view('employee.list', compact('employee', 'nationality'));
+    	return view('employee.index', compact('employee', 'nationality'));
      }
 
  /*   public function create()
