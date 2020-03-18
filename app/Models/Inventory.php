@@ -25,4 +25,9 @@ class Inventory extends Model
             'detalle',
             'entity_id'
     ];
+
+    public function Entity()
+        {
+            return $this->belongsTo('App\Models\Entity', 'entity_id');
+        }
 }

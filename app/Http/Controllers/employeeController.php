@@ -33,14 +33,10 @@ class employeeController extends Controller
 
     public function detail($id)
     {   
-
         $employee = Employee::with('Nac')->where('employee.id', $id)->first();
 
         return response()->json($employee);
-
-       
     }
-
 
 
     public function save(Request $request) 
