@@ -19,7 +19,7 @@ class Lists extends Model
  		'color'
  	];
 
- 	public function task()
+ 	public function Activity()
     {
         return $this->hasMany('App\Models\Activity', 'list_id', 'id');
     }

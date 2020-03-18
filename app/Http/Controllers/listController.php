@@ -14,7 +14,7 @@ class listController extends Controller
 
          foreach ($lists as $list){
                 $itemArr = array();
-                foreach ($list->task->sortBy('order') as $item){
+                foreach ($list->Activity->sortBy('order') as $item){
                     $itemArr[] = [
                         'id' => $item->id,
                         'name' => $item->name,

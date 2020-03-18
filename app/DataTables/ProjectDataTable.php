@@ -28,6 +28,7 @@ class ProjectDataTable extends DataTable
 
                 $html = '<a href="'.route('project.show',$query->id).'" class="icono" title="Visualizar"><b class="fa fa-eye"></b></a>';
                 /*$html .= ' <a href="'.route('bms.imprimir',$query->id).'" class="icono" title="Imprimir"><b class="fa fa-print"></b></a>';*/
+                $html .= ' <a href="'.route('project.kanban',$query->id).'" class="icono" title="Actividades"><b class="fa fa-tasks"></b></a>';
                 $html .= ' <a href="" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createProject" data-whatever="'.$query->id.'" ><b class="fa fa-edit"></b></a>';
    /*             if (auth()->user()->rol == 1) {
                     $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deleteBMS('.$query->id.')"><b class="fa fa-trash"></b></a>';

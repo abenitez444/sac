@@ -23,8 +23,13 @@ class projectController extends Controller
     
     public function show(Project $project)
     {
+        $lists = Lists::where('project_id', $project->id)->withCount('Activity')->orderBy('order', 'asc')->get();
+        $totalActivity=0;
+        foreach ($lists as $list) {
+            $totalActivity += $list->activity_count;
+        }
 
-    	return view('project.show', compact('project'));
+    	return view('project.show', compact('project', 'lists', 'totalActivity'));
     	
     }
     

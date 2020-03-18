@@ -26,13 +26,13 @@ Vue.use(moment);*/
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
-Vue.component('badge', require('./components/badge.vue').default);
-Vue.component('task', require('./components/task.vue').default);
-Vue.component('board', require('./components/board.vue').default);
-Vue.component('createList', require('./components/createList.vue').default);
-Vue.component('createTask', require('./components/createTask.vue').default);
-Vue.component('editList', require('./components/editList.vue').default);
-Vue.component('editTask', require('./components/editTask.vue').default);
+Vue.component('badge', require('./components/kanban/badge.vue').default);
+Vue.component('task', require('./components/kanban/task.vue').default);
+Vue.component('board', require('./components/kanban/board.vue').default);
+Vue.component('createList', require('./components/kanban/createList.vue').default);
+Vue.component('createTask', require('./components/kanban/createTask.vue').default);
+Vue.component('editList', require('./components/kanban/editList.vue').default);
+Vue.component('editTask', require('./components/kanban/editTask.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
