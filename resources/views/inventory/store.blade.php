@@ -36,7 +36,7 @@
           </div>
           <div class="form-group col-md-4">
             <div class="inputWithIcon">
-              <input id="dependencia" type="text" class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" value="{{ $inventory->dependencia ?? '' }}" placeholder="Dependencia administrativa">
+              <input id="dependencia" type="text" class="form-control{{ $errors->has('dependencia') ? ' is-invalid' : '' }}" name="dependencia" value="{{ $inventory->dependencia ?? '' }}" placeholder="Dependencia administrativa"  onkeypress="return letters(event)">
               <i class="fas fa-door-closed fa-lg" title="Indique la dependencia administrativa."></i>
               @if ($errors->has('dependencia'))
                 <span class="invalid-feedback">
@@ -61,7 +61,7 @@
           </div>
           <div class="form-group col-md-4 mt-2">
             <div class="inputWithIcon">
-              <input id="responsable" type="text" class="form-control{{ $errors->has('responsable') ? ' is-invalid' : '' }}" name="responsable" value="{{ $inventory->responsable ?? '' }}" placeholder=" Responsable del uso directo" >
+              <input id="responsable" type="text" class="form-control{{ $errors->has('responsable') ? ' is-invalid' : '' }}" name="responsable" value="{{ $inventory->responsable ?? '' }}" placeholder=" Responsable del uso directo" onkeypress="return letters(event)">
               <i class="fas fa-user-tag fa-lg" title="Indique el responsable del bien nacional."></i>
               @if ($errors->has('responsable'))
               <span class="invalid-feedback">
@@ -80,21 +80,21 @@
           </div>
           <div class="form-group col-md-8 offset-2 justify-content-center mt-2">
             <div class="inputWithIcon">
-              <textarea id="descripcion" type="text" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} textarea-gris element-focus" name="descripcion" value="{{ $inventory->descripcion ?? '' }}" placeholder="Ingrese descripción. . ."></textarea>
+              <textarea id="descripcion" type="text" class="form-control{{ $errors->has('descripcion') ? ' is-invalid' : '' }} textarea-gris element-focus" name="descripcion" value="{{ $inventory->descripcion ?? '' }}" placeholder="Ingrese descripción. . .">{{ $inventory->descripcion ?? '' }}</textarea>
               <i class="fas fa-list-alt fa-lg" title="Indique la descripción del bien nacional."></i>
               <p class="campo-obligatorio">* Campo obligatorio</p>
             </div>
           </div>
           <div class="form-group col-md-4 mt-2">
             <div class="inputWithIcon">
-              <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{ $inventory->serial ?? '' }}" placeholder="Serial del bien" >
+              <input id="serial" type="text" class="form-control{{ $errors->has('serial') ? ' is-invalid' : '' }}" name="serial" value="{{ $inventory->serial ?? '' }}" placeholder="Serial del bien">
               <i class="fas fa-file-code fa-lg" title="Indique el serial del bien nacional."></i>
              <p class="campo-obligatorio">* Campo obligatorio</p>
             </div>
           </div>
           <div class="form-group col-md-4 mt-2">
             <div class="inputWithIcon">
-              <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{ $inventory->text ?? '' }}" placeholder="Marca del bien">
+              <input id="marca" type="text" class="form-control{{ $errors->has('marca') ? ' is-invalid' : '' }}" name="marca" value="{{ $inventory->marca ?? '' }}" placeholder="Marca del bien">
               <i class="fas fa-money-check fa-md" title="Indique la marca del bien nacional."></i>
               @if ($errors->has('marca'))
                 <span class="invalid-feedback">
@@ -118,7 +118,7 @@
           </div>
           <div class="form-group col-md-4 mt-2">
             <div class="inputWithIcon">
-              <input id="cantidad" type="text" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" name="cantidad" value="{{ $inventory->cantidad ?? '' }}" placeholder="Cantidad" >
+              <input id="cantidad" type="text" class="form-control{{ $errors->has('cantidad') ? ' is-invalid' : '' }}" name="cantidad" value="{{ $inventory->cantidad ?? '' }}" placeholder="Cantidad" onkeypress="return numbers(event)">
               <i class="fas fa-copyright fa-lg" title="Indique la cantidad."></i>
               @if ($errors->has('cantidad'))
                 <span class="invalid-feedback">
@@ -157,8 +157,8 @@
     </div>
     <div class="card-footer" style="width: 75rem;">
       <div class="form-group text-center">
-        <button type="button" id="send-inventory" class="btn btn-primary" ><i class="fas fa-share-square"></i> <b>Guardar</b></button>
-        <a href="{{route('index')}}" class="btn btn-danger"><i class="fas fa-window-close"></i> <b>Cancelar</b></a>
+        <button type="button" id="send-inventory" class="btn btn-primary" ><i class="fas fa-share-square fa-md"></i> <b>Guardar</b></button>
+        <a href="{{route('index')}}" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-md" title="Consultar inventarios"></i></i> <b>Buscar</b></a>
       </div>
     </div>
   </div>
@@ -177,18 +177,21 @@
       //success
       }).done(function() {
         Swal.fire({
-          type: 'success',
-          title: "Inventario registrado exitosamente!",
-          showConfirmButton: false,
+          icon: 'success',
+          title: "El inventario se guardó exitosamente!",
+          showConfirmButton: true,
           timer: 2000
-        }) 
+        }).then((result) => {
+          if (result.value){
+            location.reload()
+          }
+        })
       //Errors
         $("#inventory-form")[0].reset();
       }).fail(function(msj) {
         Swal.fire({
-
-          type: 'error',
-          title: "No se realizo el registro!",
+          icon: 'error',
+          title: "No se realizo el registro de inventario!",
           showConfirmButton: false,
           timer: 2000
         })
@@ -197,9 +200,9 @@
 
         $.each(errors.errors, function(key, value) 
         {
-            $("#" + key + "_group").addClass("has-error");
-            $("." + key + "_span").addClass("help-block text-danger").html(value);
-            toastr.error(value,"<h5>"+"<b style='color:#FFF400;'>* </b>" + "Campo obligatorio"+"</h5>");
+          $("#" + key + "_group").addClass("has-error");
+          $("." + key + "_span").addClass("help-block text-danger").html(value);
+          toastr.error(value,"<h5>"+"<b style='color:#FFF400;'>* </b>" + "Campo obligatorio"+"</h5>");
         });
 
       });

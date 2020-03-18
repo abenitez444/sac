@@ -9,20 +9,13 @@ use Illuminate\Support\Facades\Validator;
 
 class employeeController extends Controller
 {
-     public function index()
+    public function index()
     {
     	$employee = Employee::all();
         $nationality = DocumentType::all();
-    	return view('employee.index', compact('employee', 'nationality'));
-     }
-
- /*   public function create()
-    {
-
-    	return view('employee.store');
-
-    }*/
-
+    	
+        return view('employee.index', compact('employee', 'nationality'));
+    }
 
     public function edit($id)
     {
@@ -37,7 +30,6 @@ class employeeController extends Controller
 
         return response()->json($employee);
     }
-
 
     public function save(Request $request) 
     {   
@@ -66,7 +58,7 @@ class employeeController extends Controller
         return \Response::json(['message' => 'Usuario ya registrado'], 200);
     }
 
-     public function destroy(Request $request)
+    public function destroy(Request $request)
     {   
             $employee = Employee::find($request->id);
             
@@ -74,8 +66,6 @@ class employeeController extends Controller
                 $delete = $employee->delete();
                 return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
             }
-
-                
     }
  
 }

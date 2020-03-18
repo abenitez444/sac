@@ -54,7 +54,7 @@
               <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createEmployee" data-whatever="{{$emp->id}}">
                 <b class="radiusM fa fa-edit"></b>
               </a>
-              <a href="#" class="icono" title="Eliminar" onclick="deleteEmployee('{{$emp->id}}')">
+              <a href="#" class="icono" title="Eliminar" onclick="deletedEmployee('{{$emp->id}}')">
                 <b class="radiusM fa fa-trash"></b>
               </a>
             </td> 
@@ -83,16 +83,6 @@
       },
     });
 
-    $('#btn-newEmployee').click(function(e){
-      modal.find('.modal-title').text('Registrar empleado')
-      $('#id').val('');
-      $("#employee-form")[0].reset();
-    });
-
-    $('#btn-detailEmployee').click(function(e){
-      modal.find('.modal-title').text('Detalle de empleado')
-    });
-
     $('#send-employee').click(function(e){
       var data = $("#employee-form").serialize();
       $.ajax({
@@ -107,6 +97,7 @@
           icon: 'success',
           title: "¡Solicitud de empleado se guardó exitosamente!",
           showConfirmButton: true,
+          timer: 3000
         }).then((result) => {
           if (result.value){
             location.reload()
@@ -163,7 +154,7 @@
 </script>
 <!--Delete empleado -->
 <script>
-  function deleteEmployee (id){
+  function deletedEmployee (id){
 
   const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: true
@@ -180,7 +171,7 @@
   }).then((result) => {
     if (result.value) {
       $.ajax({
-        url: '{{ route('employee.delete') }}',
+        url: '{{ route('employee.deleted') }}',
         type: 'PUT',
         data: {
         _token: '{{ csrf_token() }}',
@@ -191,14 +182,13 @@
           icon: 'success',
           title: "Empleado eliminado exitosamente!",
           showConfirmButton: true,
-          timer: 2000
+          timer: 3000
         }).then((result) => {
           if (result.value){
             location.reload()
           }
         })
       //Errors
-        $("#employee-form")[0].reset();
       }).fail(function(msj) {
         Swal.fire({
           icon: 'error',

@@ -23,16 +23,15 @@ class inventoryController extends Controller
     public function create()
     {
     	$entities = Entity::all();
+
     	return view('inventory.store', compact('entities'));
 
     }
-
 
     public function edit($id)
     {
     	$inventory = Inventory::find($id);
         $entities = Entity::all();
-
 
     	if(isset($inventory))
     	{
@@ -53,6 +52,7 @@ class inventoryController extends Controller
     public function show()
     {
     	$entities = Entity::all();
+
     	return view('inventory.upload', compact('entities'));
     }
 
@@ -109,6 +109,16 @@ class inventoryController extends Controller
  
       return \Response::json(['message' => 'Usuario ya registrado'], 200);
         
+    }
+
+    public function destroy(Request $request)
+    {
+        $inventory = Inventory::find($request->id);
+            
+            if ($inventory != null) {
+                $delete = $inventory->delete();
+                return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
+            }
     }
 
 }

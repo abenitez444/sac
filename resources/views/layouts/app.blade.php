@@ -68,6 +68,8 @@
 <script src="{{ asset('js/toastr.min.js') }}"></script>
 <script src="{{ asset('js/loading.js') }}"></script>
 <script src="{{asset('/js/function.js')}}"></script>
+<script src="{{asset('/js/validate-Form.js')}}"></script>
+
 
 @yield('js')
 
