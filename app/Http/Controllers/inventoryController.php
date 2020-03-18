@@ -15,9 +15,9 @@ class inventoryController extends Controller
     
     public function index(InventoryDataTable $dataTables)
     {
-    	$inventories = Inventory::all();
+    	$inventory = Inventory::all();
     	
-        return $dataTables->render('inventory.index', compact('inventories'));
+        return $dataTables->render('inventory.index', compact('inventory'));
     }
 
     public function create()
@@ -45,14 +45,9 @@ class inventoryController extends Controller
 
     public function detail($id)
     {
-        $inventory = Inventory::find($id);
-        if(isset($inventory))
-        {
-            return view('inventory.detail', compact('inventory'));
-        }else
-        {
-            return redirect('/inventory/index')->with('success');
-        }
+        $inventory = Inventory::with('Entity')->where('inventory.id', $id)->first();
+
+        return response()->json($inventory);
     }
 
     public function show()

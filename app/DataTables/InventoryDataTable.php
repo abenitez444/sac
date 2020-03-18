@@ -31,7 +31,7 @@ class InventoryDataTable extends DataTable
             ->of($query)
             ->addColumn('action', function($query){
 
-                $html = '<a href="'.route('detail',$query->id).'" class="icono" title="Visualizar"><b class="fa fa-eye"></b></a>';
+                $html = '<a href="'.route('detail',$query->id).'" class="icono" title="Visualizar"  id="btn-detailInventory" data-toggle="modal" data-target="#modal-detailInventory" data-whatever="'.$query->id.'"><b class="fa fa-eye"></b></a>';
                 /*$html .= ' <a href="'.route('bms.imprimir',$query->id).'" class="icono" title="Imprimir"><b class="fa fa-print"></b></a>';*/
                 $html .= ' <a href="'.route('edit',$query->id).'" class="icono" title="Editar"><b class="fa fa-edit"></b></a>';
    /*             if (auth()->user()->rol == 1) {
