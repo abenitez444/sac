@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Employee;
-use App\Models\Nationality;
+use App\Models\DocumentType;
 use Illuminate\Support\Facades\Validator;
 
 class employeeController extends Controller
@@ -12,7 +12,7 @@ class employeeController extends Controller
      public function index()
     {
     	$employee = Employee::all();
-        $nationality = Nationality::all();
+        $nationality = DocumentType::all();
     	return view('employee.list', compact('employee', 'nationality'));
      }
 
@@ -34,7 +34,7 @@ class employeeController extends Controller
     public function detail($id)
     {   
 
-        $employee = Employee::with('Nac')->where('employee.id', $id)->first();
+        $employee = Employee::with('DocumentType')->where('employee.id', $id)->first();
 
         return response()->json($employee);
 
@@ -51,13 +51,13 @@ class employeeController extends Controller
             [
                 'name' =>  'required|max:60|min:3',
                 'ci' =>    'nullable|digits_between:6,8',
-                'mail' =>  'nullable|email',
+                'email' =>  'nullable|email',
             ], 
 
             [
                 'name.required' => 'Introduzca nombre y apellido del empleado.',
                 'ci.digits_between' => 'Introduzca la cédula de identidad del empleado.',
-                'mail.email' => 'Introduzca el corre electrónico del empleado.',
+                'email.email' => 'Introduzca el corre electrónico del empleado.',
             ]
         );
 

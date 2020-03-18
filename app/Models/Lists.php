@@ -21,7 +21,7 @@ class Lists extends Model
 
  	public function task()
     {
-        return $this->hasMany('App\Models\Task', 'list_id', 'id');
+        return $this->hasMany('App\Models\Activity', 'list_id', 'id');
     }
 
 }

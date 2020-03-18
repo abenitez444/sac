@@ -41,7 +41,7 @@ export default {
     cancelDeleted(e){
       let self = this;
       e.preventDefault();
-      axios.post('../../task/show', {
+      axios.post('../../activity/show', {
           id : self.task.id,
       })
       .then(function (response) {
@@ -65,7 +65,7 @@ export default {
         confirmButtonText: 'Confirmar!'
       }).then((result) => {
         if (result.value) {
-          axios.post('../../task/deleted', {
+          axios.post('../../activity/deleted', {
               id : self.task.id,
           })
           .then(function (response) {

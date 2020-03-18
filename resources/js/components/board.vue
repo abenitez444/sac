@@ -112,7 +112,7 @@ export default {
         }); 
     },
     checkMove: function(e) {
-      axios.post('../../task/move', {
+      axios.post('../../activity/move', {
           id : e.item._underlying_vm_.id,
           list_id: e.to.__vue__.$attrs.source,
           tasks: this.lists[e.to.__vue__.$attrs.rowlist].tasks,

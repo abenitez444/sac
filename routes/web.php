@@ -59,13 +59,13 @@ Route::group(['prefix' => 'list'], function () {
 });
 
 
-Route::group(['prefix' => 'task'], function () {
+Route::group(['prefix' => 'activity'], function () {
 
-    Route::post('/create', 'taskController@create')->name('task.create');
-    Route::post('/move', 'taskController@move')->name('task.move');
-    Route::post('/edit', 'taskController@edit')->name('task.edit');
-    Route::post('/show', 'taskController@show')->name('task.show');
-	Route::post('/deleted', 'taskController@deleted')->name('task.deleted');
+    Route::post('/create', 'activityController@create')->name('activity.create');
+    Route::post('/move', 'activityController@move')->name('activity.move');
+    Route::post('/edit', 'activityController@edit')->name('activity.edit');
+    Route::post('/show', 'activityController@show')->name('activity.show');
+	Route::post('/deleted', 'activityController@deleted')->name('activity.deleted');
 
 });
 

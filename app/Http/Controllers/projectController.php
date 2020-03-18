@@ -8,7 +8,7 @@ use App\Models\Project;
 use App\Models\StatusProject;
 use App\Models\Lists;
 use App\Models\Entity;
-use App\Models\Task;
+use App\Models\Activity;
 
 
 class projectController extends Controller

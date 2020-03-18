@@ -16,20 +16,20 @@ class Employee extends Model
  	protected $fillable = [
 		'avatar',
 		'name',
-		'nac',
+		'document_type_id',
 		'ci',
-		'tlf',
-		'mail',
-		'cv'
+		'phone',
+		'email',
+		'curriculum'
  	];
 
  	protected $guarded = [
-		'cv'
+		'curriculum'
  	];
 
-	 public function Nac()
+	 public function DocumentType()
 	    {
-	        return $this->belongsTo('App\Models\Nationality', 'nac');
+	        return $this->belongsTo('App\Models\DocumentType');
 	    }
 
 }

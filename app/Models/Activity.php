@@ -6,9 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 
-class Task extends Model
+class Activity extends Model
 {
 	use SoftDeletes;
+    protected $table = 'activity';
+
 
  	protected $fillable = [
  		'name',

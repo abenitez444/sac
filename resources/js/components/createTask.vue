@@ -45,7 +45,7 @@ export default {
     createTask(e) {
       let self = this;
       e.preventDefault();
-      axios.post('../../task/create', {
+      axios.post('../../activity/create', {
           name : this.nameTask,
           description : this.description,
           list_id: this.lists[0].id,

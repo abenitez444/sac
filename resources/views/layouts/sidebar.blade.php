@@ -20,16 +20,6 @@
   </li>
 
   <!-- Divider -->
-  <hr class="sidebar-divider">
-   <!-- Heading -->
-  <div class="sidebar-heading">
-    Personal
-  </div>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('employee.index') }}">
-      <i class="fas fa-user-tag fa-lg"></i>
-      <span>Empleados</span></a>
-  </li>
   <!-- Heading -->
   <div class="sidebar-heading">
     Gentión
@@ -61,6 +51,11 @@
     <a class="nav-link" href="{{ route('project.index') }}">
       <i class="fas fa-fw fa-chart-area fa-lg"></i>
       <span>Gestión de Proyectos</span></a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('employee.index') }}">
+      <i class="fas fa-fw fa-users fa-lg"></i>
+      <span>Gestión de Personal</span></a>
   </li>
   <!-- Nav Item - Pages Collapse Menu -->
 

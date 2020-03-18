@@ -17,8 +17,8 @@
             </div>
           </div>
           <div class="form-group text-center">
-              <input type="file" class="form-control custom-file-input"  id="cv" name="cv" lang="es" accept=".png"  title="Debe adjuntar su sintesis curricular en formato PDF.">
-              <img src="{{asset('img/avatar.png')}}" alt="Avatar" class="avatar" title="Cargar imagen del empleado.">
+              <input type="file" class="form-control custom-file-input"  id="avatar" name="avatar" lang="es" accept=".png"  title="Debe adjuntar el avatar.">
+              <img src="{{asset('img/avatar.png')}}" alt="Avatar" class="avatar" title="Cargar avatar del empleado.">
           </div>
           <input type="hidden" class="form-control" id="id" name="id">
           <div class="row justify-content-center form-group">
@@ -33,10 +33,10 @@
           <div class="row justify-content-center">
             <div class="col-sm-8 col-md-3 col-lg-3 form-group">
               <div class="inputWithIcon">
-                  <select id="nac" name="nac" type="text" class="form-control custom-select @error('nac') is-invalid @enderror fondo-gris element-focus" value="{{ old('nac') }}">
+                  <select id="nac" name="document_type_id" type="text" class="form-control custom-select @error('document_type_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('document_type_id') }}">
                       <option value="0" disabled selected></option>
                     @foreach($nationality as $nac)
-                      <option value="{{$nac->id}}">{{$nac->opcion}}</option>
+                      <option value="{{$nac->id}}">{{$nac->option}}</option>
                     @endforeach
                   </select>
                   <i class="fas fa-hand-pointer fa-lg" title="Introduzca la cédula de identidad del empleado."></i>
@@ -52,7 +52,7 @@
           <div class="row justify-content-center">
             <div class="col-sm-8 col-md-8 col-lg-10 form-group">
               <div class="inputWithIcon">
-                <input type="text" class="form-control" id="tlf" name="tlf" placeholder="Teléfono">
+                <input type="text" class="form-control" id="tlf" name="phone" placeholder="Teléfono">
                 <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del empleado."></i>
               </div>
             </div>
@@ -60,7 +60,7 @@
           <div class="row justify-content-center">
             <div class="col-sm-8 col-md-8 col-lg-10 form-group">
               <div class="inputWithIcon">
-                <input type="text" class="form-control" id="mail" name="mail" placeholder="Correo electrónico">
+                <input type="text" class="form-control" id="mail" name="email" placeholder="Correo electrónico">
                 <i class="fas fa-envelope fa-lg" title="Introduzca el correo electrónico del empleado."></i>
               </div>
             </div>
@@ -68,7 +68,7 @@
           <div class="form-group text-center">
               <label class="ml-2 mt-2"><b>Adjuntar CV</b></label>
             <div class="inputWithIcon">
-              <input type="file" class="form-control custom-file-input"  id="cv" name="cv" placeholder="Correo electrónico" lang="es" accept=".pdf"  title="Debe adjuntar la sintesis curricular del empleado en formato PDF.">
+              <input type="file" class="form-control custom-file-input"  id="cv" name="curriculum" lang="es" accept=".pdf"  title="Debe adjuntar la sintesis curricular del empleado en formato PDF.">
               <i class="fas fa-cloud-upload-alt fa-3x text-primary push offset-5"></i>
             </div>
           </div>

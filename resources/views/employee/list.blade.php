@@ -39,10 +39,14 @@
           <tr class="text-center">
             <td><img src="{{asset('img/avatar.png')}}" alt="Avatar" style="width: 35px; border-radius: 50px;"></td> 
             <td>{{$emp->name}}</td>
-            <td>{{$emp->Nac->opcion}}-{{$emp->ci}}</td>
-            <td>{{$emp->tlf}}</td> 
-            <td>{{$emp->mail}}</td>
-            <!--<td>{{$emp->cv}}</td>-->
+            @isset($emp->DocumentType)
+             <td>{{$emp->DocumentType->option}}-{{$emp->ci}}</td>
+            @else
+             <td></td>
+            @endisset
+            <td>{{$emp->phone}}</td> 
+            <td>{{$emp->email}}</td>
+            <!--<td>{{$emp->curriculum}}</td>-->
             <td>
               <a href="detail/{{$emp->id}}" class="icono" title="Visualizar" id="btn-detailEmployee" data-toggle="modal" data-target="#modal-detailEmployee" data-whatever="{{$emp->id}}">
                 <b class="radiusV fa fa-eye"></b>
@@ -144,11 +148,11 @@
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #avatar').val(data.avatar)
           modal.find('.modal-body #name').val(data.name)
-          modal.find('.modal-body #nac').val(data.nac)
+          modal.find('.modal-body #nac').val(data.document_type_id)
           modal.find('.modal-body #ci').val(data.ci)
-          modal.find('.modal-body #tlf').val(data.tlf)
-          modal.find('.modal-body #mail').val(data.mail)
-          modal.find('.modal-body #cv').val(data.cv)
+          modal.find('.modal-body #tlf').val(data.phone)
+          modal.find('.modal-body #mail').val(data.email)
+          modal.find('.modal-body #cv').val(data.curriculum)
         })
         .fail(function() {
           console.log("error");
@@ -235,11 +239,17 @@
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #avatar').val(data.avatar)
           modal.find('.modal-body #name').text(data.name)
-          modal.find('.modal-body #nac').text(data.nac.opcion)
+          if(data.document_type){
+            modal.find('.modal-body #nac').text(data.document_type.option)
+          }
+          else{
+             modal.find('.modal-body #nac').text('')
+          }
+
           modal.find('.modal-body #ci').text(data.ci)
-          modal.find('.modal-body #tlf').text(data.tlf)
-          modal.find('.modal-body #mail').text(data.mail)
-          modal.find('.modal-body #cv').val(data.cv)
+          modal.find('.modal-body #tlf').text(data.phone)
+          modal.find('.modal-body #mail').text(data.email)
+          modal.find('.modal-body #cv').val(data.curriculum)
         })
         .fail(function() {
           console.log("error");

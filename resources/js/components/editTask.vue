@@ -40,7 +40,7 @@ export default {
       if (this.task.name) {
         let self = this;
         e.preventDefault();
-        axios.post('../../task/edit', {
+        axios.post('../../activity/edit', {
             id : self.task.id,
             name : self.task.name,
             description : self.task.description,
@@ -59,7 +59,7 @@ export default {
     cancelTask(e){
       let self = this;
       e.preventDefault();
-      axios.post('../../task/show', {
+      axios.post('../../activity/show', {
           id : self.task.id,
       })
       .then(function (response) {

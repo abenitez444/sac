@@ -17,8 +17,8 @@ class NationalitySeeder extends Seeder
         );  
 
         foreach($nationality as $nac){
-            DB::table('nationality')->insert([
-        		'opcion' => $nac[0]
+            DB::table('document_type')->insert([
+        		'option' => $nac[0]
             ]);    
         }
     }
