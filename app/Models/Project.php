@@ -26,4 +26,9 @@ class Project extends Model
     {
         return $this->belongsTo('App\Models\StatusProject', 'status_id');
     }
+
+    public function employees()
+    {
+        return $this->belongsToMany('App\Models\Employee');
+    }
 }

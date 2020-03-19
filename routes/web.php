@@ -43,6 +43,7 @@ Route::group(['prefix' => 'project'], function () {
 
 	Route::post('/store', 'projectController@store')->name('project.store');
 
+	Route::get('/get/{id}', 'projectController@getProject')->name('project.get');
 });
 
 /*Route::get('/home', '*/

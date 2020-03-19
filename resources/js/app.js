@@ -34,6 +34,8 @@ Vue.component('createTask', require('./components/kanban/createTask.vue').defaul
 Vue.component('editList', require('./components/kanban/editList.vue').default);
 Vue.component('editTask', require('./components/kanban/editTask.vue').default);
 
+Vue.component('employee', require('./components/employee/employee.vue').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

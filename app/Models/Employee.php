@@ -28,8 +28,12 @@ class Employee extends Model
  	];
 
 	 public function DocumentType()
-	    {
-	        return $this->belongsTo('App\Models\DocumentType');
-	    }
+    {
+        return $this->belongsTo('App\Models\DocumentType');
+    }
+        public function projects()
+    {
+        return $this->belongsToMany('App\Models\Project');
+    }
 
 }

@@ -9,6 +9,7 @@ use App\Models\StatusProject;
 use App\Models\Lists;
 use App\Models\Entity;
 use App\Models\Activity;
+use App\Models\Employee;
 
 
 class projectController extends Controller
@@ -31,6 +32,19 @@ class projectController extends Controller
 
     	return view('project.show', compact('project', 'lists', 'totalActivity'));
     	
+    }
+
+    public function getProject($id)
+    {
+        $project = Project::where('id', $id)->withCount('employees')->with('employees')->orderBy('id', 'asc')->first();
+        $emproyee = Employee::all();
+
+        $diff = $emproyee->diff($project->employees);
+
+        return response()->json([
+            'employee' => $diff, 
+            'project' => $project
+        ]);
     }
     
 
