@@ -37,7 +37,6 @@ class InventoryDataTable extends DataTable
                 }*/
                 $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deletedInventory('.$query->id.')"><b class="radiusM fa fa-trash"></b></a>';
                 
-                
                 return $html;
             });
     }

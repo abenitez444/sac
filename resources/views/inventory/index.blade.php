@@ -75,7 +75,7 @@
   }).then((result) => {
     if (result.value) {
       $.ajax({
-        url: '{{ route('inventory.deleted') }}',
+        url: '{{ url('/inventory/deleted') }}',
         type: 'PUT',
         data: {
         _token: '{{ csrf_token() }}',
@@ -86,21 +86,21 @@
           icon: 'success',
           title: "Inventario eliminado exitosamente.",
           showConfirmButton: true,
-          timer: 2000
+          timer: 3000
         }).then((result) => {
           if (result.value){
             location.reload()
           }
         })
-      //Errors
-      }).fail(function(msj) {
-        Swal.fire({
-          icon: 'error',
-          title: "No se eliminó el inventario.!",
-          showConfirmButton: false,
-          timer: 2000
+        //Errors
+        }).fail(function(msj) {
+          Swal.fire({
+            icon: 'error',
+            title: "No se eliminó el inventario.!",
+            showConfirmButton: false,
+            timer: 2000
+          })
         })
-      })
     } else if (
       /* Read more about handling dismissals below */
       result.dismiss === Swal.DismissReason.cancel

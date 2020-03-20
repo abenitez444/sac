@@ -15,10 +15,15 @@ class CreateEntityTable extends Migration
     {
         Schema::create('entity', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name');
-
+            $table->string('name')->nullable();
+            $table->integer('document_type_id')->nullable();
+            $table->string('identity')->nullable(); 
+            $table->string('email')->nullable(); 
+            $table->string('web')->nullable(); 
+            $table->string('addres')->nullable(); 
             $table->softDeletes();
             $table->timestamps();
+
         });
     }
 

@@ -12,9 +12,9 @@ class employeeController extends Controller
     public function index()
     {
     	$employee = Employee::all();
-        $nationality = DocumentType::all();
+        $typeDocument = DocumentType::all();
     	
-        return view('employee.index', compact('employee', 'nationality'));
+        return view('employee.index', compact('employee', 'typeDocument'));
     }
 
     public function edit($id)
@@ -33,22 +33,7 @@ class employeeController extends Controller
 
     public function save(Request $request) 
     {   
-
-         $request->validate (
-
-            [
-                'name' =>  'required|max:60|min:3',
-                'ci' =>    'nullable|digits_between:6,8',
-                'email' =>  'nullable|email',
-            ], 
-
-            [
-                'name.required' => 'Introduzca nombre y apellido del empleado.',
-                'ci.digits_between' => 'Introduzca la cédula de identidad del empleado.',
-                'email.email' => 'Introduzca el corre electrónico del empleado.',
-            ]
-        );
-
+        $this->employeeValidate($request);
         
 	 	$id = $request->input('id');
         $employee = Employee::firstOrNew(['id' => $id]);
@@ -63,9 +48,28 @@ class employeeController extends Controller
             $employee = Employee::find($request->id);
             
             if ($employee != null) {
-                $delete = $employee->delete();
+                $employee->delete();
+                
                 return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
             }
+    }
+
+    public function employeeValidate($request)
+    {
+         $request->validate (
+
+            [
+                'name' =>  'required|max:60|min:3',
+                'ci' =>    'nullable|digits_between:6,9',
+                'email' =>  'nullable|email',
+            ], 
+
+            [
+                'name.required' => 'Introduzca nombre y apellido del empleado.',
+                'ci.digits_between' => 'Introduzca la cédula de identidad del empleado.',
+                'email.email' => 'Introduzca el corre electrónico del empleado.',
+            ]
+        );
     }
  
 }

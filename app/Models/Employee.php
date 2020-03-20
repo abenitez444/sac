@@ -29,7 +29,7 @@ class Employee extends Model
 
 	 public function DocumentType()
 	    {
-	        return $this->belongsTo('App\Models\DocumentType');
+	        return $this->belongsTo('App\Models\DocumentType', 'document_type_id');
 	    }
 
 }

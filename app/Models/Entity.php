@@ -12,6 +12,10 @@ class Entity extends Model
 	
     protected $table = 'entity';
 
- 	protected $fillable = ['name'];
+ 	protected $fillable = ['name', 'document_type_id', 'identity', 'email', 'web', 'addres'];
 
+ 	 public function Type()
+        {
+            return $this->belongsTo('App\Models\DocumentType', 'document_type_id');
+        }
 }

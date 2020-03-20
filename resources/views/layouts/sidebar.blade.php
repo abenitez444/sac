@@ -35,6 +35,12 @@
     Gentión
   </div>
 
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('entity.index') }}">
+      <i class="fas fa-building font-weight-bold"></i> 
+      <span>Ente</span></a>
+  </li>
+
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">

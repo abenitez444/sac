@@ -2,7 +2,7 @@
 
 use Illuminate\Database\Seeder;
 
-class NationalitySeeder extends Seeder
+class DocumentSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -11,14 +11,17 @@ class NationalitySeeder extends Seeder
      */
     public function run()
     {
-         $nationality = array(
+        $documentType = array(
             array('V'),
             array('E'),
+            array('P'),
+            array('J'),
+            array('G'),
         );  
 
-        foreach($nationality as $nac){
+        foreach($documentType as $type){
             DB::table('document_type')->insert([
-        		'option' => $nac[0]
+        		'option' => $type[0]
             ]);    
         }
     }

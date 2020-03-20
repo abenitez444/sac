@@ -13,31 +13,23 @@
         <div class="row">
           <div class="sidebar-brand-text mx-3 push ml-3">
             <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
-          </div>
-       
-              <!--Grid column-->
-        <div class="col-lg-12 col-md-12 mb-lg-0 mb-5">
-          <!--Background color-->
-            <div class="card-up info-color"></div>
-          <!--Avatar-->
+          </div>       
+          <div class="col-lg-12 col-md-12 mb-lg-0 mb-5">
             <div class="avatar mx-auto white">
               <img src="{{asset('/img/avatar.png')}}" class="rounded-circle img-fluid" style=" border: 2px solid #aaa;">
             </div>
             <div class="card-body">
-              <!--Name-->
-                <div class="col-md-12 mt-3">
-                   <h4 class="font-weight-bold text-center mb-4"><span id="name"></span></h4>
-                   <i class="fas fa-id-card text-primary fa-lg" title="Cédula de identidad."></i> <span id="nac" class="font-weight-bold mt-3"></span>-
-                    <span id="ci" class="font-weight-bold mt-3"></span> 
-                </div>
-              <hr>
-                <div class="col-md-12">
-                    <i class="fas fa-phone-square text-primary fa-lg" title="Teléfono"></i> <span id="tlf" class="font-weight-bold"></span>
-                </div>
-              <hr>
-              <!--Quotation-->
+              <div class="col-md-12 mt-3">
+                 <h4 class="font-weight-bold text-center mb-4"><span id="name"></span></h4>
+                 <i class="fas fa-id-card text-primary fa-lg" title="Cédula de identidad."></i> <span  id="document_type_id" class="font-weight-bold mt-3"></span>-<span id="ci" class="font-weight-bold mt-3"></span> 
+              </div>
+            <hr>
               <div class="col-md-12">
-                <p class="dark-grey-text "><i class="fas fa-envelope text-primary fa-lg" title="Correo electrónico"></i> <span id="mail" class="font-weight-bold"></span>.</p>
+                  <i class="fas fa-phone-square text-primary fa-lg" title="Teléfono"></i> <span id="phone" class="font-weight-bold"></span>
+              </div>
+            <hr>
+              <div class="col-md-12">
+                <p class="dark-grey-text "><i class="fas fa-envelope text-primary fa-lg" title="Correo electrónico"></i> <span id="email" class="font-weight-bold"></span></p>
               </div>
             </div>
           </div>

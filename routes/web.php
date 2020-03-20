@@ -79,4 +79,16 @@ Route::group(['prefix' => 'employee'], function () {
 	Route::put('/deleted','employeeController@destroy')->name('employee.deleted');
 });
 
+Route::group(['prefix' => 'entity'], function () {
+
+	Route::get('/index', 'entityController@index')->name('entity.index');
+	Route::get('/create', 'entityController@create')->name('entity.create');
+	Route::get('/edit/{id}', 'entityController@edit')->name('entity.edit');
+	Route::get('/detail/{id}', 'entityController@detail')->name('entity.detail');
+	Route::post('store', 'entityController@store')->name('entity.store');
+	Route::put('/deleted','entityController@destroy')->name('inventory.deleted');
+
+});
+
+
 Auth::routes();
