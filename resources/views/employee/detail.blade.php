@@ -21,11 +21,11 @@
             <div class="card-body">
               <div class="col-md-12 mt-3">
                  <h4 class="font-weight-bold text-center mb-4"><span id="name"></span></h4>
-                 <i class="fas fa-id-card text-primary fa-lg" title="Cédula de identidad."></i> <span  id="document_type_id" class="font-weight-bold mt-3"></span>-<span id="ci" class="font-weight-bold mt-3"></span> 
+                 <i class="fas fa-id-card text-primary fa-lg" title="Documento de identidad."></i> <span  id="document_type_id" class="font-weight-bold mt-3"></span>-<span id="ci" class="font-weight-bold mt-3"></span> 
               </div>
             <hr>
               <div class="col-md-12">
-                  <i class="fas fa-phone-square text-primary fa-lg" title="Teléfono"></i> <span id="phone" class="font-weight-bold"></span>
+                  <i class="fas fa-phone-square text-primary fa-lg" title="Número de teléfono"></i> <span id="code_phone_id" class="font-weight-bold"></span>-<span id="phone" class="font-weight-bold"></span>
               </div>
             <hr>
               <div class="col-md-12">

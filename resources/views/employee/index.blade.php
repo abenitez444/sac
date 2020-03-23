@@ -46,7 +46,7 @@
            @endisset
 
            @isset($emp->phone)
-            <td>{{$emp->phone}}</td> 
+            <td>({{$emp->CodePhone->option}})-{{$emp->phone}}</td> 
            @else 
             <td>No disponible</td>
            @endisset
@@ -151,6 +151,7 @@
           modal.find('.modal-body #name').val(data.name)
           modal.find('.modal-body #document_type_id').val(data.document_type_id)
           modal.find('.modal-body #ci').val(data.ci)
+          modal.find('.modal-body #code_phone_id').val(data.code_phone_id)
           modal.find('.modal-body #phone').val(data.phone)
           modal.find('.modal-body #email').val(data.email)
           modal.find('.modal-body #curriculum').val(data.curriculum)
@@ -189,6 +190,11 @@
             modal.find('.modal-body #ci').text(data.ci)
           }else{
             modal.find('.modal-body #ci').text('No disponible')
+          }
+          if(data.code_phone){
+            modal.find('.modal-body #code_phone_id').text(data.code_phone.option)
+          }else{
+            modal.find('.modal-body #code_phone_id').text('')
           }
           if(data.phone){
             modal.find('.modal-body #phone').text(data.phone)

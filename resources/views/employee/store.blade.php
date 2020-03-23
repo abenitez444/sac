@@ -25,39 +25,50 @@
             <div class="col-sm-8 col-md-8 col-lg-10">
               <label for="document_type_id"><b>Nombres:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre y apellido" onkeypress="return letters(event)">
+                <input type="text" class="form-control" id="name" name="name" placeholder="Nombre y apellido" onkeypress="return letters(event)" maxlength="60">
                 <i class="fas fa-address-card fa-lg" title="Introduzca el nombre y apellido del empleado."></i>
+                <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
-             <p class="campo-obligatorio">* Campo obligatorio</p>
             </div>
           </div>
-    
           <div class="row justify-content-center">
-            <div class="col-sm-8 col-md-3 col-lg-3 form-group">
-              <label for="document_type_id"><b>Tipo:</b></label>
+           <div class="col-sm-8 col-md-4 col-lg-4 form-group">
+            <label for="document_type_id"><b>Tipo:</b></label>
+            <div class="inputWithIcon">
+                <select id="document_type_id" name="document_type_id" type="text" class="form-control custom-select @error('document_type_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('document_type_id') }}">
+                    <option value="0" disabled selected></option>
+                  @foreach($typeDocument as $type)
+                    <option value="{{$type->id}}">{{$type->option}}</option>
+                  @endforeach
+                </select>
+                <i class="fas fa-hand-pointer fa-lg" title="Seleccione el tipo de documento del empleado."></i>
+              </div>
+            </div>
+            <div class="col-sm-8 col-md-6 col-lg-6 form-group">
+              <label for="ci"><b>Nº Documento:</b></label>
               <div class="inputWithIcon">
-                  <select id="document_type_id" name="document_type_id" type="text" class="form-control custom-select @error('document_type_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('document_type_id') }}">
-                      <option value="0" disabled selected></option>
-                    @foreach($typeDocument as $type)
-                      <option value="{{$type->id}}">{{$type->option}}</option>
-                    @endforeach
-                  </select>
-                  <i class="fas fa-hand-pointer fa-lg" title="Seleccione el tipo de documento del empleado."></i>
-                </div>
+                <input type="text" class="form-control" id="ci" name="ci" placeholder="Identidad" onkeypress="return numbers(event)" maxlength="9">
+                 <i class="fas fa-id-card fa-lg" title="Introduzca la identidad del empleado."></i>
               </div>
-              <div class="col-sm-8 col-md-5 col-lg-7 form-group">
-                <label for="document_type_id"><b>Nº Documento:</b></label>
-                <div class="inputWithIcon">
-                  <input type="text" class="form-control" id="ci" name="ci" placeholder="Identidad" onkeypress="return numbers(event)">
-                  <i class="fas fa-id-card fa-lg" title="Introduzca la identidad del empleado."></i>
-                </div>
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-sm-8 col-md-8 col-lg-10 form-group">
+           <div class="col-sm-8 col-md-4 col-lg-4 form-group">
+            <label for="code_phone_id"><b>Código:</b></label>
+            <div class="inputWithIcon">
+                <select id="code_phone_id" name="code_phone_id" type="text" class="form-control custom-select @error('code_phone_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('code_phone_id') }}">
+                    <option value="0" disabled selected></option>
+                  @foreach($codePhone as $code)
+                    <option value="{{$code->id}}">{{$code->option}}</option>
+                  @endforeach
+                </select>
+                <i class="fas fa-hand-pointer fa-lg" title="Seleccione el código de teléfono del empleado."></i>
+              </div>
+            </div>
+            <div class="col-sm-8 col-md-6 col-lg-6 form-group">
               <label for="document_type_id"><b>Teléfono:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control" id="phone" name="phone" placeholder="Número de teléfono" onkeypress="return numbers(event)">
+                <input type="text" class="form-control" id="phone" name="phone" placeholder="Número de teléfono" onkeypress="return numbers(event)"  maxlength="7">
                 <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del empleado."></i>
               </div>
             </div>

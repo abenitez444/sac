@@ -21,10 +21,10 @@
             <div class="col-sm-8 col-md-8 col-lg-10">
               <label for="name"><b>Ente:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" placeholder="Nombre de ente">
+                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" id="name" name="name" placeholder="Nombre de ente" maxlength="60">
                 <i class="fas fa-address-card fa-lg" title="Introduzca el nombre del ente."></i>
+                <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
-              <p class="campo-obligatorio">* Campo obligatorio</p>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -44,7 +44,7 @@
               <div class="form-group">
                 <label for="identity"><b>Nº Documento:</b></label>
                 <div class="inputWithIcon">
-                  <input id="identity" type="text" class="form-control{{ $errors->has('identity') ? ' is-invalid' : '' }}" name="identity" value="{{ $inventory->identity ?? '' }}" placeholder="Identidad">
+                  <input id="identity" type="text" class="form-control{{ $errors->has('identity') ? ' is-invalid' : '' }}" name="identity" value="{{ $inventory->identity ?? '' }}" placeholder="Identidad" onkeypress="return numbers(event)" maxlength="9">
                   <i class="fas fa-file-code fa-lg" title="Indique la identidad."></i>
                 </div>
               </div>

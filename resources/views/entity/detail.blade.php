@@ -17,7 +17,8 @@
   	      <div class="col-lg-12 col-md-12 mb-lg-0 mb-5">
   	        <div class="card-body">
     	        <div class="col-md-12">
-    	          <h5 class="font-weight-bold text-center mb-5"><span id="name"></span></h5>
+                <hr>
+    	          <h5 class="font-weight-bold text-center mb-5"><span id="name"></span><hr></h5>
     	          <i class="fas fa-id-card text-primary fa-lg" title="Documento de identidad del ente."></i> <span id="document_type_id" class="font-weight-bold mt-3"></span>-<span id="identity" class="font-weight-bold mt-3"></span>
     	        </div>
     	       <hr>

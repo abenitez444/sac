@@ -59,11 +59,17 @@ class entityController extends Controller
          $request->validate (
 
             [
-                'name' =>  'required|max:60|min:3',
+                'name' =>  'required|max:60|min:2',
+                'identity' =>    'nullable|digits_between:6,9',
+                'email' =>  'nullable|email',
             ], 
 
             [
                 'name.required' => 'Introduzca el nombre del ente.',
+                'name.max' => 'El nombre del ente no debe ser mayor a 60 caracteres.',
+                'name.min' => 'El nombre del ente no debe ser menor a 2 caracteres.',
+                'identity.digits_between' => 'Introduzca el número de identificación  válido del ente.',
+                'email.email' => 'Introduzca el correo electrónico válido del ente.',
             ]
         );
     }
