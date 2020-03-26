@@ -9,6 +9,8 @@ class Inventory extends Model
 {
     use SoftDeletes; 
 
+    protected $dates = ['deleted_at'];
+    
     protected $table = 'inventory';
 
  	protected $fillable = [

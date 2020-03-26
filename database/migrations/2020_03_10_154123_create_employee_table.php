@@ -18,6 +18,7 @@ class CreateEmployeeTable extends Migration
             $table->string('name');
             $table->integer('document_type_id')->unsigned()->nullable();
             $table->string('ci')->nullable();
+            $table->integer('code_phone_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('curriculum')->nullable();
             $table->string('email')->nullable();
@@ -25,7 +26,7 @@ class CreateEmployeeTable extends Migration
             $table->softDeletes();
             $table->timestamps();
 
-            $table->foreign('document_type_id')->references('id')->on('document_type');   
+            $table->foreign('document_type_id')->references('id')->on('document_type');
 
         });
     }

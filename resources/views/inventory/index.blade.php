@@ -13,8 +13,8 @@
     </div>
   </div>
 </div>
-@endsection
 @include('inventory.detail')
+@endsection
 
 @section('js')
 <script src="/vendor/datatables/buttons.server-side.js"></script>
@@ -55,5 +55,64 @@
         });
       }
     })
+</script>
+<!--Delete Inventory -->
+<script>
+  function deletedInventory (id){
+
+  const swalWithBootstrapButtons = Swal.mixin({
+    buttonsStyling: true
+  })
+
+  swalWithBootstrapButtons.fire({
+    title: '¿Estas Seguro?',
+    text: "¡Deseas eliminar este inventario!",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonText: 'Aceptar',
+    cancelButtonText: 'Cancelar',
+    reverseButtons: true
+  }).then((result) => {
+    if (result.value) {
+      $.ajax({
+        url: '{{ url('/inventory/deleted') }}',
+        type: 'PUT',
+        data: {
+        _token: '{{ csrf_token() }}',
+        id: id
+      }
+        }).done(function(id) {
+        Swal.fire({
+          icon: 'success',
+          title: "Inventario eliminado exitosamente.",
+          showConfirmButton: true,
+          timer: 3000
+        }).then((result) => {
+          if (result.value){
+            location.reload()
+          }
+        })
+        //Errors
+        }).fail(function(msj) {
+          Swal.fire({
+            icon: 'error',
+            title: "No se eliminó el inventario.!",
+            showConfirmButton: false,
+            timer: 2000
+          })
+        })
+    } else if (
+      /* Read more about handling dismissals below */
+      result.dismiss === Swal.DismissReason.cancel
+    ) {
+      swalWithBootstrapButtons.fire({
+        title: 'Cancelado',
+        text: 'El inventario no fue eliminado.',
+        icon: 'error',
+        confirmButtonText: 'Aceptar'
+      })
+    }
+  })
+}
 </script>
 @endsection

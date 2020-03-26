@@ -23,16 +23,15 @@ class inventoryController extends Controller
     public function create()
     {
     	$entities = Entity::all();
+
     	return view('inventory.store', compact('entities'));
 
     }
-
 
     public function edit($id)
     {
     	$inventory = Inventory::find($id);
         $entities = Entity::all();
-
 
     	if(isset($inventory))
     	{
@@ -53,6 +52,7 @@ class inventoryController extends Controller
     public function show()
     {
     	$entities = Entity::all();
+
     	return view('inventory.upload', compact('entities'));
     }
 
@@ -69,11 +69,34 @@ class inventoryController extends Controller
 
     public function save(Request $request) 
     {
+        $this->inventoryValidate($request);
+        
+        $id = $request->input('id');
+        $inventory = Inventory::firstOrNew(['id' => $id]);
+        $inventory->fill($request->all());
+        $inventory->save();
+ 
+      return \Response::json(['message' => 'Usuario ya registrado'], 200);
+        
+    }
 
-        $request->validate(
+    public function destroy(Request $request)
+    {
+        $inventory = Inventory::find($request->id);
+            
+            if ($inventory != null) {
+                $inventory->delete();
+                
+                return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
+            }
+    }
+
+    public function inventoryValidate($request)
+    {
+         $request->validate(
             [
                 'entity_id' =>  ['required'],
-                'dependencia' =>  ['required'],
+                /*'dependencia' =>  ['required'],
                 'ubicacion' =>  ['required'],
                 'responsable' =>  ['required'],
                 'codigo_interno' =>  ['required'],
@@ -83,12 +106,12 @@ class inventoryController extends Controller
                 'modelo' =>  ['required'],
                 'cantidad' =>  ['required'],
                 'especificacion' =>  ['required'],
-                'detalle' =>  ['required'],
+                'detalle' =>  ['required'],*/
             ],
 
             [ 
                 'entity_id.required' => 'Debe seleccionar un ente.',
-                'dependencia.required' => 'Introduzca la dependencia administrativa.',
+                /*'dependencia.required' => 'Introduzca la dependencia administrativa.',
                 'ubicacion.required' => 'Introduzca la ubicación física del bien.',
                 'responsable.required' => 'Introduzca el responsable del bien.',
                 'codigo_interno.required' => 'Introduzca el código interno del bien.',
@@ -98,17 +121,9 @@ class inventoryController extends Controller
                 'modelo.required' => 'Introduzca el modelo del bien.',
                 'cantidad.required' => 'Introduzca la cantidad del bien.',
                 'especificacion.required' => 'Introduzca la especificación del bien.',
-                'detalle.required' => 'Introduzca detalles del bien.',
+                'detalle.required' => 'Introduzca detalles del bien.',*/
             ]
         );
-
-	 	$id = $request->input('id');
-        $inventory = Inventory::firstOrNew(['id' => $id]);
-        $inventory->fill($request->all());
-        $inventory->save();
- 
-      return \Response::json(['message' => 'Usuario ya registrado'], 200);
-        
     }
 
 }

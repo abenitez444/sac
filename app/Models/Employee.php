@@ -18,6 +18,7 @@ class Employee extends Model
 		'name',
 		'document_type_id',
 		'ci',
+		'code_phone_id',
 		'phone',
 		'email',
 		'curriculum'
@@ -27,6 +28,7 @@ class Employee extends Model
 		'curriculum'
  	];
 
+
 	 public function DocumentType()
     {
         return $this->belongsTo('App\Models\DocumentType');
@@ -34,6 +36,11 @@ class Employee extends Model
         public function projects()
     {
         return $this->belongsToMany('App\Models\Project');
+    }
+
+	public function CodePhone()
+    {
+        return $this->belongsTo('App\Models\CodePhone', 'code_phone_id');
     }
 
 }

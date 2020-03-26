@@ -27,9 +27,9 @@ Route::group(['prefix' => 'inventory'], function () {
 	Route::get('/create', 'inventoryController@create')->name('create');
 	Route::get('/edit/{id}', 'inventoryController@edit')->name('edit');
 	Route::get('/detail/{id}', 'inventoryController@detail')->name('detail');
-
 	Route::post('/save', 'inventoryController@save')->name('save');
 	Route::post('/uploadFile', 'inventoryController@uploadFile')->name('uploadFile');
+	Route::put('/deleted','inventoryController@destroy')->name('inventory.deleted');
 
 });
 
@@ -77,7 +77,19 @@ Route::group(['prefix' => 'employee'], function () {
 	Route::get('/detail/{id}', 'employeeController@detail')->name('employee.detail');
 	Route::get('/edit/{id}', 'employeeController@edit')->name('employee.edit');
 	Route::post('/save', 'employeeController@save')->name('employee.save');
-	Route::put('/delete','employeeController@destroy')->name('employee.delete');
+	Route::put('/deleted','employeeController@destroy')->name('employee.deleted');
 });
+
+Route::group(['prefix' => 'entity'], function () {
+
+	Route::get('/index', 'entityController@index')->name('entity.index');
+	Route::get('/create', 'entityController@create')->name('entity.create');
+	Route::get('/edit/{id}', 'entityController@edit')->name('entity.edit');
+	Route::get('/detail/{id}', 'entityController@detail')->name('entity.detail');
+	Route::post('store', 'entityController@store')->name('entity.store');
+	Route::put('/deleted','entityController@destroy')->name('inventory.deleted');
+
+});
+
 
 Auth::routes();

@@ -5,24 +5,19 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Employee;
 use App\Models\DocumentType;
+use App\Models\CodePhone;
 use Illuminate\Support\Facades\Validator;
 
 class employeeController extends Controller
 {
-     public function index()
+    public function index()
     {
     	$employee = Employee::all();
-        $nationality = DocumentType::all();
-    	return view('employee.index', compact('employee', 'nationality'));
-     }
-
- /*   public function create()
-    {
-
-    	return view('employee.store');
-
-    }*/
-
+        $typeDocument = DocumentType::all();
+        $codePhone = CodePhone::all();
+    	
+        return view('employee.index', compact('employee', 'typeDocument', 'codePhone'));
+    }
 
     public function edit($id)
     {
@@ -33,30 +28,14 @@ class employeeController extends Controller
 
     public function detail($id)
     {   
-        $employee = Employee::with('DocumentType')->where('employee.id', $id)->first();
+        $employee = Employee::with('DocumentType', 'CodePhone')->where('employee.id', $id)->first();
 
         return response()->json($employee);
     }
 
-
     public function save(Request $request) 
     {   
-
-         $request->validate (
-
-            [
-                'name' =>  'required|max:60|min:3',
-                'ci' =>    'nullable|digits_between:6,8',
-                'email' =>  'nullable|email',
-            ], 
-
-            [
-                'name.required' => 'Introduzca nombre y apellido del empleado.',
-                'ci.digits_between' => 'Introduzca la cédula de identidad del empleado.',
-                'email.email' => 'Introduzca el corre electrónico del empleado.',
-            ]
-        );
-
+        $this->employeeValidate($request);
         
 	 	$id = $request->input('id');
         $employee = Employee::firstOrNew(['id' => $id]);
@@ -66,16 +45,37 @@ class employeeController extends Controller
         return \Response::json(['message' => 'Usuario ya registrado'], 200);
     }
 
-     public function destroy(Request $request)
+    public function destroy(Request $request)
     {   
-            $employee = Employee::find($request->id);
+        $employee = Employee::find($request->id);
+        
+        if ($employee != null) {
+            $employee->delete();
             
-            if ($employee != null) {
-                $delete = $employee->delete();
-                return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
-            }
+            return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
+        }
+    }
 
-                
+    public function employeeValidate($request)
+    {
+        $request->validate (
+
+            [
+                'name' =>  'required|max:60|min:3',
+                'ci' =>    'nullable|digits_between:6,9',
+                'email' =>  'nullable|email',
+                'phone' =>  'nullable|digits_between:7,7',
+            ], 
+
+            [
+                'name.required' => 'Introduzca nombre y apellido del empleado.',
+                'name.max' => 'El nombre y el apellido del empleado, no debe ser mayor a 60 caracteres.',
+                'name.min' => 'El nombre y el apellido del empleado, debe ser mayor a 3 caracteres.',
+                'ci.digits_between' => 'Introduzca el número de identificación  válido del empleado.',
+                'email.email' => 'Introduzca el correo electrónico válido del empleado.',
+                'phone.digits_between' => 'Introduzca el número de teléfono válido del empleado.',
+            ]
+        );
     }
  
 }

@@ -10,17 +10,16 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="sidebar-brand-text mx-3 ml-3">
-            <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
-          </div>
+          <div class="col-lg-12 col-md-12 col-sm-10 mb-lg-0 mb-2">
+            <div class="sidebar-brand-text mx-3 ml-3">
+              <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
+            </div>
             <!--Grid column-->
-        <div class="col-lg-12 col-md-12 col-sm-10 mb-lg-0 mb-2">
-            <!--Background color-->
-              <div class="row form-group">
-                <div class="col-lg-12 col-md-12 text-center text-black">
-                  <h5 class="font-weight-bold mt-4">Bien nacional #º <span class="text-danger" id="id"></span></h5>
-                </div>
+            <div class="row form-group">
+              <div class="col-lg-12 col-md-12 text-center text-black">
+                <h5 class="font-weight-bold mt-4">Bien nacional #º <span class="text-danger" id="id"></span></h5>
               </div>
+            </div>
             <div class="row justify-content-center">
               <div class="col-auto">
                 <table class="table table-border-less">

@@ -13,8 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\JsonResponse;
 
 
-
-
 class InventoryDataTable extends DataTable
 {
 
@@ -37,6 +35,8 @@ class InventoryDataTable extends DataTable
    /*             if (auth()->user()->rol == 1) {
                     $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deleteBMS('.$query->id.')"><b class="fa fa-trash"></b></a>';
                 }*/
+                $html .= ' <a href="#" class="icono" title="Eliminar" onclick="deletedInventory('.$query->id.')"><b class="radiusM fa fa-trash"></b></a>';
+                
                 return $html;
             });
     }

@@ -22,13 +22,29 @@
   <!-- Divider -->
   <!-- Heading -->
   <div class="sidebar-heading">
+   Personal
+  </div>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('employee.index') }}">
+       <i class="fas fa-user fa-lg"></i>
+      <span>Empleado</span></a>
+  </li>
+ 
+  <div class="sidebar-heading">
     Gentión
   </div>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('entity.index') }}">
+      <i class="fas fa-building font-weight-bold"></i> 
+      <span>Ente</span></a>
+  </li>
 
   <!-- Nav Item - Pages Collapse Menu -->
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
-      <i class="fas fa-fw fa-cog"></i>
+      <i class="fas fa-fw fa-cog fa-lg"></i>
       <span>Inventario</span>
     </a>
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
