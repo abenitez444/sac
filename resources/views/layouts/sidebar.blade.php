@@ -22,23 +22,13 @@
   <!-- Divider -->
   <!-- Heading -->
   <div class="sidebar-heading">
-   Personal
-  </div>
-
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('employee.index') }}">
-       <i class="fas fa-user fa-lg"></i>
-      <span>Empleado</span></a>
-  </li>
- 
-  <div class="sidebar-heading">
     Gentión
   </div>
 
   <li class="nav-item">
     <a class="nav-link" href="{{ route('entity.index') }}">
       <i class="fas fa-building font-weight-bold"></i> 
-      <span>Ente</span></a>
+      <span>Entes</span></a>
   </li>
 
   <!-- Nav Item - Pages Collapse Menu -->

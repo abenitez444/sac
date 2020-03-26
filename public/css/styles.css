@@ -1,7 +1,3 @@
-body{
-	font-family: 'Montserrat', serif;
-}
-
 .text-light{
     color: #fff;
 }
@@ -69,4 +65,8 @@ label{
 } 
 @media (min-width: 1024px) {
   
+}
+
+.sidebar .nav-item .nav-link{
+	padding: 0.5rem;
 } 
