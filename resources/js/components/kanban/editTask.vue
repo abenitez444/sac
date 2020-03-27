@@ -4,7 +4,7 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="taskModaleditLabel">Editar Tarea: {{ task.name }}</h5>
+            <h5 class="modal-title" id="taskModaleditLabel">Editar actividad: {{ task.name }}</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close" @click="cancelTask">
               <span aria-hidden="true">&times;</span>
             </button>
@@ -12,7 +12,7 @@
           <form @submit.prevent="updateTask">
             <div class="modal-body">
               <div class="form-group">
-                <label for="recipient-name" class="col-form-label">Nombre de la Tarea:</label>
+                <label for="recipient-name" class="col-form-label">Nombre de la actividad:</label>
                 <input type="text" class="form-control taskname" v-model="task.name">
               </div>
               <div class="form-group">
@@ -53,7 +53,7 @@ export default {
         });
       }
       else{
-        toastr.error('El nombre de la tarea no puede estar vacio', 'Error!');
+        toastr.error('El nombre de la actividad no puede estar vacio', 'Error!');
       }
     },
     cancelTask(e){

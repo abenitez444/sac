@@ -20,7 +20,7 @@
             </a>
             <a v-if="lists[0]" class="dropdown-item" href="#" data-toggle="modal" data-target="#CreateTask">
               <i class="fas fa-tasks fa-sm fa-fw mr-2 text-blue-400"></i>
-              Agreagar Tarea
+              Agreagar Actividad
             </a>
             <div class="dropdown-divider"></div>
           </div>

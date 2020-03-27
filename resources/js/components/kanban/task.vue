@@ -57,7 +57,7 @@ export default {
       e.preventDefault();
       Swal.fire({
         title: '¿Estas seguro?',
-        text: "No podrás recuperar la tarea si la eliminas!",
+        text: "No podrás recuperar la actividad si la eliminas!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -74,14 +74,14 @@ export default {
             
 /*            Swal.fire(
               'Eliminada!',
-              'La tarea ha sido eliminada con éxito.',
+              'La actividad ha sido eliminada con éxito.',
               'success'
             )*/
           })
           .catch(function (error) {
              Swal.fire(
               'Error!',
-              'No se pudo eliminar la tarea.',
+              'No se pudo eliminar la actividad.',
               'error'
             )
           });

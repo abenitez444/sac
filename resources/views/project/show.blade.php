@@ -2,6 +2,7 @@
 @extends('layouts.app')
 @section('css')
 <link rel="stylesheet" type="text/css" href="{{ asset('css/tailwind.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
 @endsection
 @section('content')
 <div class="container-fluid">

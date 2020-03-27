@@ -1,5 +1,5 @@
 <template>
-  <div class="card" id="employees">
+  <div class="card" id="employeesCard">
     <div class="card-header bg-primary" style="margin-top: -12px !important; margin-bottom: -12px !important">
     </div>
     <div class="card-header bg-white ">
@@ -24,21 +24,19 @@
           </div>
         </li>
       </ul>
-        <li class="p-2 mb-2 flex justify-between items-center text-primary bg-white shadow rounded-lg w-100">
-          <div class="flex w-100 text-center cursor-pointer">
-            <a @click="cargaEmpleado" aria-label="Eliminar" class="w-100 p-1 focus:outline-none focus:shadow-outline text-blue-500 hover:text-blue-600 ">
-            <i class="fa fa-user-plus"></i> Agregar personal
-            </a>
-          </div>
-        </li>
+      <addEmployee :employees="this.employees"></addEmployee>
     </div>
   </div>
 </template>
 
 <script>
+import addEmployee from "./addEmployee.vue";
 export default {
   name: "board",
   props: ['id'],
+  components: {
+    addEmployee,
+  },
   data() {
     return {
       project: [],
@@ -54,7 +52,7 @@ export default {
         axios.get('../../project/get/'+this.id)
         .then(function (response) {
           self.project = response.data.project;
-          self.employees = response.data.employees;
+          self.employees = response.data.employee;
         })
         .catch(function (error) {
            console.log("Tasks could not be retrieved "+error);

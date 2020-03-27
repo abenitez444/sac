@@ -1932,6 +1932,128 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: ["employees"],
+  data: function data() {
+    return {
+      nameTask: '',
+      description: '',
+      filter: ''
+    };
+  },
+  computed: {
+    filterList: function filterList() {
+      var _this = this;
+
+      return this.employees.filter(function (lists) {
+        var filter = _this.filter.toUpperCase();
+
+        var hasIdMatch = String(lists.id).includes(filter);
+        var hasNameMatch = lists.name.toUpperCase().includes(filter);
+        return hasIdMatch || hasNameMatch;
+      });
+    }
+  },
+  methods: {
+    addEmployee: function addEmployee(e) {
+      var self = this;
+      e.preventDefault();
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('../../activity/create', {
+        name: this.nameTask,
+        description: this.description,
+        list_id: this.lists[0].id,
+        order: 100
+      }).then(function (response) {
+        $('.taskname').val('');
+        $('.taskdescription').val('');
+        $('#AddEmployee').modal('hide');
+        self.$emit('newTask', response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    },
+    console: function (_console) {
+      function console() {
+        return _console.apply(this, arguments);
+      }
+
+      console.toString = function () {
+        return _console.toString();
+      };
+
+      return console;
+    }(function () {
+      console.log(this.employees);
+    })
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/employee.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/employee/employee.vue?vue&type=script&lang=js& ***!
@@ -1941,6 +2063,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addEmployee_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addEmployee.vue */ "./resources/js/components/employee/addEmployee.vue");
 //
 //
 //
@@ -1972,15 +2095,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "board",
   props: ['id'],
+  components: {
+    addEmployee: _addEmployee_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
   data: function data() {
     return {
       project: [],
@@ -1995,7 +2116,7 @@ __webpack_require__.r(__webpack_exports__);
       var self = this;
       axios.get('../../project/get/' + this.id).then(function (response) {
         self.project = response.data.project;
-        self.employees = response.data.employees;
+        self.employees = response.data.employee;
       })["catch"](function (error) {
         console.log("Tasks could not be retrieved " + error);
       });
@@ -2515,7 +2636,7 @@ __webpack_require__.r(__webpack_exports__);
           console.log(error);
         });
       } else {
-        toastr.error('El nombre de la tarea no puede estar vacio', 'Error!');
+        toastr.error('El nombre de la actividad no puede estar vacio', 'Error!');
       }
     },
     cancelTask: function cancelTask(e) {
@@ -2599,7 +2720,7 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       Swal.fire({
         title: '¿Estas seguro?',
-        text: "No podrás recuperar la tarea si la eliminas!",
+        text: "No podrás recuperar la actividad si la eliminas!",
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#3085d6',
@@ -2613,11 +2734,11 @@ __webpack_require__.r(__webpack_exports__);
             self.lists.splice(self.rowtask, 1);
             /*            Swal.fire(
                           'Eliminada!',
-                          'La tarea ha sido eliminada con éxito.',
+                          'La actividad ha sido eliminada con éxito.',
                           'success'
                         )*/
           })["catch"](function (error) {
-            Swal.fire('Error!', 'No se pudo eliminar la tarea.', 'error');
+            Swal.fire('Error!', 'No se pudo eliminar la actividad.', 'error');
           });
         } else {
           _this.cancelDeleted(e);
@@ -27681,6 +27802,208 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e& ***!
+  \***********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "AddEmployee" } }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "modal fade",
+        attrs: {
+          id: "AddEmployeeModal",
+          tabindex: "-1",
+          role: "dialog",
+          "aria-labelledby": "AddEmployeeLabel",
+          "aria-hidden": "true"
+        }
+      },
+      [
+        _c(
+          "div",
+          { staticClass: "modal-dialog", attrs: { role: "document" } },
+          [
+            _c("div", { staticClass: "modal-content" }, [
+              _vm._m(1),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "modal-body" },
+                [
+                  _c("div", { staticClass: "inputWithIcon w-100 mb-2" }, [
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.filter,
+                          expression: "filter"
+                        }
+                      ],
+                      staticClass: "form-control form-control-sm",
+                      attrs: {
+                        type: "text",
+                        placeholder: "Filtral",
+                        maxlength: "60"
+                      },
+                      domProps: { value: _vm.filter },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.filter = $event.target.value
+                        }
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("i", {
+                      staticClass: "fas fa-search fa-lg",
+                      attrs: { title: "Filtral Empleados" }
+                    })
+                  ]),
+                  _vm._v(" "),
+                  _vm._l(_vm.filterList, function(employee, index) {
+                    return _c("ul", { staticClass: "w-100" }, [
+                      _c(
+                        "li",
+                        {
+                          staticClass:
+                            "p-1 mb-1 flex justify-between items-center bg-white shadow rounded-lg"
+                        },
+                        [
+                          _c("div", { staticClass: "items-center" }, [
+                            _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "ml-2 text-gray-700 font-semibold font-sans tracking-wide"
+                              },
+                              [_vm._v(_vm._s(employee.name))]
+                            ),
+                            _vm._v(" "),
+                            _c(
+                              "p",
+                              {
+                                staticClass:
+                                  "ml-2 text-gray-700 font-semibold font-sans tracking-wide"
+                              },
+                              [_vm._v(_vm._s(employee.ci))]
+                            )
+                          ])
+                        ]
+                      )
+                    ])
+                  })
+                ],
+                2
+              ),
+              _vm._v(" "),
+              _c("div", { staticClass: "modal-footer" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-secondary",
+                    attrs: { type: "button", "data-dismiss": "modal" }
+                  },
+                  [_vm._v("Cerrar")]
+                ),
+                _vm._v(" "),
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-primary",
+                    on: { click: _vm.console }
+                  },
+                  [_vm._v("Guardar")]
+                )
+              ])
+            ])
+          ]
+        )
+      ]
+    )
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "li",
+      {
+        staticClass:
+          "p-2 mb-2 flex justify-between items-center text-primary bg-white shadow rounded-lg w-100"
+      },
+      [
+        _c("div", { staticClass: "flex w-100 text-center cursor-pointer" }, [
+          _c(
+            "a",
+            {
+              staticClass:
+                "w-100 p-1 focus:outline-none focus:shadow-outline text-blue-500 hover:text-blue-600",
+              attrs: {
+                "aria-label": "Eliminar",
+                "data-toggle": "modal",
+                "data-target": "#AddEmployeeModal"
+              }
+            },
+            [
+              _c("i", { staticClass: "fa fa-user-plus" }),
+              _vm._v(" Agregar personal\n        ")
+            ]
+          )
+        ])
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "modal-header" }, [
+      _c(
+        "h5",
+        { staticClass: "modal-title", attrs: { id: "AddEmployeeLabel" } },
+        [_vm._v("Lista de personal")]
+      ),
+      _vm._v(" "),
+      _c(
+        "button",
+        {
+          staticClass: "close",
+          attrs: {
+            type: "button",
+            "data-dismiss": "modal",
+            "aria-label": "Close"
+          }
+        },
+        [_c("span", { attrs: { "aria-hidden": "true" } }, [_vm._v("×")])]
+      )
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/employee.vue?vue&type=template&id=fca11a98&":
 /*!********************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/employee/employee.vue?vue&type=template&id=fca11a98& ***!
@@ -27696,7 +28019,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "card", attrs: { id: "employees" } }, [
+  return _c("div", { staticClass: "card", attrs: { id: "employeesCard" } }, [
     _c("div", {
       staticClass: "card-header bg-primary",
       staticStyle: {
@@ -27714,7 +28037,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "span",
-            { staticClass: "badge badge-primary badge-pill cursor-default" },
+            {
+              staticClass: "badge badge-primary badge-pill cursor-default",
+              attrs: { title: "Cantidad de personal" }
+            },
             [_vm._v(_vm._s(this.project.employees_count))]
           )
         ]
@@ -27759,34 +28085,7 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
-        _c(
-          "li",
-          {
-            staticClass:
-              "p-2 mb-2 flex justify-between items-center text-primary bg-white shadow rounded-lg w-100"
-          },
-          [
-            _c(
-              "div",
-              { staticClass: "flex w-100 text-center cursor-pointer" },
-              [
-                _c(
-                  "a",
-                  {
-                    staticClass:
-                      "w-100 p-1 focus:outline-none focus:shadow-outline text-blue-500 hover:text-blue-600 ",
-                    attrs: { "aria-label": "Eliminar" },
-                    on: { click: _vm.cargaEmpleado }
-                  },
-                  [
-                    _c("i", { staticClass: "fa fa-user-plus" }),
-                    _vm._v(" Agregar personal\n          ")
-                  ]
-                )
-              ]
-            )
-          ]
-        )
+        _c("addEmployee", { attrs: { employees: this.employees } })
       ],
       2
     )
@@ -27939,7 +28238,7 @@ var render = function() {
                             staticClass:
                               "fas fa-tasks fa-sm fa-fw mr-2 text-blue-400"
                           }),
-                          _vm._v("\n            Agreagar Tarea\n          ")
+                          _vm._v("\n            Agreagar Actividad\n          ")
                         ]
                       )
                     : _vm._e(),
@@ -28379,7 +28678,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { for: "recipient-name" }
                         },
-                        [_vm._v("Nombre de la Tarea:")]
+                        [_vm._v("Nombre de la actividad:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -28458,7 +28757,7 @@ var staticRenderFns = [
       _c(
         "h5",
         { staticClass: "modal-title", attrs: { id: "CreateTaskLabel" } },
-        [_vm._v("Agregar nueva lista")]
+        [_vm._v("Agregar nueva actividad")]
       ),
       _vm._v(" "),
       _c(
@@ -28701,7 +29000,7 @@ var render = function() {
                     staticClass: "modal-title",
                     attrs: { id: "taskModaleditLabel" }
                   },
-                  [_vm._v("Editar Tarea: " + _vm._s(_vm.task.name))]
+                  [_vm._v("Editar actividad: " + _vm._s(_vm.task.name))]
                 ),
                 _vm._v(" "),
                 _c(
@@ -28742,7 +29041,7 @@ var render = function() {
                           staticClass: "col-form-label",
                           attrs: { for: "recipient-name" }
                         },
-                        [_vm._v("Nombre de la Tarea:")]
+                        [_vm._v("Nombre de la actividad:")]
                       ),
                       _vm._v(" "),
                       _c("input", {
@@ -44386,6 +44685,7 @@ Vue.component('createTask', __webpack_require__(/*! ./components/kanban/createTa
 Vue.component('editList', __webpack_require__(/*! ./components/kanban/editList.vue */ "./resources/js/components/kanban/editList.vue")["default"]);
 Vue.component('editTask', __webpack_require__(/*! ./components/kanban/editTask.vue */ "./resources/js/components/kanban/editTask.vue")["default"]);
 Vue.component('employee', __webpack_require__(/*! ./components/employee/employee.vue */ "./resources/js/components/employee/employee.vue")["default"]);
+Vue.component('addEmployee', __webpack_require__(/*! ./components/employee/addEmployee.vue */ "./resources/js/components/employee/addEmployee.vue")["default"]);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
@@ -44507,6 +44807,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ExampleComponent_vue_vue_type_template_id_299e239e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/employee/addEmployee.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/employee/addEmployee.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./addEmployee.vue?vue&type=template&id=a928d34e& */ "./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e&");
+/* harmony import */ var _addEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./addEmployee.vue?vue&type=script&lang=js& */ "./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _addEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/employee/addEmployee.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./addEmployee.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/addEmployee.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_addEmployee_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./addEmployee.vue?vue&type=template&id=a928d34e& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/employee/addEmployee.vue?vue&type=template&id=a928d34e&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_addEmployee_vue_vue_type_template_id_a928d34e___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
