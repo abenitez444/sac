@@ -12,8 +12,8 @@
     </div>
     <div class="card-body">
       <ul class="w-100" v-for="(employee, index) in this.project.employees">
-        <li class="p-2 mb-2 flex justify-between items-center bg-white shadow rounded-lg">
-          <div class="flex items-center">
+        <li class="p-2 mb-2 border-left-primary flex justify-between items-center bg-white shadow rounded-lg">
+          <div class="flex items-center cursor-pointer" @click="showProfile(employee)">
             <img class="w-10 h-10 rounded-full" src="../../img/confi.png" alt="user.name">
             <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">{{ employee.name }}</p>
           </div>
@@ -24,7 +24,8 @@
           </div>
         </li>
       </ul>
-      <addEmployee :employees="this.employees"></addEmployee>
+      <addEmployee :employees="this.employees" @ShowProfile="showProfile($event)"></addEmployee>
+      <profile :profile="profile"></profile>
     </div>
   </div>
 </template>
@@ -40,7 +41,8 @@ export default {
   data() {
     return {
       project: [],
-      employees:[]
+      employees:[],
+      profile:[]
     };
   },
   mounted(){
@@ -65,6 +67,11 @@ export default {
       }
       this.project.employees.push(data);
     },
+    showProfile(employee){
+
+      $('#modal-profile').modal('show');
+      this.profile = employee;
+    }
   }
 };
 </script>

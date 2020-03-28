@@ -36,6 +36,7 @@ Vue.component('editTask', require('./components/kanban/editTask.vue').default);
 
 Vue.component('employee', require('./components/employee/employee.vue').default);
 Vue.component('addEmployee', require('./components/employee/addEmployee.vue').default);
+Vue.component('profile', require('./components/employee/profile.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

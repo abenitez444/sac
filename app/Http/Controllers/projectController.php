@@ -37,7 +37,11 @@ class projectController extends Controller
     public function getProject($id)
     {
         $project = Project::where('id', $id)->withCount('employees')->with('employees')->orderBy('id', 'asc')->first();
-        $emproyee = Employee::all();
+
+        $project->employees->load('DocumentType');
+        $project->employees->load('CodePhone');
+        $emproyee = Employee::with('DocumentType', 'CodePhone')->get();
+
 
         $diff = $emproyee->diff($project->employees);
 

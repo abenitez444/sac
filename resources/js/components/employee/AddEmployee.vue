@@ -17,16 +17,21 @@
             </button>
           </div>
           <!-- <form @submit.prevent="addEmployee"> -->
-            <div class="modal-body">
-              <div class="inputWithIcon w-100 mb-2">
+            <div class="modal-body" >
+              <div class="inputWithIcon w-100 mb-3">
                 <input type="text" class="form-control form-control-sm" placeholder="Filtral" maxlength="60" v-model="filter">
                 <i class="fas fa-search fa-lg" title="Filtral Empleados"></i>
               </div>
-              <ul class="w-100" v-for="(employee, index) in filterList">
-                <li class="p-1 mb-1 flex justify-between items-center bg-white shadow rounded-lg">
-                  <div class="items-center">
+              <ul class="w-100 list-employe smooth-scroll list-unstyled overflow-y-auto">
+                <li class="ml-2 w-11/12 mb-1 mt-2 flex justify-between items-center bg-white shadow-sm rounded-full py-1 px-2" v-for="(employee, index) in filterList">
+                  <div class="items-center cursor-pointer" @click="showProfile(employee)">
                     <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">{{ employee.name }}</p>
-                    <p class="ml-2 text-gray-700 font-semibold font-sans tracking-wide">{{ employee.ci }}</p>
+                    <p class="ml-2 text-gray-700 text-xs font-semibold">CI: {{ employee.document_type.option }}-{{ employee.ci }}</p>
+                  </div>
+                  <div class="flex text-success hover:text-green-600 focus:outline-none focus:shadow-outline">
+                    <a aria-label="Eliminar" class="p-1 cursor-pointer">
+                    <i class="fa fa-user-plus "></i>
+                    </a>
                   </div>
                 </li>
               </ul>
@@ -41,7 +46,6 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-              <button @click="console" class="btn btn-primary">Guardar</button>
             </div>
           <!-- </form> -->
         </div>
@@ -67,8 +71,9 @@ export default {
         const filter = this.filter.toUpperCase();
         const hasIdMatch = String(lists.id).includes(filter);
         const hasNameMatch = lists.name.toUpperCase().includes(filter);
+        const hasCiMatch = String(lists.ci).includes(filter);
         
-        return hasIdMatch || hasNameMatch;
+        return hasIdMatch || hasNameMatch || hasCiMatch;
       })
     }
   },
@@ -92,10 +97,16 @@ export default {
          console.log(error);
       });
     },
-    console(){
-      console.log(this.employees);
+    showProfile(employee){
+      this.$emit('ShowProfile', employee)
     }
   }
   
 };
 </script>
+<style type="text/css">
+  .list-employe{
+    max-height: 20rem;
+
+}
+</style>
