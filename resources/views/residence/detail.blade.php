@@ -14,21 +14,20 @@
         <div class="sidebar-brand-text mx-3 push ml-3">
           	<i class="fas fa-atlas text-dark sidebar-brand-icon rotate-n-15"></i> <b class="text-dark"> GC-GCA</b>
         </div>
-  	      <div class="col-lg-12 col-md-12 mb-lg-0 mb-5">
+  	      <div class="col-lg-12 col-md-12 mb-lg-0">
   	        <div class="card-body">
-    	       <hr>
               <div class="col-sm-8 col-md-12 col-lg-12 text-center">
-                <h3><i class="fas fa-building text-dark fa-lg" title="Nombre del Conjunto Residencial."></i> 
+                <h3><i class="fas fa-building text-dark fa-md" title="Nombre del Conjunto Residencial."></i> 
                   <span id="name_residence" class="font-weight-bold mt-3"></span></h3>
     	        </div>
     	       <hr>
               <div class="col-sm-8 col-md-6 col-lg-6">
-                <p class="dark-grey-text "><i class="fa fa-university text-dark fa-lg" aria-hidden="true"></i>
+                <p class="dark-grey-text "><i class="fa fa-university text-dark fa-lg" aria-hidden="true" title="Tipo de Residencia."></i>
                   <span id="type_residence" class="font-weight-bold"></span></p>
               </div>
              <hr>
               <div class="col-sm-8 col-md-12 col-lg-12">
-                <p class="dark-grey-text "><i class="fas fa-globe-europe text-dark fa-lg" title="Sitio web."></i> 
+                <p class="dark-grey-text "><i class="fas fa-store-alt text-dark fa-mg" aria-hidden="true" title="Tipo de Estructura."></i>
                   <span id="type_center" class="font-weight-bold"></span>
                   <span id="type_corner" class="font-weight-bold"></span>
                   <span id="type_penhouse" class="font-weight-bold"></span>
@@ -36,8 +35,16 @@
                 </p>
               </div>
              <hr>
-              <div class="col-md-12">
-                <p class="dark-grey-text "><i class="fas fa-directions text-dark fa-lg" title="Dirección del ente."></i> <span id="addres" class="font-weight-bold"></span></p>
+              <div class="col-sm-8 col-md-6 col-lg-6">
+                <p class="dark-grey-text "><i class="fas fa-file-invoice text-dark fa-lg" aria-hidden="true" title="Número de RIF."></i>
+                  <b>-</b> <span id="type_rif" class="font-weight-bold"></span><span id="number_rif" class="font-weight-bold"></span>
+                </p>
+              </div>
+              <hr>
+              <div class="col-sm-8 col-md-6 col-lg-6">
+                <p class="dark-grey-text "><i class="fas fa-directions text-dark fa-lg" title="Dirección del Conjunto Residencial."></i>
+                  <b>-</b> <span id="addres" class="font-weight-bold"></span>
+                </p>
               </div>
   	        </div>
   	      </div>

@@ -57,7 +57,7 @@
              </td>
 
              <td>
-              @if($res->type_rif != '' && $res->number_rif != '')                                 {{$res->type_rif}}-{{$res->number_rif}}
+              @if($res->type_rif != '' && $res->number_rif != '')                                 {{$res->type_rif}}{{$res->number_rif}}
               @else
               No disponible
               @endif
@@ -331,35 +331,42 @@ cl++;
           modal.find('.modal-body #id').text(data.id)
           modal.find('.modal-body #name_residence').text(data.name_residence)
             if(data.type_residence == 1) {
-              modal.find('.modal-body #type_residence').text('- Apartamento');
+              modal.find('.modal-body #type_residence').text('- Apartamento')
             }else if (data.type_residence == 2) {
-              modal.find('.modal-body #type_residence').text('- Thownhouse');
+              modal.find('.modal-body #type_residence').text('- Thownhouse')
             }else{
-              modal.find('.modal-body #type_residence').text('- Casa');
+              modal.find('.modal-body #type_residence').text('- Casa')
             }
             if(data.type_residence == '') {
-              modal.find('.modal-body #type_residence').text('- No disponible.');
+              modal.find('.modal-body #type_residence').text('- No disponible.')
             }  
             if(data.type_center == 'on'){
-              modal.find('.modal-body #type_center').text('- Central');
+              modal.find('.modal-body #type_center').text('- Central')
             }else{
-              modal.find('.modal-body #type_center').text('');
+              modal.find('.modal-body #type_center').text('')
             }  
             if(data.type_corner == 'on'){
-              modal.find('.modal-body #type_corner').text('- Esquina');
+              modal.find('.modal-body #type_corner').text('- Esquina')
             }else{
-              modal.find('.modal-body #type_corner').text('');
+              modal.find('.modal-body #type_corner').text('')
             }   
             if(data.type_penhouse == 'on'){
-              modal.find('.modal-body #type_penhouse').text('- Pen House');
+              modal.find('.modal-body #type_penhouse').text('- Pen House')
             }else{
-              modal.find('.modal-body #type_penhouse').text('');
+              modal.find('.modal-body #type_penhouse').text('')
             } 
             if(data.type_structure == 'on' && data.structure != ''){
-              modal.find('.modal-body #structure').text(data.structure);
+              modal.find('.modal-body #structure').text(data.structure)
             }else{
-              modal.find('.modal-body #type_penhouse').text('');
+              modal.find('.modal-body #type_penhouse').text('')
             }  
+            if(data.type_rif != '' && data.number_rif != ''){
+              modal.find('.modal-body #type_rif').text(data.type_rif)
+              modal.find('.modal-body #number_rif').text(data.number_rif)
+            }else{
+              modal.find('.modal-body #type_rif').text('- No disponible');
+            }
+            modal.find('.modal-body #addres').text(data.addres)
         })
         .fail(function() {
           console.log("error");
