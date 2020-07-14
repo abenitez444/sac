@@ -5,37 +5,25 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-
-class Employee extends Model
+class Coowner extends Model
 {
     use SoftDeletes;
 
     protected $dates = ['deleted_at'];
-    protected $table = 'employee';
+    protected $table = 'coowner';
 
  	protected $fillable = [
 		'avatar',
 		'name',
-		'document_type_id',
-		'ci',
+		'aliquot',
+		'saldo',
 		'code_phone_id',
 		'phone',
 		'email',
-		'curriculum'
  	];
-
- 	protected $guarded = [
-		'curriculum'
- 	];
-
-	public function DocumentType()
-	    {
-	        return $this->belongsTo('App\Models\DocumentType', 'document_type_id');
-	    }
 
 	public function CodePhone()
 	    {
 	        return $this->belongsTo('App\Models\CodePhone', 'code_phone_id');
 	    }
-
 }

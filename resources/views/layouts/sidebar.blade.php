@@ -1,12 +1,12 @@
 <!-- Sidebar -->
-<ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+<ul class="navbar-nav bg-gradient-dark sidebar sidebar-dark accordion" id="accordionSidebar">
 
   <!-- Sidebar - Brand -->
   <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('home') }}">
     <div class="sidebar-brand-icon rotate-n-15">
       <i class="fas fa-atlas"></i>
     </div>
-    <div class="sidebar-brand-text mx-3">SIGESPRO</div>
+    <div class="sidebar-brand-text mx-3">Gestión de condóminio y (gca)</div>
   </a>
 
   <!-- Divider -->
@@ -19,29 +19,31 @@
       <span>Inicio</span></a>
   </li>
 
-  <!-- Divider -->
   <!-- Heading -->
-  <div class="sidebar-heading">
-   Personal
+  <div class="sidebar-heading mt-2">
+   Gestión
   </div>
 
   <li class="nav-item">
-    <a class="nav-link" href="{{ route('employee.index') }}">
+    <a class="nav-link collapsed" href="{{ route('residence.index') }}">
+     <span><i class="fas fa-building fa-md"></i>  Conjunto residencial</span>
+    </a>
+  </li>
+
+  <li class="nav-item">
+    <a class="nav-link" href="{{ route('co-owner.index') }}">
        <i class="fas fa-user fa-lg"></i>
-      <span>Empleado</span></a>
+      <span>Copropietario</span></a>
   </li>
  
+  <!--
   <div class="sidebar-heading">
-    Gentión
+    Personal
   </div>
 
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('entity.index') }}">
-      <i class="fas fa-building font-weight-bold"></i> 
-      <span>Ente</span></a>
-  </li>
+  
 
-  <!-- Nav Item - Pages Collapse Menu -->
+  // Nav Item - Pages Collapse Menu
   <li class="nav-item">
     <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
       <i class="fas fa-fw fa-cog fa-lg"></i>
@@ -56,46 +58,20 @@
       </div>
     </div>
   </li>
-    <!-- Divider -->
-  <hr class="sidebar-divider">
-
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Proyectos
-  </div>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('project.index') }}">
-      <i class="fas fa-fw fa-chart-area fa-lg"></i>
-      <span>Gestión de Proyectos</span></a>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="{{ route('employee.index') }}">
-      <i class="fas fa-fw fa-users fa-lg"></i>
-      <span>Gestión de Personal</span></a>
-  </li>
-  <!-- Nav Item - Pages Collapse Menu -->
-
-
-  <!-- Divider -->
-  <hr class="sidebar-divider">
-
-  <!-- Heading -->
-  <div class="sidebar-heading">
-    Otros
-  </div>
-
-  <!-- Nav Item - Charts -->
+   
+    // Nav Item - Charts 
   <li class="nav-item">
     <a class="nav-link" href="charts.html">
       <i class="fas fa-fw fa-chart-area fa-lg"></i>
       <span>Carga</span></a>
   </li>
-  <!-- Divider -->
+    -->
+    <!-- Divider -->
   <hr class="sidebar-divider d-none d-md-block">
 
-  <!-- Sidebar Toggler (Sidebar) -->
-  <div class="text-center d-none d-md-inline">
+    <!-- Sidebar Toggler (Sidebar) -->
+      <div class="text-center d-none d-md-inline">
     <button class="rounded-circle border-0" id="sidebarToggle"></button>
   </div>
 
-</ul>
+</ul> 

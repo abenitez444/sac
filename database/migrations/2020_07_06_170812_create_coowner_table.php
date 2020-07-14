@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateActivityTable extends Migration
+class CreateCoownerTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,18 +13,18 @@ class CreateActivityTable extends Migration
      */
     public function up()
     {
-        Schema::create('activity', function (Blueprint $table) {
+        Schema::create('coowner', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->string('description')->nullable();
-            $table->integer('order')->nullable();
-            $table->bigInteger('list_id')->unsigned();
-            $table->date('date_end')->nullable();
+            $table->string('aliquot')->nullable();
+            $table->string('saldo')->nullable();
+            $table->integer('code_phone_id')->nullable();
+            $table->string('phone')->nullable();
+            $table->string('email')->nullable();
             $table->softDeletes();
             $table->timestamps();
-
-            $table->foreign('list_id')->references('id')->on('lists');   
-
+    
+            /*$table->foreign('document_type_id')->references('id')->on('document_type'); */
         });
     }
 
@@ -35,6 +35,6 @@ class CreateActivityTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('activity');
+        Schema::dropIfExists('coowner');
     }
 }

@@ -69,24 +69,24 @@ Route::group(['prefix' => 'activity'], function () {
 
 });
 
-Route::group(['prefix' => 'employee'], function () {
+Route::group(['prefix' => 'co-owner'], function () {
 
-	Route::get('/index', 'employeeController@index')->name('employee.index');
-	Route::get('/create', 'employeeController@create')->name('employee.create');
-	Route::get('/detail/{id}', 'employeeController@detail')->name('employee.detail');
-	Route::get('/edit/{id}', 'employeeController@edit')->name('employee.edit');
-	Route::post('/save', 'employeeController@save')->name('employee.save');
-	Route::put('/deleted','employeeController@destroy')->name('employee.deleted');
+	Route::get('/index', 'coownerController@index')->name('co-owner.index');
+	Route::get('/create', 'coownerController@create')->name('co-owner.create');
+	Route::get('/detail/{id}', 'coownerController@detail')->name('co-owner.detail');
+	Route::get('/edit/{id}', 'coownerController@edit')->name('co-owner.edit');
+	Route::post('/store', 'coownerController@store')->name('co-owner.store');
+	Route::put('/deleted','coownerController@destroy')->name('co-owner.deleted');
 });
 
-Route::group(['prefix' => 'entity'], function () {
+Route::group(['prefix' => 'residence'], function () {
 
-	Route::get('/index', 'entityController@index')->name('entity.index');
-	Route::get('/create', 'entityController@create')->name('entity.create');
-	Route::get('/edit/{id}', 'entityController@edit')->name('entity.edit');
-	Route::get('/detail/{id}', 'entityController@detail')->name('entity.detail');
-	Route::post('store', 'entityController@store')->name('entity.store');
-	Route::put('/deleted','entityController@destroy')->name('inventory.deleted');
+	Route::get('/index', 'residenceController@index')->name('residence.index');
+	Route::get('/create', 'residenceController@create')->name('residence.create');
+	Route::get('/edit/{id}', 'residenceController@edit')->name('residence.edit');
+	Route::get('/detail/{id}', 'residenceController@detail')->name('residence.detail');
+	Route::post('store', 'residenceController@store')->name('residence.store');
+	Route::put('/deleted','residenceController@destroy')->name('residence.deleted');
 
 });
 

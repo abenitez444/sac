@@ -4,21 +4,69 @@
 @section('card-subtitle', '')
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header bg-primary">
-    <h5 class="font-weight-bold text-white">Tabla de Inventario</h5>
+  <div class="card-header bg-gradient-info">
+    <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      {!! $dataTable->table(['class' => 'table table-bordered table-hover text-center w-100'], true) !!} 
-    </div>
+      <table id="co-ownerTable" class="table table-bordered table-hover" data-order='[[ 0, "desc" ]]' data-page-length='10'>
+        <thead>
+          <tr class="text-center">
+            <th><b>Nombre residencia</b></th>
+            <th><b>Tipo vivienda</b></th>
+            <th><b>Tipo estructura</b></th>
+            <th><b>Número/letra</b></th>
+            <th><b>Nombre propietario</b></th>
+            <th><b>Teléfonos</b></th>
+            <th><b>Correo electrónico</b></th>
+            <!--<th><b>Sintesis curricular</b></th>-->
+            <th><b>Opciones</b></th>
+          </tr>
+        </thead>
+        <tbody>
+          @foreach($coowner as $owner)
+          <tr class="text-center">
+            <td>{{$owner->name}}</td>
+            <td>{{$owner->aliquot}}</td>
+            <td>{{$owner->saldo}}</td>
+
+           @isset($owner->phone)
+            <td>({{$owner->CodePhone->option}})-{{$owner->phone}}</td> 
+           @else 
+            <td>No disponible</td>
+           @endisset
+
+           @isset($owner->email)
+            <td>{{$owner->email}}</td>
+           @else
+            <td>No disponible</td>
+           @endisset
+            <!--<td>{{$owner->curriculum}}</td>-->
+            <td>
+              <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCo-owner" data-toggle="modal" data-target="#modal-detailCo-owner" data-whatever="{{$owner->id}}">
+                <b class="radiusV fa fa-eye"></b>
+              </a>
+              <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createCo-owner" data-whatever="{{$owner->id}}">
+                <b class="radiusM fa fa-edit"></b>
+              </a>
+              <a href="#" class="icono" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
+                <b class="radiusM fa fa-trash"></b>
+              </a>
+            </td> 
+          </tr>
+          @endforeach
+        </tbody>
+      </table>
+    </div>    
   </div>
 </div>
+
 @include('inventory.detail')
 @endsection
 
 @section('js')
 <script src="/vendor/datatables/buttons.server-side.js"></script>
-	{!! $dataTable->scripts() !!}
+
 
 <!--Details of inventory in modal -->
 <script>

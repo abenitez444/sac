@@ -1,12 +1,46 @@
+
+.checkbox{
+  color:#636363 !important;
+  background-color: #636363 !important;
+}
+
+.fa-eye:hover{
+  background: #4e73df;
+  border-radius: 40px;
+  width: 1.4em;
+  height: 1em;
+  color:white;
+}
+
+.fa-edit:hover{
+  background: #f6c23e;
+  border-radius: 20px;
+  width: 1.5em;
+  height: 1.1em;
+  color:white;
+}
+
+.fa-trash:hover{
+  background: #e74a3b;
+  border-radius: 20px;
+  width: 1.4em;
+  height: 1.1em;
+  color:white;
+}
+
+.icono{
+  color:#313131;
+}
+
 .inputWithIcon input[type="text"] {
-  padding-left: 42px;
+  padding-left: 45px;
 }
 .inputWithIcon textarea {
-  padding-left: 40px;
+  padding-left: 45px;
 }
 
 .inputWithIcon select {
-  padding-left: 40px;
+  padding-left: 45px;
 }
 
 .inputWithIcon {
@@ -29,7 +63,7 @@
 }
 
 .inputWithIcon input[type="text"]:focus + i {
-  color: #4E73DF !important;
+  color: #2EA1B2 !important;
 }
 
 .inputWithIcon select:focus + i + p{
@@ -43,7 +77,7 @@
 }
 
 .inputWithIcon textarea:focus + i {
-  color: #4E73DF;
+  color: #2EA1B2;
 }
 
 .inputWithIcon select:focus + i + p{
@@ -52,7 +86,7 @@
 }
 
 .inputWithIcon select:focus + i {
-  color: #4E73DF;
+  color: #2EA1B2;
 }
 
 input[type="text"] {
@@ -78,13 +112,13 @@ input[type="text"] {
 }  
 
 .element-focus:focus {
-   border-color: #4E73DF;
-   box-shadow: 0 0 8px 0 #4E73DF;
+   border-color: #2EA1B2;
+   box-shadow: 0 0 8px 0 #2EA1B2;
 }
 
 input[type="text"]:focus {
-  border-color: #4E73DF;
-  box-shadow: 0 0 8px 0 #4E73DF;
+  border-color: #2EA1B2;
+  box-shadow: 0 0 8px 0 #2EA1B2;
 }
 
 .campo-obligatorio{
@@ -101,5 +135,16 @@ input[type="text"]:focus {
   height: 10vh;
   border-radius: 50%;
   margin-top: -40px;
+
+}
+
+/* Class hidden in switches */
+.m-hidden{
+    display: none;
+}
+
+.img-delete2{
+  width: 50px;
+  height: 50px;
 
 }

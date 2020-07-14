@@ -3,71 +3,64 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
 @endsection
-@section('card-title', 'Consulta de Entes')
+@section('card-title', 'Consulta')
 @section('card-button')
-<div class="d-none d-sm-inline-block">
-  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-newEntity" data-toggle="modal" data-target="#modal-createEntity">
+<div class="d-none d-sm-inline-block ">
+  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner">
     <span class="icon text-white-50">
-      <i class="fas fa-plus font-weight-bold mt-1"></i>
+      <i class="fas fa-plus font-weight-bold"></i>
     </span>
-    <span class="text font-weight-bold"> Registrar ente</span>
+    <span class="text font-weight-bold"> Registrar copropetario</span>
   </a>
 </div>
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header bg-primary">
-    <h5 class="font-weight-bold text-white">Lista de ente</h5>
+  <div class="card-header bg-gradient-info">
+    <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
     <div class="table-responsive">
-      <table id="entityTable" class="table table-bordered table-hover" data-order='[[ 0, "desc" ]]' data-page-length='10'>
+      <table id="co-ownerTable" class="table table-bordered table-hover" data-order='[[ 0, "desc" ]]' data-page-length='10'>
         <thead>
           <tr class="text-center">
-            <th><b>Nombre de ente</b></th>
-            <th><b>Identificación</b></th>
+            <th><b>Nombre y apellido</b></th>
+            <th><b>Alícuota</b></th>
+            <th><b>Saldo</b></th>
+            <th><b>Teléfonos</b></th>
             <th><b>Correo electrónico</b></th>
-            <th><b>Página web</b></th>
-            <th><b>Dirección</b></th>
+            <!--<th><b>Sintesis curricular</b></th>-->
             <th><b>Opciones</b></th>
           </tr>
         </thead>
         <tbody>
-          @foreach($entity as $ent)
+          @foreach($coowner as $owner)
           <tr class="text-center">
-             <td>{{$ent->name}}</td> 
-            @isset($ent->document_type_id)
-             <td>{{$ent->Type->option}}-{{$ent->identity}}</td>
-            @else
-             <td>No disponible</td>
-            @endisset
+            <td>{{$owner->name}}</td>
+            <td>{{$owner->aliquot}}</td>
+            <td>{{$owner->saldo}}</td>
 
-            @isset($ent->email)
-             <td>{{$ent->email}}</td>
-            @else
-             <td>No disponible</td>
-            @endisset
+           @isset($owner->phone)
+            <td>({{$owner->CodePhone->option}})-{{$owner->phone}}</td> 
+           @else 
+            <td>No disponible</td>
+           @endisset
 
-            @isset($ent->web)
-             <td>{{$ent->web}}</td>
-            @else
-             <td>No disponible</td>
-            @endif
-
-            @isset($ent->addres)
-             <td>{{$ent->addres}}</td>
-            @else
-             <td>No disponible</td>
-            @endisset
-             <td>
-              <a href="detail/{{$ent->id}}" class="icono" title="Visualizar" id="btn-detailEntity" data-toggle="modal" data-target="#modal-detailEntity" data-whatever="{{$ent->id}}">
+           @isset($owner->email)
+            <td>{{$owner->email}}</td>
+           @else
+            <td>No disponible</td>
+           @endisset
+            <!--<td>{{$owner->curriculum}}</td>-->
+            <td>
+              <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCo-owner" data-toggle="modal" data-target="#modal-detailCo-owner" data-whatever="{{$owner->id}}">
                 <b class="radiusV fa fa-eye"></b>
               </a>
-              <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createEntity" data-whatever="{{$ent->id}}">
+              <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createCo-owner" data-whatever="{{$owner->id}}">
                 <b class="radiusM fa fa-edit"></b>
               </a>
-              <a href="#" class="icono" title="Eliminar" onclick="deletedEntity('{{$ent->id}}')">
+              <a href="#" class="icono" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
                 <b class="radiusM fa fa-trash"></b>
               </a>
             </td> 
@@ -79,38 +72,35 @@
   </div>
 </div>
 
-@include('entity.store')
-
+@include('coowner.store')
+@include('coowner.detail')
 @endsection
 
-@include('entity.detail')
-
 @section('js')
-
 <script type="text/javascript">
-  //Register entity in modal 
+  //Register employee in modal 
   $(document).ready(function(){
     var modal = $(this)
 
-    var table = $('#entityTable').DataTable({
+    var table = $('#co-ownerTable').DataTable({
     "language": {
       "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
       },
     });
 
-    $('#send-entity').click(function(e){
-      var data = $("#entity-form").serialize();
+    $('#send-co-owner').click(function(e){
+      var data = $("#co-owner-form").serialize();
       $.ajax({
-        url: '{{ route('entity.store') }}',
+        url: '{{ route('co-owner.store') }}',
         type: 'POST',
         dataType: 'json',
         data: data,
         //Success
       }).done(function() {
-        $('#modal-createEntity').modal('hide')
+        $('#modal-createEmployee').modal('hide')
         Swal.fire({
           icon: 'success',
-          title: "¡Solicitud de ente se guardó exitosamente!",
+          title: "¡Solicitud de copropetario se guardó exitosamente!",
           showConfirmButton: true,
           timer: 3000
         }).then((result) => {
@@ -122,7 +112,7 @@
       }).fail(function(msj) {
         Swal.fire({
           icon: 'error',
-          title: "No se realizo el registro del ente!",
+          title: "No se realizo el registro del empleado!",
           showConfirmButton: false,
           timer: 2000
         })
@@ -138,14 +128,14 @@
       });
       
     })
-    //Edit entity in modal 
-      $('#modal-createEntity').on('show.bs.modal', function (event) {
+    //Edit employee in modal 
+      $('#modal-createCo-owner').on('show.bs.modal', function (event) {
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
       if(id){
 
         $.ajax({
-          url: '{{ url('/entity/edit') }}/'+id,
+          url: '{{ url('/co-owner/edit') }}/'+id,
           type: 'GET',
           dataType: 'json',
         })
@@ -153,11 +143,11 @@
           modal.find('.modal-title')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name').val(data.name)
-          modal.find('.modal-body #document_type_id').val(data.document_type_id)
-          modal.find('.modal-body #identity').val(data.identity)
+          modal.find('.modal-body #aliquot').val(data.aliquot)
+          modal.find('.modal-body #saldo').val(data.saldo)
+          modal.find('.modal-body #code_phone_id').val(data.code_phone_id)
+          modal.find('.modal-body #phone').val(data.phone)
           modal.find('.modal-body #email').val(data.email)
-          modal.find('.modal-body #web').val(data.web)
-          modal.find('.modal-body #addres').val(data.addres)
         })
         .fail(function() {
           console.log("error");
@@ -166,49 +156,50 @@
     })
   })
 </script>
-<!--Details of entity in modal -->
+<!--Details of empleado in modal -->
 <script>
-  $('#modal-detailEntity').on('show.bs.modal', function (event) {
+  $('#modal-detailCo-owner').on('show.bs.modal', function (event) {
       var modal = $(this)
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
       if(id){
 
         $.ajax({
-          url: '{{ url('/entity/detail') }}/'+id,
+          url: '{{ url('/co-owner/detail') }}/'+id,
           type: 'GET',
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Detalle de ente ')
-          modal.find('.modal-body #id').text(data.id)
+          modal.find('.modal-title').text(' Perfil de empleado ')
+          modal.find('.modal-body #id').val(data.id)
+          modal.find('.modal-body #avatar').val(data.avatar)
           modal.find('.modal-body #name').text(data.name)
-          if(data.document_type_id){
-            modal.find('.modal-body #document_type_id').text(data.type.option)
+          if(data.document_type){
+            modal.find('.modal-body #document_type_id').text(data.document_type.option)
           }else{
             modal.find('.modal-body #document_type_id').text('')
           }
-          if(data.identity){
-            modal.find('.modal-body #identity').text(data.identity)
+          if(data.ci){
+            modal.find('.modal-body #ci').text(data.ci)
           }else{
-            modal.find('.modal-body #identity').text('No disponible')
+            modal.find('.modal-body #ci').text('No disponible')
+          }
+          if(data.code_phone){
+            modal.find('.modal-body #code_phone_id').text(data.code_phone.option)
+          }else{
+            modal.find('.modal-body #code_phone_id').text('')
+          }
+          if(data.phone){
+            modal.find('.modal-body #phone').text(data.phone)
+          }else{
+            modal.find('.modal-body #phone').text('No disponible')
           }
           if(data.email){
             modal.find('.modal-body #email').text(data.email)
           }else{
             modal.find('.modal-body #email').text('No disponible')
           }
-          if(data.web){
-            modal.find('.modal-body #web').text(data.web)
-          }else{
-            modal.find('.modal-body #web').text('No disponible')
-          }
-          if(data.addres){
-            modal.find('.modal-body #addres').text(data.addres)
-          }else{
-            modal.find('.modal-body #addres').text('No disponible')
-          }
-         
+            modal.find('.modal-body #cv').val(data.curriculum)
         })
         .fail(function() {
           console.log("error");
@@ -216,9 +207,9 @@
       }
     })
 </script>
-<!--Delete entity-->
+<!--Delete empleado -->
 <script>
-  function deletedEntity (id){
+  function deletedEmployee (id){
 
   const swalWithBootstrapButtons = Swal.mixin({
     buttonsStyling: true
@@ -226,7 +217,7 @@
 
   swalWithBootstrapButtons.fire({
     title: '¿Estas Seguro?',
-    text: "¡Deseas eliminar este empleado!",
+    text: "¡Deseas eliminar este copropietario!",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonText: 'Aceptar',
@@ -235,7 +226,7 @@
   }).then((result) => {
     if (result.value) {
       $.ajax({
-        url: '{{ url('/entity/deleted') }}',
+        url: '{{ route('co-owner.deleted') }}',
         type: 'PUT',
         data: {
         _token: '{{ csrf_token() }}',
@@ -244,7 +235,7 @@
         }).done(function(id) {
         Swal.fire({
           icon: 'success',
-          title: "Ente eliminado exitosamente!",
+          title: "¡Copropietario eliminado exitosamente!",
           showConfirmButton: true,
           timer: 3000
         }).then((result) => {
@@ -267,7 +258,7 @@
     ) {
       swalWithBootstrapButtons.fire({
         title: 'Cancelado',
-        text: 'El ente no fue eliminado',
+        text: 'El copropetario no fue eliminado',
         icon: 'error',
         confirmButtonText: 'Aceptar'
       })

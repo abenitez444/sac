@@ -21,10 +21,10 @@ class StatusSeeder extends Seeder
             array('Aprobado')
         );  
 
-        foreach($status as $statu){
+        /* foreach($status as $statu){
             DB::table('status_project')->insert([
         		'description' => $statu[0]
             ]);    
-        }
+        } */
     }
 }

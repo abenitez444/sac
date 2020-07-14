@@ -1,5 +1,5 @@
 
-<div class="modal fade" id="modal-detailEmployee" tabindex="-1" role="dialog" aria-labelledby="modal-detailEmployee"
+<div class="modal fade" id="modal-detailCo-owner" tabindex="-1" role="dialog" aria-labelledby="modal-detailCo-owner"
   aria-hidden="true">
   <div class="modal-dialog" role="employee">
     <div class="modal-content" style="border-radius: 10px;">
@@ -11,16 +11,11 @@
       </div>
       <div class="modal-body">
         <div class="row">
-          <div class="sidebar-brand-text mx-3 push ml-3">
-            <i class="fas fa-atlas text-primary sidebar-brand-icon rotate-n-15"></i> <b class="text-primary"> SIGESPRO</b>
-          </div>       
           <div class="col-lg-12 col-md-12 mb-lg-0 mb-5">
-            <div class="avatar mx-auto white">
-              <img src="{{asset('/img/avatar.png')}}" class="rounded-circle img-fluid" style=" border: 2px solid #aaa;">
-            </div>
             <div class="card-body">
+            <h4 class="font-weight-bold text-center mb-4"></span>Estado de cuenta del copropetario</h4>
               <div class="col-md-12 mt-3">
-                 <h4 class="font-weight-bold text-center mb-4"><span id="name"></span></h4>
+                 <h5 class="font-weight-bold text-center mb-4"><span id="name"></span></h5>
                  <i class="fas fa-id-card text-primary fa-lg" title="Documento de identidad."></i> <span  id="document_type_id" class="font-weight-bold mt-3"></span>-<span id="ci" class="font-weight-bold mt-3"></span> 
               </div>
             <hr>

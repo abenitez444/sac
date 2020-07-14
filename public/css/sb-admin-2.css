@@ -3435,8 +3435,8 @@ input[type="button"].btn-block {
 
 .custom-control-input:checked ~ .custom-control-label::before {
   color: #fff;
-  border-color: #4e73df;
-  background-color: #4e73df;
+  border-color: #1cc88a;
+  background-color: #1cc88a;
 }
 
 .custom-control-input:focus ~ .custom-control-label::before {
@@ -3878,6 +3878,7 @@ input[type="button"].btn-block {
 
 .nav-link:hover, .nav-link:focus {
   text-decoration: none;
+  font-weight: bold;
 }
 
 .nav-link.disabled {

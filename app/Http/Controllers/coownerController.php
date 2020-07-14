@@ -3,54 +3,52 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Employee;
-use App\Models\DocumentType;
+use App\Models\Coowner;
 use App\Models\CodePhone;
 use Illuminate\Support\Facades\Validator;
 
-class employeeController extends Controller
+class coownerController extends Controller
 {
     public function index()
     {
-    	$employee = Employee::all();
-        $typeDocument = DocumentType::all();
+    	$coowner = Coowner::all();
         $codePhone = CodePhone::all();
     	
-        return view('employee.index', compact('employee', 'typeDocument', 'codePhone'));
+        return view('coowner.index', compact('coowner', 'codePhone'));
     }
 
     public function edit($id)
     {
-    	$employee = Employee::find($id);
+    	$coowner = Coowner::find($id);
 
-    	return response()->json($employee);
+    	return response()->json($coowner);
     }
 
     public function detail($id)
     {   
-        $employee = Employee::with('DocumentType', 'CodePhone')->where('employee.id', $id)->first();
+        $coowner = Coowner::with('CodePhone')->where('coowner.id', $id)->first();
 
-        return response()->json($employee);
+        return response()->json($coowner);
     }
 
-    public function save(Request $request) 
+    public function store(Request $request) 
     {   
         $this->employeeValidate($request);
         
 	 	$id = $request->input('id');
-        $employee = Employee::firstOrNew(['id' => $id]);
-        $employee->fill($request->all());
-        $employee->save();
+        $coowner = Coowner::firstOrNew(['id' => $id]);
+        $coowner->fill($request->all());
+        $coowner->save();
         
         return \Response::json(['message' => 'Usuario ya registrado'], 200);
     }
 
     public function destroy(Request $request)
     {   
-        $employee = Employee::find($request->id);
+        $coowner = Coowner::find($request->id);
         
-        if ($employee != null) {
-            $employee->delete();
+        if ($coowner != null) {
+            $coowner->delete();
             
             return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
         }
@@ -77,5 +75,4 @@ class employeeController extends Controller
             ]
         );
     }
- 
 }
