@@ -8,16 +8,16 @@
 <div class="d-none d-sm-inline-block ">
   <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner">
     <span class="icon text-white-50">
-      <i class="fas fa-plus font-weight-bold"></i>
+      <i class="fas fa-plus font-weight-bold" title="Registrar Copropetario."></i>
     </span>
-    <span class="text font-weight-bold"> Registrar copropetario</span>
+    <span class="text font-weight-bold"> Registrar</span>
   </a>
 </div>
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header bg-gradient-info">
+  <div class="card-header bg-gradient-dark">
     <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
@@ -25,11 +25,14 @@
       <table id="co-ownerTable" class="table table-bordered table-hover" data-order='[[ 0, "desc" ]]' data-page-length='10'>
         <thead>
           <tr class="text-center">
-            <th><b>Nombre y apellido</b></th>
+            <th><b>Nombres</b></th>
+            <th><b>Residencia</b></th>
+            <th><b>Tipo</b></th>
+            <th><b>Estructura</b></th>
+            <th><b>N°/Letra</b></th>
             <th><b>Alícuota</b></th>
-            <th><b>Saldo</b></th>
             <th><b>Teléfonos</b></th>
-            <th><b>Correo electrónico</b></th>
+            <th><b>Correo </b></th>
             <!--<th><b>Sintesis curricular</b></th>-->
             <th><b>Opciones</b></th>
           </tr>
@@ -38,14 +41,36 @@
           @foreach($coowner as $owner)
           <tr class="text-center">
             <td>{{$owner->name}}</td>
-            <td>{{$owner->aliquot}}</td>
-            <td>{{$owner->saldo}}</td>
+            <td>{{$owner->nameResidence->name_residence}}</td>
+            @if($owner->type_residence_id == 1)
+            <td>Apartamento</td>
+            @elseif($owner->type_residence_id == 2)
+            <td>Thownhouse</td>
+            @else
+            <td>Casa</td>
+            @endif
+          
+            @if($owner->type_structure_id == 1 )
+              <td>Central</td> 
+            @endif
+            @if($owner->type_structure_id == 2 )
+              <td>Esquina</td> 
+            @endif
+            @if($owner->type_structure_id == 3 )
+              <td>Pen House</td> 
+            @endif
+            @if($owner->type_structure_id !=  1 && $owner->type_structure_id !=  2 && $owner->type_structure_id !=  3)
+              <td>{{$owner->type_structure_id}}</td> 
+            @endif
 
-           @isset($owner->phone)
-            <td>({{$owner->CodePhone->option}})-{{$owner->phone}}</td> 
+            <td>{{$owner->number_letters}}</td>
+            <td>{{$owner->aliquot}}%</td>
+
+           @if($owner->code_phone_id && $owner->phone)
+            <td>{{$owner->CodePhone->option}}{{$owner->phone}}</td> 
            @else 
             <td>No disponible</td>
-           @endisset
+           @endif
 
            @isset($owner->email)
             <td>{{$owner->email}}</td>
@@ -57,7 +82,7 @@
               <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCo-owner" data-toggle="modal" data-target="#modal-detailCo-owner" data-whatever="{{$owner->id}}">
                 <b class="radiusV fa fa-eye"></b>
               </a>
-              <a href="#" class="icono" title="Editar" data-toggle="modal" data-target="#modal-createCo-owner" data-whatever="{{$owner->id}}">
+              <a href="edit/{{$owner->id}}" class="icono" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
                 <b class="radiusM fa fa-edit"></b>
               </a>
               <a href="#" class="icono" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
@@ -73,20 +98,28 @@
 </div>
 
 @include('coowner.store')
+@include('coowner.edit')
 @include('coowner.detail')
 @endsection
 
 @section('js')
-<script type="text/javascript">
+
+<script src="{{ asset('js/selectDependent.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('js/Spanish.json') }}"></script>
+<script>
+  //Mask Jquery Aliquot
+$(document).ready(function(){
+  $('.aliquot').mask('09,909.099.099');
+});
+</script>
+
+<script>
   //Register employee in modal 
   $(document).ready(function(){
     var modal = $(this)
 
-    var table = $('#co-ownerTable').DataTable({
-    "language": {
-      "url": "//cdn.datatables.net/plug-ins/1.10.15/i18n/Spanish.json"
-      },
-    });
+    var table = $('#co-ownerTable').DataTable();
 
     $('#send-co-owner').click(function(e){
       var data = $("#co-owner-form").serialize();
@@ -97,7 +130,7 @@
         data: data,
         //Success
       }).done(function() {
-        $('#modal-createEmployee').modal('hide')
+        $('#modal-createCo-owner').modal('hide')
         Swal.fire({
           icon: 'success',
           title: "¡Solicitud de copropetario se guardó exitosamente!",
@@ -128,33 +161,63 @@
       });
       
     })
+  })
+</script>
+<!--Edit of co-owner in modal -->
+<script>
     //Edit employee in modal 
-      $('#modal-createCo-owner').on('show.bs.modal', function (event) {
+    $("#modal-editResidence").appendTo("body");
+      $('#modal-editCoowner').on('show.bs.modal', function (event) {
+      var modal = $(this)
       var button = $(event.relatedTarget) 
-      var id = button.data('whatever') 
+      var id = button.data('whatever')  
       if(id){
 
         $.ajax({
           url: '{{ url('/co-owner/edit') }}/'+id,
           type: 'GET',
           dataType: 'json',
-        })
-        .done(function(data) {
+        }).done(function(data) {
+          console.log(data)
           modal.find('.modal-title')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name').val(data.name)
+          modal.find('.modal-body #name_residence_id').val(data.name_residence_id)
+          modal.find('.modal-body #type_residence_id').val(data.type_residence_id)
+
+          if (data.type_structure_id == 1) {
+            modal.find('.modal-body #type_structure_id').append("<option value='1'>Central</option>");
+          }
+          if(data.type_structure_id == 2)  {
+            modal.find('.modal-body #type_structure_id').append("<option value='2'>Esquina</option>");
+          }
+          if(data.type_structure_id == 3)  {
+            modal.find('.modal-body #type_structure_id').append("<option value='3'>Pen House</option>");
+          }
+          if (data.type_structure_id != 1 && data.type_structure_id != 2 && data.type_structure_id != 3) {
+            modal.find('.modal-body #type_structure_id').append("<option value='"+data.id+ "'> "+data.type_structure_id+"</option>");
+          }
+          modal.find('.modal-body #number_letters').val(data.number_letters)
           modal.find('.modal-body #aliquot').val(data.aliquot)
-          modal.find('.modal-body #saldo').val(data.saldo)
           modal.find('.modal-body #code_phone_id').val(data.code_phone_id)
           modal.find('.modal-body #phone').val(data.phone)
           modal.find('.modal-body #email').val(data.email)
+
         })
         .fail(function() {
           console.log("error");
         });
       }
-    })
+      $('#close').click(function(){
+        location.reload()
+      });
+      $(document).keyup(function(e) {
+      if (e.key === "Escape") {
+        location.reload() 
+      }
+    });
   })
+ 
 </script>
 <!--Details of empleado in modal -->
 <script>

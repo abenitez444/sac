@@ -1,15 +1,15 @@
-<div class="modal fade" id="modal-createCo-owner" tabindex="-1" role="dialog" aria-labelledby="modal-createCo-owner"
+<div class="modal fade" id="modal-editCoowner" tabindex="-1" role="dialog" aria-labelledby="modal-editCoowner"
   aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="co-owner">
+  <div class="modal-dialog modal-lg" role="editCo-owner">
     <div class="modal-content">
       <div class="modal-header bg-gradient-dark"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
-        <h5 class="modal-title text-white" id="ModalLabel">Copropetario</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <h5 class="modal-title text-white" id="ModalLabel">Editar: Copropetario</h5>
+        <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>
       </div>
       <div class="modal-body">
-        <form id="co-owner-form" method="POST">
+        <form id="editCoowner-form">
           <input type="hidden" class="form-control" id="id" name="id">
           @csrf
           <div class="avatar mx-auto text-center">
@@ -20,7 +20,7 @@
             <div class="col-sm-6 col-md-6 col-lg-7">
               <label for="name"><b>Nombre y Apellido:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Nombre y apellido" onkeypress="return letters(event)" maxlength="60">
+                <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Nombre y apellido" value="{{ old('name') }}" onkeypress="return letters(event)" maxlength="60">
                 <i class="fas fa-address-card fa-lg" title="Ingrese el nombre y apellido del copropetario."></i>
                 <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
@@ -45,8 +45,11 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
              <label for="type_residence_id"><b>Tipo residencia:</b></label>
               <div class="inputWithIcon">
-                <select id="type_residence_id" name="type_residence_id" type="text" class="form-control custom-select @error('type_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_residence_id') }}" disabled>
-                    <option value="" disabled selected>Seleccione</option>
+                <select id="type_residence_id" name="type_residence_id" type="text" class="form-control custom-select @error('type_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_residence_id') }}">
+                  <option value="0" disabled selected>Opción</option>
+                  <option value="1">Apartamento</option>
+                  <option value="2">Thownhouse</option>
+                  <option value="3">Casa</option>
                 </select>
                 <i class="fas fa-store-alt fa-lg font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i>
                 <p class="campo-obligatorio">* Campo obligatorio</p>
@@ -55,8 +58,7 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
              <label for="type_structure_id"><b>Estructura:</b></label>
               <div class="inputWithIcon">
-                <select id="type_structure_id" name="type_structure_id" type="text" class="form-control custom-select @error('type_structure_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_structure_id') }}" disabled>
-                    <option value="0" disabled selected>Seleccione. . .</option>
+                <select id="type_structure_id" name="type_structure_id" type="text" class="form-control custom-select @error('type_structure_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_structure_id') }}">
                 </select>
                 <i class="fa fa-university fa-lg font-weight-bold" title="Seleccione el tipo de estructura de la residencia del copropetario."></i>
                  <p class="campo-obligatorio">* Campo obligatorio</p>
@@ -114,7 +116,7 @@
         </form>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" id="send-co-owner" class="btn btn-dark text-white rounded" title="Guardar copropetario"><i class="fas fa-save"></i><b> Guardar</b></button>
+        <button type="button" id="edit-co-owner" class="btn btn-dark text-white rounded" title="Guardar copropetario"><i class="fas fa-save"></i><b> Guardar</b></button>
       </div>
     </div>
   </div>

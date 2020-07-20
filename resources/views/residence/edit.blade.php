@@ -1,4 +1,3 @@
-
 <div class="modal fade" id="modal-editResidence" tabindex="-1" role="dialog" aria-labelledby="modal-editResidence"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="residence">
@@ -11,14 +10,19 @@
       </div>
       <div class="modal-body">
         <form id="editResidence-form" method="POST">
-          <input type="hidden" class="form-control" id="id" name="id" value="{{ $res->id }}" >
+          <input type="hidden" class="form-control" id="id" name="id">
           @csrf
+          <div class="row">
+            <div class="sidebar-brand-text mx-3 push ml-3">
+              <i class="fas fa-atlas text-dark sidebar-brand-icon rotate-n-15"></i> <b class="text-dark"> GC-GCA</b>
+            </div>
+          </div>
           <div class="row justify-content-center">
             <div class="col-sm-8 col-md-8 col-lg-8">
               <label for="name_residence"><b>Conjunto residencial:</b></label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('name_residence') ? ' is-invalid' : '' }}" id="name_residence" name="name_residence" placeholder="Nombre de residencia" maxlength="60">
-                <i class="fas fa-building font-weight-bold" title="Ingrese el nombre del conjunto residencial."></i>
+                <i class="fas fa-building fa-lg font-weight-bold" title="Ingrese el nombre del conjunto residencial."></i>
                 <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
             </div>
@@ -34,7 +38,7 @@
                       <option value="3">Casa</option>
                    
                   </select>
-                  <i class="fas fa-hand-pointer fa-lg" title="Introduzca el tipo de documento."></i>
+                  <i class="fas fa-hand-pointer fa-lg" title="Seleccione el tipo de residencia."></i>
                   <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
             </div>
@@ -90,16 +94,14 @@
                       <option value="0" disabled selected></option>
                       <option value="J">J</option>
                   </select>
-                  <i class="fas fa-hand-pointer fa-lg" title="Introduzca el tipo de documento."></i>
-                  <p class="campo-obligatorio">* Campo obligatorio</p>
+                  <i class="fas fa-hand-pointer fa-lg" title="Seleccione el tipo de documento."></i>
               </div>
             </div>
-            <div class="col-sm-5 col-md-5 col-lg-5">
+            <div class="col-sm-5 col-md-5 col-lg-5 form-group">
               <label for="number_rif"><b>Número (RIF):</b></label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('number_rif') ? ' is-invalid' : '' }}" id="number_rif" name="number_rif" placeholder="N° - Ej:123456789" maxlength="60">
-                <i class="fas fa-building font-weight-bold" title="Ingrese rif de la residencia."></i>
-                <p class="campo-obligatorio">* Campo obligatorio</p>
+                <i class="fas fa-file-invoice fa-lg" aria-hidden="true" title="Ingrese número de RIF de la residencia."></i>
               </div>
             </div>
           </div>
@@ -122,22 +124,29 @@
                   }
               </script>
           </div>-->
-         
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mt-3">
+            <div class="col-sm-6 col-md-6 col-lg-6 form-group">
+              <label for="email_residence"><b>Correo electrónico:</b></label>
+              <div class="inputWithIcon">
+                <input type="text" class="form-control{{ $errors->has('email_residence') ? ' is-invalid' : '' }}" id="email_residence" name="email_residence" value="{{ $inventory->email_residence ?? '' }}" placeholder="Ej:residencia@gmail.com" maxlength="80">
+                <i class="fas fa-envelope fa-lg font-weight-bold" title="Ingrese correo electrónico de la residencia."></i>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center mt-3">
             <div class="col-sm-6 col-md-8 col-lg-8">
               <div class="form-group">
                 <label for="addres"><b>Dirección:</b></label>
                 <div class="inputWithIcon">
-                  <textarea id="addres" type="text" class="form-control{{ $errors->has('addres') ? ' is-invalid' : '' }} textarea-gris element-focus" name="addres" value="{{ $inventory->addres ?? '' }}" placeholder="Ingrese dirección. . .">{{ $inventory->addres ?? '' }}</textarea>
-                  <i class="fas fa-list-alt fa-lg" title="Indique la dirección del ente."></i>
+                  <textarea id="addres" type="text" class="form-control{{ $errors->has('addres') ? ' is-invalid' : '' }} textarea-gris element-focus" name="addres" value="{{ $inventory->addres ?? '' }}" placeholder="Ingrese dirección. . ."></textarea>
+                  <i class="fas fa-list-alt fa-lg" title="Ingrese la dirección de la residencia."></i>
                 </div>
               </div>
             </div>
           </div>
         </form>
       <div class="modal-footer justify-content-center">
-        <button type="button" id="send-editResidence" class="btn btn-info" ><i class="fas fa-share-square"></i><b> Guardar</b></button>
-        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fas fa-window-close"></i>  <b>Cerrar</b></button>
+        <button type="button" id="send-editResidence" class="btn btn-info" title="Editar residencia."><i class="fas fa-share-square"></i><b> Editar</b></button>
       </div>
     </div>
   </div>

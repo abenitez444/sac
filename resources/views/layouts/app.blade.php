@@ -18,6 +18,8 @@
 {{--   <link rel="stylesheet" href="{{ asset('css/sweetalert2.min.css') }}"> --}}
   <link rel="stylesheet" href="{{ asset('css/toastr.min.css') }}">
   <link rel="stylesheet" href="{{ asset('css/loading.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+
   @yield('css')
 
 </head>
@@ -69,6 +71,7 @@
 <script src="{{ asset('js/loading.js') }}"></script>
 <script src="{{asset('/js/function.js')}}"></script>
 <script src="{{asset('/js/validate-Form.js')}}"></script>
+<script src="{{ asset('js/select2.min.js') }}"></script>
 
 
 @yield('js')

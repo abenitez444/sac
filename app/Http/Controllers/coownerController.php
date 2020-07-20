@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coowner;
+use App\Models\Residence;
 use App\Models\CodePhone;
 use Illuminate\Support\Facades\Validator;
 
@@ -12,16 +13,37 @@ class coownerController extends Controller
     public function index()
     {
     	$coowner = Coowner::all();
+        $residence = Residence::all();
         $codePhone = CodePhone::all();
-    	
-        return view('coowner.index', compact('coowner', 'codePhone'));
+       
+
+        return view('coowner.index', compact('coowner', 'residence', 'codePhone'));
+    }
+
+   
+    public function nameResidence (Request $request, $id) 
+    {   
+        $data = Residence::where('id', $id)->get();
+       
+        return response()->json($data);
+    }
+
+    public function typeStructure (Request $request, $id) 
+    {   
+        
+        $query = Residence::where('id', $id)->get();
+        
+        $data = array($query);
+
+        echo json_encode($data);
+       
     }
 
     public function edit($id)
     {
-    	$coowner = Coowner::find($id);
+    	$data = Coowner::find($id);
 
-    	return response()->json($coowner);
+        return response()->json($data);
     }
 
     public function detail($id)
@@ -40,7 +62,7 @@ class coownerController extends Controller
         $coowner->fill($request->all());
         $coowner->save();
         
-        return \Response::json(['message' => 'Usuario ya registrado'], 200);
+        return \Response::json($coowner);
     }
 
     public function destroy(Request $request)
@@ -50,7 +72,7 @@ class coownerController extends Controller
         if ($coowner != null) {
             $coowner->delete();
             
-            return response()->json(['message' => 'El empleado ha sido eliminado exitosamente.']);
+            return response()->json(['message' => 'El copropietario ha sido eliminado exitosamente.']);
         }
     }
 

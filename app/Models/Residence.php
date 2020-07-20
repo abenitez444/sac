@@ -11,10 +11,14 @@ class Residence extends Model
 	
     protected $table = 'residence';
 
- 	protected $fillable = ['name_residence', 'type_residence', 'type_center', 'type_corner', 'type_penhouse', 'type_structure', 'structure', 'type_rif', 'number_rif', 'addres'];
+ 	protected $fillable = ['name_residence', 'type_residence', 'type_center', 'type_corner', 'type_penhouse', 'type_structure', 'structure', 'type_rif', 'number_rif', 'email_residence', 'addres'];
 
  	 //public function Type()
        // {
          //   return $this->belongsTo('App\Models\DocumentType', 'document_type_id');
         //}
+ 	public function typeResidence()
+    {
+        return $this->hasOne('App\Models\Coowner',  'type_residence');
+    }
 }

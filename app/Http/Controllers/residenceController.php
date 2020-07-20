@@ -16,11 +16,9 @@ class residenceController extends Controller
 
     public function edit(Request $request)
     {   
-    
-      $residence = Residence::find($request->id);
+        $residence = Residence::find($request->id);
 
-      return response()->json($residence);
-
+        return response()->json($residence);
     }
 
     public function detail($id)
@@ -32,8 +30,7 @@ class residenceController extends Controller
 
     public function store(Request $request) 
     {   
-        
-        $this->entityValidate($request);
+        $this->residenceValidate($request);
 
 	 	$id = $request->input('id');
         $residence = Residence::firstOrNew(['id' => $id]);
@@ -45,35 +42,35 @@ class residenceController extends Controller
 
     public function destroy(Request $request)
     {   
-            $entity = Residence::find($request->id);
+        $residence = Residence::find($request->id);
+        
+        if ($residence != null) {
+            $residence->delete();
             
-            if ($entity != null) {
-                $entity->delete();
-                
-                return response()->json(['message' => 'La residencia ha sido eliminada exitosamente.']);
-            }
+            return response()->json(['message' => 'La residencia ha sido eliminada exitosamente.']);
+        }
     }
 
-    public function entityValidate($request)
+    public function residenceValidate($request)
     {
          $request->validate (
-
             [
                 'name_residence' =>  'required|max:60|min:2',
                 'type_residence' =>  'required',
                 'type_rif' =>  'nullable',
-                'number_rif' =>    'nullable|digits_between:6,9',
+                'number_rif' =>  'nullable|digits_between:6,9',
                 'addres' =>  'nullable',
+                'email_residence' =>  'nullable|email',
             ], 
 
             [
                 'name_residence.required' => 'Ingrese el nombre de la residencia.',
                 'type_residence.required' => 'Seleccione el tipo de residencia.',
-                'type_rif' => 'Seleccione el tipo de residencia.',
                 'name.max' => 'El nombre de la residencia no debe ser mayor a 60 caracteres.',
                 'name.min' => 'El nombre de la residencia no debe ser menor a 2 caracteres.',
                 'number_rif.digits_between' => 'Introduzca el número de RIF  válido de la residencia.',
-                'addres' => 'Ingres la dirección de la residencia.',
+                'email' => 'Ingrese el correo válido de la residencia.',
+                'addres' => 'Ingrese la dirección de la residencia.',
             ]
         );
     }

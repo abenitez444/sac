@@ -77,6 +77,8 @@ Route::group(['prefix' => 'co-owner'], function () {
 	Route::get('/edit/{id}', 'coownerController@edit')->name('co-owner.edit');
 	Route::post('/store', 'coownerController@store')->name('co-owner.store');
 	Route::put('/deleted','coownerController@destroy')->name('co-owner.deleted');
+	Route::Get('nameResidence/{id}', 'coownerController@nameResidence')->name('nameResidence');
+	Route::Get('typeStructure/{id}', 'coownerController@typeStructure')->name('typeStructure');
 });
 
 Route::group(['prefix' => 'residence'], function () {

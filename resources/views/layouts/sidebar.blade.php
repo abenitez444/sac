@@ -32,7 +32,7 @@
 
   <li class="nav-item">
     <a class="nav-link" href="{{ route('co-owner.index') }}">
-       <i class="fas fa-user fa-lg"></i>
+       <i class="fas fa-users fa-lg"></i>
       <span>Copropietario</span></a>
   </li>
  

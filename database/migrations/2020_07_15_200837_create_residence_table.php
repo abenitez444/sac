@@ -14,7 +14,7 @@ class CreateResidenceTable extends Migration
     public function up()
     {
         Schema::create('residence', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name_residence');
             $table->string('type_residence'); 
             $table->string('type_center')->nullable(); 
@@ -24,6 +24,7 @@ class CreateResidenceTable extends Migration
             $table->string('structure')->nullable(); 
             $table->string('type_rif')->nullable(); 
             $table->string('number_rif')->nullable(); 
+            $table->string('email_residence')->nullable(); 
             $table->string('addres')->nullable(); 
             $table->softDeletes();
             $table->timestamps();

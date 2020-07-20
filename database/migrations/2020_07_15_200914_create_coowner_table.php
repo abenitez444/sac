@@ -14,17 +14,21 @@ class CreateCoownerTable extends Migration
     public function up()
     {
         Schema::create('coowner', function (Blueprint $table) {
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('name');
-            $table->string('aliquot')->nullable();
-            $table->string('saldo')->nullable();
-            $table->integer('code_phone_id')->nullable();
+            $table->unsignedBigInteger('name_residence_id');
+            $table->foreign('name_residence_id')->references('id')->on('residence'); 
+            $table->unsignedBigInteger('type_residence_id');
+            $table->foreign('type_residence_id')->references('id')->on('residence'); 
+            $table->string('number_letters');
+            $table->string('type_structure_id');
+            $table->string('aliquot');
+            $table->unsignedBigInteger('code_phone_id');
+            $table->foreign('code_phone_id')->references('id')->on('code_phone'); 
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->softDeletes();
             $table->timestamps();
-    
-            /*$table->foreign('document_type_id')->references('id')->on('document_type'); */
         });
     }
 

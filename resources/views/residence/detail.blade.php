@@ -5,7 +5,7 @@
     <div class="modal-content">
       <div class="modal-header bg-gradient-dark"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold">Detalle: Conjunto residencial</h5>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" id="closeDetail" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>
       </div>
@@ -41,9 +41,15 @@
                 </p>
               </div>
               <hr>
-              <div class="col-sm-8 col-md-6 col-lg-6">
+              <div class="col-sm-10 col-md-12 col-lg-12">
+                <p class="dark-grey-text "><i class="fas fa-envelope text-dark fa-lg" title="Correo Electrónico de la Residencia."></i>
+                 <b>-</b> <span id="email_residence" class="font-weight-bold"></span>
+                </p>
+              </div>
+              <hr>
+              <div class="col-sm-10 col-md-12 col-lg-12 mr-3">
                 <p class="dark-grey-text "><i class="fas fa-directions text-dark fa-lg" title="Dirección del Conjunto Residencial."></i>
-                  <b>-</b> <span id="addres" class="font-weight-bold"></span>
+                 <b>-</b> <span id="addres" class="font-weight-bold"></span>
                 </p>
               </div>
   	        </div>

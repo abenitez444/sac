@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCodePhoneTable extends Migration
+class CreateMonthTable extends Migration
 {
     /**
      * Run the migrations.
@@ -12,10 +12,10 @@ class CreateCodePhoneTable extends Migration
      * @return void
      */
     public function up()
-    {   
-        Schema::create('code_phone', function (Blueprint $table) {
+    {
+        Schema::create('month', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('option');
+            $table->string('month', 12);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ class CreateCodePhoneTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('code_phone');
+        Schema::dropIfExists('month');
     }
 }

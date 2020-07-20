@@ -5,7 +5,7 @@
 }
 
 .fa-eye:hover{
-  background: #4e73df;
+  background: #1cc88a;
   border-radius: 40px;
   width: 1.4em;
   height: 1em;
@@ -13,7 +13,7 @@
 }
 
 .fa-edit:hover{
-  background: #f6c23e;
+  background: #36b9cc;
   border-radius: 20px;
   width: 1.5em;
   height: 1.1em;
@@ -92,7 +92,6 @@
 input[type="text"] {
   width: 100%;
   border: 2px solid #aaa;
-  border-radius: 60px;
   outline: none;
   box-sizing: border-box;
   transition: 0.3s;
@@ -103,7 +102,7 @@ input[type="text"] {
     width: 100%;
     border: 2px solid #aaa;
     background-color: #F9F4F4;
-    border-radius: 60px;
+    
 }
 
 .textarea-gris {
