@@ -55,7 +55,7 @@ class coownerController extends Controller
 
     public function store(Request $request) 
     {   
-        $this->employeeValidate($request);
+        $this->coownerValidate($request);
         
 	 	$id = $request->input('id');
         $coowner = Coowner::firstOrNew(['id' => $id]);
@@ -76,24 +76,30 @@ class coownerController extends Controller
         }
     }
 
-    public function employeeValidate($request)
+    public function coownerValidate($request)
     {
         $request->validate (
 
             [
                 'name' =>  'required|max:60|min:3',
-                'ci' =>    'nullable|digits_between:6,9',
-                'email' =>  'nullable|email',
+                'name_residence_id' => 'required',
+                'type_residence_id' => 'required',
+                'number_letters' => 'required|max:20|min:1',
+                'type_structure_id' => 'required',
                 'phone' =>  'nullable|digits_between:7,7',
+                'email' =>  'nullable|email',
             ], 
 
             [
-                'name.required' => 'Introduzca nombre y apellido del empleado.',
+                'name.required' => 'Introduzca nombre y apellido del copropietario.',
                 'name.max' => 'El nombre y el apellido del empleado, no debe ser mayor a 60 caracteres.',
                 'name.min' => 'El nombre y el apellido del empleado, debe ser mayor a 3 caracteres.',
-                'ci.digits_between' => 'Introduzca el número de identificación  válido del empleado.',
-                'email.email' => 'Introduzca el correo electrónico válido del empleado.',
-                'phone.digits_between' => 'Introduzca el número de teléfono válido del empleado.',
+                'name_residence_id.required' => 'Seleccione el nombre de la residencia.',
+                'type_residence_id.required' => 'Seleccione el tipo de residencia.',
+                'number_letters.required' => 'Ingrese el número o letra del hogar.',
+                'type_structure_id.required' => 'Seleccione el tipo de estructura.',
+                'phone.digits_between' => 'Ingrese el número de teléfono válido del copropietario.',
+                'email.email' => 'Introduzca el correo electrónico válido del copropietario.',
             ]
         );
     }

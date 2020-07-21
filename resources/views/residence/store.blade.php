@@ -96,7 +96,7 @@
             <div class="col-sm-5 col-md-5 col-lg-5 form-group">
               <label for="number_rif"><b>Número (RIF):</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control{{ $errors->has('number_rif') ? ' is-invalid' : '' }}" id="number_rif" name="number_rif" placeholder="Ej: 020613018" maxlength="60" onkeypress="return numbers(event)">
+                <input type="text" class="form-control{{ $errors->has('number_rif') ? ' is-invalid' : '' }}" id="number_rif" name="number_rif" placeholder="Ej: 020613018" maxlength="10" onkeypress="return numbers(event)">
                 <i class="fas fa-file-invoice fa-lg" aria-hidden="true" title="Ingrese número de RIF de la residencia."></i>
               </div>
             </div>

@@ -29,7 +29,7 @@
               </div>
             <hr>
             <div class="col-sm-10 col-md-12 col-md-12 mt-3">
-                  <i class="fa fa-university fa-lg text-dark font-weight-bold" title="Tipo de estructura de la residencia."></i> <span class="font-weight-bold" id="type_structure_id"></span>
+                  <i class="fa fa-university fa-lg text-dark font-weight-bold" title="Tipo de estructura."></i> <span class="font-weight-bold" id="type_structure_id"></span>
               </div>
             <hr>
             <div class="col-sm-10 col-md-12 col-md-12 mt-3">
@@ -37,7 +37,7 @@
               </div>
             <hr>
               <div class="col-sm-10 col-md-12 col-md-12">
-                  <i class="fas fa-phone-square text-dark fa-lg" title="Número de teléfono."></i> (<span id="code_phone_id" class="font-weight-bold"></span>)-<span id="phone" class="font-weight-bold"></span>
+                  <i class="fas fa-phone-square text-dark fa-lg" title="Número de teléfono."></i> (<span id="code_phone_id" class="font-weight-bold"></span>) <span id="phone" class="font-weight-bold"></span>
               </div>
             <hr>
               <div class="col-md-12">

@@ -54,10 +54,10 @@
             @if($owner->type_structure_id == 2 )
               <td>Esquina</td> 
             @endif
-            @if($owner->type_structure_id == 3 )
+            @if($owner->type_structure_id ==  3 )
               <td>Pen House</td> 
             @endif
-            @if($owner->type_structure_id !=  1 && $owner->type_structure_id !=  2 && $owner->type_structure_id !=  3)
+            @if($owner->type_structure_id != 1 && $owner->type_structure_id != 2 && $owner->type_structure_id != 3 )
               <td>{{$owner->type_structure_id}}</td> 
             @endif
 
@@ -297,7 +297,7 @@ $(document).ready(function(){
             modal.find('.modal-body #code_phone_id').text(data.code_phone.option)
             modal.find('.modal-body #phone').text(data.phone)
           }else{
-            modal.find('.modal-body #email').text('No disponible')
+            modal.find('.modal-body #code_phone_id').text('No disponible')
           }
         
           if (data.email != null) {

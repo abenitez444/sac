@@ -67,7 +67,7 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
               <label for="number_letters"><b>Número/Letra:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control{{ $errors->has('number_letters') ? ' is-invalid' : '' }}" id="number_letters" name="number_letters" placeholder="Hogar" maxlength="10">
+                <input type="text" class="form-control{{ $errors->has('number_letters') ? ' is-invalid' : '' }}" id="number_letters" name="number_letters" placeholder="Hogar" maxlength="20">
                  <i class="fas fa-home fa-lg font-weight-bold" title="Ingrese el número/letra del hogar del copropetario."></i>
                   <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
@@ -97,7 +97,7 @@
             <div class="col-sm-5 col-md-5 col-lg-5 form-group">
               <label for="document_type_id"><b>Teléfono:</b></label>
               <div class="inputWithIcon">
-                <input type="text"  class="form-control phone @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Número de teléfono" maxlength="7">
+                <input type="text"  class="form-control phone @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Número de teléfono" maxlength="7" onkeypress="return numbers(event)">
                 <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del copropetario."></i>
               </div>
             </div>
@@ -106,7 +106,7 @@
             <div class="col-sm-6 col-md-6 col-lg-7 form-group">
               <label for="email"><b>Correo:</b></label>
               <div class="inputWithIcon">
-                <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico">
+                <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico" maxlength="80">
                 <i class="fas fa-envelope fa-lg" title="Introduzca el correo electrónico del copropetario."></i>
               </div>
             </div>
