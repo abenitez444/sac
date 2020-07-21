@@ -32,8 +32,6 @@
             <th><b>N°/Letra</b></th>
             <th><b>Alícuota</b></th>
             <th><b>Teléfonos</b></th>
-            <th><b>Correo </b></th>
-            <!--<th><b>Sintesis curricular</b></th>-->
             <th><b>Opciones</b></th>
           </tr>
         </thead>
@@ -66,20 +64,13 @@
             <td>{{$owner->number_letters}}</td>
             <td>{{$owner->aliquot}}%</td>
 
-           @if($owner->code_phone_id && $owner->phone)
+            @if($owner->code_phone_id && $owner->phone)
             <td>{{$owner->CodePhone->option}}{{$owner->phone}}</td> 
-           @else 
+            @else 
             <td>No disponible</td>
-           @endif
-
-           @isset($owner->email)
-            <td>{{$owner->email}}</td>
-           @else
-            <td>No disponible</td>
-           @endisset
-            <!--<td>{{$owner->curriculum}}</td>-->
+            @endif
             <td>
-              <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCo-owner" data-toggle="modal" data-target="#modal-detailCo-owner" data-whatever="{{$owner->id}}">
+              <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCoowner" data-toggle="modal" data-target="#modal-detailCoowner" data-whatever="{{$owner->id}}">
                 <b class="radiusV fa fa-eye"></b>
               </a>
               <a href="edit/{{$owner->id}}" class="icono" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
@@ -184,7 +175,6 @@ $(document).ready(function(){
           modal.find('.modal-body #name').val(data.name)
           modal.find('.modal-body #name_residence_id').val(data.name_residence_id)
           modal.find('.modal-body #type_residence_id').val(data.type_residence_id)
-
           if (data.type_structure_id == 1) {
             modal.find('.modal-body #type_structure_id').append("<option value='1'>Central</option>");
           }
@@ -195,36 +185,77 @@ $(document).ready(function(){
             modal.find('.modal-body #type_structure_id').append("<option value='3'>Pen House</option>");
           }
           if (data.type_structure_id != 1 && data.type_structure_id != 2 && data.type_structure_id != 3) {
-            modal.find('.modal-body #type_structure_id').append("<option value='"+data.id+ "'> "+data.type_structure_id+"</option>");
+           
+            modal.find('.modal-body #type_structure_id').append("<option value='"+data.type_structure_id+ "'> "+data.type_structure_id+"</option>");
+
           }
           modal.find('.modal-body #number_letters').val(data.number_letters)
           modal.find('.modal-body #aliquot').val(data.aliquot)
           modal.find('.modal-body #code_phone_id').val(data.code_phone_id)
           modal.find('.modal-body #phone').val(data.phone)
           modal.find('.modal-body #email').val(data.email)
+      
+          //Edit Co-owner and save form
+          $('#send-editCoowner').click(function(e){
+            var data = $("#editCoowner-form").serialize();
+            $.ajax({
+              url: '{{ route('co-owner.store') }}',
+              type: 'POST',
+              dataType: 'json',
+              data: data,
+              //Success
+            }).done(function() {
+              $('#modal-editCoowner').modal('hide')
+              Swal.fire({
+                icon: 'success',
+                title: "¡Solicitud de Copropetario se guardó exitosamente!",
+                showConfirmButton: true,
+                timer: 3000
+              }).then((result) => {
+                if (result.value){
+                  location.reload()
+                }
+              })
+              //Error
+            }).fail(function(msj) {
+              Swal.fire({
+                icon: 'error',
+                title: "No se realizo el registro del Copropetario!",
+                showConfirmButton: false,
+                timer: 2000
+              })
+              var errors = $.parseJSON(msj.responseText);
 
+              $.each(errors.errors, function(key, value) 
+              {
+                  $("#" + key + "_group").addClass("has-error");
+                  $("." + key + "_span").addClass("help-block text-danger").html(value);
+                  toastr.error(value,"<h5>"+"<b style='color:#FFF400;'>* </b>" + "Campo obligatorio"+"</h5>");
+              });
+            });
+          })
         })
         .fail(function() {
           console.log("error");
         });
-      }
-      $('#close').click(function(){
+        $('#close').click(function(){
         location.reload()
+        });
+        $(document).keyup(function(e) {
+        if (e.key === "Escape") {
+          location.reload() 
+        }
       });
-      $(document).keyup(function(e) {
-      if (e.key === "Escape") {
-        location.reload() 
-      }
-    });
+    }
   })
- 
 </script>
 <!--Details of empleado in modal -->
 <script>
-  $('#modal-detailCo-owner').on('show.bs.modal', function (event) {
+  $('#modal-detailCoowner').on('show.bs.modal', function (event) {
       var modal = $(this)
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
+
       if(id){
 
         $.ajax({
@@ -233,36 +264,48 @@ $(document).ready(function(){
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Perfil de empleado ')
+          modal.find('.modal-title').text(' Ficha del Copropetario ')
           modal.find('.modal-body #id').val(data.id)
-          modal.find('.modal-body #avatar').val(data.avatar)
           modal.find('.modal-body #name').text(data.name)
-          if(data.document_type){
-            modal.find('.modal-body #document_type_id').text(data.document_type.option)
-          }else{
-            modal.find('.modal-body #document_type_id').text('')
+          modal.find('.modal-body #name_residence_id').text(data.name_residence.name_residence)
+          if (data.type_residence_id == 1) {
+            modal.find('.modal-body #type_residence_id').text('Apartamento')
           }
-          if(data.ci){
-            modal.find('.modal-body #ci').text(data.ci)
-          }else{
-            modal.find('.modal-body #ci').text('No disponible')
+          if (data.type_residence_id == 2) {
+            modal.find('.modal-body #type_residence_id').text('Thownhouse')
           }
-          if(data.code_phone){
+          if (data.type_residence_id == 3) {
+            modal.find('.modal-body #type_residence_id').text('Casa')
+          }
+          if (data.type_structure_id == 1) {
+            modal.find('.modal-body #type_structure_id').text('Central')
+          }
+          if (data.type_structure_id == 2) {
+            modal.find('.modal-body #type_structure_id').text('Esquina')
+          }
+          if (data.type_structure_id == 3) {
+            modal.find('.modal-body #type_structure_id').text('Pen House')
+          }
+          if (data.type_structure_id != 1 && data.type_structure_id != 2 && data.type_structure_id != 3) {
+            modal.find('.modal-body #type_structure_id').text(data.type_structure_id)
+          }
+
+          modal.find('.modal-body #number_letters').text(data.number_letters)
+          modal.find('.modal-body #aliquot').text(data.aliquot)
+          
+          if (data.code_phone_id != null && data.phone != null) {
             modal.find('.modal-body #code_phone_id').text(data.code_phone.option)
-          }else{
-            modal.find('.modal-body #code_phone_id').text('')
-          }
-          if(data.phone){
             modal.find('.modal-body #phone').text(data.phone)
           }else{
-            modal.find('.modal-body #phone').text('No disponible')
+            modal.find('.modal-body #email').text('No disponible')
           }
-          if(data.email){
+        
+          if (data.email != null) {
             modal.find('.modal-body #email').text(data.email)
           }else{
             modal.find('.modal-body #email').text('No disponible')
           }
-            modal.find('.modal-body #cv').val(data.curriculum)
+         
         })
         .fail(function() {
           console.log("error");

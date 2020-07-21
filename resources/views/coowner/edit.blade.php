@@ -30,7 +30,7 @@
             <div class="col-sm-6 col-md-6 col-lg-7">
              <label for="name_residence_id"><b>Residencia:</b></label>
               <div class="inputWithIcon">
-                <select id="name_residence_id" name="name_residence_id" type="text" class=" custom-select @error('name_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('name_residence_id') }}">
+                <select id="name_residence_id" name="name_residence_id" type="text" class="name_residence_id custom-select @error('name_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('name_residence_id') }}">
                   <option value="0" disabled selected>Seleccione</option>
                    @foreach($residence as $res)
                     <option value="{{$res->id}}">{{$res->name_residence}}</option>
@@ -45,7 +45,7 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
              <label for="type_residence_id"><b>Tipo residencia:</b></label>
               <div class="inputWithIcon">
-                <select id="type_residence_id" name="type_residence_id" type="text" class="form-control custom-select @error('type_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_residence_id') }}">
+                <select id="type_residence_id" name="type_residence_id" type="text" class="type_residence_id form-control custom-select @error('type_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_residence_id') }}">
                   <option value="0" disabled selected>Opción</option>
                   <option value="1">Apartamento</option>
                   <option value="2">Thownhouse</option>
@@ -58,7 +58,7 @@
             <div class="col-sm-4 col-md-4 col-lg-4">
              <label for="type_structure_id"><b>Estructura:</b></label>
               <div class="inputWithIcon">
-                <select id="type_structure_id" name="type_structure_id" type="text" class="form-control custom-select @error('type_structure_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_structure_id') }}">
+                <select id="type_structure_id" name="type_structure_id" type="text" class="type_structure_id form-control custom-select @error('type_structure_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_structure_id') }}">
                 </select>
                 <i class="fa fa-university fa-lg font-weight-bold" title="Seleccione el tipo de estructura de la residencia del copropetario."></i>
                  <p class="campo-obligatorio">* Campo obligatorio</p>
@@ -67,7 +67,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-4 col-md-4 col-lg-4">
-              <label for="number_letters"><b>Número/Letra:</b></label>
+             <label for="number_letters"><b>Número/Letra:</b></label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('number_letters') ? ' is-invalid' : '' }}" id="number_letters" name="number_letters" placeholder="Hogar" maxlength="10">
                  <i class="fas fa-home fa-lg font-weight-bold" title="Ingrese el número/letra del hogar del copropetario."></i>
@@ -86,7 +86,7 @@
           <div class="row justify-content-center">
            <div class="col-sm-4 col-md-4 col-lg-4 form-group">
             <label for="code_phone_id"><b>Código:</b></label>
-            <div class="inputWithIcon">
+              <div class="inputWithIcon">
                 <select id="code_phone_id" name="code_phone_id" type="text" class="form-control custom-select @error('code_phone_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('code_phone_id') }}">
                     <option value="0" disabled selected>Opción</option>
                     @foreach($codePhone as $code)
@@ -116,7 +116,7 @@
         </form>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" id="edit-co-owner" class="btn btn-dark text-white rounded" title="Guardar copropetario"><i class="fas fa-save"></i><b> Guardar</b></button>
+        <button type="button" id="send-editCoowner" class="btn btn-info text-white rounded" title="Guardar copropetario"><i class="fas fa-share-square"></i> <b>Editar</b></button>
       </div>
     </div>
   </div>

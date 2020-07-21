@@ -48,9 +48,9 @@ class coownerController extends Controller
 
     public function detail($id)
     {   
-        $coowner = Coowner::with('CodePhone')->where('coowner.id', $id)->first();
+        $data = Coowner::with('codePhone', 'nameResidence')->where('coowner.id', $id)->first();
 
-        return response()->json($coowner);
+        return response()->json($data);
     }
 
     public function store(Request $request) 
