@@ -5,19 +5,15 @@
 @endsection
 @section('card-title', 'Consulta')
 @section('card-button')
-<div class="d-none d-sm-inline-block ">
-  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner">
-    <span class="icon text-white-50">
-      <i class="fas fa-plus font-weight-bold" title="Registrar Copropetario."></i>
-    </span>
-    <span class="text font-weight-bold"> Registrar</span>
-  </a>
+<div class="d-none d-sm-inline-block btn-icon-split">
+    <span class="btn aqua-gradient btn-rounded" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner"> <i class="fas fa-plus fa-lg text-white font-weight-bold" title="Registrar Copropetario."></i>
+     </span>
 </div>
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header bg-gradient-dark">
+  <div class="card-header blue-gradient">
     <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
@@ -30,7 +26,6 @@
             <th><b>Tipo</b></th>
             <th><b>Estructura</b></th>
             <th><b>N°/Letra</b></th>
-            <th><b>Alícuota</b></th>
             <th><b>Teléfonos</b></th>
             <th><b>Opciones</b></th>
           </tr>
@@ -62,7 +57,6 @@
             @endif
 
             <td>{{$owner->number_letters}}</td>
-            <td>{{$owner->aliquot}}%</td>
 
             @if($owner->code_phone_id && $owner->phone)
             <td>{{$owner->CodePhone->option}}{{$owner->phone}}</td> 
@@ -70,14 +64,14 @@
             <td>No disponible</td>
             @endif
             <td>
-              <a href="detail/{{$owner->id}}" class="icono" title="Visualizar" id="btn-detailCoowner" data-toggle="modal" data-target="#modal-detailCoowner" data-whatever="{{$owner->id}}">
-                <b class="radiusV fa fa-eye"></b>
+              <a href="detail/{{$owner->id}}" class="blue-gradient btn-round btn-sm" title="Visualizar" id="btn-detailCoowner" data-toggle="modal" data-target="#modal-detailCoowner" data-whatever="{{$owner->id}}">
+                <b class="text-white fa fa-eye"></b>
               </a>
-              <a href="edit/{{$owner->id}}" class="icono" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
-                <b class="radiusM fa fa-edit"></b>
+              <a href="edit/{{$owner->id}}" class="blue-gradient btn-round btn-sm" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
+                <b class="text-white fa fa-edit"></b>
               </a>
-              <a href="#" class="icono" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
-                <b class="radiusM fa fa-trash"></b>
+              <a href="#" class="blue-gradient btn-round btn-sm" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
+                <b class="text-white fa fa-trash"></b>
               </a>
             </td> 
           </tr>
@@ -190,7 +184,6 @@ $(document).ready(function(){
 
           }
           modal.find('.modal-body #number_letters').val(data.number_letters)
-          modal.find('.modal-body #aliquot').val(data.aliquot)
           modal.find('.modal-body #code_phone_id').val(data.code_phone_id)
           modal.find('.modal-body #phone').val(data.phone)
           modal.find('.modal-body #email').val(data.email)
@@ -291,7 +284,6 @@ $(document).ready(function(){
           }
 
           modal.find('.modal-body #number_letters').text(data.number_letters)
-          modal.find('.modal-body #aliquot').text(data.aliquot)
           
           if (data.code_phone_id != null && data.phone != null) {
             modal.find('.modal-body #code_phone_id').text(data.code_phone.option)

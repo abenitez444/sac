@@ -18,7 +18,6 @@ class Coowner extends Model
 		'type_residence_id',
 		'number_letters',
 		'type_structure_id',
-		'aliquot',
 		'code_phone_id',
 		'phone',
 		'email',
@@ -38,5 +37,15 @@ class Coowner extends Model
     {
         return $this->belongsTo('App\Models\Residence', 'type_structure_id');
     }
-	
+
+	public function typeResidence()
+    {
+        return $this->belongsTo('App\Models\TypeResidence', 'type_residence_id');
+    }
+
+    public function typeStructu()
+    {
+        return $this->belongsTo('App\Models\Structure', 'type_structure_id');
+    }
+
 }

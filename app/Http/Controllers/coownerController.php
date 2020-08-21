@@ -15,7 +15,6 @@ class coownerController extends Controller
     	$coowner = Coowner::all();
         $residence = Residence::all();
         $codePhone = CodePhone::all();
-       
 
         return view('coowner.index', compact('coowner', 'residence', 'codePhone'));
     }

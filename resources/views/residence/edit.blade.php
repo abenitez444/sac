@@ -2,9 +2,9 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="residence">
     <div class="modal-content">
-      <div class="modal-header bg-gradient-dark"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold">Editar: Conjunto residencial</h5>
+      <div class="modal-header blue-gradient"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold">Editar: Conjunto residencial</h5>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <button type="button" class="close" id="closeEdit" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>
       </div>
@@ -14,7 +14,7 @@
           @csrf
           <div class="row">
             <div class="sidebar-brand-text mx-3 push ml-3">
-              <i class="fas fa-atlas text-dark sidebar-brand-icon rotate-n-15"></i> <b class="text-dark"> GC-GCA</b>
+              <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -44,33 +44,50 @@
             </div>
           </div>
           <div class="form-row justify-content-center" id="row-structure">
-            <div class="col-md-6 offset-4 mt-1">
+            <div class="col-md-6 offset-3 mt-1">
               <div class="col-md-4 text-center">
                     <label><b>Estructura:</b></label>
                   <div class="col-md-8 mb-2 pb-1 form-group" id="form-structure"></div>
               </div>
-           
-              <div class="col-md-12 mt-2 form-group">
-                  <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="type_center" name="type_center">
-                      <label class="custom-control-label" for="type_center"> Central</label>
-                  </div>
-              </div>
-
               <div class="col-md-12 form-group">
-                  <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="type_corner" name="type_corner">
-                      <label class="custom-control-label" for="type_corner"> Esquina</label>
+                <div class="custom-control custom-switch" id="row-bulbs">
+                    <input type="checkbox" class="custom-control-input checkbox-input" id="type_center" name="type_center">
+                    <label class="custom-control-label" for="type_center"> Central</label>
+                </div>
+                <div class="col-md-12 form-group" id="form-type_center">
+                  <div class="form-row">
+                      <div class="col-md-6 mt-3">
+                          <input id="aliquot_center"  name="aliquot_center" type="text" class="form-control @error('aliquot_center') is-invalid @enderror m-hidden" value="{{ old('aliquot_center') }}" autocomplete="aliquot_center" maxlength="30" placeholder="%" autofocus>
+                      </div>
                   </div>
+                </div>
               </div>
-             
-               <div class="col-md-12 form-group">
-                  <div class="custom-control custom-switch">
-                      <input type="checkbox" class="custom-control-input" id="type_penhouse" name="type_penhouse">
-                      <label class="custom-control-label" for="type_penhouse"> Pen House</label>
+              <div class="col-md-12 form-group">
+                <div class="custom-control custom-switch" id="row-bulbs">
+                    <input type="checkbox" class="custom-control-input checkbox-input" id="type_corner" name="type_corner">
+                    <label class="custom-control-label" for="type_corner"> Esquina</label>
+                </div>
+                <div class="col-md-12 form-group" id="form-type_corner">
+                  <div class="form-row">
+                      <div class="col-md-6 mt-3">
+                          <input id="aliquot_corner"  name="aliquot_corner" type="text" class="form-control @error('aliquot_corner') is-invalid @enderror m-hidden" value="{{ old('aliquot_corner') }}" autocomplete="aliquot_corner" maxlength="30" placeholder="%" autofocus>
+                      </div>
                   </div>
+                </div>
               </div>
-
+              <div class="col-md-12 form-group">
+                <div class="custom-control custom-switch" id="row-bulbs">
+                    <input type="checkbox" class="custom-control-input checkbox-input" id="type_penhouse" name="type_penhouse">
+                    <label class="custom-control-label" for="type_penhouse"> Pen House</label>
+                </div>
+                <div class="col-md-12 form-group" id="form-type_penhouse">
+                  <div class="form-row">
+                      <div class="col-md-6 mt-3">
+                          <input id="aliquot_penhouse"  name="aliquot_penhouse" type="text" class="form-control @error('aliquot_penhouse') is-invalid @enderror m-hidden" value="{{ old('aliquot_penhouse') }}" autocomplete="aliquot_penhouse" maxlength="30" placeholder="%" autofocus>
+                      </div>
+                  </div>
+                </div>
+              </div>
               <div class="col-md-12 form-group">
                 <div class="custom-control custom-switch" id="row-bulbs">
                     <input type="checkbox" class="custom-control-input checkbox-input" id="type_structure" name="type_structure">
@@ -80,6 +97,8 @@
                   <div class="form-row">
                       <div class="col-md-6 mt-3">
                           <input id="structure"  name="structure" type="text" class="form-control @error('structure') is-invalid @enderror m-hidden" value="{{ old('structure') }}" autocomplete="structure" maxlength="30" placeholder="Estructura" autofocus>
+                      
+                          <input id="aliquot_structure"  name="aliquot_structure" type="text" class="form-control @error('aliquot_structure') is-invalid @enderror m-hidden mt-3" value="{{ old('aliquot_structure') }}" autocomplete="aliquot_structure" maxlength="30" placeholder="Estructura" autofocus>
                       </div>
                   </div>
                 </div>
@@ -105,25 +124,6 @@
               </div>
             </div>
           </div>
-          <!--<div class="row text-center mt-2" id="council">
-              <div class="col-md-12">
-                 <label><b>Gastos comunes</b></label>
-              </div>
-
-              <div class="col-md-12">
-                  <a href="javascript:void(0);" class="add_button" title="Add field"><i class="btn btn-outline-info fas fa-plus form-group"></i></a>
-              </div>
-         
-              <div class="col-md-12 field_wrapper">
-              </div>
-
-              <script type="text/javascript">
-                  var removeROW = function (x){
-                      $('#row'+x).remove();
-                      x--;
-                  }
-              </script>
-          </div>-->
           <div class="row justify-content-center mt-3">
             <div class="col-sm-6 col-md-6 col-lg-6 form-group">
               <label for="email_residence"><b>Correo electrónico:</b></label>

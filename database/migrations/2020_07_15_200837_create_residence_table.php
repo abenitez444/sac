@@ -18,10 +18,14 @@ class CreateResidenceTable extends Migration
             $table->string('name_residence');
             $table->string('type_residence'); 
             $table->string('type_center')->nullable(); 
+            $table->string('aliquot_center')->nullable(); 
             $table->string('type_corner')->nullable(); 
+            $table->string('aliquot_corner')->nullable(); 
             $table->string('type_penhouse')->nullable(); 
+            $table->string('aliquot_penhouse')->nullable(); 
             $table->string('type_structure')->nullable(); 
             $table->string('structure')->nullable(); 
+            $table->string('aliquot_structure')->nullable(); 
             $table->string('type_rif')->nullable(); 
             $table->string('number_rif')->nullable(); 
             $table->string('email_residence')->nullable(); 

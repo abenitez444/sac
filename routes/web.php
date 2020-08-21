@@ -20,18 +20,18 @@ Route::get('/', function () {
 });
 
 
-Route::group(['prefix' => 'inventory'], function () {
+	Route::get('/index', 'expenditureController@index')->name('mon-expenditure.index');
+	Route::get('/create', 'expenditureController@create')->name('mon-expenditure.create');
+	Route::get('/edit/{id}', 'expenditureController@edit')->name('mon-expenditure.edit');
+	Route::get('/detail/{id}', 'expenditureController@detail')->name('mon-expenditure.detail');
+	Route::post('/store', 'expenditureController@store')->name('mon-expenditure.store');
+	Route::put('/deleted','expenditureController@destroy')->name('mon-expenditure.deleted');
+	Route::post('/searchClient', 'expenditureController@searchClient');
+	Route::post('/searchMonth', 'expenditureController@searchMonth');
+	Route::post('/searchYear','expenditureController@searchYear');
 
-	Route::get('/index', 'inventoryController@index')->name('index');
-	Route::get('/upload', 'inventoryController@show')->name('upload');
-	Route::get('/create', 'inventoryController@create')->name('create');
-	Route::get('/edit/{id}', 'inventoryController@edit')->name('edit');
-	Route::get('/detail/{id}', 'inventoryController@detail')->name('detail');
-	Route::post('/save', 'inventoryController@save')->name('save');
-	Route::post('/uploadFile', 'inventoryController@uploadFile')->name('uploadFile');
-	Route::put('/deleted','inventoryController@destroy')->name('inventory.deleted');
 
-});
+
 
 /*CRUD PROYECT*/
 Route::group(['prefix' => 'project'], function () {

@@ -2,7 +2,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="co-owner">
     <div class="modal-content">
-      <div class="modal-header bg-gradient-dark"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
+      <div class="modal-header blue-gradient"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
         <h5 class="modal-title text-white" id="ModalLabel">Copropetario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
@@ -12,6 +12,11 @@
         <form id="co-owner-form" method="POST">
           <input type="hidden" class="form-control" id="id" name="id">
           @csrf
+          <div class="row">
+            <div class="sidebar-brand-text mx-3 push ml-3">
+              <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
+            </div>
+          </div>
           <div class="avatar mx-auto text-center">
               <input type="file" class="form-control custom-file-input"  id="avatar" name="avatar" lang="es" accept=".png"  title="Debe adjuntar el avatar.">
               <img src="{{asset('img/avatar.png')}}" alt="Avatar" class="avatar" title="Cargar avatar del copropietario.">
@@ -64,19 +69,11 @@
             </div>
           </div>
           <div class="row justify-content-center">
-            <div class="col-sm-4 col-md-4 col-lg-4">
+            <div class="col-sm-4 col-md-5 col-lg-5">
               <label for="number_letters"><b>Número/Letra:</b></label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('number_letters') ? ' is-invalid' : '' }}" id="number_letters" name="number_letters" placeholder="Hogar" maxlength="20">
                  <i class="fas fa-home fa-lg font-weight-bold" title="Ingrese el número/letra del hogar del copropetario."></i>
-                  <p class="campo-obligatorio">* Campo obligatorio</p>
-              </div>
-            </div>
-            <div class="col-sm-4 col-md-4 col-lg-4">
-              <label for="aliquot"><b>Alícuota:</b></label>
-              <div class="inputWithIcon">
-                <input type="text" class="form-control aliquot {{ $errors->has('aliquot') ? ' is-invalid' : '' }}" id="aliquot" name="aliquot" placeholder="Alicuota" maxlength="10">
-                 <i class="p-2 font-weight-bold" title="Ingrese la alícuota correspondiente al copropetario."><b>%</b></i>
                   <p class="campo-obligatorio">* Campo obligatorio</p>
               </div>
             </div>
@@ -114,7 +111,7 @@
         </form>
       </div>
       <div class="modal-footer justify-content-center">
-        <button type="button" id="send-co-owner" class="btn btn-dark text-white rounded" title="Guardar copropetario"><i class="fas fa-save"></i><b> Guardar</b></button>
+        <button type="button" id="send-co-owner" class="btn aqua-gradient text-white rounded" title="Guardar copropetario"><i class="fas fa-save"></i><b> Guardar</b></button>
       </div>
     </div>
   </div>

@@ -24,5 +24,41 @@ class DocumentSeeder extends Seeder
         		'option' => $type[0]
             ]);    
         }
+
+        $typeResidence = array(
+            array('Apartamento'),
+            array('Townhouse'),
+            array('Casa'),
+        );  
+
+        foreach($typeResidence as $type){
+            DB::table('type_residence')->insert([
+                'option' => $type[0]
+            ]);    
+        }
+
+        $structure = array(
+            array('Central'),
+            array('Esquina'),
+            array('Pen house'),
+        );  
+
+        foreach($structure as $type){
+            DB::table('structure')->insert([
+                'option' => $type[0]
+            ]);    
+        }
+
+         $money = array(
+            array('Bolívares'),
+            array('Dolares'),
+            array('Euros'),
+        );  
+
+        foreach($money as $type){
+            DB::table('type_money')->insert([
+                'option' => $type[0]
+            ]);    
+        }
     }
 }

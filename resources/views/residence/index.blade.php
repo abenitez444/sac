@@ -7,18 +7,18 @@
 @section('card-title', 'Consulta de Residencias')
 @section('card-button')
 <div class="d-none d-sm-inline-block">
-  <a href="#" class="btn btn-success btn-icon-split btn-sm" id="btn-newResidence" data-toggle="modal" data-target="#modal-createResidence">
+  <a href="#" class="btn aqua-gradient btn-rounded" id="btn-newResidence" data-toggle="modal" data-target="#modal-createResidence">
     <span class="icon text-white-50">
-      <i class="fas fa-plus font-weight-bold mt-1" title="Registrar Residencia."></i>
+      <i class="fas fa-plus text-white font-weight-bold mt-1" title="Registrar Residencia."></i>
     </span>
-    <span class="text font-weight-bold"> Registrar</span>
+    <span class="text font-weight-bold"></span>
   </a>
 </div>
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header bg-gradient-dark">
+  <div class="card-header blue-gradient">
     <h5 class="font-weight-bold text-white">Lista de residencias</h5>
   </div>
   <div class="card-body">
@@ -50,10 +50,10 @@
               @if($res->type_center == '' && $res->type_corner == '' && $res->type_penhouse == '' && $res->type_structure == '')
                No disponible
               @else
-                @if($res->type_center == 'on') Central <br>  @endif 
-                @if($res->type_corner == 'on') Esquina <br>  @endif
-                @if($res->type_penhouse == 'on') Pen House <br> @endif
-                @if($res->type_structure == 'on' && $res->structure != '') {{$res->structure}} <br> @endif
+                @if($res->type_center == 'on' || $res->aliquot_center != null) Central - ({{$res->aliquot_center}}%) <br>  @endif 
+                @if($res->type_corner == 'on' || $res->aliquot_corner != null) Esquina - ({{$res->aliquot_corner}}%)<br>  @endif
+                @if($res->type_penhouse == 'on' || $res->aliquot_penhouse != null) Pen House  - ({{$res->aliquot_penhouse}}%)<br> @endif
+                @if($res->type_structure == 'on' && $res->structure != '' || $res->aliquot_structure) {{$res->structure}} - ({{$res->aliquot_structure}}%) <br> @endif
               @endif
              </td>
 
@@ -77,14 +77,14 @@
                <td>No disponible</td>
               @endisset
              <td>
-              <a href="detail/{{$res->id}}" class="icono" title="Visualizar" id="btn-detailResidence" data-toggle="modal" data-target="#modal-detailResidence" data-whatever="{{$res->id}}">
-                <b class="radiusV fa fa-eye"></b>
+              <a href="detail/{{$res->id}}" class="blue-gradient btn-round btn-sm" title="Visualizar" id="btn-detailResidence" data-toggle="modal" data-target="#modal-detailResidence" data-whatever="{{$res->id}}">
+                <b class="text-white fa fa-eye"></b>
               </a>
-              <a href="edit/{{$res->id}}" class="icono" title="Editar" id="btn-editResidence" data-toggle="modal" data-target="#modal-editResidence" data-whatever="{{$res->id}}">
-                <b class="radiusM fa fa-edit"></b>
+              <a href="edit/{{$res->id}}" class="blue-gradient btn-round btn-sm" title="Editar" id="btn-editResidence" data-toggle="modal" data-target="#modal-editResidence" data-whatever="{{$res->id}}">
+                <b class="text-white fa fa-edit"></b>
               </a>
-              <a href="#" class="icono" title="Eliminar" onclick="deletedResidence('{{$res->id}}')">
-                <b class="radiusM fa fa-trash icon-danger"></b>
+              <a href="#" class="blue-gradient btn-round btn-sm" title="Eliminar" onclick="deletedResidence('{{$res->id}}')">
+                <b class="text-white fa fa-trash icon-danger"></b>
               </a>
             </td> 
           </tr>
@@ -101,6 +101,13 @@
 @endsection
 
 @section('js')
+<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+  $('.aliquot').mask('09,90909909');
+});
+</script>
+</script>
 <script src="{{ asset('js/Spanish.json') }}"></script>
 <!-- Swichet Type Estructure -->
 <script>
@@ -114,62 +121,6 @@
         }
     });
 
-</script>
-
-<script>
-    $(document).ready(function(){
-var maxField = 10; //Input fields increment limitation
-var addButton = $('.add_button'); //Add button selector
-var wrapper = $('.field_wrapper'); //Input field wrapper
-
-
-var x = 1; //Initial field counter is 1
-$(addButton).click(function(){ //Once add button is clicked
-var contentCC = $('#contentCC').html();
-if(x < maxField){ //Check maximum number of input fields
-x++; //Increment field counter
-$(wrapper).append('<div id=row'+x+'>'+contentCC+'<a href="javascript:removeROW('+x+');" title="Add field"><img class="img-delete2" src="../img/delete.png"/></a></div>'); // Add field html
-}
-});
-
-/*    $(wrapper).on('click', '.remove_button', function(e){ //Once remove button is clicked
-e.preventDefault();
-$('#row').remove(); //Remove field html
-x--; //Decrement field counter
-});*/
-
-var mr = 1;
-var buttonMR = $('.button-mr');
-var contentMR = $('.content-mr');
-
-//Initial field counter is 1 Datos N°'+mr+'
-$(buttonMR).click(function(){ //Once add button is clicked
-//Check maximum number of input fields
-var MRcontent = $('#contentMR').html(); 
-
-$(contentMR).append('<div id="MRrow'+mr+'""><hr><h6>Datos N°:'+mr+'</h6>'+MRcontent+'<div class="col-md-1"><a href="javascript:RemoveRM('+mr+');" class="removeRM" data="'+mr+'" title="Add field"><img class="img-delete2" src="img/delete.png" style="margin-top: 20px !important;" /></a></div></div>'); // Add field html
-
-mr++;
-
-});
-
-var cl = 1;
-var buttonCL = $('.button-cl');
-var contentCL = $('.content-cl'); 
-
-//Initial field counter is 1 Datos N°'+hs+'
-$(buttonCL).click(function(){ //Once add button is clicked
-//Check maximum number of input fields
-var CLcontent = $('#contentCL').html(); 
-
-$(contentCL).append('<div id="CLrow'+cl+'""><hr><h6>Datos N°:'+cl+'</h6>'+CLcontent+'<div class="col-md-1"><a href="javascript:RemoveCL('+cl+');" class="removeRM" data="'+cl+'" title="Add field"><img class="img-delete2" src="img/delete.png" style="margin-top: 20px !important;" /></a></div></div>'); // Add field html
-
-cl++;
-
-});
-
-
-});
 </script>
 
 <script type="text/javascript">
@@ -246,27 +197,48 @@ cl++;
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name_residence').val(data.name_residence)
           modal.find('.modal-body #type_residence').val(data.type_residence)
-          if(data.type_center === 'on'){
+          
+          if(data.type_center === 'on' && data.aliquot_center != ''){
             modal.find('.modal-body #type_center').prop('checked', true);
+             
+            if(data.type_center === 'on' ){
+              modal.find('.modal-body #aliquot_center').removeClass('m-hidden');
+              modal.find('.modal-body #aliquot_center').val(data.aliquot_center);
+            }
           }else{
-            modal.find('.modal-body #type_center').prop('checked', false);
+             modal.find('.modal-body #aliquot_center').addClass('m-hidden');
+             modal.find('.modal-body #type_center').prop('checked', false);
           }
           if(data.type_corner === 'on'){
             modal.find('.modal-body #type_corner').prop('checked', true);
+             
+            if(data.aliquot_corner != ''){
+              modal.find('.modal-body #aliquot_corner').removeClass('m-hidden');
+              modal.find('.modal-body #aliquot_corner').val(data.aliquot_corner);
+            }
           }else{
-            modal.find('.modal-body #type_corner').prop('checked', false);
+             modal.find('.modal-body #aliquot_center').addClass('m-hidden');
+             modal.find('.modal-body #type_corner').prop('checked', false);
           }
           if(data.type_penhouse === 'on'){
             modal.find('.modal-body #type_penhouse').prop('checked', true);
+             
+            if(data.aliquot_penhouse != ''){
+              modal.find('.modal-body #aliquot_penhouse').removeClass('m-hidden');
+              modal.find('.modal-body #aliquot_penhouse').val(data.aliquot_penhouse);
+            }
           }else{
-            modal.find('.modal-body #type_penhouse').prop('checked', false);
+             modal.find('.modal-body #aliquot_penhouse').addClass('m-hidden');
+             modal.find('.modal-body #type_penhouse').prop('checked', false);
           }
           if(data.type_structure === 'on'){
             modal.find('.modal-body #type_structure').prop('checked', true);
              
-            if(data.structure != ''){
+            if(data.structure != '' && data.aliquot_structure != ''){
               modal.find('.modal-body #structure').removeClass('m-hidden');
+              modal.find('.modal-body #aliquot_structure').removeClass('m-hidden');
               modal.find('.modal-body #structure').val(data.structure)
+              modal.find('.modal-body #aliquot_structure').val(data.aliquot_structure)
             }
           }else{
              modal.find('.modal-body #structure').addClass('m-hidden');
@@ -319,6 +291,14 @@ cl++;
         .fail(function() {
           console.log("error");
         });
+         $('#closeEdit').click(function(){
+            location.reload()
+        });
+        $(document).keyup(function(e) {
+          if (e.key === "Escape") {
+            location.reload() 
+          }
+        });
       }
     })
 </script>
@@ -352,23 +332,27 @@ cl++;
             if(data.type_center == null && data.type_corner == null && data.type_penhouse == null && data.type_structure == null ){
               modal.find('.modal-body #type_center').text('- No disponible')
             }else{
-              if(data.type_center == 'on'){
+              if(data.type_center != null && data.aliquot_center != ''){
+                modal.find('.modal-body #aliquot_center').text(data.aliquot_center, '%')
                 modal.find('.modal-body #type_center').text('- Central')
               }else{
                 modal.find('.modal-body #type_center').text('')
               }  
-              if(data.type_corner == 'on'){
+              if(data.type_corner != null && data.aliquot_corner != ''){
                 modal.find('.modal-body #type_corner').text('- Esquina')
+                modal.find('.modal-body #aliquot_corner').text(data.aliquot_corner)
               }else{
                 modal.find('.modal-body #type_corner').text('')
               }   
-              if(data.type_penhouse == 'on'){
+              if(data.type_penhouse != null && data.aliquot_penhouse != ''){
                 modal.find('.modal-body #type_penhouse').text('- Pen House')
+                modal.find('.modal-body #aliquot_penhouse').text(data.aliquot_penhouse)
               }else{
                 modal.find('.modal-body #type_penhouse').text('')
               } 
-              if(data.type_structure != '' && data.structure != ''){
+              if(data.type_structure != '' && data.structure != ''  && data.aliquot_structure != ''){
                 modal.find('.modal-body #structure').text(data.structure)
+                modal.find('.modal-body #aliquot_structure').text(data.aliquot_structure)
               }else{
                 modal.find('.modal-body #structure').text('')
               }  
