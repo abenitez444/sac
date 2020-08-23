@@ -18,9 +18,6 @@ class CreateExpenditureTable extends Migration
             $table->string('residence_coowner');
             $table->integer('year')->nullable();
             $table->string('month');
-            $table->string('description_monthly');
-            $table->string('type_money');
-            $table->string('amount_monthly');
             $table->softDeletes();
             $table->timestamps();
         });

@@ -40,4 +40,10 @@ class Expenditure extends Model
     {
         return $this->belongsTo('App\Models\Structure', 'structure_coowner');
     }
+  
+  
+    public function EspensesDetail()
+    {
+        return $this->hasMany('App\Models\Structure', 'expenditure_id');
+    }
 }

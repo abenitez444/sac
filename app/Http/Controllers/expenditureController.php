@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Expenditure;
+use App\Models\ExpensesDetail;
 use App\Models\Coowner;
 use App\Models\Residence;
 use App\Models\Month;
@@ -19,15 +20,42 @@ class expenditureController extends Controller
         return view('expenditure.index', compact('coowner', 'residence'));
     }
 
-    public function store(Request $request, $obj) 
-    {   
+    public function store(Request $request) 
+    {     
+      $id = $request->input('id');
+      $expenditure = Expenditure::firstOrNew(['id' => $id]);
+      $expenditure->residence_coowner = $request->residence_coowner;
+      $expenditure->year = $request->year;
+      $expenditure->month = $request->month;
+      $expenditure->save();
+      
+      $expenditure_id = $expenditure->id;
 
-      //
+      $this->expenses_detail($expenditure_id, $request);
+      
+      dd("Listo, Has tu pestaña de retorno Putito");
+      
+    }
+    
+    private function expenses_detail($id, $obj)
+    {
+      for ($i=0; $i < count($obj->description_monthly); $i++) { 
+        $expenditure = new ExpensesDetail;
+        $expenditure->description_monthly = $obj->description_monthly[$i];
+        $expenditure->type_money = $obj->type_money[$i];
+        $expenditure->amount_monthly = $obj->amount_monthly[$i];
+        $expenditure->expenditure_id = $id;
+       
+        $expenditure->save();
+      }  
 
+      return true;
+      
     }
 
     public function create()
     {
+
     	$expenditure = Expenditure::all();
     	$coowner = Coowner::all();
       $month = Month::all();
