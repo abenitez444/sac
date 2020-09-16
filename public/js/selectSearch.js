@@ -14,7 +14,6 @@ $('.buscador').select2({
 	    	  $('#resultClient').html(data);
 	    	  $('#year').val($(this).find('option:first').val());
 	    	  $('#year').removeAttr('disabled');
-
 	        }                           
         })
 	});

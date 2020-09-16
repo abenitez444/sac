@@ -17,7 +17,7 @@ class ExpensesDetail extends Model
 
    public function Expenditure()
     {
-        return $this->belongsTo('App\Models\ExpensesDetail', 'expenditure_id');
+        return $this->belongsTo('App\Models\Expenditure', 'expenditure_id');
     }
    
     public function Type_money()

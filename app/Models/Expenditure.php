@@ -16,14 +16,21 @@ class Expenditure extends Model
 		'residence_coowner',
 		'year',
 		'month',
-		'description_monthly',
-        'type_money',
-		'amount_monthly',
+
  	];
 
- 	 public function nameResidence()
+    public function Expenditures()
     {
-        return $this->belongsTo('App\Models\Coowner', 'name_residence_id');
+        return $this->belongsTo('App\Models\ExpensesDetail', 'id');
+    } 
+
+ 	public function nameResidence()
+    {
+        return $this->belongsTo('App\Models\Residence', 'residence_coowner');
+    }
+    public function monthly()
+    {
+        return $this->belongsTo('App\Models\ExpensesDetail', 'description_monthly');
     }
 
     public function typeStructure()
@@ -41,9 +48,28 @@ class Expenditure extends Model
         return $this->belongsTo('App\Models\Structure', 'structure_coowner');
     }
   
-  
+    public function typeMonth()
+    {
+        return $this->belongsTo('App\Models\Month', 'month');
+    }
+
     public function EspensesDetail()
     {
         return $this->hasMany('App\Models\Structure', 'expenditure_id');
+    }
+
+    public function descriptionMonth()
+    {
+        return $this->belongsTo('App\Models\ExpensesDetail', 'description_monthly_id');
+    }
+
+    public function typesMoney()
+    {
+        return $this->belongsTo('App\Models\ExpensesDetail', 'type_money_id');
+    } 
+    
+    public function amountMonth()
+    {
+        return $this->belongsTo('App\Models\ExpensesDetail', 'amount_monthly_id');
     }
 }

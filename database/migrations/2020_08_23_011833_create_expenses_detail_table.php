@@ -16,7 +16,6 @@ class CreateExpensesDetailTable extends Migration
         Schema::create('expenses_detail', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description_monthly');
-            //$table->string('type_money');
             $table->string('amount_monthly');
             $table->unsignedBigInteger('expenditure_id')->nullable();
             $table->foreign('expenditure_id')->references('id')->on('expenditure'); 

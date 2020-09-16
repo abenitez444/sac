@@ -9,15 +9,20 @@ use App\Models\Coowner;
 use App\Models\Residence;
 use App\Models\Month;
 use App\Models\TypeMoney;
+use DB;
 
 class expenditureController extends Controller
 {
     public function index()
     {
-    	  $coowner = Coowner::all();
+    	  $expenditure = Expenditure::all();
+        $coowner = Coowner::all();
+        $month = Month::all();
+        $typeMoney = TypeMoney::all();
         $residence = Residence::all();
+        $expenses = ExpensesDetail::all();
  
-        return view('expenditure.index', compact('coowner', 'residence'));
+        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'month', 'typeMoney','expenses'));
     }
 
     public function store(Request $request) 
@@ -29,11 +34,11 @@ class expenditureController extends Controller
       $expenditure->month = $request->month;
       $expenditure->save();
       
-      $expenditure_id = $expenditure->id;
+      $expenditure_id = $request->residence_coowner;
 
       $this->expenses_detail($expenditure_id, $request);
       
-      dd("Listo, Has tu pestaña de retorno Putito");
+      return response()->json($expenditure);
       
     }
     
@@ -63,6 +68,14 @@ class expenditureController extends Controller
       $residence = Residence::all();
 
     	return view('expenditure.store', compact('expenditure', 'coowner', 'month', 'typeMoney', 'residence'));
+
+    }
+
+    public function findGeneral(Request $request, $id)
+    {
+      $expenditure = Expenditure::all();
+     
+      return view('expenditure.detail', compact('expenditure'));
 
     }
 
@@ -102,28 +115,48 @@ class expenditureController extends Controller
                             <label for="type_residence_coowner"><b>Tipo de Residencia:</b></label>
                               <input type="text" disabled class="form-control" id="type_residence_coowner" name="type_residence_coowner" value="'.$resultado->typeResidences->option.'">
                           </div>
-                          <div class="col-md-6 pb-4">   
+                          <div class="col-md-8 pb-4 offset-2">   
                             <label for="addres_residence"><b>Dirección:</b></label>
                               <input type="text" disabled class="form-control" id="addres_residence" name="addres_residence" value="'.$resultado->addres.'">
                           </div>
-                          <div class="col-md-6 pb-4">   
+                          <div class="col-md-3 pb-4">   
                             <label for="type_center_exp"><b>Estructura - Tipo 1:</b></label>
                               <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_center_exp" name="type_center_exp" value="'.$resultado->type_center.'">
                           </div>
 
-                          <div class="col-md-6 pb-4">   
+                          <div class="col-md-3 pb-4">   
+                            <label for="aliquot_center_exp"><b>Alícuota:</b></label>
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_center_exp" name="aliquot_center_exp" value="'.$resultado->aliquot_center.'%">
+                          </div>
+
+                          <div class="col-md-3 pb-4">   
                             <label for="type_corner_exp"><b>Estructura - Tipo 2:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed; id="type_corner_exp" name="type_corner_exp" value="'.$resultado->type_corner.'">
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_corner_exp" name="type_corner_exp" value="'.$resultado->type_corner.'">
                           </div>
 
-                          <div class="col-md-6 pb-4">   
+                          <div class="col-md-3 pb-4">   
+                            <label for="aliquot_corner_exp"><b>Alícuota:</b></label>
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_corner_exp" name="aliquot_corner_exp" value="'.$resultado->aliquot_corner.'%">
+                          </div>
+
+                          <div class="col-md-3 pb-4">   
                             <label for="type_penhouse_exp"><b>Estructura - Tipo 3:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed; id="type_penhouse_exp" name="type_penhouse_exp" value="'.$resultado->type_penhouse.'">
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_penhouse_exp" name="type_penhouse_exp" value="'.$resultado->type_penhouse.'">
                           </div>
 
-                          <div class="col-md-6 pb-4">   
-                            <label for="structure_exp"><b>Estructura - Tipo 4:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed; id="structure_exp" name="structure_exp" value="'.$resultado->structure.'">
+                          <div class="col-md-3 pb-4">   
+                            <label for="aliquot_penhouse_exp"><b>Alícuota:</b></label>
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_penhouse_exp" name="aliquot_penhouse_exp" value="'.$resultado->aliquot_penhouse.'%">
+                          </div>
+
+                          <div class="col-md-3 pb-4">   
+                            <label for="type_structure_exp"><b>Estructura - Tipo 4:</b></label>
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_structure_exp" name="type_structure_exp" value="'.$resultado->structure.'">
+                          </div>
+
+                          <div class="col-md-3 pb-4">   
+                            <label for="aliquot_structure_exp"><b>Alícuota:</b></label>
+                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_structure_exp" name="aliquot_structure_exp" value="'.$resultado->aliquot_structure.'%">
                           </div>
 
                           <div class="col-md-6 pb-4">   
@@ -134,7 +167,6 @@ class expenditureController extends Controller
                       </div>
                     </div>
                 ';
-             
           	}
         }
         else 
@@ -143,6 +175,93 @@ class expenditureController extends Controller
         }
 
 	}
+
+    public function searchResidence (Request $request) 
+    {
+      $id = $request->name_residence_id;
+      $resultDos = Expenditure::where('residence_coowner', $id)->get();
+      $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
+      $data = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
+     return response()->json($data);
+     /* $data = DB::table('expenditure')
+           ->join('expenses_detail', 'expenses_detail.expenditure_id', '=', 'expenditure.residence_coowner')
+             ->whereIn('expenditure.residence_coowner', $id)
+           ->select('expenses_detail.description_monthly', 'expenses_detail.amount_monthly', 'expenses_detail.type_money', 'expenditure.residence_coowner', 'expenditure.year', 'expenditure.month')
+            ->Distinct()->get();
+      */ 
+    
+      if ($resultDos != '[]' && $resultTres != '[]') {
+
+        echo'
+        <div class="row justify-content-center form-group">
+          <div class="col-sm-12 col-md-12 col-lg-12  text-center mt-4">
+            <label><b class="font-weight-bold">Detalle General</b></label>
+            <a href="detail/{{$resultDos->id}}" class="blue-gradient btn-round btn-lg" title="Visualizar" id="btn-detailResidence" name="resuFormatos">
+              <b class="text-white fa fa-eye"></b>
+            </a>
+          </div>
+        </div>
+        ';
+
+      }else{
+
+         echo '<div style="color: gray;" class="text-center mt-3"><h6><b><i class="fas fa-search fa-md font-weight-bold" title="Detalle Gásto Mensual."></i> Busquedad. . . </b></h6></div>';
+      }
+      
+          echo'
+              <div class="card shadow">
+                <div class="card-header blue-gradient">
+                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (No. Registro : #)</h6>
+                </div>
+              
+
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table id="expenditureTable" class="table table-fit">
+                    <thead>
+                      <tr>
+                        <th style="white-space:nowrap; width:1%;"><b>Residencia</b></th>
+                        <th style="white-space:nowrap; width:1%;"><b>Méses</b></th>
+                        <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
+                        <th style="white-space:nowrap; width:1%;"><b>Descripción Monto</b></th>
+                        <th style="white-space:nowrap; width:1%;"><b>Tipo Moneda</b></th>
+                        <th style="white-space:nowrap; width:1%;"><b>Total</b></th>
+                      </tr>
+                    </thead>
+                  </div>    
+                </div>
+                ';
+            
+          
+              foreach($data as $t){
+
+              echo'
+
+              <div class="card-body" style="margin-top:-35px;">
+                  <div class="table-responsive">
+                  <table align="center" border="1" style="width:auto; height:20px;" class="table table-condensed table-bordered table-hover">
+                    <tbody>
+                      <tr>
+                      <td style="white-space:nowrap; width:1%;">'.$t->nameResidence->name_residence.'</td>
+                      <td style="white-space:nowrap; width:1%;">'.$t->typeMonth->month.'</td>
+                      <td style="white-space:nowrap; width:1%;">'.$t->year.'</td>
+                      <td style="white-space:nowrap; width:1%;">'.$t->expenditures->description_monthly.'</td>
+                      <td style="white-space:nowrap; width:1%;">'.$t->expenditures->Type_money->option.'</td>
+                      <td style="white-space:nowrap; width:1%;">'.$t->expenditures->amount_monthly.'</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>    
+              </div>
+                ';
+            }
+
+          if($resultDos == '[]'){
+            echo '<br><div style="border-radius:5px;" class="text-center blue-gradient text-white font-weight-bold p-3"><h6><b><i style="color:yellow !important;" class="fa fa-exclamation-triangle fa-md font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i></b><b class="font-weight-bold"> No existe registro de Gásto Mensual en la Residencia.</b></h6></div>';
+          }  
+            
+            
+  }
 
 	public function searchMonth (Request $request) 
     {

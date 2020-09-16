@@ -3,33 +3,61 @@
 @section('css')
 <link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
 @endsection
-@section('card-title', 'Consulta')
+@section('card-title', 'Consulta de Gástos Mensuales')
 @section('card-button')
-<div class="d-none d-sm-inline-block btn-icon-split">
-    <span class="btn aqua-gradient btn-rounded" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner"> <i class="fas fa-plus fa-lg text-white font-weight-bold"></i>
-     </span>
-</div>
+
 @endsection
 
 @section('content')
-<div class="card shadow mb-4">
-  <div class="card-header blue-gradient">
-    <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Gásto Mensual."></i> Registro de Gástos Mensuales</h6>
-  </div>
-  <div class="card-body">
-    <div class="col-sm-8 col-md-6 col-lg-6">
-      
-    </div>
-  </div>
+<form id="htmlExpenditure" name="htmlExpenditure" method="POST">
+<div class="row justify-content-center">
+	<div class="col-sm-6 col-md-6 col-lg-7">
+	 <label for="name_residence_id"><b>Residencia:</b></label>
+	  <div class="inputWithIcon">
+	    <select id="name_residence_id" name="name_residence_id" type="text" class=" custom-select @error('name_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('name_residence_id') }}">
+	      <option value="0" disabled selected>Seleccione</option>
+	       @foreach($residence as $res)
+	        <option value="{{$res->id}}">{{$res->name_residence}}</option>
+	       @endforeach
+	    </select>
+	    <i class="fas fa-building fa-lg font-weight-bold" title="Seleccione el nombre de residencia del copropetario."></i>
+	  </div>
+	</div>
 </div>
+<div class="row">
+	<div class="col-md-10 offset-lg-1">
+ 	  <div id="resultResidence" name="resuFormatos"></div>
+	</div>
+</div>
+<hr>
 
-@include('expenditure.store')
+
+</form>
 @endsection
 
 @section('js')
 
-
 <script src="{{ asset('js/Spanish.json') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
+<script>
+	
+	$("#name_residence_id").change(function(event) {
+		var data = $( "#htmlExpenditure" ).serialize();
+	    $.ajax({
+	    	type: 'POST',
+	    	url: 'searchResidence',
+	    	data: data,
+	    	success: function(data){
+	    	  $('#resultResidence').html(data);
+	        }                           
+        })
+	});
+
+</script>
+<script>
+$(document).ready(function(){
+    var table = $('#expenditureTable').DataTable();
+  })
+</script>
 
 @endsection

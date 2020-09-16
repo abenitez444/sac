@@ -99,7 +99,6 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
-
 <script>
   $.ajaxSetup({
     headers: {
@@ -110,7 +109,7 @@
   $(document).ready(function(){
     $('#send-expenditure').click(function(e){
       var data = $("#addExpenditure").serialize();
-
+      
       $.ajax({
         url: '{{ route('mon-expenditure.store') }}',
         type: 'POST',
@@ -150,6 +149,7 @@
     })
   })
 </script>
+
 <script>
 $(document).ready(function(){
   var i=1;
@@ -163,18 +163,7 @@ $(document).ready(function(){
   $('#row'+button_id+'').remove();
   });
 
-  $('#submit').click(function(){      
-  $.ajax({
-      url:"nombre.php",
-      method:"POST",
-      data:$('#add_name').serialize(),
-      success:function(data)
-      {
-          alert(data);
-          $('#add_name')[0].reset();
-      }
-  });
-});
+
 
 });
 </script>
