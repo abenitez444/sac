@@ -30,8 +30,6 @@
 	</div>
 </div>
 <hr>
-
-
 </form>
 @endsection
 
@@ -48,16 +46,26 @@
 	    	url: 'searchResidence',
 	    	data: data,
 	    	success: function(data){
-	    	  $('#resultResidence').html(data);
+
+	    	  	$('#resultResidence').html(data);
+	    	  	$('#tableExpenditure').dataTable( {
+						    "drawCallback": function( settings ) {
+						        var api = new $.fn.dataTable.Api( settings );
+						 
+						        // Output the data for the visible rows to the browser's console
+						        // You might do something more useful with it!
+						        console.log( api.rows( {page:'current'} ).data() );
+						    }
+						} );
+	//var table = $('#tableExpenditure').DataTable();
+
 	        }                           
         })
 	});
 
 </script>
 <script>
-$(document).ready(function(){
-    var table = $('#expenditureTable').DataTable();
-  })
+
 </script>
 
 @endsection

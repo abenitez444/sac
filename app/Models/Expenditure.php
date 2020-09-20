@@ -21,7 +21,7 @@ class Expenditure extends Model
 
     public function Expenditures()
     {
-        return $this->belongsTo('App\Models\ExpensesDetail', 'id');
+        return $this->hasMany('App\Models\ExpensesDetail', 'expenditure_id');
     } 
 
  	public function nameResidence()
