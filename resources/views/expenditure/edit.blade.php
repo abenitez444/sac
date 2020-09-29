@@ -1,0 +1,163 @@
+@extends('layouts.app')
+@section('card-subtitle', '')
+@section('content')
+@section('css')
+<link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
+<link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
+@endsection
+<form id="addExpenditure" name="addExpenditure" method="PUT">
+  @csrf
+<input type="hidden" name="id" >
+<div class="row  justify-content-center">
+  <div class="col-sm-8 col-md-11 col-lg-11">
+    <div class="card">
+      <div class="card-header aqua-gradient text-white">
+        <h5 class="font-weight-bold text-center"><i class="far fa-list-alt fa-lg"></i> Registro de Gástos Mensuales</h5>
+      </div>
+      <div class="row mt-4">
+        <div class="col-sm-8 col-md-12 col-lg-12">
+          <div class="sidebar-brand-text mx-3 push ml-3">
+            <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
+          </div>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="container" >
+          <div class="row justify-content-center form-group">
+            <div class="col-sm-12 col-md-6 col-lg-6">
+              <label><b>Residencia:</b></label>
+              <div class="inputWithIcon">
+                  <select class="form-control{{ $errors->has('residence_coowner') ? ' is-invalid' : '' }} browser-default buscador custom-select fondo-gris element-focus" name="residence_coowner" id="residence_coowner" disabled>
+                    <option disabled selected>{{ $residence->name_residence }}</option>
+                   
+                    <option value="{{ $residence->id }}">{{ $residence->name_residence }}</option>
+                   
+                  </select>
+               <p class="campo-obligatorio">* Campo obligatorio</p>
+              </div>
+            </div>
+          </div>
+          <div class="row justify-content-center">
+            <div class="col-md-5 text-left">
+                <!-- Default input -->
+              <label>Año:</label>
+                <select class="browser-default custom-select" id="year" name="year">
+                <option  value="" >{{ $expenditure->year }}</option>
+              @for($anio=(date("Y")+5); 1980<=$anio; $anio--)
+                <option value="{{ $anio }}">{{ $anio }}</option>
+              @endfor
+              </select>
+              <div id="errorcontainer-ano" class='errorDiv'></div>
+              </div>
+            <div class="col-sm-4 col-md-4 col-lg-4">
+              <label><b>Mes:</b></label>
+                <div class="inputWithIcon">
+                    <select class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }} browser-default custom-select fondo-gris element-focus" name="month" id="month">
+                      <option value="" disabled selected>{{ $expenditure->typeMonth->month }}</option>
+                      @foreach($month as $m)
+                        <option value="{{ $m->id }}">{{ $m->month }}</option>
+                      @endforeach
+                    </select>
+                 <p class="campo-obligatorio">* Campo obligatorio</p>
+                </div>
+            </div>
+          </div>
+        </div>
+       </div>
+      <div class="row">
+        <div class="col-md-10 offset-lg-1">
+          <div id="resultClient" name="resuFormatos"> </div>
+        </div>
+      </div>
+      <div class="row justify-content-center">
+        <div class="col-sm-8 col-md-10 col-lg-10"> 
+        <div class="container">
+        <br />
+       
+        <form name="add_expenditure" id="add_expenditure">
+        <div class="table-responsive">
+        <table class="table table-bordered" id="edit_field">
+        @foreach ($expenditure->Expenditures as $detail)
+        <tr>
+        
+        <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" value="{{ $detail->description_monthly }}" class="form-control name_list mt-2" /></td>
+        <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>{{ $detail->Type_money->option }}</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
+        <td><label>Monto:</label><input type="text" name="amount_monthly[]" id="amount_monthly[]" value="{{ $detail->amount_monthly }}" placeholder="Ingrese cantidad. . ." class="form-control moneyType name_list mt-2" /></td>
+      
+        @endforeach
+        </tr>
+        </table>
+        </div>
+        <div class="card-footer justify-content-center">
+          <div class="text-center mt-1">
+              <button type="button" id="send-expenditure" class="btn aqua-gradient" ><i class="fas fa-share-square fa-md"></i> <b>Guardar</b></button>
+              <a href="#" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-md" title="Consultar"></i><b> Buscar</b></a>
+          </div>
+        </div>
+    </div>
+</div>
+</form>  
+@endsection
+@section('js')
+<script src="{{ asset('js/select2.min.js') }}"></script>
+<script src="{{ asset('js/selectSearch.js') }}"></script>
+<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script>
+  $.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+ 
+  
+</script>
+
+<script>
+//Edit Co-owner and save form
+  $('#send-expenditure').click(function(e){
+    var data = $("#editExpenditure").serialize();
+    $.ajax({
+      url: '{{ url('/mon-expenditure/update') }}',
+      type: 'GET',
+      dataType: 'json',
+      data: data,
+      //Success
+    }).done(function() {
+    
+      Swal.fire({
+        icon: 'success',
+        title: "¡Solicitud de Copropetario se guardó exitosamente!",
+        showConfirmButton: true,
+        timer: 3000
+      }).then((result) => {
+        if (result.value){
+          location.reload()
+        }
+      })
+      //Error
+    }).fail(function(msj) {
+      Swal.fire({
+        icon: 'error',
+        title: "No se realizo el registro del Copropetario!",
+        showConfirmButton: false,
+        timer: 2000
+      })
+      var errors = $.parseJSON(msj.responseText);
+
+      $.each(errors.errors, function(key, value) 
+      {
+          $("#" + key + "_group").addClass("has-error");
+          $("." + key + "_span").addClass("help-block text-danger").html(value);
+          toastr.error(value,"<h5>"+"<b style='color:#FFF400;'>* </b>" + "Campo obligatorio"+"</h5>");
+      });
+    });
+  })
+</script>
+
+<script>
+  //Mask Jquery Aliquot
+$(document).ready(function(){
+  $('.moneyType').mask('099.099.099,09');
+});
+</script>
+@endsection

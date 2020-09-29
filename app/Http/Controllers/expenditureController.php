@@ -79,6 +79,33 @@ class expenditureController extends Controller
 
     }
 
+    public function edit( $id)
+    {
+        $residence = Residence::find($id);
+        $expenditure = Expenditure::find($id);
+        $detail = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
+        $month = Month::all();
+        $typeMoney = TypeMoney::all();
+    
+        return view('expenditure.edit', compact('residence','expenditure','detail','month','typeMoney'));
+    }
+
+     public function updateExpenditure(Request $request, $id){
+      $residence = Residence::find($id);
+      $detail = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
+      dd($detail);
+          $results = ExpensesDetail::where('id','=', $request->id)
+             ->where('id','=',$request->id)
+             ->update([
+                     'description_monthly' => $request->description_monthly,
+                     'type_money' => $request->type_money,
+                     'amount_monthly' => $request->amount_monthly
+               ]);
+
+          return response()->json($results);
+      }
+  
+
     public function searchClient (Request $request) 
     {
         $id = $request->residence_coowner;
@@ -209,7 +236,7 @@ class expenditureController extends Controller
           echo'
               <div class="card shadow">
                 <div class="card-header blue-gradient">
-                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.')</h6>
+                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6>    </a>
                 </div>';
             
           
