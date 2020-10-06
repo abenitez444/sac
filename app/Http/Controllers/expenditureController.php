@@ -13,7 +13,7 @@ use DB;
 
 class expenditureController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
     	  $expenditure = Expenditure::all();
         $coowner = Coowner::all();
@@ -21,8 +21,11 @@ class expenditureController extends Controller
         $typeMoney = TypeMoney::all();
         $residence = Residence::all();
         $expenses = ExpensesDetail::all();
+        $id = Residence::orderBy('id', 'asc')->get();
+        $residences = Residence::find($id);
+        $resultDos = Expenditure::where('residence_coowner', $id)->get();
  
-        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'month', 'typeMoney','expenses'));
+        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'residences', 'month', 'typeMoney','expenses','resultDos'));
     }
 
     public function store(Request $request) 
@@ -58,6 +61,28 @@ class expenditureController extends Controller
       
     }
 
+    public function update(Request $request)
+    {
+ 
+        $id = $request->residence_coowner;
+        $expenditure = Expenditure::firstOrNew(['id' => $id]);
+        $expenditure->fill($request->all());
+        $expenditure_id = $request->residence_coowner;
+        $expenditure->save(); 
+     
+     
+      for ($i=0; $i < count((array)$request->description_monthly); $i++) { 
+        $expenditure = ExpensesDetail::firstOrNew(['id' => $id]);
+        $expenditure->description_monthly = $request->description_monthly[$i];
+        $expenditure->type_money = $request->type_money[$i];
+        $expenditure->amount_monthly = $request->amount_monthly[$i];
+        $expenditure->save();
+      }
+      
+      return response()->json($expenditure);
+    }
+
+
     public function create()
     {
 
@@ -79,32 +104,12 @@ class expenditureController extends Controller
 
     }
 
-    public function edit( $id)
+    public function edit($id)
     {
-        $residence = Residence::find($id);
-        $expenditure = Expenditure::find($id);
-        $detail = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
-        $month = Month::all();
-        $typeMoney = TypeMoney::all();
-    
-        return view('expenditure.edit', compact('residence','expenditure','detail','month','typeMoney'));
+      $data =  Expenditure::with('Expenditures', 'typeMoney')->where('expenditure.residence_coowner',  $id)->first();
+
+      return \Response::json($data);
     }
-
-     public function updateExpenditure(Request $request, $id){
-      $residence = Residence::find($id);
-      $detail = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
-      dd($detail);
-          $results = ExpensesDetail::where('id','=', $request->id)
-             ->where('id','=',$request->id)
-             ->update([
-                     'description_monthly' => $request->description_monthly,
-                     'type_money' => $request->type_money,
-                     'amount_monthly' => $request->amount_monthly
-               ]);
-
-          return response()->json($results);
-      }
-  
 
     public function searchClient (Request $request) 
     {
@@ -211,7 +216,7 @@ class expenditureController extends Controller
       $resultDos = Expenditure::where('residence_coowner', $id)->get();
 
       $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
-      $data = Expenditure::with('Expenditures')->where('expenditure.residence_coowner',  $id)->get();
+      $data = Expenditure::with('Expenditures')->where('expenditure.id',  $id)->get();
      //return response()->json($data);
      /* $data = DB::table('expenditure')
            ->join('expenses_detail', 'expenses_detail.expenditure_id', '=', 'expenditure.residence_coowner')
@@ -219,7 +224,7 @@ class expenditureController extends Controller
            ->select('expenses_detail.description_monthly', 'expenses_detail.amount_monthly', 'expenses_detail.type_money', 'expenditure.residence_coowner', 'expenditure.year', 'expenditure.month')
             ->Distinct()->get();
       */ 
-    
+      
       if ($resultDos->isNotEmpty()) {
 
         echo'
@@ -236,7 +241,7 @@ class expenditureController extends Controller
           echo'
               <div class="card shadow">
                 <div class="card-header blue-gradient">
-                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6>    </a>
+                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6> </a>
                 </div>';
             
           
@@ -247,8 +252,8 @@ class expenditureController extends Controller
                     <div class="table-responsive">
                       <table id="tableExpenditure" align="center" border="1" style="width:auto; height:20px;" class="table table-condensed table-bordered table-hover">
                         <thead>
-                              <tr>
-                                <th style="white-space:nowrap; width:1%;"><b>Méses</b></th>
+                              <tr class="text-center">
+                                <th style="white-space:nowrap; width:1%;"><b>Més</b></th>
                                 <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
                                 <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Descripción Monto</b></th>
                                 <th style="white-space:nowrap; width:1%;"><b class="ml-5">Tipo Moneda</b></th>
@@ -259,7 +264,7 @@ class expenditureController extends Controller
                           foreach ($resultDos as $expenditure) {
                             foreach ($expenditure->Expenditures as $detail) {
                               echo'
-                              <tr>
+                              <tr class="text-center">
                                 <td style="white-space:nowrap; width:1%;">'.$expenditure->typeMonth->month.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$expenditure->year.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$detail->description_monthly.'</td>

@@ -74,7 +74,7 @@
         <div class="container">
         <br />
        
-        <form name="add_expenditure" id="add_expenditure">
+       
         <div class="table-responsive">
         <table class="table table-bordered" id="dynamic_field">
         <tr>
@@ -92,6 +92,7 @@
           </div>
         </div>
     </div>
+  </div>
 </div>
 </form>  
 @endsection

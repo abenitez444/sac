@@ -2,7 +2,7 @@
     * Loading v1.0
     * Copyright Grafikdev
     * Distributed under the MIT license
-    */
+   
 
     (function($) {
 
@@ -58,3 +58,4 @@
     })(jQuery);
 
     $('#loading').Loading();
+ */

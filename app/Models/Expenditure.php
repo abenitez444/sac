@@ -40,7 +40,7 @@ class Expenditure extends Model
 
      public function typeMoney()
     {
-        return $this->belongsTo('App\Models\TypeMoney', 'type_money');
+        return $this->belongsTo('App\Models\TypeMoney');
     }
 
     public function typeCenter()
