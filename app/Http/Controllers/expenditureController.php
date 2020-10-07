@@ -70,9 +70,9 @@ class expenditureController extends Controller
         $expenditure_id = $request->residence_coowner;
         $expenditure->save(); 
      
-     
+
       for ($i=0; $i < count((array)$request->description_monthly); $i++) { 
-        $expenditure = ExpensesDetail::firstOrNew(['id' => $id]);
+        $expenditure = ExpensesDetail::find($request->expenditure_id[$i]);
         $expenditure->description_monthly = $request->description_monthly[$i];
         $expenditure->type_money = $request->type_money[$i];
         $expenditure->amount_monthly = $request->amount_monthly[$i];

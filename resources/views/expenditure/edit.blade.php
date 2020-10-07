@@ -58,6 +58,7 @@
             <div class="table-responsive">
               <table class="table table-bordered" id="dynamic_field">
               <tr>
+                <td id="expenditure_id" hidden><label><b>id</b></label></td>
                 <td id="description_monthly"><label><b>Descripción:</b></label></td>
                 <td id="type_money"><label><b>Tipo:</b></label></td>
                 <td id="amount_monthly"><label>Monto:</label></td>

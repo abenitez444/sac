@@ -86,8 +86,10 @@
             modal.find('.modal-body #month').val(data.month)
             
        if(data.expenditures.length > 0){
-          
           for(i=0; i < data.expenditures.length; i++) {
+
+            modal.find('.modal-body #expenditure_id').append('<input type="hidden" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].id+'" placeholder="ID" class="form-control name_list mt-2" />')
+
             modal.find('.modal-body #description_monthly').append('<input type="text" name="description_monthly[]" id="description_monthly[]" value="'+data.expenditures[i].description_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
             
                 if (data.expenditures[i].type_money == 1) {
