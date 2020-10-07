@@ -20,6 +20,10 @@ Route::get('/', function () {
 });
 
 
+	Route::get('/saveData', 'testController@saveData')->name('test');
+	Route::get('/data', 'testController@index')->name('test.index');
+
+
 	Route::get('/index', 'expenditureController@index')->name('mon-expenditure.index');
 	Route::get('/create', 'expenditureController@create')->name('mon-expenditure.create');
 	Route::get('/edit/{id}', 'expenditureController@edit')->name('mon-expenditure.edit');
