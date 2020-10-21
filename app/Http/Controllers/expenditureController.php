@@ -96,16 +96,18 @@ class expenditureController extends Controller
 
     }
 
-    public function findGeneral(Request $request, $id)
-    {
-      $expenditure = Expenditure::all();
-     
-      return view('expenditure.detail', compact('expenditure'));
+    public function findGeneral($id)
+    {  
+
+      $data =  Expenditure::with('Expenditures', 'typeMonth')->where('expenditure.id',  $id)->first();
+      
+       return \Response::json($data);
 
     }
 
     public function edit($id)
     {
+
       $data =  Expenditure::with('Expenditures', 'typeMoney')->where('expenditure.residence_coowner',  $id)->first();
 
       return \Response::json($data);
@@ -217,13 +219,7 @@ class expenditureController extends Controller
 
       $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
       $data = Expenditure::with('Expenditures')->where('expenditure.id',  $id)->get();
-     //return response()->json($data);
-     /* $data = DB::table('expenditure')
-           ->join('expenses_detail', 'expenses_detail.expenditure_id', '=', 'expenditure.residence_coowner')
-             ->whereIn('expenditure.residence_coowner', $id)
-           ->select('expenses_detail.description_monthly', 'expenses_detail.amount_monthly', 'expenses_detail.type_money', 'expenditure.residence_coowner', 'expenditure.year', 'expenditure.month')
-            ->Distinct()->get();
-      */ 
+    
       
       if ($resultDos->isNotEmpty()) {
 
@@ -247,6 +243,76 @@ class expenditureController extends Controller
           
              /* foreach($resultDos->Expenditures as $t){*/
 
+              echo'
+                  <div class="card-body" style="margin-top:10px;">
+                    <div class="table-responsive">
+                      <table id="tableExpenditure" align="center" border="1" style="width:auto; height:20px;" class="table table-condensed table-bordered table-hover">
+                        <thead>
+                              <tr class="text-center">
+                                <th style="white-space:nowrap; width:1%;"><b>Més</b></th>
+                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
+                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
+                              </tr>
+                        </thead>
+                        <tbody>';
+                          foreach ($resultDos as $expenditure) {
+                           
+                              echo'
+                              <tr class="text-center">
+                                <td style="white-space:nowrap; width:1%;">'.$expenditure->typeMonth->month.'</td>
+                                <td style="white-space:nowrap; width:1%;">'.$expenditure->year.'</td>
+                                <td style="white-space:nowrap; width:1%;"><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'"">
+                                  <b class="fa fa-eye"></b>
+                                </a></td>
+                              </tr>';
+                          }
+
+              echo'
+                        </tbody>
+                      </table>
+                    </div>    
+                  </div>';
+            /*}*/
+      }else{
+
+        echo '<br><div style="border-radius:5px;" class="text-center blue-gradient text-white font-weight-bold p-3"><h6><b><i style="color:yellow !important;" class="fa fa-exclamation-triangle fa-md font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i></b><b class="font-weight-bold"> No existe registro de Gásto Mensual en la Residencia.</b></h6></div>';
+
+      }
+
+  }
+
+  
+   public function searchExpenditure (Request $request) 
+    {
+      $id = $request->name_residence_id;
+
+      $residence = Residence::find($id);
+      $resultDos = Expenditure::where('residence_coowner', $id)->get();
+
+      $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
+      $data = Expenditure::with('Expenditures')->where('expenditure.id',  $id)->get();
+    
+      
+      if ($resultDos->isNotEmpty()) {
+
+        echo'
+        <div class="row justify-content-center form-group">
+          <div class="col-sm-12 col-md-12 col-lg-12  text-center mt-4">
+            <label><b class="font-weight-bold">Detalle General</b></label>
+            <a href="detail/'.$residence->id.'" class="blue-gradient btn-round btn-lg" title="Visualizar" id="btn-detailResidence" name="resuFormatos">
+              <b class="text-white fa fa-eye"></b>
+            </a>
+          </div>
+        </div>
+        ';
+
+          echo'
+              <div class="card shadow">
+                <div class="card-header blue-gradient">
+                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6> </a>
+                </div>';
+            
+          
               echo'
                   <div class="card-body" style="margin-top:10px;">
                     <div class="table-responsive">
@@ -279,21 +345,13 @@ class expenditureController extends Controller
                       </table>
                     </div>    
                   </div>';
-            /*}*/
+         
       }else{
 
         echo '<br><div style="border-radius:5px;" class="text-center blue-gradient text-white font-weight-bold p-3"><h6><b><i style="color:yellow !important;" class="fa fa-exclamation-triangle fa-md font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i></b><b class="font-weight-bold"> No existe registro de Gásto Mensual en la Residencia.</b></h6></div>';
 
       }
       
-/*  
-                      <th style="white-space:nowrap; width:1%;"><b>Descripción Monto</b></th>
-                        <th style="white-space:nowrap; width:1%;"><b>Tipo Moneda</b></th>
-                        <th style="white-space:nowrap; width:1%;"><b>Total</b></th>
-
-                                <td style="white-space:nowrap; width:1%;">'.$t->expenditures->description_monthly.'</td>
-                      <td style="white-space:nowrap; width:1%;">'.$t->expenditures->Type_money->option.'</td>
-                      <td style="white-space:nowrap; width:1%;">'.$t->expenditures->amount_monthly.'</td>*/
             
   }
 

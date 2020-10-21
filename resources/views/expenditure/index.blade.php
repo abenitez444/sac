@@ -32,6 +32,7 @@
 <hr>
 </form>
 @include('expenditure.edit')
+@include('expenditure.detail')
 @endsection
 
 @section('js')
@@ -153,6 +154,55 @@
       }
     })
 </script>
+<script>
+ $("#detailExpenses").appendTo("body");
+  $('#detailExpenses').on('show.bs.modal', function (event) {
+      var modal = $(this)
+      var button = $(event.relatedTarget) 
+      var id = button.data('whatever') 
 
+      if(id){
+
+        $.ajax({
+          url: '{{ url('/detailExpenses') }}/'+id,
+          type: 'GET',
+          dataType: 'json',
+        })
+        .done(function(data) {
+          modal.find('.modal-title').text(' Ficha  ')
+          modal.find('.modal-body #id').text(data.id)
+            modal.find('.modal-body #residence_coowner').text(data.residence_coowner)
+            modal.find('.modal-body #year').text(data.year)
+            modal.find('.modal-body #month').text(data.type_month.month)
+           
+       if(data.expenditures.length > 0){
+          for(i=0; i < data.expenditures.length; i++) {
+
+            modal.find('.modal-body #expenditure_id').append('<input type="text" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].id+'" placeholder="id" class="form-control name_list mt-2" />')
+          
+            modal.find('.modal-body #description_monthly').append('<input type="text" name="description_monthly[]" id="description_monthly[]" value="'+data.expenditures[i].description_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
+            
+                if (data.expenditures[i].type_money == 1) {
+                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='1'> Bolívares</option><option value='2'> Dolares</option><option value='3'> Euros</option></select>");
+                }
+                if (data.expenditures[i].type_money == 2) {
+                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='2'> Dolares</option></option><option value='3'> Euros</option></option><option value='1'> Bolívares</option></select>");
+                }
+                if (data.expenditures[i].type_money == 3) {
+                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='3'> Euros</option>><option value='1'> Bolívares</option><option value='2'> Dolares</option></select>");
+                }
+
+            modal.find('.modal-body #amount_monthly').append('<input type="text" name="amount_monthly[]" id="amount_monthly[]" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
+ 
+            }
+          }
+     
+        })
+        .fail(function() {
+          console.log("error");
+        });
+      }
+    })
+</script>
 
 @endsection

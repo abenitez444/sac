@@ -25,7 +25,7 @@ Route::get('/', function () {
 	Route::get('/editExpenditure/{id}', 'expenditureController@edit')->name('mon-expenditure.edit');
 	Route::post('/updateExpenditure', 'expenditureController@update')->name('mon-expenditure.update');
 	Route::get('/show/{id}', 'expenditureController@show');
-	Route::get('/detail/{id}', 'expenditureController@findGeneral')->name('mon-expenditure.detail');
+	Route::get('/detailExpenses/{id}', 'expenditureController@findGeneral')->name('mon-expenditure.detail');
 	Route::post('/store', 'expenditureController@store')->name('mon-expenditure.store');
 	Route::put('/deleted','expenditureController@destroy')->name('mon-expenditure.deleted');
 	Route::post('/searchClient', 'expenditureController@searchClient');
