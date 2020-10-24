@@ -174,7 +174,6 @@
             modal.find('.modal-body #residence_coowner').text(data.residence_coowner)
             modal.find('.modal-body #year').text(data.year)
             modal.find('.modal-body #month').text(data.type_month.month)
-           
        if(data.expenditures.length > 0){
           for(i=0; i < data.expenditures.length; i++) {
 

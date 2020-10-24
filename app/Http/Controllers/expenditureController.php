@@ -37,7 +37,7 @@ class expenditureController extends Controller
       $expenditure->month = $request->month;
       $expenditure->save();
       
-      $expenditure_id = $request->residence_coowner;
+      $expenditure_id = $expenditure->id;
 
       $this->expenses_detail($expenditure_id, $request);
       
@@ -100,7 +100,7 @@ class expenditureController extends Controller
     {  
 
       $data =  Expenditure::with('Expenditures', 'typeMonth')->where('expenditure.id',  $id)->first();
-      
+
        return \Response::json($data);
 
     }
