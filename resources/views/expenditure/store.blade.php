@@ -80,7 +80,7 @@
         <tr>
         <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td>
         <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
-        <td><label>Monto:</label><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Ingrese cantidad. . ." class="form-control moneyType name_list mt-2" /></td>
+        <td><label>Monto:</label><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Ingrese cantidad. . ." class=" form-control moneyType name_list mt-2" /></td>
         <td><button type="button" name="add" id="add" class="btn aqua-gradient btn-rounded mt-3 ml-2"><i class="fas fa-plus fa-lg text-white font-weight-bold"></i></button></td>
         </tr>
         </table>
@@ -100,6 +100,11 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script>
+  $(document).ready(function(){
+
+});
+</script>
 <script>
   $.ajaxSetup({
     headers: {
@@ -153,9 +158,13 @@
 
 <script>
 $(document).ready(function(){
+    
+
   var i=1;
   $('#add').click(function(){
+
   i++;
+  $('.amount').mask('099.090.990,99');
   $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td><td><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]" ><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td><td><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Monto" class="form-control name_list mt-2" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn-rounded btn_remove ml-2"><b>X</b></button></td></tr>');
   });
 
@@ -169,10 +178,4 @@ $(document).ready(function(){
 });
 </script>
 
-<script>
-  //Mask Jquery Aliquot
-$(document).ready(function(){
-  $('.moneyType').mask('099.099.099,09');
-});
-</script>
 @endsection

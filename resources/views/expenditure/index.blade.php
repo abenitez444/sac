@@ -88,8 +88,8 @@
             
        if(data.expenditures.length > 0){
           for(i=0; i < data.expenditures.length; i++) {
-
-            modal.find('.modal-body #expenditure_id').append('<input type="hidden" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].id+'" placeholder="ID" class="form-control name_list mt-2" />')
+         
+            modal.find('.modal-body #expenditure_id').append('<input type="hidden" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].expenditure_id+'" placeholder="ID" class="form-control name_list mt-2" />')
 
             modal.find('.modal-body #description_monthly').append('<input type="text" name="description_monthly[]" id="description_monthly[]" value="'+data.expenditures[i].description_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
             
@@ -105,8 +105,8 @@
 
             modal.find('.modal-body #amount_monthly').append('<input type="text" name="amount_monthly[]" id="amount_monthly[]" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
  
+              }
             }
-          }
           //Edit Co-owner and save form
           $('#send-updateExpenditure').click(function(e){
             var data = $("#updateExpenditure").serialize();
@@ -160,6 +160,13 @@
       var modal = $(this)
       var button = $(event.relatedTarget) 
       var id = button.data('whatever') 
+      
+      var suma = 0;
+      var total = 0;
+      var total_general = 0;
+      var aliq_center = 0;
+      var aliq_corner = 0;
+      var aliq_penhouse = 0;
 
       if(id){
 
@@ -169,36 +176,81 @@
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Ficha  ')
+      
+          modal.find('.modal-title').text(' Condominios de Residencias')
           modal.find('.modal-body #id').text(data.id)
-            modal.find('.modal-body #residence_coowner').text(data.residence_coowner)
+            modal.find('.modal-body #residence_coowner').text(data.name_residence.name_residence)
             modal.find('.modal-body #year').text(data.year)
             modal.find('.modal-body #month').text(data.type_month.month)
-       if(data.expenditures.length > 0){
+
+         
           for(i=0; i < data.expenditures.length; i++) {
-
-            modal.find('.modal-body #expenditure_id').append('<input type="text" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].id+'" placeholder="id" class="form-control name_list mt-2" />')
           
-            modal.find('.modal-body #description_monthly').append('<input type="text" name="description_monthly[]" id="description_monthly[]" value="'+data.expenditures[i].description_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
-            
+            suma +=  parseFloat(data.expenditures[i].amount_monthly);
+            total +=  parseFloat(data.expenditures[i].amount_monthly)*(10)/(100);
+            total_general =  suma+total;
+
+            aliq_center = data.name_residence.aliquot_center*total_general;
+            aliq_corner = data.name_residence.aliquot_corner*total_general;
+            aliq_penhouse = data.name_residence.aliquot_penhouse*total_general;
+            aliq_structure = data.name_residence.aliquot_structure*total_general;
+          
+            modal.find('.modal-body #expenditure_id').append('<span id="expenditure_id[]">'+data.expenditures[i].id+'</span>')
+          
+            modal.find('.modal-body #description_monthly').append('<br><span  name="expenditure_id[]" id="expenditure_id[]">'+data.expenditures[i].description_monthly+'</span><br>')
+
                 if (data.expenditures[i].type_money == 1) {
-                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='1'> Bolívares</option><option value='2'> Dolares</option><option value='3'> Euros</option></select>");
+                modal.find('.modal-body #type_money').append(' <br><span  name="type_money[]" id="type_money[]">Bolívares</span><br>');
                 }
+                
+
                 if (data.expenditures[i].type_money == 2) {
-                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='2'> Dolares</option></option><option value='3'> Euros</option></option><option value='1'> Bolívares</option></select>");
-                }
-                if (data.expenditures[i].type_money == 3) {
-                modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='3'> Euros</option>><option value='1'> Bolívares</option><option value='2'> Dolares</option></select>");
+                modal.find('.modal-body #type_money').append('<br><span  name="type_money[]" id="type_money[]">Dolares</span><br>');
                 }
 
-            modal.find('.modal-body #amount_monthly').append('<input type="text" name="amount_monthly[]" id="amount_monthly[]" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
- 
-            }
+                if (data.expenditures[i].type_money == 3) {
+                modal.find('.modal-body #type_money').append('<br><span  name="type_money[]" id="type_money[]">Euros</span><br>');
+                }
+
+                modal.find('.modal-body #amount_monthly').append('<br><span id="expenditure_id[]">'+data.expenditures[i].amount_monthly+'</span><br>')
+        
           }
-     
+            modal.find('.modal-body #suma_amount').append(' <br><span id="suma_amount">'+suma+'</span><br>');
+            modal.find('.modal-body #total_amount').append(' <br><span id="total_amount">'+total+'</span><br>');
+            modal.find('.modal-body #total_general').append(' <br><span id="total_general">'+total_general+'</span><br>');
+
+            if (data.name_residence.type_center == 'on') {
+                modal.find('.modal-body #aliquot_center').append(' <br><span id="aliquot_center">'+parseFloat(data.name_residence.aliquot_center)+' %</span><br>');
+                 modal.find('.modal-body #aliq_center').append(' <br><span id="aliq_center">'+aliq_center.toLocaleString('es-CO')+' %</span><br>');
+            }
+
+            if (data.name_residence.type_corner == 'on') {
+                modal.find('.modal-body #aliquot_corner').append(' <br><span id="type_corner">'+data.name_residence.aliquot_corner+' %</span><br>');
+                modal.find('.modal-body #aliq_corner').append(' <br><span id="aliq_corner">'+aliq_corner.toLocaleString('es-CO')+' %</span><br>');
+            }
+
+            if (data.name_residence.type_penhouse == 'on') {
+                modal.find('.modal-body #aliquot_penhouse').append(' <br><span id="type_corner">'+data.name_residence.aliquot_penhouse+' %</span><br>');
+                modal.find('.modal-body #aliq_penhouse').append(' <br><span id="aliq_penhouse">'+aliq_penhouse.toLocaleString('en-IN')+' %</span><br>');
+            }
+
+             if (data.name_residence.type_structure == 'on') {
+                modal.find('.modal-body #structure').append(' <br><span id="structure">'+data.name_residence.structure+' </span><br>');
+                modal.find('.modal-body #aliquot_structure').append(' <br><span id="aliquot_structure">'+data.name_residence.aliquot_structure+' %</span><br>');
+                modal.find('.modal-body #aliq_structure').append(' <br><span id="aliq_structure">'+aliq_structure.toLocaleString('en-IN')+' %</span><br>');
+            }
+
         })
         .fail(function() {
           console.log("error");
+        });
+        $('#closeDetail').click(function(){
+            location.reload('index')
+        });
+        $(document).keyup(function(e) {
+          if (e.key === "Escape") {
+            location.reload() 
+          }
         });
       }
     })

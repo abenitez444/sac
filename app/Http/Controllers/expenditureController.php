@@ -21,11 +21,10 @@ class expenditureController extends Controller
         $typeMoney = TypeMoney::all();
         $residence = Residence::all();
         $expenses = ExpensesDetail::all();
-        $id = Residence::orderBy('id', 'asc')->get();
-        $residences = Residence::find($id);
-        $resultDos = Expenditure::where('residence_coowner', $id)->get();
+       
  
-        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'residences', 'month', 'typeMoney','expenses','resultDos'));
+ 
+        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'residences', 'month', 'typeMoney','expenses'));
     }
 
     public function store(Request $request) 
@@ -99,7 +98,7 @@ class expenditureController extends Controller
     public function findGeneral($id)
     {  
 
-      $data =  Expenditure::with('Expenditures', 'typeMonth')->where('expenditure.id',  $id)->first();
+      $data =  Expenditure::with('Expenditures', 'nameResidence', 'typeMonth')->where('expenditure.id',  $id)->first();
 
        return \Response::json($data);
 
@@ -108,7 +107,7 @@ class expenditureController extends Controller
     public function edit($id)
     {
 
-      $data =  Expenditure::with('Expenditures', 'typeMoney')->where('expenditure.residence_coowner',  $id)->first();
+      $data =  Expenditure::with('Expenditures',  'typeMoney')->where('expenditure.residence_coowner',  $id)->first();
 
       return \Response::json($data);
     }

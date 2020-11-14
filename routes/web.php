@@ -32,6 +32,7 @@ Route::get('/', function () {
 	Route::post('/searchMonth', 'expenditureController@searchMonth');
 	Route::post('/searchYear','expenditureController@searchYear');
 	Route::post('/searchResidence','expenditureController@searchResidence')->name('mon-expenditure.residence');
+	
 
 
 /*CRUD PROYECT*/

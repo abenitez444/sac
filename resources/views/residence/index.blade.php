@@ -104,7 +104,7 @@
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 <script>
   $(document).ready(function(){
-  $('.aliquot').mask('09,90909909');
+  $('.aliquot').mask('0.990909909');
 });
 </script>
 </script>
