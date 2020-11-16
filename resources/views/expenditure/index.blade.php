@@ -198,12 +198,9 @@
             suma += parseFloat(data.expenditures[i].amount_monthly);
 
 
-
-
-
-            total +=  parseFloat(data.expenditures[i].amount_monthly)*parseFloat(10)/parseFloat(100);
+            total =  parseFloat(suma)*10/100;
+            total = total.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             total_general =  suma+total;
-            console.log(total_general)
 
             aliq_center = data.name_residence.aliquot_center*total_general;
             aliq_corner = data.name_residence.aliquot_corner*total_general;
