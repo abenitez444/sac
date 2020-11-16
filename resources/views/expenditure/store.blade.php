@@ -80,7 +80,7 @@
         <tr>
         <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td>
         <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
-        <td><label>Monto:</label><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Ingrese cantidad. . ." class=" form-control moneyType name_list mt-2" /></td>
+        <td><label>Monto:</label><input type="text" name="amount_monthly[]" inputmode="numeric" id="amount_monthly" placeholder="Ingrese cantidad. . ." class="money form-control moneyType name_list mt-2" value="0,00" /></td>
         <td><button type="button" name="add" id="add" class="btn aqua-gradient btn-rounded mt-3 ml-2"><i class="fas fa-plus fa-lg text-white font-weight-bold"></i></button></td>
         </tr>
         </table>
@@ -100,9 +100,30 @@
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
 <script src="{{ asset('js/jquery.mask.min.js') }}"></script>
+<script src="{{ asset('js/simple-mask-money.js') }}"></script>
 <script>
+ 
   $(document).ready(function(){
+  // configuration
+      const args = {
+        //afterFormat(e) { console.log('afterFormat', e); },
+        allowNegative: false,
+        //beforeFormat(e) { console.log('beforeFormat', e); },
+        negativeSignAfter: false,
+        prefix: '',
+        suffix: '',
+        fixed: true,
+        fractionDigits: 2,
+        decimalSeparator: ',',
+        thousandsSeparator: '.',
+        cursor: 'move'
+      };
 
+      // select the element
+      const input = SimpleMaskMoney.setMask('#amount_monthly', args);
+
+      // This method return value of your input in format number to save in your database
+      //input.formatToNumber();
 });
 </script>
 <script>
@@ -160,13 +181,58 @@
 $(document).ready(function(){
     
 
-  var i=1;
+  var i= 1;
   $('#add').click(function(){
 
   i++;
-  $('.amount').mask('099.090.990,99');
-  $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td><td><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]" ><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td><td><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Monto" class="form-control name_list mt-2" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn-rounded btn_remove ml-2"><b>X</b></button></td></tr>');
+  //$('.amount').mask('099.090.990,99');
+  $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td><td><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]" ><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td><td><input type="text" name="amount_monthly[]" id="amount_monthly'+i+'" inputmode="numeric" value="0,00" placeholder="Monto" class="form-control name_list mt-2" /></td><td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn-rounded btn_remove ml-2"><b>X</b></button></td></tr>');
+
+      // configuration
+      const config = {
+        //afterFormat(e) { console.log('afterFormat', e); },
+        allowNegative: false,
+        //beforeFormat(e) { console.log('beforeFormat', e); },
+        negativeSignAfter: false,
+        prefix: '',
+        suffix: '',
+        fixed: true,
+        fractionDigits: 2,
+        decimalSeparator: ',',
+        thousandsSeparator: '.',
+        cursor: 'move'
+      };
+
+      // select the element
+      const nueov = SimpleMaskMoney.setMask('#amount_monthly'+i+'', config);
+
   });
+
+
+    /*SimpleMaskMoney.args = {
+            afterFormat(e) { console.log('afterFormat', e); },
+            allowNegative: false,
+            beforeFormat(e) { console.log('beforeFormat', e); },
+            negativeSignAfter: false,
+            prefix: '',
+            suffix: '',
+            fixed: true,
+            fractionDigits: 2,
+            decimalSeparator: ',',
+            thousandsSeparator: '.',
+            cursor: 'move'
+          };
+
+          input.oninput = () => {
+            input.value = SimpleMaskMoney.format(input.value);
+          }
+
+          // Your send method
+          input.onkeyup = (e) => {
+            if (e.key !== "Enter") return;
+            // This method return value of your input in format number to save in your database
+            SimpleMaskMoney.formatToNumber(input.value);
+          }*/
 
   $(document).on('click', '.btn_remove', function(){
   var button_id = $(this).attr("id"); 

@@ -30,12 +30,17 @@
 		          <br />
 		            <div class="table-responsive">
 		              <table class="table" id="dynamic_field">
+                    <thead class="text-center">
+                      <th><label><h6 class="dark-grey-text  font-weight-bold">Descripción</h6></label></th>
+                      <th><label><h6 class="dark-grey-text  font-weight-bold">Tipo</h6></label></th>
+                      <th><label><h6 class="dark-grey-text  font-weight-bold">Monto</h6></label></th>
+                    </thead>
 		              	<tbody id="reset" >
 			              <tr class="text-center">
 			                <td id="expenditure_id" hidden><label><b>id</b></label></td>
-			                <td id="description_monthly" class="font-weight-bold"><label><h6 class="dark-grey-text  font-weight-bold">Descripción:</h6></label></td>
-			                <td id="type_money" class="font-weight-bold"><label><h6 class="dark-grey-text  font-weight-bold">Tipo:</h6></label></td>
-			                <td id="amount_monthly" class="font-weight-bold"><label><h6 class="dark-grey-text  font-weight-bold">Monto:</h6></label></td>
+			                <td id="description_monthly" class="font-weight-bold"></td>
+			                <td id="type_money" class="font-weight-bold"></td>
+			                <td id="amount_monthly" class="font-weight-bold"></td>
 			              </tr>
 		                </tbody>
 		              </table>

@@ -24,7 +24,7 @@ class expenditureController extends Controller
        
  
  
-        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'residences', 'month', 'typeMoney','expenses'));
+        return view('expenditure.index', compact('expenditure', 'coowner', 'residence', 'month', 'typeMoney','expenses'));
     }
 
     public function store(Request $request) 
@@ -47,10 +47,17 @@ class expenditureController extends Controller
     private function expenses_detail($id, $obj)
     {
       for ($i=0; $i < count($obj->description_monthly); $i++) { 
+      
+        $b = str_replace('.', '', $obj->amount_monthly[$i] );
+        $b = str_replace(',', '.', $b );
+        $b = (float)$b;
+
+        $b = number_format($b, 2, '.', '');
+
         $expenditure = new ExpensesDetail;
         $expenditure->description_monthly = $obj->description_monthly[$i];
         $expenditure->type_money = $obj->type_money[$i];
-        $expenditure->amount_monthly = $obj->amount_monthly[$i];
+        $expenditure->amount_monthly = $b;
         $expenditure->expenditure_id = $id;
        
         $expenditure->save();

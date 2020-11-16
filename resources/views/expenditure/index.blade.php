@@ -167,6 +167,7 @@
       var aliq_center = 0;
       var aliq_corner = 0;
       var aliq_penhouse = 0;
+      var x;
 
       if(id){
 
@@ -183,19 +184,33 @@
             modal.find('.modal-body #year').text(data.year)
             modal.find('.modal-body #month').text(data.type_month.month)
 
+           modal.find('.modal-body #description_monthly').html('');
+           modal.find('.modal-body #type_money').html('');
+           modal.find('.modal-body #amount_monthly').html('');
+
          
           for(i=0; i < data.expenditures.length; i++) {
-          
-            suma +=  parseFloat(data.expenditures[i].amount_monthly);
-            total +=  parseFloat(data.expenditures[i].amount_monthly)*(10)/(100);
+            
+            x = parseFloat(data.expenditures[i].amount_monthly); 
+            x = x.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+            
+
+            suma += parseFloat(data.expenditures[i].amount_monthly);
+
+
+
+
+
+            total +=  parseFloat(data.expenditures[i].amount_monthly)*parseFloat(10)/parseFloat(100);
             total_general =  suma+total;
+            console.log(total_general)
 
             aliq_center = data.name_residence.aliquot_center*total_general;
             aliq_corner = data.name_residence.aliquot_corner*total_general;
             aliq_penhouse = data.name_residence.aliquot_penhouse*total_general;
             aliq_structure = data.name_residence.aliquot_structure*total_general;
           
-            modal.find('.modal-body #expenditure_id').append('<span id="expenditure_id[]">'+data.expenditures[i].id+'</span>')
+            modal.find('.modal-body #expenditure_id').html('<span id="expenditure_id[]">'+data.expenditures[i].id+'</span>')
           
             modal.find('.modal-body #description_monthly').append('<br><span  name="expenditure_id[]" id="expenditure_id[]">'+data.expenditures[i].description_monthly+'</span><br>')
 
@@ -212,32 +227,35 @@
                 modal.find('.modal-body #type_money').append('<br><span  name="type_money[]" id="type_money[]">Euros</span><br>');
                 }
 
-                modal.find('.modal-body #amount_monthly').append('<br><span id="expenditure_id[]">'+data.expenditures[i].amount_monthly+'</span><br>')
+                modal.find('.modal-body #amount_monthly').append('<br><span id="expenditure_id[]">'+x+'</span><br>')
         
           }
-            modal.find('.modal-body #suma_amount').append(' <br><span id="suma_amount">'+suma+'</span><br>');
-            modal.find('.modal-body #total_amount').append(' <br><span id="total_amount">'+total+'</span><br>');
-            modal.find('.modal-body #total_general').append(' <br><span id="total_general">'+total_general+'</span><br>');
+
+            suma = suma.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
+
+            modal.find('.modal-body #suma_amount').html(' <br><span id="suma_amount">'+suma+'</span><br>');
+            modal.find('.modal-body #total_amount').html(' <br><span id="total_amount">'+total+'</span><br>');
+            modal.find('.modal-body #total_general').html(' <br><span id="total_general">'+total_general+'</span><br>');
 
             if (data.name_residence.type_center == 'on') {
-                modal.find('.modal-body #aliquot_center').append(' <br><span id="aliquot_center">'+parseFloat(data.name_residence.aliquot_center)+' %</span><br>');
-                 modal.find('.modal-body #aliq_center').append(' <br><span id="aliq_center">'+aliq_center.toLocaleString('es-CO')+' %</span><br>');
+                modal.find('.modal-body #aliquot_center').html(' <br><span id="aliquot_center">'+parseFloat(data.name_residence.aliquot_center)+' %</span><br>');
+                 modal.find('.modal-body #aliq_center').html(' <br><span id="aliq_center">'+aliq_center.toLocaleString('es-CO')+' %</span><br>');
             }
 
             if (data.name_residence.type_corner == 'on') {
-                modal.find('.modal-body #aliquot_corner').append(' <br><span id="type_corner">'+data.name_residence.aliquot_corner+' %</span><br>');
-                modal.find('.modal-body #aliq_corner').append(' <br><span id="aliq_corner">'+aliq_corner.toLocaleString('es-CO')+' %</span><br>');
+                modal.find('.modal-body #aliquot_corner').html(' <br><span id="type_corner">'+data.name_residence.aliquot_corner+' %</span><br>');
+                modal.find('.modal-body #aliq_corner').html(' <br><span id="aliq_corner">'+aliq_corner.toLocaleString('es-CO')+' %</span><br>');
             }
 
             if (data.name_residence.type_penhouse == 'on') {
-                modal.find('.modal-body #aliquot_penhouse').append(' <br><span id="type_corner">'+data.name_residence.aliquot_penhouse+' %</span><br>');
-                modal.find('.modal-body #aliq_penhouse').append(' <br><span id="aliq_penhouse">'+aliq_penhouse.toLocaleString('en-IN')+' %</span><br>');
+                modal.find('.modal-body #aliquot_penhouse').html(' <br><span id="type_corner">'+data.name_residence.aliquot_penhouse+' %</span><br>');
+                modal.find('.modal-body #aliq_penhouse').html(' <br><span id="aliq_penhouse">'+aliq_penhouse.toLocaleString('en-IN')+' %</span><br>');
             }
 
              if (data.name_residence.type_structure == 'on') {
-                modal.find('.modal-body #structure').append(' <br><span id="structure">'+data.name_residence.structure+' </span><br>');
-                modal.find('.modal-body #aliquot_structure').append(' <br><span id="aliquot_structure">'+data.name_residence.aliquot_structure+' %</span><br>');
-                modal.find('.modal-body #aliq_structure').append(' <br><span id="aliq_structure">'+aliq_structure.toLocaleString('en-IN')+' %</span><br>');
+                modal.find('.modal-body #structure').html(' <br><span id="structure">'+data.name_residence.structure+' </span><br>');
+                modal.find('.modal-body #aliquot_structure').html(' <br><span id="aliquot_structure">'+data.name_residence.aliquot_structure+' %</span><br>');
+                modal.find('.modal-body #aliq_structure').html(' <br><span id="aliq_structure">'+aliq_structure.toLocaleString('en-IN')+' %</span><br>');
             }
 
         })
@@ -245,11 +263,11 @@
           console.log("error");
         });
         $('#closeDetail').click(function(){
-            location.reload('index')
+            //location.reload('index')
         });
         $(document).keyup(function(e) {
           if (e.key === "Escape") {
-            location.reload() 
+            //location.reload() 
           }
         });
       }
