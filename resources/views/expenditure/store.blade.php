@@ -78,7 +78,7 @@
         <div class="table-responsive">
         <table class="table table-bordered" id="dynamic_field">
         <tr>
-        <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td>
+        <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Ingrese. . ." class="form-control name_list mt-2" /></td>
         <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
         <td><label>Monto:</label><input type="text" name="amount_monthly[]" inputmode="numeric" id="amount_monthly" placeholder="Ingrese cantidad. . ." class="money form-control moneyType name_list mt-2" value="0,00" /></td>
         <td><button type="button" name="add" id="add" class="btn aqua-gradient btn-rounded mt-3 ml-2"><i class="fas fa-plus fa-lg text-white font-weight-bold"></i></button></td>

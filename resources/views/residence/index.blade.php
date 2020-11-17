@@ -76,15 +76,15 @@
               @else
                <td>No disponible</td>
               @endisset
-             <td>
-              <a href="detail/{{$res->id}}" class="blue-gradient btn-round btn-sm" title="Visualizar" id="btn-detailResidence" data-toggle="modal" data-target="#modal-detailResidence" data-whatever="{{$res->id}}">
-                <b class="text-white fa fa-eye"></b>
+             <td class="text-center mb-2">
+              <a href="detail/{{$res->id}}" class="" title="Visualizar" id="btn-detailResidence" data-toggle="modal" data-target="#modal-detailResidence" data-whatever="{{$res->id}}">
+                <b class=" fa fa-eye"></b>
               </a>
-              <a href="edit/{{$res->id}}" class="blue-gradient btn-round btn-sm" title="Editar" id="btn-editResidence" data-toggle="modal" data-target="#modal-editResidence" data-whatever="{{$res->id}}">
-                <b class="text-white fa fa-edit"></b>
+              <a href="edit/{{$res->id}}" class="" title="Editar" id="btn-editResidence" data-toggle="modal" data-target="#modal-editResidence" data-whatever="{{$res->id}}">
+                <b class=" fa fa-edit"></b>
               </a>
-              <a href="#" class="blue-gradient btn-round btn-sm" title="Eliminar" onclick="deletedResidence('{{$res->id}}')">
-                <b class="text-white fa fa-trash icon-danger"></b>
+              <a href="#" class="" title="Eliminar" onclick="deletedResidence('{{$res->id}}')">
+                <b class=" fa fa-trash icon-danger"></b>
               </a>
             </td> 
           </tr>

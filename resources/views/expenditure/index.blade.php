@@ -25,7 +25,7 @@
 	</div>
 </div>
 <div class="row">
-	<div class="col-md-10 offset-lg-1">
+	<div class="col-md-10 offset-lg-12">
  	  <div id="resultResidence" name="resuFormatos"></div>
 	</div>
 </div>
@@ -196,12 +196,12 @@
             
 
             suma += parseFloat(data.expenditures[i].amount_monthly);
+            console.log(i)
+            console.log(suma)
 
 
-            total =  parseFloat(suma)*10/100;
-            total = total.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
-            total_general =  suma+total;
-
+           
+            
             aliq_center = data.name_residence.aliquot_center*total_general;
             aliq_corner = data.name_residence.aliquot_corner*total_general;
             aliq_penhouse = data.name_residence.aliquot_penhouse*total_general;
@@ -228,8 +228,14 @@
         
           }
 
+            
+            total =  parseFloat(suma)*10/100;
+            total_general =  suma+total;
+            total_general =  total_general.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            total = total.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             suma = suma.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
-
+           // console.log(total_general);
+            /*=========*/
             modal.find('.modal-body #suma_amount').html(' <br><span id="suma_amount">'+suma+'</span><br>');
             modal.find('.modal-body #total_amount').html(' <br><span id="total_amount">'+total+'</span><br>');
             modal.find('.modal-body #total_general').html(' <br><span id="total_general">'+total_general+'</span><br>');

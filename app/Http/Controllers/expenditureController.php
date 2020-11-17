@@ -160,7 +160,7 @@ class expenditureController extends Controller
                               <input type="text" disabled class="form-control" id="addres_residence" name="addres_residence" value="'.$resultado->addres.'">
                           </div>
                           <div class="col-md-3 pb-4">   
-                            <label for="type_center_exp"><b>Estructura - Tipo 1:</b></label>
+                            <label for="type_center_exp"><b>Estructura 1:</b></label>
                               <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_center_exp" name="type_center_exp" value="'.$resultado->type_center.'">
                           </div>
 
@@ -170,7 +170,7 @@ class expenditureController extends Controller
                           </div>
 
                           <div class="col-md-3 pb-4">   
-                            <label for="type_corner_exp"><b>Estructura - Tipo 2:</b></label>
+                            <label for="type_corner_exp"><b>Estructura 2:</b></label>
                               <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_corner_exp" name="type_corner_exp" value="'.$resultado->type_corner.'">
                           </div>
 
@@ -180,7 +180,7 @@ class expenditureController extends Controller
                           </div>
 
                           <div class="col-md-3 pb-4">   
-                            <label for="type_penhouse_exp"><b>Estructura - Tipo 3:</b></label>
+                            <label for="type_penhouse_exp"><b>Estructura 3:</b></label>
                               <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_penhouse_exp" name="type_penhouse_exp" value="'.$resultado->type_penhouse.'">
                           </div>
 
@@ -190,7 +190,7 @@ class expenditureController extends Controller
                           </div>
 
                           <div class="col-md-3 pb-4">   
-                            <label for="type_structure_exp"><b>Estructura - Tipo 4:</b></label>
+                            <label for="type_structure_exp"><b>Estructura 4:</b></label>
                               <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_structure_exp" name="type_structure_exp" value="'.$resultado->structure.'">
                           </div>
 
@@ -281,7 +281,7 @@ class expenditureController extends Controller
             /*}*/
       }else{
 
-        echo '<br><div style="border-radius:5px;" class="text-center blue-gradient text-white font-weight-bold p-3"><h6><b><i style="color:yellow !important;" class="fa fa-exclamation-triangle fa-md font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i></b><b class="font-weight-bold"> No existe registro de Gásto Mensual en la Residencia.</b></h6></div>';
+        echo '<br><div style="border-radius:5px;" class="col-sm-8 col-md-10 col-lg-10 offset-2 text-center blue-gradient text-white font-weight-bold p-3"><h6><b><i style="color:yellow !important;" class="fa fa-exclamation-triangle fa-md font-weight-bold" title="Seleccione el tipo de residencia del copropetario."></i></b><b class=" font-weight-bold"> No existe registro de Gásto Mensual en la Residencia.</b></h6></div>';
 
       }
 
