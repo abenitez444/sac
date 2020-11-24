@@ -7,7 +7,7 @@
 @section('card-title', 'Consulta de Residencias')
 @section('card-button')
 <div class="d-none d-sm-inline-block">
-  <a href="#" class="btn aqua-gradient btn-rounded" id="btn-newResidence" data-toggle="modal" data-target="#modal-createResidence">
+  <a href="#" class="btn btn-deep-orange" id="btn-newResidence" data-toggle="modal" data-target="#modal-createResidence">
     <span class="icon text-white-50">
       <i class="fas fa-plus text-white font-weight-bold mt-1" title="Registrar Residencia."></i>
     </span>
@@ -18,7 +18,7 @@
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header blue-gradient">
+  <div class="card-header teal darken-2">
     <h5 class="font-weight-bold text-white">Lista de residencias</h5>
   </div>
   <div class="card-body">

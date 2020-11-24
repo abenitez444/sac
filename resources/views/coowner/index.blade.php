@@ -6,14 +6,14 @@
 @section('card-title', 'Consulta')
 @section('card-button')
 <div class="d-none d-sm-inline-block btn-icon-split">
-    <span class="btn aqua-gradient btn-rounded" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner"> <i class="fas fa-plus fa-lg text-white font-weight-bold" title="Registrar Copropetario."></i>
+    <span class="btn btn-deep-orange" id="btn-newCo-owner" data-toggle="modal" data-target="#modal-createCo-owner"> <i class="fas fa-plus fa-lg text-white font-weight-bold" title="Registrar Copropetario."></i>
      </span>
 </div>
 @endsection
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header blue-gradient">
+  <div class="card-header default-color-dark">
     <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
@@ -64,14 +64,14 @@
             <td>No disponible</td>
             @endif
             <td>
-              <a href="detail/{{$owner->id}}" class="blue-gradient btn-round btn-sm" title="Visualizar" id="btn-detailCoowner" data-toggle="modal" data-target="#modal-detailCoowner" data-whatever="{{$owner->id}}">
-                <b class="text-white fa fa-eye"></b>
+              <a href="detail/{{$owner->id}}" title="Visualizar" id="btn-detailCoowner" data-toggle="modal" data-target="#modal-detailCoowner" data-whatever="{{$owner->id}}">
+                <b class="text-dark fa fa-eye"></b>
               </a>
-              <a href="edit/{{$owner->id}}" class="blue-gradient btn-round btn-sm" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
-                <b class="text-white fa fa-edit"></b>
+              <a href="edit/{{$owner->id}}" title="Editar" data-toggle="modal" data-target="#modal-editCoowner" data-whatever="{{$owner->id}}">
+                <b class="text-dark fa fa-edit"></b>
               </a>
-              <a href="#" class="blue-gradient btn-round btn-sm" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
-                <b class="text-white fa fa-trash"></b>
+              <a href="#" class="dark-grey-text" title="Eliminar" onclick="deletedEmployee('{{$owner->id}}')">
+                <b class="text-dark fa fa-trash"></b>
               </a>
             </td> 
           </tr>
@@ -367,93 +367,3 @@ $(document).ready(function(){
 
 @endsection
 
-
-
-<div class="modal fade" id="modal-updateExpenditure" tabindex="-1" role="dialog" aria-labelledby="modal-updateExpenditure"
-  aria-hidden="true">
-  <div class="modal-dialog modal-lg" role="updateExpenditure">
-    <div class="modal-content">
-      <div class="modal-header blue-gradient"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
-        <h5 class="modal-title text-white" id="ModalLabel">Editar: Registro de Gástos </h5>
-        <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
-          <span><i class="fas fa-window-close text-danger fa-md"></i></span>
-        </button>
-      </div>
-      <form id="editExpenditure" name="editExpenditure">
-       @csrf
-      <input type="hidden" name="id" id="id">
-      <div class="container">
-        <div class="modal-body">
-          <div class="row justify-content-center form-group">
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <label><b>Residencia:</b></label>
-              <div class="inputWithIcon">
-                  <select class="form-control{{ $errors->has('residence_coowner') ? ' is-invalid' : '' }} browser-default custom-select fondo-gris element-focus" name="residence_coowner" id="residence_coowner" value="{{ old('residence_coowner') }}">
-                  
-                    @foreach($residence as $res)
-                    <option value="{{ $res->id }}">{{ $res->name_residence }}</option>
-                    @endforeach
-                  </select>
-                  </select>
-               <p class="campo-obligatorio">* Campo obligatorio</p>
-              </div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-            <div class="col-md-5 text-left">
-                <!-- Default input -->
-              <label>Año:</label>
-                <select class="browser-default custom-select" id="year" name="year" value="{{ old('year') }}">
-                <option  value="" disabled selected>Seleccione...</option>
-              @for($anio=(date("Y")+5); 1980<=$anio; $anio--)
-                <option value="{{ $anio }}">{{ $anio }}</option>
-              @endfor
-              </select>
-              <div id="errorcontainer-ano" class='errorDiv'></div>
-              </div>
-            <div class="col-sm-4 col-md-4 col-lg-4">
-              <label><b>Mes:</b></label>
-                <div class="inputWithIcon">
-                    <select class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }} browser-default custom-select fondo-gris element-focus" name="month" id="month" value="{{ old('month') }}">
-                      <option value="" disabled selected>Buscar. . .</option>
-                      @foreach($month as $m)
-                      <option value="{{ $m->id }}">{{ $m->month }}</option>
-                      @endforeach
-                    </select>
-                 <p class="campo-obligatorio">* Campo obligatorio</p>
-                </div>
-            </div>
-          </div>
-          <div class="row justify-content-center">
-        <div class="col-sm-12 col-md-12 col-lg-12"> 
-        <div class="container">
-          <br />
-            <div class="table-responsive">
-              <table class="table table-bordered" id="dynamic_field">
-
-         
-              <tr>
-                <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Descripción del gásto" class="form-control name_list mt-2" /></td>
-                <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>{{ $expenses->type_money->option }}</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
-                <td><label>Monto:</label><input type="text" name="amount_monthly[]" id="amount_monthly[]" placeholder="Ingrese cantidad. . ." class="form-control moneyType name_list mt-2" /></td>
-              </tr>
-            
-              </table>
-            </div>
-            <div class="card-footer justify-content-center">
-              <div class="text-center mt-1">
-                  <button type="button" id="send-expenditure" class="btn aqua-gradient" ><i class="fas fa-share-square fa-md"></i> <b>Guardar</b></button>
-                  <a href="#" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-md" title="Consultar"></i><b> Buscar</b></a>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  </form> 
-      <div class="modal-footer justify-content-center">
-        <button type="button" id="send-updateExpenditure" class="btn btn-info text-white rounded" title="Guardar copropetario"><i class="fas fa-share-square"></i> <b>Editar</b></button>
-      </div>
-    </div>
-  </div>

@@ -4,7 +4,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="expenses">
     <div class="modal-content" style="border-radius: 10px;">
-      <div class="modal-header blue-gradient" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
+      <div class="modal-header default-color-dark" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" id="closeDetail" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
@@ -23,11 +23,9 @@
               <div class="col-lg-12 col-lg-10 col-sm-8">
                  <h5 class="dark-grey-text text-center font-weight-bold"> <span id="month" class="mr-5"></span> <span id="year" class="ml-5"></span></h5>
               </div>
-
             <div class="row justify-content-center">
-		        <div class="col-sm-12 col-md-12 col-lg-12"> 
-		    
-		          <br />
+		          <div class="col-sm-12 col-md-12 col-lg-12 form-group"> 
+		           <br />
 		            <div class="table-responsive">
 		              <table class="table" id="dynamic_field">
                     <thead class="text-center">
@@ -51,17 +49,14 @@
                 <h6 class="dark-grey-text  font-weight-bold text-right">Fondo de Reserva 10%: <label id="total_amount"></label></h6>
                  <h6 class="dark-grey-text font-weight-bold text-right">Total: <label id="total_general"></label></h6>
 		          </div>
-		      </div>
-
-           <div class="row">
-            <div class="col-sm-12 col-md-12 col-lg-12"> 
-           
-              <br />
+		        </div>
+            <div class="row">
+              <div class="col-sm-12 col-md-12 col-lg-12 form-group"> 
                 <div class="table-responsive">
                   <table class="table table-bordered" id="dynamic_field2" style="border:0;">
                     <tbody>
                     <tr class="text-center">
-                      <th><h6 class="dark-grey-text font-weight-bold">Tipo de Estructura</h6></th>
+                      <th><h6 class="dark-grey-text font-weight-bold">Estructura</h6></th>
                       <th><h6 class="dark-grey-text font-weight-bold">Alíquota</h6></th>
                       <th><h6 class="dark-grey-text font-weight-bold">Monto</h6></th>
                     </tr>
@@ -74,11 +69,13 @@
                   </table>
                 </div>
               </div>
-           
-          </div>
-              <div class="col-md-12">
-                <i class="fas fa-envelope dark-grey-text fa-lg" title="Correo electrónico."></i> <span id="email" class="font-weight-bold"></span>
+            </div>
+              <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 form-group"> 
+                  <h6 class="font-weight-bold text-center">FAVOR DEPOSITAR EN LA CUENTA CORRIENTE 01740146781464193992<br>CONDOMINIOS RESIDENCIAS (<span id="residence_coowner"></span>) / BCO.BANPLUS</h6>
+                </div>
               </div>
+             <hr>
             </div>
           </div>
         </div>

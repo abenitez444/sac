@@ -11,13 +11,13 @@
 <div class="row  justify-content-center">
   <div class="col-sm-8 col-md-11 col-lg-11">
     <div class="card">
-      <div class="card-header aqua-gradient text-white">
+      <div class="card-header default-color-dark text-white">
         <h5 class="font-weight-bold text-center"><i class="far fa-list-alt fa-lg"></i> Registro de Gástos Mensuales</h5>
       </div>
-      <div class="row mt-4">
-        <div class="col-sm-8 col-md-12 col-lg-12">
-          <div class="sidebar-brand-text mx-3 push ml-3">
-            <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
+      <div class="row">
+        <div class="col-sm-12 col-md-12 col-lg-12 ">   
+          <div class="sidebar-brand-text mx-3 push ml-3 mt-1">
+            <i class="fas fa-atlas dark-grey-text sidebar-brand-icon"> GC-GCA</i>
           </div>
         </div>
       </div>
@@ -25,7 +25,7 @@
         <div class="container" >
           <div class="row justify-content-center form-group">
             <div class="col-sm-12 col-md-6 col-lg-6">
-              <label><b>Residencia:</b></label>
+              <label class="dark-grey-text font-weight-bold">Residencia</label>
               <div class="inputWithIcon">
                   <select class="form-control{{ $errors->has('residence_coowner') ? ' is-invalid' : '' }} browser-default buscador custom-select fondo-gris element-focus" name="residence_coowner" id="residence_coowner" >
                     <option disabled selected>Buscar. . .</option>
@@ -40,7 +40,7 @@
           <div class="row justify-content-center">
             <div class="col-md-5 text-left">
                 <!-- Default input -->
-              <label>Año:</label>
+              <label class="dark-grey-text font-weight-bold">Año</label>
                 <select class="browser-default custom-select" id="year" name="year" required disabled>
                 <option  value="" disabled selected>Seleccione...</option>
               @for($anio=(date("Y")+5); 1980<=$anio; $anio--)
@@ -50,7 +50,7 @@
               <div id="errorcontainer-ano" class='errorDiv'></div>
               </div>
             <div class="col-sm-4 col-md-4 col-lg-4">
-              <label><b>Mes:</b></label>
+              <label class="dark-grey-text font-weight-bold">Mes</label>
                 <div class="inputWithIcon">
                     <select class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }} browser-default custom-select fondo-gris element-focus" name="month" id="month" disabled>
                       <option value="" disabled selected>Buscar. . .</option>
@@ -78,17 +78,17 @@
         <div class="table-responsive">
         <table class="table table-bordered" id="dynamic_field">
         <tr>
-        <td><label><b>Descripción:</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Ingrese. . ." class="form-control name_list mt-2" /></td>
-        <td><label><b>Moneda:</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>Tipo:</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
-        <td><label>Monto:</label><input type="text" name="amount_monthly[]" inputmode="numeric" id="amount_monthly" placeholder="Ingrese cantidad. . ." class="money form-control moneyType name_list mt-2" value="0,00" /></td>
-        <td><button type="button" name="add" id="add" class="btn aqua-gradient btn-rounded mt-3 ml-2"><i class="fas fa-plus fa-lg text-white font-weight-bold"></i></button></td>
+        <td><label class="dark-grey-text font-weight-bold"><b>Descripción</b></label><input type="text" name="description_monthly[]" id="description_monthly[]" placeholder="Ingrese. . ." class="form-control name_list mt-2" /></td>
+        <td><label class="dark-grey-text font-weight-bold"><b>Moneda</b></label><select class="form-control mt-2 custom-select fondo-gris element-focus" name="type_money[]" id="type_money[]"><option disabled selected>Tipo</option>@foreach($typeMoney as $money)<option value="{{$money->id}}">{{$money->option}}</option>@endforeach</select></td>
+        <td><label class="dark-grey-text font-weight-bold">Monto</label><input type="text" name="amount_monthly[]" inputmode="numeric" id="amount_monthly" placeholder="Ingrese cantidad. . ." class="form-control moneyType name_list mt-2" value="0,00" /></td>
+        <td><button type="button" name="add" id="add" class="btn peach-gradient btn-rounded mt-3 ml-2"><i class="fas fa-plus fa-lg text-white font-weight-bold"></i></button></td>
         </tr>
         </table>
         </div>
         <div class="card-footer justify-content-center">
           <div class="text-center mt-1">
-              <button type="button" id="send-expenditure" class="btn aqua-gradient" ><i class="fas fa-share-square fa-md"></i> <b>Guardar</b></button>
-              <a href="#" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-md" title="Consultar"></i><b> Buscar</b></a>
+              <button type="button" id="send-expenditure" class="btn btn-deep-orange" ><i class="fas fa-save font-weight-bold text-white fa-2x" title="Guardar Gásto Mensual."> </i></button>
+              <a href="#" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-2x" title="Consultar Gástos Mensuales."></i></a>
           </div>
         </div>
     </div>

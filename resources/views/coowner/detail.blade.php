@@ -3,7 +3,7 @@
   aria-hidden="true">
   <div class="modal-dialog" role="Coowner">
     <div class="modal-content" style="border-radius: 10px;">
-      <div class="modal-header blue-gradient" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
+      <div class="modal-header default-color-dark" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
@@ -12,7 +12,7 @@
       <div class="modal-body">
         <div class="row">
           <div class="sidebar-brand-text mx-3 push ml-3">
-            <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
+            <i class="fas fa-atlas dark-grey-text sidebar-brand-icon rotate-n-15"></i> <b class="dark-grey-text"> GC-GCA</b>
         </div>
           <div class="col-sm-10 col-md-12 col-lg-12  mb-lg-0 mb-5">
             <div class="card-body">

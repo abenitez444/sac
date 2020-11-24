@@ -2,7 +2,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="residence">
     <div class="modal-content">
-      <div class="modal-header blue-gradient"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold">Editar: Conjunto residencial</h5>
+      <div class="modal-header default-color-dark"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold">Editar: Conjunto residencial</h5>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" id="closeEdit" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
@@ -14,7 +14,7 @@
           @csrf
           <div class="row">
             <div class="sidebar-brand-text mx-3 push ml-3">
-              <i class="fas fa-atlas text-info sidebar-brand-icon rotate-n-15"></i> <b class="text-info"> GC-GCA</b>
+              <i class="fas fa-atlas dark-grey-text sidebar-brand-icon rotate-n-15"></i><b class="dark-grey-text"> GC-GCA</b>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -146,7 +146,7 @@
           </div>
         </form>
       <div class="modal-footer justify-content-center">
-        <button type="button" id="send-editResidence" class="btn btn-info" title="Editar residencia."><i class="fas fa-share-square"></i><b> Editar</b></button>
+        <button type="button" id="send-editResidence" class="btn deep-orange btn-md" title="Editar residencia."><i class="fas fa-share-square text-white fa-2x"></i></button>
       </div>
     </div>
   </div>

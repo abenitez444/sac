@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-gradient-dark text-white font-weight-bold">{{ __('Inicio de Sesión') }}</div>
+                <div class="card-header default-color-dark text-white font-weight-bold">{{ __('Inicio de Sesión') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('login') }}">
@@ -53,8 +53,8 @@
 
                         <div class="form-group text-center row mb-0">
                             <div class="col-md-4 offset-md-4">
-                                <button type="submit" class="btn btn-dark font-weight-bold">
-                                    <i class="fas fa-sign-in-alt fa-md"></i> {{ __('Entrar') }}
+                                <button type="submit" class="btn btn-deep-orange btn-md font-weight-bold">
+                                    <i class="fas fa-sign-in-alt fa-2x"></i> 
                                 </button>
 
 {{--                                 @if (Route::has('password.request'))

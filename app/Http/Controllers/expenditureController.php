@@ -71,14 +71,16 @@ class expenditureController extends Controller
     {
  
         $id = $request->residence_coowner;
-        $expenditure = Expenditure::firstOrNew(['id' => $id]);
-        $expenditure->fill($request->all());
+        $expenditure = Expenditure::firstOrNew(['id' => $request->id]);
+        $expenditure->residence_coowner = $request->residence_coowner;
+        $expenditure->month = $request->month;
+        $expenditure->year = $request->year;
         $expenditure_id = $request->residence_coowner;
-        $expenditure->save(); 
+        
      
-
       for ($i=0; $i < count((array)$request->description_monthly); $i++) { 
-        $expenditure = ExpensesDetail::find($request->expenditure_id[$i]);
+
+        $expenditure = ExpensesDetail::firstOrNew(['id' => $request->id[$i]]);
         $expenditure->description_monthly = $request->description_monthly[$i];
         $expenditure->type_money = $request->type_money[$i];
         $expenditure->amount_monthly = $request->amount_monthly[$i];
@@ -114,7 +116,8 @@ class expenditureController extends Controller
     public function edit($id)
     {
 
-      $data =  Expenditure::with('Expenditures',  'typeMoney')->where('expenditure.residence_coowner',  $id)->first();
+      $data =  Expenditure::with('Expenditures',  'typeMoney', 'typeMonth')->where('expenditure.id',  $id)->first();
+
 
       return \Response::json($data);
     }
@@ -140,65 +143,51 @@ class expenditureController extends Controller
               }
            		echo '
                     <div class="card">
-                     <div class="card-header text-white aqua-gradient text-center">
+                     <div class="card-header text-white default-color-dark text-center">
                         <h6>
                             <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Información Residencial</b>
                         </h6>
                     </div>
                       <div class="card-body">
-                      <div class="row">
-                          <div class="col-md-6 pb-4">   
-                            <label for="number_rif_residence"><b>RIF:</b></label>
-                              <input type="text" disabled class="form-control" id="number_rif_residence" name="number_rif_residence" value="J-'.$resultado->number_rif.'">
+                        <div class="row text-center">
+                          <div class="col-sm-8 col-md-6 col-lg-6">   
+                            <label for="number_rif_residence" class="dark-grey-text font-weight-bold">Número (RIF)</label>
+                              <br><span>'.$resultado->type_rif.'-'.$resultado->number_rif.'</span>
                           </div>
-                          <div class="col-md-6 pb-4">   
-                            <label for="type_residence_coowner"><b>Tipo de Residencia:</b></label>
-                              <input type="text" disabled class="form-control" id="type_residence_coowner" name="type_residence_coowner" value="'.$resultado->typeResidences->option.'">
+                          <div class="col-sm-8 col-md-6 col-lg-6">   
+                            <label for="type_residence_coowner" class="dark-grey-text font-weight-bold">Tipo Residencia</label>
+                              <br><span>'.$resultado->typeResidences->option.'</span>
                           </div>
-                          <div class="col-md-8 pb-4 offset-2">   
-                            <label for="addres_residence"><b>Dirección:</b></label>
-                              <input type="text" disabled class="form-control" id="addres_residence" name="addres_residence" value="'.$resultado->addres.'">
+                        </div>
+                        <hr>
+                        <div class="row mt-4">
+                          <div class="col-sm-8 col-md-12 col-lg-12 text-center">   
+                            <label for="addres_residence" class="dark-grey-text font-weight-bold">Dirección Residencia</label>
+                              <br><span>'.$resultado->addres.'</span>
                           </div>
-                          <div class="col-md-3 pb-4">   
-                            <label for="type_center_exp"><b>Estructura 1:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_center_exp" name="type_center_exp" value="'.$resultado->type_center.'">
+                        </div>
+                        <hr>
+                        <div class="row mt-2">
+                          <div class="col-sm-8 col-md-12 col-lg-12">
+                           <div class="table-responsive">
+                            <table class="table">
+                              <thead class="text-center">
+                                <th><label><h6 class="dark-grey-text  font-weight-bold">Central</h6></label></th>
+                                <th><label><h6 class="dark-grey-text  font-weight-bold">Esquina</h6></label></th>
+                                <th><label><h6 class="dark-grey-text  font-weight-bold">Pen house</h6></label></th>
+                                <th><label><h6 class="dark-grey-text  font-weight-bold">Otros</h6></label></th>
+                              </thead>
+                              <tbody id="reset" >
+                              <tr class="text-center">
+                                <td class="font-weight-bold">'.$resultado->aliquot_center.'%</td>
+                                <td class="font-weight-bold">'.$resultado->aliquot_corner.'%</td>
+                                <td class="font-weight-bold">'.$resultado->aliquot_penhouse.'%</td>
+                                <td class="font-weight-bold"><span>'.$resultado->structure.'</span>,<span>'.$resultado->aliquot_structure.'%</span></td>
+                              </tr>
+                              </tbody>
+                            </table>
                           </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="aliquot_center_exp"><b>Alícuota:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_center_exp" name="aliquot_center_exp" value="'.$resultado->aliquot_center.'%">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="type_corner_exp"><b>Estructura 2:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_corner_exp" name="type_corner_exp" value="'.$resultado->type_corner.'">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="aliquot_corner_exp"><b>Alícuota:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_corner_exp" name="aliquot_corner_exp" value="'.$resultado->aliquot_corner.'%">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="type_penhouse_exp"><b>Estructura 3:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_penhouse_exp" name="type_penhouse_exp" value="'.$resultado->type_penhouse.'">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="aliquot_penhouse_exp"><b>Alícuota:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_penhouse_exp" name="aliquot_penhouse_exp" value="'.$resultado->aliquot_penhouse.'%">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="type_structure_exp"><b>Estructura 4:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="type_structure_exp" name="type_structure_exp" value="'.$resultado->structure.'">
-                          </div>
-
-                          <div class="col-md-3 pb-4">   
-                            <label for="aliquot_structure_exp"><b>Alícuota:</b></label>
-                              <input type="text" disabled class="form-control font-weight-bold" style="Color:#1babed;" id="aliquot_structure_exp" name="aliquot_structure_exp" value="'.$resultado->aliquot_structure.'%">
-                          </div>
-
+                        </div>
                           <div class="col-md-6 pb-4">   
                             <div id="title"></div>
                             <div id="anio"></div>
@@ -224,35 +213,24 @@ class expenditureController extends Controller
       $resultDos = Expenditure::where('residence_coowner', $id)->get();
 
       $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
-      $data = Expenditure::with('Expenditures')->where('expenditure.id',  $id)->get();
+      $data =  Expenditure::with('Expenditures',  'typeMoney', 'typeMonth')->where('expenditure.id',  $id)->first();
     
       
       if ($resultDos->isNotEmpty()) {
 
-        echo'
-        <div class="row justify-content-center form-group">
-          <div class="col-sm-12 col-md-12 col-lg-12  text-center mt-4">
-            <label><b class="font-weight-bold">Detalle General</b></label>
-            <a href="detail/'.$residence->id.'" class="blue-gradient btn-round btn-lg" title="Visualizar" id="btn-detailResidence" name="resuFormatos">
-              <b class="text-white fa fa-eye"></b>
-            </a>
-          </div>
-        </div>
-        ';
-
-          echo'
-              <div class="card shadow">
-                <div class="card-header blue-gradient">
-                  <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6> </a>
-                </div>';
-            
-          
-             /* foreach($resultDos->Expenditures as $t){*/
-
               echo'
-                  <div class="card-body" style="margin-top:10px;">
+
+                <div class="row justify-content-center">
+                 <div class="col-md-10 offset-2">
+                  <div class="card shadow mt-3">
+                    <div class="card-header default-color-dark">
+                      <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.')
+                    </div>';
+            
+              echo'
+                  <div class="card-body justify-content-center">
                     <div class="table-responsive">
-                      <table id="tableExpenditure" align="center" border="1" style="width:auto; height:20px;" class="table table-condensed table-bordered table-hover">
+                      <table id="tableExpenditure" align="center" border="1" class="table table-condensed table-bordered table-hover">
                         <thead>
                               <tr class="text-center">
                                 <th style="white-space:nowrap; width:1%;"><b>Més</b></th>
@@ -269,13 +247,17 @@ class expenditureController extends Controller
                                 <td style="white-space:nowrap; width:1%;">'.$expenditure->year.'</td>
                                 <td style="white-space:nowrap; width:1%;"><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'"">
                                   <b class="fa fa-eye"></b>
+                                   <a href="edit/'.$expenditure->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$expenditure->id.'" ><b class="fa fa-edit"> </b></h6> </a>
                                 </a></td>
+
                               </tr>';
                           }
 
               echo'
-                        </tbody>
-                      </table>
+                         </tbody>
+                        </table>
+                       </div>    
+                      </div>    
                     </div>    
                   </div>';
             /*}*/
@@ -314,7 +296,7 @@ class expenditureController extends Controller
 
           echo'
               <div class="card shadow">
-                <div class="card-header blue-gradient">
+                <div class="card-header default-color-dark">
                   <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.') <a href="edit/'.$residence->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$residence->id.'" ><b class="offset-5 text-white fa fa-edit"> Editar</b></h6> </a>
                 </div>';
             

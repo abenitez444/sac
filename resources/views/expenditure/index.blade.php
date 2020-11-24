@@ -12,7 +12,7 @@
 <form id="htmlExpenditure" name="htmlExpenditure" method="POST">
 <div class="row justify-content-center">
 	<div class="col-sm-6 col-md-6 col-lg-7">
-	 <label for="name_residence_id"><b>Residencia:</b></label>
+	 <label for="name_residence_id" class="dark-grey-text font-weight-bold">Residencia</label>
 	  <div class="inputWithIcon">
 	    <select id="name_residence_id" name="name_residence_id" type="text" class=" custom-select @error('name_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('name_residence_id') }}">
 	      <option value="0" disabled selected>Seleccione</option>
@@ -85,11 +85,14 @@
             modal.find('.modal-body #residence_coowner').val(data.residence_coowner)
             modal.find('.modal-body #year').val(data.year)
             modal.find('.modal-body #month').val(data.month)
+            modal.find('.modal-body #id').html('');
+            modal.find('.modal-body #description_monthly').html('');
+            modal.find('.modal-body #type_money').html('');
+            modal.find('.modal-body #amount_monthly').html('');
             
-       if(data.expenditures.length > 0){
           for(i=0; i < data.expenditures.length; i++) {
          
-            modal.find('.modal-body #expenditure_id').append('<input type="hidden" name="expenditure_id[]" id="expenditure_id[]" value="'+data.expenditures[i].expenditure_id+'" placeholder="ID" class="form-control name_list mt-2" />')
+            modal.find('.modal-body #id').append('<input type="hidden" name="id[]" id="id[]" value="'+data.expenditures[i].id+'" placeholder="ID" class="form-control name_list mt-2" />')
 
             modal.find('.modal-body #description_monthly').append('<input type="text" name="description_monthly[]" id="description_monthly[]" value="'+data.expenditures[i].description_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
             
@@ -106,7 +109,7 @@
             modal.find('.modal-body #amount_monthly').append('<input type="text" name="amount_monthly[]" id="amount_monthly[]" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
  
               }
-            }
+          
           //Edit Co-owner and save form
           $('#send-updateExpenditure').click(function(e){
             var data = $("#updateExpenditure").serialize();
@@ -147,10 +150,6 @@
             });
           })
         })
-      
-        $('#close').click(function(){
-        location.reload()
-        });
       }
     })
 </script>
@@ -162,6 +161,7 @@
       var id = button.data('whatever') 
       
       var suma = 0;
+      var suma_parse = 0;
       var total = 0;
       var total_general = 0;
       var aliq_center = 0;
@@ -193,16 +193,10 @@
             
             x = parseFloat(data.expenditures[i].amount_monthly); 
             x = x.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
-            
-
             suma += parseFloat(data.expenditures[i].amount_monthly);
-            console.log(i)
-            console.log(suma)
-
-
+            suma_parse += parseFloat(data.expenditures[i].amount_monthly);
            
             
-            aliq_center = data.name_residence.aliquot_center*total_general;
             aliq_corner = data.name_residence.aliquot_corner*total_general;
             aliq_penhouse = data.name_residence.aliquot_penhouse*total_general;
             aliq_structure = data.name_residence.aliquot_structure*total_general;
@@ -228,21 +222,39 @@
         
           }
 
-            
             total =  parseFloat(suma)*10/100;
             total_general =  suma+total;
             total_general =  total_general.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             total = total.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
             suma = suma.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
-           // console.log(total_general);
+
+            totali =  parseFloat(suma_parse)*10/100;
+            total_aliquot =  suma_parse+totali;
+            //Amount aliquot_center * total_aliquot
+            aliq_center_parse = data.name_residence.aliquot_center; 
+            aliq_center = aliq_center_parse*total_aliquot/100;
+            aliq_center = aliq_center.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            //Amount aliquot_corner * total_aliquot
+            aliq_corner_parse = data.name_residence.aliquot_corner;
+            aliq_corner = aliq_corner_parse*total_aliquot/100;
+            aliq_corner = aliq_corner.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            //Amount aliquot_penhouse * total_aliquot
+            aliq_penhouse_parse = data.name_residence.aliquot_penhouse;
+            aliq_penhouse = aliq_penhouse_parse*total_aliquot/100;
+            aliq_penhouse = aliq_penhouse.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            //Amount aliquot_structure * total_aliquot
+            aliq_structure_parse = data.name_residence.aliquot_structure;
+            aliq_structure = aliq_structure_parse*total_aliquot/100;
+            aliq_structure = aliq_structure.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2});
+            // console.log(total_general);
             /*=========*/
             modal.find('.modal-body #suma_amount').html(' <br><span id="suma_amount">'+suma+'</span><br>');
             modal.find('.modal-body #total_amount').html(' <br><span id="total_amount">'+total+'</span><br>');
             modal.find('.modal-body #total_general').html(' <br><span id="total_general">'+total_general+'</span><br>');
 
             if (data.name_residence.type_center == 'on') {
-                modal.find('.modal-body #aliquot_center').html(' <br><span id="aliquot_center">'+parseFloat(data.name_residence.aliquot_center)+' %</span><br>');
-                 modal.find('.modal-body #aliq_center').html(' <br><span id="aliq_center">'+aliq_center.toLocaleString('es-CO')+' %</span><br>');
+                modal.find('.modal-body #aliquot_center').html(' <br><span id="aliquot_center">'+data.name_residence.aliquot_center+' %</span><br>');
+                 modal.find('.modal-body #aliq_center').html(' <br><span id="aliq_center">'+aliq_center+' %</span><br>');
             }
 
             if (data.name_residence.type_corner == 'on') {
