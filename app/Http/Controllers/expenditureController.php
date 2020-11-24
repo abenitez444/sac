@@ -70,20 +70,20 @@ class expenditureController extends Controller
     public function update(Request $request)
     {
  
-        $id = $request->residence_coowner;
-        $expenditure = Expenditure::firstOrNew(['id' => $request->id]);
+        $id = $request->id_request;
+        $expenditure = Expenditure::firstOrNew(['id' => $id]);
         $expenditure->residence_coowner = $request->residence_coowner;
-        $expenditure->month = $request->month;
         $expenditure->year = $request->year;
-        $expenditure_id = $request->residence_coowner;
-        
-     
+        $expenditure->month = $request->month;
+        $expenditure->save();
+
       for ($i=0; $i < count((array)$request->description_monthly); $i++) { 
 
         $expenditure = ExpensesDetail::firstOrNew(['id' => $request->id[$i]]);
         $expenditure->description_monthly = $request->description_monthly[$i];
         $expenditure->type_money = $request->type_money[$i];
-        $expenditure->amount_monthly = $request->amount_monthly[$i];
+        $expenditure->amount_monthly = $request->monthly_amount[$i];
+
         $expenditure->save();
       }
       
@@ -235,7 +235,7 @@ class expenditureController extends Controller
                               <tr class="text-center">
                                 <th style="white-space:nowrap; width:1%;"><b>Més</b></th>
                                 <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
-                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
+                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Opción</b></th>
                               </tr>
                         </thead>
                         <tbody>';

@@ -10,7 +10,7 @@
       </div>
       <form id="updateExpenditure" method="POST">
        @csrf
-      <input type="hidden" name="id" id="id">
+      <input type="hidden" name="id_request" id="id_request">
       <div class="container">
         <div class="modal-body">
           <div class="row justify-content-center  form-group">

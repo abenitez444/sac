@@ -36,9 +36,34 @@
 @endsection
 
 @section('js')
+<script>
+ 
+  $(document).ready(function(){
+  // configuration
+      const amount = {
+        //afterFormat(e) { console.log('afterFormat', e); },
+        allowNegative: false,
+        //beforeFormat(e) { console.log('beforeFormat', e); },
+        negativeSignAfter: false,
+        prefix: '',
+        suffix: '',
+        fixed: true,
+        fractionDigits: 2,
+        decimalSeparator: ',',
+        thousandsSeparator: '.',
+        cursor: 'move'
+      };
 
+      // select the element
+      const input = SimpleMaskMoney.setMask('#monthly_amount', amount);
+
+      // This method return value of your input in format number to save in your database
+      //input.formatToNumber();
+});
+</script>
 <script src="{{ asset('js/Spanish.json') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
+<script src="{{ asset('js/simple-mask-money.js') }}"></script>
 <script>
 	
 	$("#name_residence_id").change(function(event) {
@@ -59,8 +84,6 @@
 						        console.log( api.rows( {page:'current'} ).data() );
 						    }
 						} );
-	//var table = $('#tableExpenditure').DataTable();
-
 	        }                           
         })
 	});
@@ -72,7 +95,7 @@
       var modal = $(this)
       var button = $(event.relatedTarget) 
       var id = button.data('whatever')  
-      
+      var x;
       if(id){
 
         $.ajax({
@@ -81,7 +104,9 @@
            dataType: 'json',
         }).done(function(data) {
             modal.find('.modal-title')
-            modal.find('.modal-body #id').val(data.id)
+            
+            modal.find('#id_request').val(data.id)
+
             modal.find('.modal-body #residence_coowner').val(data.residence_coowner)
             modal.find('.modal-body #year').val(data.year)
             modal.find('.modal-body #month').val(data.month)
@@ -91,6 +116,7 @@
             modal.find('.modal-body #amount_monthly').html('');
             
           for(i=0; i < data.expenditures.length; i++) {
+     
          
             modal.find('.modal-body #id').append('<input type="hidden" name="id[]" id="id[]" value="'+data.expenditures[i].id+'" placeholder="ID" class="form-control name_list mt-2" />')
 
@@ -106,11 +132,11 @@
                 modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='3'> Euros</option>><option value='1'> Bolívares</option><option value='2'> Dolares</option></select>");
                 }
 
-            modal.find('.modal-body #amount_monthly').append('<input type="text" name="amount_monthly[]" id="amount_monthly[]" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
+            modal.find('.modal-body #amount_monthly').append('<input type="text" name="monthly_amount[]" id="monthly_amount" inputmode="numeric" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
  
-              }
+          }
           
-          //Edit Co-owner and save form
+          //Edit Expenditure and save form
           $('#send-updateExpenditure').click(function(e){
             var data = $("#updateExpenditure").serialize();
             $.ajax({
@@ -180,13 +206,12 @@
       
           modal.find('.modal-title').text(' Condominios de Residencias')
           modal.find('.modal-body #id').text(data.id)
-            modal.find('.modal-body #residence_coowner').text(data.name_residence.name_residence)
-            modal.find('.modal-body #year').text(data.year)
-            modal.find('.modal-body #month').text(data.type_month.month)
-
-           modal.find('.modal-body #description_monthly').html('');
-           modal.find('.modal-body #type_money').html('');
-           modal.find('.modal-body #amount_monthly').html('');
+          modal.find('.modal-body #residence_coowner').text(data.name_residence.name_residence)
+          modal.find('.modal-body #year').text(data.year)
+          modal.find('.modal-body #month').text(data.type_month.month)
+          modal.find('.modal-body #description_monthly').html('');
+          modal.find('.modal-body #type_money').html('');
+          modal.find('.modal-body #amount_monthly').html('');
 
          
           for(i=0; i < data.expenditures.length; i++) {
@@ -195,7 +220,6 @@
             x = x.toLocaleString('in-EN', {minimumFractionDigits: 2, maximumFractionDigits: 2})
             suma += parseFloat(data.expenditures[i].amount_monthly);
             suma_parse += parseFloat(data.expenditures[i].amount_monthly);
-           
             
             aliq_corner = data.name_residence.aliquot_corner*total_general;
             aliq_penhouse = data.name_residence.aliquot_penhouse*total_general;

@@ -99,7 +99,6 @@
 @section('js')
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
-<script src="{{ asset('js/jquery.mask.min.js') }}"></script>
 <script src="{{ asset('js/simple-mask-money.js') }}"></script>
 <script>
  
