@@ -38,9 +38,9 @@
 @section('js')
 <script>
  
-  $(document).ready(function(){
+   $(document).ready(function(){
   // configuration
-      const amount = {
+      const config = {
         //afterFormat(e) { console.log('afterFormat', e); },
         allowNegative: false,
         //beforeFormat(e) { console.log('beforeFormat', e); },
@@ -55,7 +55,7 @@
       };
 
       // select the element
-      const input = SimpleMaskMoney.setMask('#monthly_amount', amount);
+      const nuevo = SimpleMaskMoney.setMask('#monthly_amount', config);
 
       // This method return value of your input in format number to save in your database
       //input.formatToNumber();
@@ -135,7 +135,7 @@
             modal.find('.modal-body #amount_monthly').append('<input type="text" name="monthly_amount[]" id="monthly_amount" inputmode="numeric" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
  
           }
-          
+
           //Edit Expenditure and save form
           $('#send-updateExpenditure').click(function(e){
             var data = $("#updateExpenditure").serialize();
