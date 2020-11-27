@@ -29,6 +29,9 @@ class expenditureController extends Controller
 
     public function store(Request $request) 
     {     
+
+      $this->expenditureValidate($request);
+
       $id = $request->input('id');
       $expenditure = Expenditure::firstOrNew(['id' => $id]);
       $expenditure->residence_coowner = $request->residence_coowner;
@@ -78,11 +81,16 @@ class expenditureController extends Controller
         $expenditure->save();
 
       for ($i=0; $i < count((array)$request->description_monthly); $i++) { 
+        $b = str_replace('.', '', $request->monthly_amount[$i] );
+        $b = str_replace(',', '.', $b );
+        $b = (float)$b;
+
+        $b = number_format($b, 2, '.', '');
 
         $expenditure = ExpensesDetail::firstOrNew(['id' => $request->id[$i]]);
         $expenditure->description_monthly = $request->description_monthly[$i];
         $expenditure->type_money = $request->type_money[$i];
-        $expenditure->amount_monthly = $request->monthly_amount[$i];
+        $expenditure->amount_monthly = $b;
 
         $expenditure->save();
       }
@@ -374,31 +382,35 @@ class expenditureController extends Controller
         }               
     }
 
-    /*public function searchYear (Request $request) 
+    public function expenditureValidate($request)
     {
-      $id = $request->residence_coowner;
-      $year = $request->year;
-      $respuesta = Expenditure::where('residence_coowner', $id)->where('year', $year)->get();
-     
-      $meses= Month::get();
-      $pagos=[];
-      $i=0;
-      if ($respuesta != "[]") {
-        foreach ($respuesta as $value) {
-          $month = explode(',', $value->month);
-          foreach ($month as $key) {
-            $pagos[$i++]=$key;
-          }
-        }
-        foreach($meses as $mostrar){;
-          $valor=array_search($mostrar->id, $pagos);
-          $valor++;
-          if ($valor) {
-            echo '<i class="fa fa-check" aria-hidden="true" style="color:#4ACB91"></i> '.$mostrar->month.'<br>';
-          } 
-        }     
-      }
-    }*/
+        $request->validate (
+
+            [
+                'residence_coowner' =>  'required',
+                'year' => 'required',
+                'month' => 'required',
+                'description_monthly' => 'required',
+                /*'number_letters' => 'required|max:20|min:1',
+                'type_structure_id' => 'required',
+                'phone' =>  'nullable|digits_between:7,7',
+                'email' =>  'nullable|email',*/
+            ], 
+
+            [
+                'residence_coowner.required' => 'Seleccione el nombre nombre de la residencia.',
+                'year.required' => 'Seleccione el año del gásto mensual.',
+                'month.required' => 'Seleccione el mes del gásto mensual.',
+                'description_monthly.required' => 'Ingrese la descripción del gásto mensual.',
+                /*'name_residence_id.required' => 'Seleccione el nombre de la residencia.',
+                'type_residence_id.required' => 'Seleccione el tipo de residencia.',
+                'number_letters.required' => 'Ingrese el número o letra del hogar.',
+                'type_structure_id.required' => 'Seleccione el tipo de estructura.',
+                'phone.digits_between' => 'Ingrese el número de teléfono válido del copropietario.',
+                'email.email' => 'Introduzca el correo electrónico válido del copropietario.',*/
+            ]
+        );
+    }
 
     
 }

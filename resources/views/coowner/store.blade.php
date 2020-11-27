@@ -1,4 +1,4 @@
-<div class="modal fade" id="modal-createCo-owner" tabindex="-1" role="dialog" aria-labelledby="modal-createCo-owner"
+ <div class="modal fade" id="modal-createCo-owner" tabindex="-1" role="dialog" aria-labelledby="modal-createCo-owner"
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="co-owner">
     <div class="modal-content">

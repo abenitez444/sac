@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header bg-gradient-dark text-white font-weight-bold"> <i class="fas fa-address-card fa-md" title="Ingrese correo electrónico y contraseña."></i> {{ __('Register') }}</div>
+                <div class="card-header  default-color-dark text-white font-weight-bold"> <i class="fas fa-address-card fa-md" title="Ingrese correo electrónico y contraseña."></i> {{ __('Register') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -63,8 +63,8 @@
 
                         <div class="form-group row">
                             <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-dark text-white font-weight-bold">
-                                    {{ __('Register') }}
+                                <button type="submit" class="btn btn-deep-orange btn-md font-weight-bold">
+                                    {{ __('Guardar') }}
                                 </button>
                             </div>
                         </div>

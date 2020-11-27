@@ -52,7 +52,7 @@ class DocumentSeeder extends Seeder
          $money = array(
             array('Bolívares'),
             array('Dolares'),
-            array('Euros'),
+            /*array('Euros'),*/
         );  
 
         foreach($money as $type){

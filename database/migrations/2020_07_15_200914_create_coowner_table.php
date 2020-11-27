@@ -14,7 +14,7 @@ class CreateCoownerTable extends Migration
     public function up()
     {
         Schema::create('coowner', function (Blueprint $table) {
-            $table->increments('id');
+            $table->bigIncrements('id');
             $table->string('name');
             $table->unsignedBigInteger('name_residence_id');
             $table->foreign('name_residence_id')->references('id')->on('residence'); 

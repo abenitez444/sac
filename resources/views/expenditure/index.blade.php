@@ -36,31 +36,7 @@
 @endsection
 
 @section('js')
-<script>
- 
-   $(document).ready(function(){
-  // configuration
-      const config = {
-        //afterFormat(e) { console.log('afterFormat', e); },
-        allowNegative: false,
-        //beforeFormat(e) { console.log('beforeFormat', e); },
-        negativeSignAfter: false,
-        prefix: '',
-        suffix: '',
-        fixed: true,
-        fractionDigits: 2,
-        decimalSeparator: ',',
-        thousandsSeparator: '.',
-        cursor: 'move'
-      };
 
-      // select the element
-      const nuevo = SimpleMaskMoney.setMask('#monthly_amount', config);
-
-      // This method return value of your input in format number to save in your database
-      //input.formatToNumber();
-});
-</script>
 <script src="{{ asset('js/Spanish.json') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
 <script src="{{ asset('js/simple-mask-money.js') }}"></script>
@@ -89,13 +65,14 @@
 	});
 </script>
 <script>
-    //Edit employee in modal 
+    //Edit expenditure in modal 
     $("#modal-updateExpenditure").appendTo("body");
       $('#modal-updateExpenditure').on('show.bs.modal', function (event) {
       var modal = $(this)
       var button = $(event.relatedTarget) 
       var id = button.data('whatever')  
       var x;
+ 
       if(id){
 
         $.ajax({
@@ -114,6 +91,7 @@
             modal.find('.modal-body #description_monthly').html('');
             modal.find('.modal-body #type_money').html('');
             modal.find('.modal-body #amount_monthly').html('');
+
             
           for(i=0; i < data.expenditures.length; i++) {
      
@@ -132,8 +110,24 @@
                 modal.find('.modal-body #type_money').append(" <select class='form-control browser-default custom-select fondo-gris element-focus mt-2' name='type_money[]' id='type_money[]'><option value='3'> Euros</option>><option value='1'> Bolívares</option><option value='2'> Dolares</option></select>");
                 }
 
-            modal.find('.modal-body #amount_monthly').append('<input type="text" name="monthly_amount[]" id="monthly_amount" inputmode="numeric" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
- 
+
+                modal.find('.modal-body #amount_monthly').append('<input type="text" name="monthly_amount[]" id="monthly_amount'+i+'" inputmode="numeric" value="'+data.expenditures[i].amount_monthly+'" placeholder="Descripción del gásto" class="form-control name_list mt-2" />')
+
+                // configuration
+                const config = {
+                  allowNegative: false,
+                  negativeSignAfter: false,
+                  prefix: '',
+                  suffix: '',
+                  fixed: true,
+                  fractionDigits: 2,
+                  decimalSeparator: ',',
+                  thousandsSeparator: '.',
+                  cursor: 'move'
+                };
+
+                const inout = SimpleMaskMoney.setMask('#monthly_amount'+i+'', config);
+         
           }
 
           //Edit Expenditure and save form

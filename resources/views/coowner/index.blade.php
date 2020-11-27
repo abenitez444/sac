@@ -130,7 +130,7 @@ $(document).ready(function(){
       }).fail(function(msj) {
         Swal.fire({
           icon: 'error',
-          title: "No se realizo el registro del empleado!",
+          title: "No se realizo el registro del copropetario.!",
           showConfirmButton: false,
           timer: 2000
         })

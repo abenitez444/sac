@@ -47,6 +47,7 @@
                 <option value="{{ $anio }}">{{ $anio }}</option>
               @endfor
               </select>
+               <p class="campo-obligatorio">* Campo obligatorio</p>
               <div id="errorcontainer-ano" class='errorDiv'></div>
               </div>
             <div class="col-sm-4 col-md-4 col-lg-4">

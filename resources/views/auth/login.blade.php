@@ -3,16 +3,16 @@
 @section('content')
 <div class="container pb-5 mb-5">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-6 mt-2">
             <div class="card">
-                <div class="card-header default-color-dark text-white font-weight-bold">{{ __('Inicio de Sesión') }}</div>
+                <div class="card-header default-color-dark text-white font-weight-bold"><i class="fas fa-user fa-md text-white"></i> {{ __('Inicio de Sesión') }}</div>
 
-                <div class="card-body">
+                <div class="card-body mt-3">
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
                         <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right font-weight-bold">{{ __('E-Mail Address') }}:</label>
+                            <label for="email" class="col-md-4 col-form-label text-md-right font-weight-bold">{{ __('Correo') }}:</label>
 
                             <div class="col-md-6">
                                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
