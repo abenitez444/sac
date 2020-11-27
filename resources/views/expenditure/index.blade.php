@@ -10,7 +10,7 @@
 
 @section('content')
 <form id="htmlExpenditure" name="htmlExpenditure" method="POST">
-<div class="row justify-content-center">
+<div class="row justify-content-center form-group">
 	<div class="col-sm-6 col-md-6 col-lg-7">
 	 <label for="name_residence_id" class="dark-grey-text font-weight-bold">Residencia</label>
 	  <div class="inputWithIcon">

@@ -18,7 +18,7 @@
           </div>
           <div class="row justify-content-center mt-3">
             <div class="col-sm-6 col-md-6 col-lg-7">
-              <label for="name"><b>Nombre y Apellido:</b></label>
+              <label for="name" class="dark-grey-text font-weight-bold">Nombre y Apellido</label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}"  id="name" name="name" placeholder="Nombre y apellido" value="{{ old('name') }}" onkeypress="return letters(event)" maxlength="60">
                 <i class="fas fa-address-card fa-lg" title="Ingrese el nombre y apellido del copropetario."></i>
@@ -28,7 +28,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-6 col-md-6 col-lg-7">
-             <label for="name_residence_id"><b>Residencia:</b></label>
+             <label for="name_residence_id" class="dark-grey-text font-weight-bold">Residencia</label>
               <div class="inputWithIcon">
                 <select id="name_residence_id" name="name_residence_id" type="text" class="name_residence_id custom-select @error('name_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('name_residence_id') }}">
                   <option value="0" disabled selected>Seleccione</option>
@@ -43,7 +43,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-4 col-md-4 col-lg-4">
-             <label for="type_residence_id"><b>Tipo residencia:</b></label>
+             <label for="type_residence_id" class="dark-grey-text font-weight-bold">Tipo residencia</label>
               <div class="inputWithIcon">
                 <select id="type_residence_id" name="type_residence_id" type="text" class="type_residence_id form-control custom-select @error('type_residence_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_residence_id') }}">
                   <option value="0" disabled selected>Opción</option>
@@ -56,7 +56,7 @@
               </div>
             </div>
             <div class="col-sm-4 col-md-4 col-lg-4">
-             <label for="type_structure_id"><b>Estructura:</b></label>
+             <label for="type_structure_id" class="dark-grey-text font-weight-bold">Estructura</label>
               <div class="inputWithIcon">
                 <select id="type_structure_id" name="type_structure_id" type="text" class="type_structure_id form-control custom-select @error('type_structure_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('type_structure_id') }}">
                 </select>
@@ -67,7 +67,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-4 col-md-4 col-lg-4">
-             <label for="number_letters"><b>Número/Letra:</b></label>
+             <label for="number_letters" class="dark-grey-text font-weight-bold">Número/Letra</label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control{{ $errors->has('number_letters') ? ' is-invalid' : '' }}" id="number_letters" name="number_letters" placeholder="Hogar" maxlength="20">
                  <i class="fas fa-home fa-lg font-weight-bold" title="Ingrese el número/letra del hogar del copropetario."></i>
@@ -75,9 +75,9 @@
               </div>
             </div>
           </div>
-          <div class="row justify-content-center">
-           <div class="col-sm-4 col-md-4 col-lg-4 form-group">
-            <label for="code_phone_id"><b>Código:</b></label>
+          <div class="row justify-content-center form-group">
+           <div class="col-sm-4 col-md-4 col-lg-4">
+            <label for="code_phone_id" class="dark-grey-text font-weight-bold">Código</label>
               <div class="inputWithIcon">
                 <select id="code_phone_id" name="code_phone_id" type="text" class="form-control custom-select @error('code_phone_id') is-invalid @enderror fondo-gris element-focus" value="{{ old('code_phone_id') }}">
                     <option value="0" disabled selected>Opción</option>
@@ -89,7 +89,7 @@
               </div>
             </div>
             <div class="col-sm-5 col-md-5 col-lg-5 form-group">
-              <label for="document_type_id"><b>Teléfono:</b></label>
+              <label for="document_type_id" class="dark-grey-text font-weight-bold">Teléfono</label>
               <div class="inputWithIcon">
                 <input type="text"  class="form-control phone @error('phone') is-invalid @enderror" id="phone" name="phone" placeholder="Número de teléfono" maxlength="7" onkeypress="return numbers(event)">
                 <i class="fas fa-phone-square fa-lg" title="Introduzca el teléfono del copropetario."></i>
@@ -98,7 +98,7 @@
           </div>
           <div class="row justify-content-center">
             <div class="col-sm-6 col-md-6 col-lg-7 form-group">
-              <label for="email"><b>Correo:</b></label>
+              <label for="email" class="dark-grey-text font-weight-bold">Correo</label>
               <div class="inputWithIcon">
                 <input type="text" class="form-control" id="email" name="email" placeholder="Correo electrónico" maxlength="80">
                 <i class="fas fa-envelope fa-lg" title="Introduzca el correo electrónico del copropetario."></i>

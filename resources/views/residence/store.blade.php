@@ -10,7 +10,7 @@
       </div>
       <div class="modal-body">
         <form id="residence-form" method="POST">
-          <input type="text" class="form-control" id="id" name="id">
+          <input type="hidden" class="form-control" id="id" name="id">
           @csrf
           <div class="row">
             <div class="sidebar-brand-text mx-3 push ml-3">

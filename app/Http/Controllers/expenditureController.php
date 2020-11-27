@@ -230,7 +230,7 @@ class expenditureController extends Controller
 
                 <div class="row justify-content-center">
                  <div class="col-md-10 offset-2">
-                  <div class="card shadow mt-3">
+                  <div class="card shadow">
                     <div class="card-header default-color-dark">
                       <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.')
                     </div>';
@@ -241,9 +241,9 @@ class expenditureController extends Controller
                       <table id="tableExpenditure" align="center" border="1" class="table table-condensed table-bordered table-hover">
                         <thead>
                               <tr class="text-center">
-                                <th style="white-space:nowrap; width:1%;"><b>Més</b></th>
-                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Año</b></th>
-                                <th style="white-space:nowrap; width:1%;"><b class="ml-5"> Opción</b></th>
+                                <th><b class="dark-grey-text font-weight-bold">Mes</b></th>
+                                <th><b class="dark-grey-text font-weight-bold"> Año</b></th>
+                                <th><b class="dark-grey-text font-weight-bold"> Opción</b></th>
                               </tr>
                         </thead>
                         <tbody>';
@@ -251,9 +251,9 @@ class expenditureController extends Controller
                            
                               echo'
                               <tr class="text-center">
-                                <td style="white-space:nowrap; width:1%;">'.$expenditure->typeMonth->month.'</td>
-                                <td style="white-space:nowrap; width:1%;">'.$expenditure->year.'</td>
-                                <td style="white-space:nowrap; width:1%;"><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'"">
+                                <td>'.$expenditure->typeMonth->month.'</td>
+                                <td>'.$expenditure->year.'</td>
+                                <td><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'"">
                                   <b class="fa fa-eye"></b>
                                    <a href="edit/'.$expenditure->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$expenditure->id.'" ><b class="fa fa-edit"> </b></h6> </a>
                                 </a></td>
