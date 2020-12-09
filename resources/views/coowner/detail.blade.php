@@ -3,7 +3,7 @@
   aria-hidden="true">
   <div class="modal-dialog" role="Coowner">
     <div class="modal-content" style="border-radius: 10px;">
-      <div class="modal-header default-color-dark" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
+      <div class="modal-header info-color-dark" style="border-radius: 10px;">
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>

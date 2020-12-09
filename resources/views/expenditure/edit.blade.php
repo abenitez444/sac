@@ -2,8 +2,8 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="updateExpenditure">
     <div class="modal-content">
-      <div class="modal-header default-color-dark"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
-        <h5 class="modal-title text-white" id="ModalLabel">Editar: Registro de Gástos </h5>
+      <div class="modal-header info-color-dark">
+        <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>
@@ -80,7 +80,7 @@
   </div>
   </form> 
       <div class="modal-footer justify-content-center">
-        <button type="button" id="send-updateExpenditure" class="btn btn-deep-orange btn-md" title="Guardar copropetario"><i class="fas fa-share-square fa-2x"></i></button>
+        <button type="button" id="send-updateExpenditure" class="btn btn-deep-orange btn-md" title="Editar Gásto Mensual."><i class="fas fa-edit fa-2x"></i></button>
       </div>
     </div>
   </div>

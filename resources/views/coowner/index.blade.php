@@ -13,7 +13,7 @@
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header default-color-dark">
+  <div class="card-header info-color-dark">
     <h6 class="font-weight-bold text-white"><i class="fas fa-fw fa-users fa-lg" title="Registrar Copropetario."></i> LISTA DE COPROPETARIOS</h6>
   </div>
   <div class="card-body">
@@ -164,11 +164,12 @@ $(document).ready(function(){
           dataType: 'json',
         }).done(function(data) {
           console.log(data)
-          modal.find('.modal-title')
+          modal.find('.modal-title').html('').append('<span class="font-weight-bold"><i class="fa fa-users text-white fa-lg mt-1" title="Editar Copropetario."></i> Editar Copropietario </span>')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name').val(data.name)
           modal.find('.modal-body #name_residence_id').val(data.name_residence_id)
           modal.find('.modal-body #type_residence_id').val(data.type_residence_id)
+          modal.find('.modal-body #type_structure_id').html('')
           if (data.type_structure_id == 1) {
             modal.find('.modal-body #type_structure_id').append("<option value='1'>Central</option>");
           }
@@ -228,19 +229,8 @@ $(document).ready(function(){
             });
           })
         })
-        .fail(function() {
-          console.log("error");
-        });
-        $('#close').click(function(){
-        location.reload()
-        });
-        $(document).keyup(function(e) {
-        if (e.key === "Escape") {
-          location.reload() 
-        }
-      });
-    }
-  })
+      }
+    })
 </script>
 <!--Details of empleado in modal -->
 <script>
@@ -257,7 +247,7 @@ $(document).ready(function(){
           dataType: 'json',
         })
         .done(function(data) {
-          modal.find('.modal-title').text(' Ficha del Copropetario ')
+          modal.find('.modal-title').html('').append('<span class="font-weight-bold"><i class="fas fa-user-tag text-white fa-md mt-1"></i> Detalle Copropietario </span>')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name').text(data.name)
           modal.find('.modal-body #name_residence_id').text(data.name_residence.name_residence)

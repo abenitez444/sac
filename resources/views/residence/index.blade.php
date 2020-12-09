@@ -18,21 +18,21 @@
 
 @section('content')
 <div class="card shadow mb-4">
-  <div class="card-header teal darken-2">
-    <h5 class="font-weight-bold text-white">Lista de residencias</h5>
+  <div class="card-header info-color-dark">
+    <h5 class="font-weight-bold text-white"><i class="fas fa-building fa-md"></i>  Lista de residencias</h5>
   </div>
   <div class="card-body">
     <div class="table-responsive">
       <table id="residenceTable" class="table table-bordered table-hover" data-order='[[ 0, "desc" ]]' data-page-length='10'>
         <thead>
           <tr class="text-center">
-            <th><b>Residencia</b></th>
-            <th><b>Tipo</b></th>
-            <th><b>Estructura</b></th>
-            <th><b>RIF</b></th>
-            <th><b>Correo electrónico</b></th>
-            <th><b>Dirección</b></th>
-            <th><b>Opciones</b></th>
+            <th class="dark-grey-text font-weight-bold">Residencia</th>
+            <th class="dark-grey-text font-weight-bold">Tipo</th>
+            <th class="dark-grey-text font-weight-bold">Estructura</th>
+            <th class="dark-grey-text font-weight-bold">RIF</th>
+            <th class="dark-grey-text font-weight-bold">Correo electrónico</th>
+            <th class="dark-grey-text font-weight-bold">Dirección</th>
+            <th class="dark-grey-text font-weight-bold">Opciones</th>
           </tr>
         </thead>
         <tbody>
@@ -168,14 +168,6 @@
         });
       });
     })
-    $('#close').click(function(){
-        location.reload()
-    });
-    $(document).keyup(function(e) {
-      if (e.key === "Escape") {
-        location.reload() 
-      }
-    });
   })
 </script>
 <script>
@@ -193,7 +185,7 @@
           dataType: 'json',
          
         }).done(function(data) {
-          modal.find('.modal-title')
+          modal.find('.modal-title').html('').append('<span class="font-weight-bold text-white">Editar -' +' '+ data.name_residence+'</span>')
           modal.find('.modal-body #id').val(data.id)
           modal.find('.modal-body #name_residence').val(data.name_residence)
           modal.find('.modal-body #type_residence').val(data.type_residence)
@@ -288,17 +280,6 @@
             });
           })
         })
-        .fail(function() {
-          console.log("error");
-        });
-         $('#closeEdit').click(function(){
-            location.reload()
-        });
-        $(document).keyup(function(e) {
-          if (e.key === "Escape") {
-            location.reload() 
-          }
-        });
       }
     })
 </script>
@@ -317,6 +298,7 @@
           dataType: 'json',
         })
         .done(function(data) {
+          modal.find('.modal-title').html('').append('<span class="font-weight-bold text-white">Detalle -' +' '+ data.name_residence+'</span>')
           modal.find('.modal-body #id').text(data.id)
           modal.find('.modal-body #name_residence').text(data.name_residence)
             if(data.type_residence == 1) {

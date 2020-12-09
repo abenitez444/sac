@@ -11,7 +11,7 @@
 <div class="row  justify-content-center">
   <div class="col-sm-8 col-md-11 col-lg-11">
     <div class="card">
-      <div class="card-header default-color-dark text-white">
+      <div class="card-header info-color-dark text-white">
         <h5 class="font-weight-bold text-center"><i class="far fa-list-alt fa-lg"></i> Registro de Gástos Mensuales</h5>
       </div>
       <div class="row">
@@ -89,7 +89,7 @@
         <div class="card-footer justify-content-center">
           <div class="text-center mt-1">
               <button type="button" id="send-expenditure" class="btn btn-deep-orange" ><i class="fas fa-save font-weight-bold text-white fa-2x" title="Guardar Gásto Mensual."> </i></button>
-              <a href="#" class="btn btn-info"><i class="fas fa-search font-weight-bold fa-2x" title="Consultar Gástos Mensuales."></i></a>
+              <a href="#" class="btn info-color-dark text-white"><i class="fas fa-search font-weight-bold fa-2x" title="Consultar Gástos Mensuales."></i></a>
           </div>
         </div>
     </div>

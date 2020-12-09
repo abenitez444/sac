@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-6 mt-2">
             <div class="card">
-                <div class="card-header default-color-dark text-white font-weight-bold"><i class="fas fa-user fa-md text-white"></i> {{ __('Inicio de Sesión') }}</div>
+                <div class="card-header info-color-dark text-white font-weight-bold"><i class="fas fa-user fa-md text-white"></i> {{ __('Inicio de Sesión') }}</div>
 
                 <div class="card-body mt-3">
                     <form method="POST" action="{{ route('login') }}">

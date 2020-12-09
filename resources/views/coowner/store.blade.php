@@ -2,8 +2,8 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="co-owner">
     <div class="modal-content">
-      <div class="modal-header default-color-dark"><i class="fa fa-users text-white fa-lg mr-2 mt-2" title="Registrar Copropetario."></i>
-        <h5 class="modal-title text-white" id="ModalLabel">Copropetario</h5>
+      <div class="modal-header info-color-dark"><i class="fa fa-users text-white fa-lg mr-1 mt-2" title="Registrar Copropetario."></i>
+        <h5 class="modal-title text-white font-weight-bold" id="ModalLabel">Registrar Copropetario</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
         </button>

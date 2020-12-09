@@ -2,7 +2,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="residence">
     <div class="modal-content">
-      <div class="modal-header default-color-dark"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold"> Conjunto residencial</h5>
+      <div class="modal-header info-color-dark"><i class="fas fa-building fa-lg mr-2 mt-1 text-white" title="Seleccione el ente."></i> <h5 class="text-white font-weight-bold"> Conjunto residencial</h5>
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" class="close" id="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>

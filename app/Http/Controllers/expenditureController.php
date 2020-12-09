@@ -124,7 +124,7 @@ class expenditureController extends Controller
     public function edit($id)
     {
 
-      $data =  Expenditure::with('Expenditures',  'typeMoney', 'typeMonth')->where('expenditure.id',  $id)->first();
+      $data =  Expenditure::with('Expenditures', 'nameResidence', 'typeMoney', 'typeMonth')->where('expenditure.id',  $id)->first();
 
 
       return \Response::json($data);
@@ -151,7 +151,7 @@ class expenditureController extends Controller
               }
            		echo '
                     <div class="card">
-                     <div class="card-header text-white default-color-dark text-center">
+                     <div class="card-header text-white info-color-dark text-center">
                         <h6>
                             <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Información Residencial</b>
                         </h6>
@@ -190,7 +190,7 @@ class expenditureController extends Controller
                                 <td class="font-weight-bold">'.$resultado->aliquot_center.'%</td>
                                 <td class="font-weight-bold">'.$resultado->aliquot_corner.'%</td>
                                 <td class="font-weight-bold">'.$resultado->aliquot_penhouse.'%</td>
-                                <td class="font-weight-bold"><span>'.$resultado->structure.'</span>,<span>'.$resultado->aliquot_structure.'%</span></td>
+                                <td class="font-weight-bold"><span>'.$resultado->structure.'</span> - <span>'.$resultado->aliquot_structure.'%</span></td>
                               </tr>
                               </tbody>
                             </table>
@@ -231,8 +231,8 @@ class expenditureController extends Controller
                 <div class="row justify-content-center">
                  <div class="col-md-10 offset-2">
                   <div class="card shadow">
-                    <div class="card-header default-color-dark">
-                      <h6 class="font-weight-bold text-white"><i class="fas fa-building fa-lg font-weight-bold" title="Detalle Gásto Mensual."></i> Detalle del Gásto Mensual (Residencia : '.$residence->name_residence.')
+                    <div class="card-header info-color-dark">
+                      <h6 class="font-weight-bold text-white"><i class="far fa-list-alt fa-lg" title="Detalle Gásto Mensual."></i> Consultar Gásto Mensual (Residencia : '.$residence->name_residence.')
                     </div>';
             
               echo'

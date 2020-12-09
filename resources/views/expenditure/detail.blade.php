@@ -4,7 +4,7 @@
   aria-hidden="true">
   <div class="modal-dialog modal-lg" role="expenses">
     <div class="modal-content" style="border-radius: 10px;">
-      <div class="modal-header default-color-dark" style="border-radius: 10px;"><i class="fas fa-user-tag text-white fa-lg mr-2 mt-1"></i>
+      <div class="modal-header info-color-dark" style="border-radius: 10px;">
         <h5 class="modal-title text-white" id="ModalLabel"></h5>
         <button type="button" id="closeDetail" class="close" data-dismiss="modal" aria-label="Close">
           <span><i class="fas fa-window-close text-danger fa-md"></i></span>
@@ -27,7 +27,7 @@
 		          <div class="col-sm-12 col-md-12 col-lg-12 form-group"> 
 		           <br />
 		            <div class="table-responsive">
-		              <table class="table" id="dynamic_field">
+		              <table class="table table-bordered" id="dynamic_field">
                     <thead class="text-center">
                       <th><label><h6 class="dark-grey-text  font-weight-bold">Descripción</h6></label></th>
                       <th><label><h6 class="dark-grey-text  font-weight-bold">Tipo</h6></label></th>

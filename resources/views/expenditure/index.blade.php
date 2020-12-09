@@ -10,7 +10,7 @@
 
 @section('content')
 <form id="htmlExpenditure" name="htmlExpenditure" method="POST">
-<div class="row justify-content-center form-group">
+<div class="row justify-content-center form-group ">
 	<div class="col-sm-6 col-md-6 col-lg-7">
 	 <label for="name_residence_id" class="dark-grey-text font-weight-bold">Residencia</label>
 	  <div class="inputWithIcon">
@@ -80,10 +80,8 @@
           type: 'GET',
            dataType: 'json',
         }).done(function(data) {
-            modal.find('.modal-title')
-            
+            modal.find('.modal-title').html('').append('<span class="font-weight-bold"><i class="fa fa-edit text-white fa-lg mt-1" title="Editar Gásto Mensual."></i> Editar Gásto Mensual - ' + data.name_residence.name_residence+'</span>')
             modal.find('#id_request').val(data.id)
-
             modal.find('.modal-body #residence_coowner').val(data.residence_coowner)
             modal.find('.modal-body #year').val(data.year)
             modal.find('.modal-body #month').val(data.month)
@@ -198,7 +196,7 @@
         })
         .done(function(data) {
       
-          modal.find('.modal-title').text(' Condominios de Residencias')
+          modal.find('.modal-title').html('').append('<span class="font-weight-bold text-white"><i class="far fa-list-alt text-white fa-lg  mt-1"></i> Detalle Mensual -' +' '+ data.name_residence.name_residence+'</span>')
           modal.find('.modal-body #id').text(data.id)
           modal.find('.modal-body #residence_coowner').text(data.name_residence.name_residence)
           modal.find('.modal-body #year').text(data.year)

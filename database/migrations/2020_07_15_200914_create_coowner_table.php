@@ -18,8 +18,7 @@ class CreateCoownerTable extends Migration
             $table->string('name');
             $table->unsignedBigInteger('name_residence_id');
             $table->foreign('name_residence_id')->references('id')->on('residence'); 
-            $table->unsignedBigInteger('type_residence_id');
-            $table->foreign('type_residence_id')->references('id')->on('residence'); 
+            $table->string('type_residence_id');
             $table->string('number_letters');
             $table->string('type_structure_id');
             $table->unsignedBigInteger('code_phone_id')->nullable();
