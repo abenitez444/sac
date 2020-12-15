@@ -19,7 +19,15 @@ Route::get('/', function () {
     return redirect()->route('home');
 });
 
+    Route::group(['prefix' => 'balance'], function () {
 
+	Route::get('/index', 'balanceController@index')->name('balance.index');
+	Route::get('/create', 'balanceController@create')->name('balance.create');
+	Route::post('/store', 'balanceController@store')->name('balance.store');
+	
+});
+
+Route::group(['prefix' => 'expenditure'], function () {
 	Route::get('/index', 'expenditureController@index')->name('mon-expenditure.index');
 	Route::get('/create', 'expenditureController@create')->name('mon-expenditure.create');
 	Route::get('/editExpenditure/{id}', 'expenditureController@edit')->name('mon-expenditure.edit');
@@ -32,7 +40,7 @@ Route::get('/', function () {
 	Route::post('/searchMonth', 'expenditureController@searchMonth');
 	Route::post('/searchYear','expenditureController@searchYear');
 	Route::post('/searchResidence','expenditureController@searchResidence')->name('mon-expenditure.residence');
-	
+});
 
 
 /*CRUD PROYECT*/

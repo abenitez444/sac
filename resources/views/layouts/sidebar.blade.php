@@ -72,8 +72,8 @@
     <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
       <div class="bg-white py-2 collapse-inner rounded">
         <h6 class="collapse-header">Gestión:</h6>
-        <a class="collapse-item" href="#">Lista</a>
-        <a class="collapse-item" href="#">Registrar</a>
+        <a class="collapse-item" href="{{ route('balance.index') }}">Lista</a>
+        <a class="collapse-item" href="{{ route('balance.create') }}">Registrar</a>
       </div>
     </div>
   </li>

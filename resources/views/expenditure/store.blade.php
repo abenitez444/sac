@@ -89,7 +89,7 @@
         <div class="card-footer justify-content-center">
           <div class="text-center mt-1">
               <button type="button" id="send-expenditure" class="btn btn-deep-orange" ><i class="fas fa-save font-weight-bold text-white fa-2x" title="Guardar Gásto Mensual."> </i></button>
-              <a href="#" class="btn info-color-dark text-white"><i class="fas fa-search font-weight-bold fa-2x" title="Consultar Gástos Mensuales."></i></a>
+              <a href="{{ route('mon-expenditure.index') }}" class="btn info-color-dark text-white"><i class="fas fa-search font-weight-bold fa-2x" title="Consultar Gástos Mensuales."></i></a>
           </div>
         </div>
     </div>
