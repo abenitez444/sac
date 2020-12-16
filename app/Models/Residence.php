@@ -34,7 +34,7 @@ class Residence extends Model
         return $this->belongsTo('App\Models\Residence',  'name_residence');
     }
 
-        public function typeResidences()
+    public function typeResidences()
     {
         return $this->belongsTo('App\Models\TypeResidence',  'type_residence');
     }

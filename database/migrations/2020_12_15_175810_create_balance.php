@@ -19,6 +19,8 @@ class CreateBalance extends Migration
             $table->foreign('name_coowner_id')->references('id')->on('coowner'); 
             $table->unsignedBigInteger('name_residence_id');
             $table->foreign('name_residence_id')->references('id')->on('residence');
+            $table->unsignedBigInteger('type_residence_id');
+            $table->foreign('type_residence_id')->references('id')->on('residence');
             $table->string('number_apto');
             $table->string('type_structure');
             $table->string('aliquot_structure');

@@ -5,7 +5,7 @@
 <link rel="stylesheet" href="{{ asset('css/select2.min.css') }}">
 <link rel="stylesheet" href="{{ asset('css/form-styles.css') }}">
 @endsection
-<form id="addExpenditure" name="addExpenditure" method="POST">
+<form id="addPayment" name="addPayment" method="POST">
   @csrf
 <input type="hidden" name="id" >
 <div class="row  justify-content-center">
@@ -38,18 +38,9 @@
               </div>
             </div>
           </div>
-           <div class="row justify-content-center form-group">
-            <div class="col-sm-12 col-md-6 col-lg-6">
-              <label class="dark-grey-text font-weight-bold">Residencia</label>
-              <div class="inputWithIcon">
-                  <select class="form-control{{ $errors->has('residence_coowner') ? ' is-invalid' : '' }} browser-default buscador custom-select fondo-gris element-focus" name="residence_coowner" id="residence_coowner" >
-                    <option disabled selected>Buscar. . .</option>
-               
-                    <option value=""></option>
-                 
-                  </select>
-               <p class="campo-obligatorio">* Campo obligatorio</p>
-              </div>
+          <div class="row form-group">
+            <div class="col-md-10 offset-lg-1">
+              <div id="resultCoowner" name="resuFormatos"></div>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -94,7 +85,30 @@
 @section('js')
 <script src="{{ asset('js/select2.min.js') }}"></script>
 <script src="{{ asset('js/selectSearch.js') }}"></script>
+<script>
+  
+  $("#name_coowner").change(function(event) {
+    var data = $( "#addPayment" ).serialize();
+      $.ajax({
+        type: 'POST',
+        url: 'searchCoowner',
+        data: data,
+        success: function(data){
 
+            $('#resultCoowner').html(data);
+            $('#tablePayment').dataTable( {
+                "drawCallback": function( settings ) {
+                    var api = new $.fn.dataTable.Api( settings );
+             
+                    // Output the data for the visible rows to the browser's console
+                    // You might do something more useful with it!
+                    console.log( api.rows( {page:'current'} ).data() );
+                }
+            } );
+          }                           
+        })
+  });
+</script>
 <script>
   $.ajaxSetup({
     headers: {

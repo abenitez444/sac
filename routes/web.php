@@ -24,7 +24,7 @@ Route::get('/', function () {
 	Route::get('/index', 'balanceController@index')->name('balance.index');
 	Route::get('/create', 'balanceController@create')->name('balance.create');
 	Route::post('/store', 'balanceController@store')->name('balance.store');
-	
+	Route::post('/searchCoowner', 'balanceController@searchCoowner');
 });
 
 Route::group(['prefix' => 'expenditure'], function () {
