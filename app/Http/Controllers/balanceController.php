@@ -53,7 +53,7 @@ class balanceController extends Controller
                     <div class="card">
                      <div class="card-header text-white info-color-dark text-center">
                         <h6>
-                            <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Información Copropietario</b>
+                            <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Información Copropietario.</b>
                         </h6>
                     </div>
                       <div class="card-body">
@@ -158,7 +158,7 @@ class balanceController extends Controller
 				                              <tbody id="reset" >
 				                              <tr class="text-center">
 				                                <td class="font-weight-bold"><li>'.$detail->typeMonth->month.'</li></td>
-				                                <td class="font-weight-bold">'.$structure->type_structure_id.'</td>
+				                                <td class="font-weight-bold"></td>
 				                              </tr>
 				                              </tbody>
 				                            </table>

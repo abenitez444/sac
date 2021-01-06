@@ -96,15 +96,7 @@
         success: function(data){
 
             $('#resultCoowner').html(data);
-            $('#tablePayment').dataTable( {
-                "drawCallback": function( settings ) {
-                    var api = new $.fn.dataTable.Api( settings );
-             
-                    // Output the data for the visible rows to the browser's console
-                    // You might do something more useful with it!
-                    console.log( api.rows( {page:'current'} ).data() );
-                }
-            } );
+           
           }                           
         })
   });
