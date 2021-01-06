@@ -219,7 +219,6 @@ class expenditureController extends Controller
 
       $residence = Residence::find($id);
       $resultDos = Expenditure::where('residence_coowner', $id)->get();
-
       $resultTres = ExpensesDetail::where('expenditure_id', $id)->get();
       $data =  Expenditure::with('Expenditures',  'typeMoney', 'typeMonth')->where('expenditure.id',  $id)->first();
     
@@ -253,10 +252,12 @@ class expenditureController extends Controller
                               <tr class="text-center">
                                 <td>'.$expenditure->typeMonth->month.'</td>
                                 <td>'.$expenditure->year.'</td>
-                                <td><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'"">
-                                  <b class="fa fa-eye"></b>
-                                   <a href="edit/'.$expenditure->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$expenditure->id.'" ><b class="fa fa-edit"> </b></h6> </a>
-                                </a></td>
+                               
+                                <td><a href="detailExpenses/'.$expenditure->id.'" title="Visualizar" id="btn-expenses" data-toggle="modal" data-target="#detailExpenses" data-whatever="'.$expenditure->id.'">
+                                  <b class="fa fa-eye"></b></a>
+
+                                   <a href="edit/'.$expenditure->id.'" title="Editar" data-toggle="modal" data-target="#modal-updateExpenditure" data-whatever="'.$expenditure->id.'" ><b class="fa fa-edit"> </b></h6></a>
+                                </td>
 
                               </tr>';
                           }

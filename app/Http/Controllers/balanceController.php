@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Balance;
 use App\Models\Coowner;
 use App\Models\Residence;
+use App\Models\Expenditure;
+use App\Models\ExpensesDetail;
 
 
 class balanceController extends Controller
@@ -28,22 +30,25 @@ class balanceController extends Controller
     {
         $id = $request->name_coowner;
         $result = Coowner::where('id', $id)->get();
+        $resultRes = Residence::where('id', $id)->get();
+        $expenses = Expenditure::where('residence_coowner', $id)->get();
+        $expense = Coowner::where('name_residence_id', $id)->get();
+        $amount = ExpensesDetail::where('expenditure_id', $id)->get();
+       // dd($amount);
+      // dd($expense[0]->type_structure_id);
+
        
         if (isset($result)) 
-        {
+        {	
 
             foreach($result as $resultado) 
             {
-              if ($resultado->type_center == 'on') {
-                $resultado->type_center = 'Central';
-              }
-              if ($resultado->type_corner == 'on') {
-                $resultado->type_corner = 'Esquina';
-              }
-              if ($resultado->type_penhouse == 'on') {
-                $resultado->type_penhouse = 'Pen House';
-              }
+             
+            foreach($resultRes as $res) 
+            {
 
+           	
+            	
                 echo '
                     <div class="card">
                      <div class="card-header text-white info-color-dark text-center">
@@ -52,39 +57,46 @@ class balanceController extends Controller
                         </h6>
                     </div>
                       <div class="card-body">
-                        <div class="row">
-                          <div class="col-sm-8 col-md-6 col-lg-6">   
-                            <label for="name_residence_id" class="dark-grey-text font-weight-bold">Nombre Residencia</label>
-                              <br><input type="text" class="form-control"  id="name_residence_id" name="name_residence_id" maxlength="60" value="'.$resultado->nameResidence->name_residence.'">
-                          </div>
-                          <div class="col-sm-8 col-md-6 col-lg-6">   
-                            <label for="type_residence_id" class="dark-grey-text font-weight-bold">Tipo Residencia</label>
-                              <br><input type="text" class="form-control"  id="type_residence_id" name="type_residence_id" maxlength="60" value="'.$resultado->typeResidence->option.'">
+                        <div class="row text-center">
+                          <div class="col-sm-8 col-md-12 col-lg-12">   
+                              <br><span><h4><i class="fas fa-user font-weight-bold"> '.$resultado->name.' </i></h4></span>
+                           </div>
                           </div>
                         </div>
                         <hr>
-                        <div class="row">
+                        <div class="row text-center">
                           <div class="col-sm-8 col-md-6 col-lg-6">   
-                            <label for="number_apto" class="dark-grey-text font-weight-bold">Número/Letra</label>
-                              <br><input type="text" class="form-control"  id="number_apto" name="number_apto" maxlength="60" value="'.$resultado->number_letters.'">
+                            <label for="name_residence_id" class="dark-grey-text font-weight-bold">Residencia</label>
+                              <br><span>'.$resultado->nameResidence->name_residence.'</span>
                           </div>
                           <div class="col-sm-8 col-md-6 col-lg-6">   
-                            <label for="type_residence_id" class="dark-grey-text font-weight-bold">Tipo Residencia</label>
-                              <br><input type="text" class="form-control"  id="type_residence_id" name="type_residence_id" maxlength="60" value="'.$resultado->typeResidence->option.'">
+                            <label for="type_residence_id" class="dark-grey-text font-weight-bold">Tipo</label>
+                              <br><span>'.$resultado->typeResidence->option.'</span>
+                          </div>
+                        </div>
+                        <hr>
+                        <div class="row text-center">
+                          <div class="col-sm-8 col-md-6 col-lg-6">   
+                            <label for="number_apto" class="dark-grey-text font-weight-bold">Número/Letra</label>
+                              <br><span>'.$resultado->number_letters.'</span>
+                          </div>
+                          <div class="col-sm-8 col-md-6 col-lg-6">   
+                            <label for="type_residence_id" class="dark-grey-text font-weight-bold">Estructura</label>
+                              <br><span>'.$resultado->typeStructu->option.'</span>
                           </div>
                         </div>
                         <hr>
                         <div class="row mt-4">
                           <div class="col-sm-8 col-md-12 col-lg-12 text-center">   
-                            <label for="addres_residence" class="dark-grey-text font-weight-bold">Dirección Residencia</label>
-                              <br><span>'.$resultado->addres.'</span>
+                            <label for="addres_residence" class="dark-grey-text font-weight-bold">Dirección</label>
+                              <br><span>'.$res->addres.'</span>
                           </div>
                         </div>
                         <hr>
-                        <div class="row mt-2">
+                         <div class="row mt-2">
                           <div class="col-sm-8 col-md-12 col-lg-12">
                            <div class="table-responsive">
-                            <table class="table" id="tablePayment>
+                            <table class="table">
                               <thead class="text-center">
                                 <th><label><h6 class="dark-grey-text  font-weight-bold">Central</h6></label></th>
                                 <th><label><h6 class="dark-grey-text  font-weight-bold">Esquina</h6></label></th>
@@ -93,15 +105,17 @@ class balanceController extends Controller
                               </thead>
                               <tbody id="reset" >
                               <tr class="text-center">
-                                <td class="font-weight-bold">'.$resultado->aliquot_center.'%</td>
-                                <td class="font-weight-bold">'.$resultado->aliquot_corner.'%</td>
-                                <td class="font-weight-bold">'.$resultado->aliquot_penhouse.'%</td>
-                                <td class="font-weight-bold"><span>'.$resultado->structure.'</span> - <span>'.$resultado->aliquot_structure.'%</span></td>
+                                <td class="font-weight-bold">'.$res->aliquot_center.'%</td>
+                                <td class="font-weight-bold">'.$res->aliquot_corner.'%</td>
+                                <td class="font-weight-bold">'.$res->aliquot_penhouse.'%</td>
+                                <td class="font-weight-bold"><span>'.$res->structure.'</span> - <span>'.$res->aliquot_structure.'%</span></td>
                               </tr>
                               </tbody>
                             </table>
+                           </div>
                           </div>
-                        </div>
+                         </div>
+                         
                           <div class="col-md-6 pb-4">   
                             <div id="title"></div>
                             <div id="anio"></div>
@@ -109,8 +123,54 @@ class balanceController extends Controller
                         </div>
                       </div>
                     </div>
-                ';
-            }
+                   
+                    	<div class="card">
+                     <div class="card-header text-white info-color-dark text-center">
+                        <h6>
+                            <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Mes por pagar</b>
+                        </h6>
+                    </div>';
+                        
+                foreach($expenses as $detail) 
+                {
+                	foreach($expense as $structure) 
+                	{
+
+                	  if ($structure->type_structure_id == 1) {
+		                $structure->type_structure_id = 'Central';
+		              }
+		              if ($structure->type_structure_id  == 2) {
+		                $structure->type_structure_id  = 'Esquina';
+		              }
+		              if ($structure->type_structure_id == 3) {
+		                $structure->type_structure_id = 'Pen House';
+		              }
+                 
+	               		echo'
+			           		<div class="card-body ">
+			                    <div class="row">
+			                        <div class="col-sm-10 col-md-12 col-lg-12">  
+			                          <span>Estructura: '.$structure->type_structure_id.'</span>
+					               		<div class="table-responsive">
+				                            <table class="table table-condensed table-bordered table-hover">
+				                              <thead class="text-center">
+				                              </thead>
+				                              <tbody id="reset" >
+				                              <tr class="text-center">
+				                                <td class="font-weight-bold"><li>'.$detail->typeMonth->month.'</li></td>
+				                                <td class="font-weight-bold">'.$structure->type_structure_id.'</td>
+				                              </tr>
+				                              </tbody>
+				                            </table>
+				                        </div>
+			                        </div>
+		                        </div>
+		                    </div>';
+	                    //VER SI PUEDO COLOCAR ESTRUCTURA FUERA DEL FOREACH
+		           	  	    }
+		        	  	}
+		            }
+		        }
         }
         else 
         {
