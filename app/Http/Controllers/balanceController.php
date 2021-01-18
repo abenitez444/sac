@@ -8,6 +8,7 @@ use App\Models\Coowner;
 use App\Models\Residence;
 use App\Models\Expenditure;
 use App\Models\ExpensesDetail;
+use DB;
 
 
 class balanceController extends Controller
@@ -30,13 +31,22 @@ class balanceController extends Controller
     {
         $id = $request->name_coowner;
        
-        $result =  Coowner::with('CodePhone', 'nameResidence', 'typeStructure', 'typeResidence')->where('coowner.id',  $id)->first();
-        $result =  Expenditure::with('Expenditures', 'nameResidence', 'nameResidence', 'typeStructure')->where('coowner.id',  $id)->first();
+        $result =  Coowner::with('CodePhone', 'nameResidence', 'typeStructu', 'typeResidence')->where('coowner.id',  $id)->first();
+      
 
        
-        if (isset($result)) 
+        if (isset($result))  
         {	
 
+              if ($result->type_structure_id == 1) {
+                $result->type_structure_id = 'Central';
+              }
+              if ($result->type_structure_id == 2) {
+                $result->type_structure_id = 'Esquina';
+              }
+              if ($result->type_structure_id == 3) {
+                $result->type_structure_id = 'Pen House';
+              }
           
                 echo '
                     <div class="card">
@@ -71,7 +81,7 @@ class balanceController extends Controller
                           </div>
                           <div class="col-sm-8 col-md-6 col-lg-6">   
                             <label for="type_residence_id" class="dark-grey-text font-weight-bold">Estructura</label>
-                              <br><span>'.$result->typeStructu->option.'</span>
+                              <br><span>'.$result->type_structure_id.'</span>
                           </div>
                         </div>
                         <hr>
@@ -93,9 +103,8 @@ class balanceController extends Controller
                         </h6>
                     </div>';
               
-        }
-        else 
-        {
+        }else{
+        
             echo '<div style="color: red;" class="text-center"><h2><b>No hay Copropietario que mostrar</b></h2></div>';
         }
 
