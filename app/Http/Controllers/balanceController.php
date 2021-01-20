@@ -30,10 +30,10 @@ class balanceController extends Controller
     public function searchCoowner (Request $request) 
     {
         $id = $request->name_coowner;
-       
         $result =  Coowner::with('CodePhone', 'nameResidence', 'typeStructu', 'typeResidence')->where('coowner.id',  $id)->first();
-      
 
+        $month =  Expenditure::with('typeMonth', 'descriptionMonth')->where('expenditure.id',  $id)->first();
+       //dd($month);
        
         if (isset($result))  
         {	
@@ -82,6 +82,7 @@ class balanceController extends Controller
                           <div class="col-sm-8 col-md-6 col-lg-6">   
                             <label for="type_residence_id" class="dark-grey-text font-weight-bold">Estructura</label>
                               <br><span>'.$result->type_structure_id.'</span>
+      
                           </div>
                         </div>
                         <hr>
@@ -96,12 +97,18 @@ class balanceController extends Controller
                       </div>
                     </div>
                    
-                    	<div class="card">
+                    <div class="card">
                      <div class="card-header text-white info-color-dark text-center">
                         <h6>
-                            <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Mes por pagar</b>
+                            <b><i class="fas fa-building fa-md font-weight-bold" title="Residencia."></i> <b>Meses</b>
                         </h6>
-                    </div>';
+                     </div>
+                    
+                     <div class="col-sm-8 col-md-12 col-lg-12 text-center">   
+                        <label for="type_residence_id" class="dark-grey-text font-weight-bold">Por pagar</label>
+                          <br><span>'.$month->typeMonth->month.'</span>
+                     </div>
+                    ';
               
         }else{
         
