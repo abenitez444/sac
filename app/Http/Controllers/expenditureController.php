@@ -88,8 +88,10 @@ class expenditureController extends Controller
         $b = number_format($b, 2, '.', '');
 
         $expenditure = ExpensesDetail::firstOrNew(['id' => $request->id[$i]]);
+        
         $expenditure->description_monthly = $request->description_monthly[$i];
-        $expenditure->type_money = $request->type_money[$i];
+        $expenditure->type_money = $request->type_money;
+        
         $expenditure->amount_monthly = $b;
 
         $expenditure->save();
@@ -326,14 +328,18 @@ class expenditureController extends Controller
                         <tbody>';
                           foreach ($resultDos as $expenditure) {
                             foreach ($expenditure->Expenditures as $detail) {
-                              echo'
+                              
+                              dd($expenditure->typeMonth->month);
+                           
+                              
+                              /*echo'
                               <tr class="text-center">
                                 <td style="white-space:nowrap; width:1%;">'.$expenditure->typeMonth->month.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$expenditure->year.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$detail->description_monthly.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$detail->Type_money->option.'</td>
                                 <td style="white-space:nowrap; width:1%;">'.$detail->amount_monthly.'</td>
-                              </tr>';
+                              </tr>';*/
                             }
                           }
 

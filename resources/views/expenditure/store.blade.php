@@ -55,9 +55,6 @@
                 <div class="inputWithIcon">
                     <select class="form-control{{ $errors->has('month') ? ' is-invalid' : '' }} browser-default custom-select fondo-gris element-focus" name="month" id="month" disabled>
                       <option value="" disabled selected>Buscar. . .</option>
-                      @foreach($month as $m)
-                      <option value="{{ $m->id }}">{{ $m->month }}</option>
-                      @endforeach
                     </select>
                  <p class="campo-obligatorio">* Campo obligatorio</p>
                 </div>
@@ -74,8 +71,6 @@
         <div class="col-sm-8 col-md-10 col-lg-10"> 
         <div class="container">
         <br />
-       
-       
         <div class="table-responsive">
         <table class="table table-bordered" id="dynamic_field">
         <tr>
